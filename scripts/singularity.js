@@ -15,7 +15,12 @@ const config = {
     suckSpeed: 0.15,     // Acceleration
     // Paths are relative to index.html
     cleanImgSrc: 'assets/header.png',
-    chaosImgSrc: 'assets/pixels.png'
+    chaosImgSrc: 'assets/pixels.png',
+
+    // Image Alignment (0.0 = Left/Top, 0.5 = Center, 1.0 = Right/Bottom)
+    // "Slightly off center" - adjust these to match the face position in the image
+    imgFocusX: 0.5,
+    imgFocusY: 0.35 // Bias towards top (faces are usually in upper third)
 };
 
 // State
@@ -84,8 +89,28 @@ function drawCover(ctx, img) {
     const ratio = Math.max(w / img.width, h / img.height);
     const nw = img.width * ratio;
     const nh = img.height * ratio;
-    const ix = (w - nw) / 2;
-    const iy = (h - nh) / 2;
+
+    // Focus Point Logic:
+    // We want the point (nw * imgFocusX) to lie at the screen center (w * 0.5)
+    // unless that pushes the image edge off screen.
+
+    let ix = (w * 0.5) - (nw * config.imgFocusX);
+    let iy = (h * 0.5) - (nh * config.imgFocusY);
+
+    // Constrain to prevent empty space (if image is larger than screen)
+    // If nw > w, then ix can be negative, but ix + nw must be >= w
+    if (nw > w) {
+        ix = Math.min(0, Math.max(w - nw, ix));
+    } else {
+        ix = (w - nw) / 2; // Center if smaller (shouldn't happen with cover ratio)
+    }
+
+    if (nh > h) {
+        iy = Math.min(0, Math.max(h - nh, iy));
+    } else {
+        iy = (h - nh) / 2;
+    }
+
     ctx.drawImage(img, ix, iy, nw, nh);
 }
 

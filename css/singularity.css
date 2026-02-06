@@ -42,6 +42,25 @@ input[type=range] {
     appearance: slider-vertical;
 }
 
+/* Thumb Styling (Square, Green Gradient) */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(to bottom, #238636, #000000);
+    border: none;
+    border-radius: 0;
+}
+
+input[type=range]::-moz-range-thumb {
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(to bottom, #238636, #000000);
+    border: none;
+    border-radius: 0;
+}
+
 /* Reset Button */
 button.reset-btn {
     width: 12px;
@@ -63,6 +82,16 @@ button.reset-btn:hover {
     input[type=range] {
         width: 40px;
         height: 300px;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+        width: 40px;
+        height: 40px;
+    }
+
+    input[type=range]::-moz-range-thumb {
+        width: 40px;
+        height: 40px;
     }
 
     button.reset-btn {
