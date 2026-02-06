@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Test Bench: Background Leak</title>
+    <title>Test Bench: Polished Leak (Complexity Protocol)</title>
     <style>
         body {
             margin: 0;
@@ -12,7 +12,6 @@
             color: #c9d1d9;
             font-family: -apple-system, sans-serif;
             overflow: hidden;
-            /* Canvas covers everything */
         }
 
         #bgCanvas {
@@ -24,27 +23,6 @@
             z-index: -1;
         }
 
-        .content-overlay {
-            position: relative;
-            z-index: 10;
-            padding: 4rem;
-            max-width: 800px;
-            pointer-events: none;
-            /* Let clicks pass through to canvas if needed, or set to auto if selecting text */
-        }
-
-        h1 {
-            font-size: 3rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-        }
-
-        p {
-            font-size: 1.2rem;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 1rem;
-            border-radius: 8px;
-        }
-
         .controls {
             position: fixed;
             bottom: 20px;
@@ -52,7 +30,16 @@
             z-index: 100;
             background: rgba(0, 0, 0, 0.8);
             padding: 10px;
-            pointer-events: auto;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            pointer-events: none;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -61,221 +48,187 @@
 
     <canvas id="bgCanvas"></canvas>
 
-    <div class="content-overlay">
-        <h1>The Polished Leak</h1>
-        <p>
-            Move your mouse to reveal the truth underneath the chaos.<br>
-            The background is currently a placeholder (gray blocks) until you add an image.
-        </p>
+    <div class="overlay">
+        <h1>Leak Test V3 (Complexity Protocol)</h1>
+        <p>1. Bottom Layer: Clean Image<br>
+            2. Top Layer: Pixel Chaos<br>
+            3. Mouse: <b>Erases</b> Top Layer (Reveals Clean)<br>
+            Speed: Ultra Slow</p>
     </div>
 
     <div class="controls">
         <button onclick="resetMask()">Reset Trail</button>
-        <button onclick="toggleImage()">Toggle Image Source</button>
+        <button onclick="toggleImage()">Toggle Image</button>
     </div>
 
     <script>
+        // --- COMPLEXITY PROTOCOL: DEFINITIONS ---
+        // GOAL: Reveal clean image by "wiping away" the chaos pixels.
+        // METHOD: Destination-Out masking on the Chaos Layer.
+
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
 
-        // Settings
         const config = {
-            pixelSize: 20,    // Size of the giant pixels
-            jitterAmount: 2,  // Max pixels to shift
-            jitterSpeed: 0.17, // 17% of original chaos speed (probability of update)
-            revealRadius: 80, // Size of the mouse brush
-            imageSrc: '../assets/header.png' // User must place image here
+            pixelSize: 20,
+            jitterAmount: 2,
+            jitterSpeed: 0.02, // Ultra Slow
+            revealRadius: 80,
+            imageSrc: '../assets/header.png'
         };
 
         // State
         let w, h;
-        let cols, rows;
         let particles = [];
         let mouse = { x: -1000, y: -1000 };
-        let useImage = true; // Default to true
-
-        // Image Asset
-        const img = new Image();
-        img.src = config.imageSrc;
+        let useImage = true;
         let imageLoaded = false;
 
-        img.onload = () => {
-            imageLoaded = true;
-            resize(); // Force re-init with colors
-            console.log('Image loaded:', config.imageSrc);
-        };
-        img.onerror = () => {
-            console.log("No image found, switching to fallback.");
-            // Don't auto-switch useImage, keep it true so we know it FAILED.
-            // But visually we need to handle it.
-        };
+        // --- ASSETS ---
+        const img = new Image();
+        img.src = config.imageSrc;
+        img.onload = () => { console.log('Assets loaded'); imageLoaded = true; resize(); };
+        img.onerror = () => { console.log('Assets missing'); };
 
-        // Mask Canvas (Offscreen) to track trails
+        // --- OFFSCREEN BUFFERS ---
+        // 1. maskCanvas: Stores the "Trail" (Alpha=1 where erased)
         const maskCanvas = document.createElement('canvas');
         const maskCtx = maskCanvas.getContext('2d');
 
+        // 2. cleanCanvas: Stores the resized Clean Image (Bottom Layer)
+        const cleanCanvas = document.createElement('canvas');
+        const cleanCtx = cleanCanvas.getContext('2d');
+
+        // 3. chaosCanvas: Scratchpad for one frame of pixels (Top Layer)
+        const chaosCanvas = document.createElement('canvas');
+        const chaosCtx = chaosCanvas.getContext('2d');
+
+        // --- INIT ---
         function resize() {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
 
-            maskCanvas.width = w;
-            maskCanvas.height = h;
+            [maskCanvas, cleanCanvas, chaosCanvas].forEach(c => { c.width = w; c.height = h; });
 
-            // Init Mask to Black (Hidden) -- preserve trail if resizing? nah reset.
-            maskCtx.fillStyle = 'black';
-            maskCtx.fillRect(0, 0, w, h);
+            // Reset Mask (Black = No Erase)
+            // Actually for 'destination-out', we draw content where we want to erase.
+            // So we start empty.
+            maskCtx.clearRect(0, 0, w, h);
 
-            initParticles();
-        }
-
-        function initParticles() {
-            cols = Math.ceil(w / config.pixelSize);
-            rows = Math.ceil(h / config.pixelSize);
-            particles = [];
-
-            // Create temporary canvas to sample image data
-            let bufferData = null;
-
-            if (useImage && imageLoaded) {
-                const bC = document.createElement('canvas');
-                bC.width = w; bC.height = h;
-                const bX = bC.getContext('2d');
-                // Draw image cover-style
-                const ratio = Math.max(w / img.width, h / img.height);
-                const nw = img.width * ratio;
-                const nh = img.height * ratio;
-                bX.drawImage(img, (w - nw) / 2, (h - nh) / 2, nw, nh);
-                bufferData = bX.getImageData(0, 0, w, h).data;
-            }
-
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    const x = c * config.pixelSize;
-                    const y = r * config.pixelSize;
-
-                    let color;
-
-                    if (useImage && bufferData) {
-                        // Sample center of pixel
-                        const sx = Math.floor(x + config.pixelSize / 2);
-                        const sy = Math.floor(y + config.pixelSize / 2);
-                        const i = (sy * w + sx) * 4;
-                        color = `rgb(${bufferData[i]}, ${bufferData[i + 1]}, ${bufferData[i + 2]})`;
-                    } else {
-                        // Fallback Procedural
-                        color = `hsl(${Math.random() * 360}, 50%, 40%)`;
-                    }
-
-                    particles.push({
-                        x: x,
-                        y: y,
-                        originX: x,
-                        originY: y,
-                        color: color,
-                        dx: 0,
-                        dy: 0
-                    });
-                }
-            }
-        }
-
-        window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', e => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-
-            maskCtx.beginPath();
-            maskCtx.arc(mouse.x, mouse.y, config.revealRadius, 0, Math.PI * 2);
-            maskCtx.fillStyle = 'white';
-            maskCtx.fill();
-        });
-
-        // Better Loop for Compositing
-        function renderLoop() {
-            ctx.fillStyle = '#0d1117';
-            ctx.fillRect(0, 0, w, h);
-
-            // A. Draw Chaos
-            particles.forEach(p => {
-                if (Math.random() < config.jitterSpeed) {
-                    p.dx = (Math.random() - 0.5) * config.jitterAmount;
-                    p.dy = (Math.random() - 0.5) * config.jitterAmount;
-                }
-                ctx.fillStyle = p.color;
-                ctx.fillRect(p.originX + p.dx, p.originY + p.dy, config.pixelSize + 0.5, config.pixelSize + 0.5); // +0.5 to fix subpixel gaps
-            });
-
-            // B. Draw Clean Overlay
-            if (useImage && imageLoaded) {
-                ctx.save();
-
-                // Let's use a scratch canvas
-                if (!window.scratch) {
-                    window.scratch = document.createElement('canvas');
-                    window.scratch.width = w;
-                    window.scratch.height = h;
-                    window.sCtx = window.scratch.getContext('2d');
-                }
-                // sync Scratch size if resize happened (basic check)
-                if (window.scratch.width !== w) { window.scratch.width = w; window.scratch.height = h; }
-
-                // Clear scratch
-                window.sCtx.globalCompositeOperation = 'source-over';
-                window.sCtx.clearRect(0, 0, w, h);
-
-                // Draw Clean Image
+            if (imageLoaded) {
+                // Prepare Clean Layer
                 const ratio = Math.max(w / img.width, h / img.height);
                 const nw = img.width * ratio;
                 const nh = img.height * ratio;
                 const ix = (w - nw) / 2;
                 const iy = (h - nh) / 2;
-
-                window.sCtx.drawImage(img, ix, iy, nw, nh);
-
-                // Apply Mask
-                window.sCtx.globalCompositeOperation = 'destination-in';
-                window.sCtx.drawImage(maskCanvas, 0, 0);
-
-                // Draw scratch to main
-                ctx.drawImage(window.scratch, 0, 0);
-
-                ctx.restore();
-            } else if (!useImage) {
-                // Procedural Reveal (just show white blocks or something?)
-                // Or just show simpler reveal for fallback mode
-                ctx.save();
-                // Draw mask as white overlay to prove it works
-                ctx.globalAlpha = 0.2;
-                ctx.drawImage(maskCanvas, 0, 0);
-                ctx.restore();
+                cleanCtx.drawImage(img, ix, iy, nw, nh);
             }
 
-            requestAnimationFrame(renderLoop);
+            initParticles();
         }
 
-        function resetMask() {
-            maskCtx.clearRect(0, 0, w, h);
-            maskCtx.fillStyle = 'black';
-            maskCtx.fillRect(0, 0, w, h);
+        function initParticles() {
+            const cols = Math.ceil(w / config.pixelSize);
+            const rows = Math.ceil(h / config.pixelSize);
+            particles = [];
+
+            // Sample colors from Clean Layer
+            const buffer = cleanCtx.getImageData(0, 0, w, h).data;
+
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    const px = x * config.pixelSize;
+                    const py = y * config.pixelSize;
+
+                    let color = `hsl(${Math.random() * 360}, 50%, 20%)`; // Dark fallback
+
+                    if (useImage && imageLoaded) {
+                        // Sample Center
+                        const cx = Math.floor(px + config.pixelSize / 2);
+                        const cy = Math.floor(py + config.pixelSize / 2);
+                        const i = (cy * w + cx) * 4;
+                        if (buffer[i] !== undefined) {
+                            color = `rgb(${buffer[i]}, ${buffer[i + 1]}, ${buffer[i + 2]})`;
+                        }
+                    }
+
+                    particles.push({
+                        x: px, y: py,
+                        ox: px, oy: py,
+                        color: color,
+                        dx: 0, dy: 0
+                    });
+                }
+            }
         }
 
-        function toggleImage() {
-            useImage = !useImage;
-            initParticles(); // Re-sample colors
-            console.log('Mode:', useImage ? 'Image' : 'Fallback');
+        // --- INTERACTION ---
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+
+            // Draw to Mask
+            // We draw a "Soft Brush"
+            const g = maskCtx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, config.revealRadius);
+            g.addColorStop(0, 'rgba(255,255,255,1)'); // Solid erase center
+            g.addColorStop(1, 'rgba(255,255,255,0)'); // Fade edge
+
+            maskCtx.globalCompositeOperation = 'source-over';
+            maskCtx.fillStyle = g;
+            maskCtx.beginPath();
+            maskCtx.arc(mouse.x, mouse.y, config.revealRadius, 0, Math.PI * 2);
+            maskCtx.fill();
+        });
+
+        // --- RENDER LOOP ---
+        function frame() {
+            // 1. Draw Clean Bottom Layer
+            // (Always draw this first)
+            ctx.globalCompositeOperation = 'source-over';
+
+            if (useImage && imageLoaded) {
+                ctx.drawImage(cleanCanvas, 0, 0);
+            } else {
+                ctx.fillStyle = '#161b22'; // Dark fallback bg
+                ctx.fillRect(0, 0, w, h);
+            }
+
+            // 2. Prepare Chaos Top Layer (on scratchpad)
+            chaosCtx.clearRect(0, 0, w, h);
+
+            particles.forEach(p => {
+                // Jitter
+                if (Math.random() < config.jitterSpeed) {
+                    p.dx = (Math.random() - 0.5) * config.jitterAmount;
+                    p.dy = (Math.random() - 0.5) * config.jitterAmount;
+                }
+
+                chaosCtx.fillStyle = p.color;
+                // Draw slightly oversize to prevent cracks
+                chaosCtx.fillRect(p.ox + p.dx, p.oy + p.dy, config.pixelSize + 0.5, config.pixelSize + 0.5);
+            });
+
+            // 3. Apply Mask to Chaos Layer
+            // "Destination-Out" removes pixels from Chaos where Mask is opaque
+            chaosCtx.globalCompositeOperation = 'destination-out';
+            chaosCtx.drawImage(maskCanvas, 0, 0);
+            chaosCtx.globalCompositeOperation = 'source-over'; // Reset
+
+            // 4. Draw Chaos Layer onto Main Canvas
+            ctx.drawImage(chaosCanvas, 0, 0);
+
+            requestAnimationFrame(frame);
         }
 
-        // Init
-        // Wait for load or force init if cached
-        if (img.complete) {
-            imageLoaded = true;
-            resize();
-        } else {
-            // resize called on load
-            // but call it once for fallback init
-            resize();
-        }
-        renderLoop();
+        // --- UTILS ---
+        function resetMask() { maskCtx.clearRect(0, 0, w, h); }
+        function toggleImage() { useImage = !useImage; initParticles(); }
+
+        // Start
+        resize();
+        frame();
 
     </script>
 </body>
