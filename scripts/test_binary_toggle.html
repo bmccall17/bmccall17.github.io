@@ -26,16 +26,38 @@
         /* UI Container */
         .controls-panel {
             position: fixed;
-            top: 50%;
+            bottom: 0;
             left: 0;
-            transform: translateY(-50%);
+            top: auto;
+            transform: none;
+            display: flex;
+            flex-direction: column-reverse;
+            /* Reset button on top of slider visually? No, column-reverse puts bottom element on top if column? column-reverse: flex-start is bottom. items are 1, 2. 1 is slider, 2 is button. column-reverse -> 2 is bottom, 1 is top. 
+            Wait, user said "reset button at the bottom of that slider". 
+            If I use column-reverse, the first child (slider) is at the bottom?
+            Let's stick to standard column and just order them in HTML or CSS.
+            HTML is Slider then Button.
+            Standard column: Slider Top, Button Bottom.
+            User: "Reset button at the bottom of that slider".
+            So Slider is ABOVE button.
+            So standard column is fine?
+            "slider needs to be all the way up against the left side... slider needs to be straight cornered... move to bottom left... tuck it in"
+            "Reset button at the bottom of that slider".
+            So: 
+            [Slider]
+            [Button]
+            (Bottom of screen)
+            
+            So standard flex-direction: column.
+            just bottom: 0; left: 0.
+            */
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            align-items: flex-start;
+            gap: 0;
             z-index: 100;
-            width: 20px;
-            /* Slight width for hover hit area */
+            width: auto;
+            padding: 0;
         }
 
         /* Custom Slider Styling */
@@ -45,15 +67,12 @@
             -webkit-appearance: slider-vertical;
             /* Webkit */
             width: 8px;
-            height: 300px;
+            height: 200px;
             background: transparent;
-            /* No background track visible */
             cursor: ns-resize;
             margin: 0;
+            appearance: slider-vertical;
         }
-
-        /* Attempting to style the run/track if possible, but webkit-slider-vertical is tricky. 
-           We'll rely on the default track being minimal or invisible. */
 
         /* Reset Button */
         button.reset-btn {
@@ -61,9 +80,28 @@
             height: 12px;
             background: #f85149;
             border: none;
-            /* Straight corners */
             cursor: pointer;
             transition: all 0.2s ease;
+            margin-bottom: 2px;
+            /* Tiny buffer to frame edge? Or 0. User: "no buffer". */
+            margin: 0;
+        }
+
+        button.reset-btn:hover {
+            transform: scale(1.5);
+        }
+
+        /* Mobile Overrides (5x Bigger) */
+        @media (max-width: 768px) {
+            input[type=range] {
+                width: 40px;
+                height: 300px;
+            }
+
+            button.reset-btn {
+                width: 60px;
+                height: 60px;
+            }
         }
 
         button.reset-btn:hover {
