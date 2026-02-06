@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Test Bench: Polished Leak (Complexity Protocol)</title>
+    <title>Test Bench: Polished Leak (Final)</title>
     <style>
         body {
             margin: 0;
@@ -23,23 +23,44 @@
             z-index: -1;
         }
 
-        .controls {
+        /* Unlabelled Controls */
+        .controls-panel {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px;
+            opacity: 0.3;
+            /* Subtle */
+            transition: opacity 0.3s;
         }
 
-        .overlay {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            pointer-events: none;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 1rem;
-            border-radius: 8px;
+        .controls-panel:hover {
+            opacity: 1.0;
+        }
+
+        input[type=range] {
+            writing-mode: bt-lr;
+            /* IE/Edge */
+            -webkit-appearance: slider-vertical;
+            /* Webkit */
+            width: 8px;
+            height: 200px;
+            background: #30363d;
+            accent-color: #238636;
+        }
+
+        button.reset-btn {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #f85149;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -48,59 +69,61 @@
 
     <canvas id="bgCanvas"></canvas>
 
-    <div class="overlay">
-        <h1>Leak Test V3 (Complexity Protocol)</h1>
-        <p>1. Bottom Layer: Clean Image<br>
-            2. Top Layer: Pixel Chaos<br>
-            3. Mouse: <b>Erases</b> Top Layer (Reveals Clean)<br>
-            Speed: Ultra Slow</p>
-    </div>
-
-    <div class="controls">
-        <button onclick="resetMask()">Reset Trail</button>
-        <button onclick="toggleImage()">Toggle Image</button>
+    <div class="controls-panel">
+        <input type="range" id="jitterSlider" min="1" max="17" value="1" step="1">
+        <button class="reset-btn" onclick="resetMask()" title="Reset"></button>
     </div>
 
     <script>
-        // --- COMPLEXITY PROTOCOL: DEFINITIONS ---
-        // GOAL: Reveal clean image by "wiping away" the chaos pixels.
-        // METHOD: Destination-Out masking on the Chaos Layer.
-
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
 
         const config = {
             pixelSize: 20,
             jitterAmount: 2,
-            jitterSpeed: 0.02, // Ultra Slow
+            jitterSpeed: 0.01, // Default Ultra Slow (will be mapped from slider)
             revealRadius: 80,
-            imageSrc: '../assets/header.png'
+            cleanImgSrc: '../assets/header.png',
+            chaosImgSrc: '../assets/pixels.png' // New Green Seed
         };
 
         // State
         let w, h;
         let particles = [];
         let mouse = { x: -1000, y: -1000 };
-        let useImage = true;
-        let imageLoaded = false;
 
         // --- ASSETS ---
-        const img = new Image();
-        img.src = config.imageSrc;
-        img.onload = () => { console.log('Assets loaded'); imageLoaded = true; resize(); };
-        img.onerror = () => { console.log('Assets missing'); };
+        const cleanImg = new Image();
+        const chaosImg = new Image();
+        let loadedCount = 0;
 
-        // --- OFFSCREEN BUFFERS ---
-        // 1. maskCanvas: Stores the "Trail" (Alpha=1 where erased)
-        const maskCanvas = document.createElement('canvas');
+        const checkLoad = () => {
+            loadedCount++;
+            if (loadedCount >= 2) {
+                console.log('All assets loaded');
+                resize();
+            }
+        };
+
+        cleanImg.src = config.cleanImgSrc;
+        cleanImg.onload = checkLoad;
+        cleanImg.onerror = () => console.log('Clean img missing');
+
+        chaosImg.src = config.chaosImgSrc;
+        chaosImg.onload = checkLoad;
+        chaosImg.onerror = () => console.log('Chaos img missing');
+
+        // --- BUFFERS ---
+        const maskCanvas = document.createElement('canvas'); // The eraser trail
         const maskCtx = maskCanvas.getContext('2d');
 
-        // 2. cleanCanvas: Stores the resized Clean Image (Bottom Layer)
-        const cleanCanvas = document.createElement('canvas');
+        const cleanCanvas = document.createElement('canvas'); // Bottom Layer
         const cleanCtx = cleanCanvas.getContext('2d');
 
-        // 3. chaosCanvas: Scratchpad for one frame of pixels (Top Layer)
-        const chaosCanvas = document.createElement('canvas');
+        const chaosMapCanvas = document.createElement('canvas'); // Source for chaos colors
+        const chaosMapCtx = chaosMapCanvas.getContext('2d');
+
+        const chaosCanvas = document.createElement('canvas'); // Top Layer Frame
         const chaosCtx = chaosCanvas.getContext('2d');
 
         // --- INIT ---
@@ -108,24 +131,30 @@
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
 
-            [maskCanvas, cleanCanvas, chaosCanvas].forEach(c => { c.width = w; c.height = h; });
+            [maskCanvas, cleanCanvas, chaosMapCanvas, chaosCanvas].forEach(c => { c.width = w; c.height = h; });
 
-            // Reset Mask (Black = No Erase)
-            // Actually for 'destination-out', we draw content where we want to erase.
-            // So we start empty.
-            maskCtx.clearRect(0, 0, w, h);
+            maskCtx.clearRect(0, 0, w, h); // Empty mask
 
-            if (imageLoaded) {
-                // Prepare Clean Layer
-                const ratio = Math.max(w / img.width, h / img.height);
-                const nw = img.width * ratio;
-                const nh = img.height * ratio;
-                const ix = (w - nw) / 2;
-                const iy = (h - nh) / 2;
-                cleanCtx.drawImage(img, ix, iy, nw, nh);
+            if (loadedCount >= 1) {
+                // Draw Clean Layer (Bottom)
+                drawCover(cleanCtx, cleanImg);
+            }
+
+            if (loadedCount >= 2) {
+                // Draw Chaos Source Map (used for sampling colors)
+                drawCover(chaosMapCtx, chaosImg);
             }
 
             initParticles();
+        }
+
+        function drawCover(targetCtx, img) {
+            const ratio = Math.max(w / img.width, h / img.height);
+            const nw = img.width * ratio;
+            const nh = img.height * ratio;
+            const ix = (w - nw) / 2;
+            const iy = (h - nh) / 2;
+            targetCtx.drawImage(img, ix, iy, nw, nh);
         }
 
         function initParticles() {
@@ -133,24 +162,26 @@
             const rows = Math.ceil(h / config.pixelSize);
             particles = [];
 
-            // Sample colors from Clean Layer
-            const buffer = cleanCtx.getImageData(0, 0, w, h).data;
+            // Sample colors from Chaos Map
+            // If chaosMap is empty (image failed), we fallback to cleanMap or green.
+
+            let buffer = null;
+            if (loadedCount >= 2) {
+                buffer = chaosMapCtx.getImageData(0, 0, w, h).data;
+            }
 
             for (let y = 0; y < rows; y++) {
                 for (let x = 0; x < cols; x++) {
                     const px = x * config.pixelSize;
                     const py = y * config.pixelSize;
 
-                    let color = `hsl(${Math.random() * 360}, 50%, 20%)`; // Dark fallback
+                    let color = '#0e4429'; // Base Github Green
 
-                    if (useImage && imageLoaded) {
-                        // Sample Center
+                    if (buffer) {
                         const cx = Math.floor(px + config.pixelSize / 2);
                         const cy = Math.floor(py + config.pixelSize / 2);
                         const i = (cy * w + cx) * 4;
-                        if (buffer[i] !== undefined) {
-                            color = `rgb(${buffer[i]}, ${buffer[i + 1]}, ${buffer[i + 2]})`;
-                        }
+                        color = `rgb(${buffer[i]}, ${buffer[i + 1]}, ${buffer[i + 2]})`;
                     }
 
                     particles.push({
@@ -169,11 +200,9 @@
             mouse.x = e.clientX;
             mouse.y = e.clientY;
 
-            // Draw to Mask
-            // We draw a "Soft Brush"
             const g = maskCtx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, config.revealRadius);
-            g.addColorStop(0, 'rgba(255,255,255,1)'); // Solid erase center
-            g.addColorStop(1, 'rgba(255,255,255,0)'); // Fade edge
+            g.addColorStop(0, 'rgba(255,255,255,1)');
+            g.addColorStop(1, 'rgba(255,255,255,0)');
 
             maskCtx.globalCompositeOperation = 'source-over';
             maskCtx.fillStyle = g;
@@ -182,53 +211,49 @@
             maskCtx.fill();
         });
 
+        // Slider Logic
+        const slider = document.getElementById('jitterSlider');
+        slider.addEventListener('input', (e) => {
+            // Map 1-17 to 0.01 - 0.17
+            config.jitterSpeed = parseInt(e.target.value) / 100;
+        });
+
         // --- RENDER LOOP ---
         function frame() {
-            // 1. Draw Clean Bottom Layer
-            // (Always draw this first)
+
+            // 1. Draw Clean Bottom
             ctx.globalCompositeOperation = 'source-over';
+            if (loadedCount >= 1) ctx.drawImage(cleanCanvas, 0, 0);
+            else { ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, w, h); }
 
-            if (useImage && imageLoaded) {
-                ctx.drawImage(cleanCanvas, 0, 0);
-            } else {
-                ctx.fillStyle = '#161b22'; // Dark fallback bg
-                ctx.fillRect(0, 0, w, h);
-            }
-
-            // 2. Prepare Chaos Top Layer (on scratchpad)
+            // 2. Prepare Chaos Top
             chaosCtx.clearRect(0, 0, w, h);
 
             particles.forEach(p => {
-                // Jitter
                 if (Math.random() < config.jitterSpeed) {
                     p.dx = (Math.random() - 0.5) * config.jitterAmount;
                     p.dy = (Math.random() - 0.5) * config.jitterAmount;
                 }
-
                 chaosCtx.fillStyle = p.color;
-                // Draw slightly oversize to prevent cracks
                 chaosCtx.fillRect(p.ox + p.dx, p.oy + p.dy, config.pixelSize + 0.5, config.pixelSize + 0.5);
             });
 
-            // 3. Apply Mask to Chaos Layer
-            // "Destination-Out" removes pixels from Chaos where Mask is opaque
+            // 3. Mask Chaos
             chaosCtx.globalCompositeOperation = 'destination-out';
             chaosCtx.drawImage(maskCanvas, 0, 0);
-            chaosCtx.globalCompositeOperation = 'source-over'; // Reset
+            chaosCtx.globalCompositeOperation = 'source-over';
 
-            // 4. Draw Chaos Layer onto Main Canvas
+            // 4. Combine
             ctx.drawImage(chaosCanvas, 0, 0);
 
             requestAnimationFrame(frame);
         }
 
-        // --- UTILS ---
         function resetMask() { maskCtx.clearRect(0, 0, w, h); }
-        function toggleImage() { useImage = !useImage; initParticles(); }
 
-        // Start
-        resize();
-        frame();
+        // Init
+        // (Wait for images or timeout)
+        setTimeout(() => { if (loadedCount < 2) resize(); }, 1000);
 
     </script>
 </body>
