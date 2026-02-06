@@ -63,6 +63,12 @@ create `devnotes/releases/vX.Y.Z.md` with this structure:
 - [ ] checked `darketype/weblog` (if touched)
 ```
 
+### step 3b: auto-generate mess entry
+1.  **generate moniker**: create a clever, self-referential filename (e.g., `darketype/entries/YYYY-MM-DD_messy_release_vX.Y.Z.md`).
+2.  **stage content**: use `darketype/entries/TEMPLATE.md` to create a new entry about *this current sprint/task*.
+3.  **wait**: do not add to `weblog/index.html` yet. just stage the file for user review/approval.
+4.  **notify**: explicitly tell user: "i have drafted a new mess entry at [path] for your review."
+
 ### step 4: update SHIP_LOG.md
 add entry to the **ship log** table in `SHIP_LOG.md` (insert at top of data rows):
 
