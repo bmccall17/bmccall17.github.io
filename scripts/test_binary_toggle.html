@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Test Bench: Polished Leak (Final V6)</title>
+    <title>Test Bench: Polished Leak (Physx V7)</title>
     <style>
         body {
             margin: 0;
@@ -23,51 +23,52 @@
             z-index: -1;
         }
 
-        /* Minimalist Left Controls */
+        /* UI Container */
         .controls-panel {
             position: fixed;
             top: 50%;
             left: 0;
-            /* Flush left */
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             z-index: 100;
-            width: 7px;
-            /* Specified width */
+            width: 20px;
+            /* Slight width for hover hit area */
         }
 
+        /* Custom Slider Styling */
         input[type=range] {
             writing-mode: bt-lr;
-            /* IE/Edge */
+            /* IE */
             -webkit-appearance: slider-vertical;
             /* Webkit */
-            width: 7px;
-            /* Specified width */
+            width: 8px;
             height: 300px;
-            background: #21262d;
-            accent-color: #238636;
+            background: transparent;
+            /* No background track visible */
             cursor: ns-resize;
             margin: 0;
-            padding: 0;
-            border-radius: 4px;
         }
 
+        /* Attempting to style the run/track if possible, but webkit-slider-vertical is tricky. 
+           We'll rely on the default track being minimal or invisible. */
+
+        /* Reset Button */
         button.reset-btn {
             width: 12px;
             height: 12px;
-            border-radius: 50%;
             background: #f85149;
             border: none;
+            /* Straight corners */
             cursor: pointer;
-            opacity: 0.5;
-            transition: opacity 0.2s;
+            transition: all 0.2s ease;
         }
 
         button.reset-btn:hover {
-            opacity: 1;
+            transform: scale(1.5);
+            /* Magnify */
         }
 
         /* Diagnostic Panel */
@@ -75,40 +76,25 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 300px;
-            background: rgba(0, 0, 0, 0.9);
+            width: 250px;
+            background: rgba(0, 0, 0, 0.8);
             border: 1px solid #30363d;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 12px;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 11px;
             z-index: 1000;
-            display: block;
+            pointer-events: none;
+            /* Click through */
         }
 
         .status-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 5px;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 2px;
+            margin-bottom: 2px;
         }
 
         .status-ok {
             color: #238636;
-        }
-
-        .status-err {
-            color: #f85149;
-        }
-
-        .log-box {
-            height: 100px;
-            overflow-y: auto;
-            background: #000;
-            border: 1px solid #30363d;
-            padding: 5px;
-            margin-top: 10px;
-            color: #8b949e;
         }
     </style>
 </head>
@@ -118,49 +104,33 @@
     <canvas id="bgCanvas"></canvas>
 
     <div class="controls-panel">
-        <input type="range" id="jitterSlider" min="17" max="170" value="17" step="1" title="Jitter Speed">
-        <button class="reset-btn" onclick="resetMask()" title="Reset"></button>
+        <!-- Range: 17 to 1700 (0.0017 to 0.17) -->
+        <input type="range" id="jitterSlider" min="17" max="1700" value="17" step="1" title="Entropy">
+        <button class="reset-btn" onclick="initParticles()" title="Reset Entropy"></button>
     </div>
 
-    <!-- Diagnostic Overlay -->
+    <!-- Minimal Diagnostics -->
     <div id="diagnostics">
-        <h3>System Diagnostics</h3>
-        <div class="status-row"><span>Canvas:</span> <span id="status-canvas">Waiting...</span></div>
-        <div class="status-row"><span>Clean Image:</span> <span id="status-clean">Loading...</span></div>
-        <div class="status-row"><span>Chaos Image:</span> <span id="status-chaos">Loading...</span></div>
-        <div class="status-row"><span>Particles:</span> <span id="status-parts">0</span></div>
-        <div class="status-row"><span>Jitter:</span> <span id="status-jitter">0.017</span></div>
-        <div class="log-box" id="logBox">Initializing...<br></div>
-        <div style="margin-top:10px; text-align:right;">
-            <button onclick="forceRestart()">Force Restart</button>
-            <button onclick="toggleFallback()">Toggle Fallback</button>
-        </div>
+        <div class="status-row"><span>Particles:</span> <span id="s-count">0</span></div>
+        <div class="status-row"><span>Entropy:</span> <span id="s-jitter">0.0017</span></div>
+        <div class="status-row"><span id="s-log">Init...</span></div>
     </div>
 
     <script>
-        function log(msg, type = 'info') {
-            const box = document.getElementById('logBox');
-            const line = document.createElement('div');
-            line.style.color = type === 'error' ? '#f85149' : '#8b949e';
-            line.textContent = `> ${msg}`;
-            box.appendChild(line);
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function setStatus(id, text, type) {
-            const el = document.getElementById(id);
-            el.textContent = text;
-            el.className = type === 'ok' ? 'status-ok' : (type === 'err' ? 'status-err' : '');
-        }
-
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
+        const diagnostics = {
+            count: document.getElementById('s-count'),
+            jitter: document.getElementById('s-jitter'),
+            log: document.getElementById('s-log')
+        };
 
         const config = {
             pixelSize: 20,
+            jitterSpeed: 0.0017, // Low end
             jitterAmount: 2,
-            jitterSpeed: 0.017, // New Default
-            revealRadius: 80,
+            suckRadius: 100,     // Black Hole Horizon
+            suckSpeed: 0.15,      // How fast they fly in
             cleanImgSrc: '../assets/header.png',
             chaosImgSrc: '../assets/pixels.png'
         };
@@ -168,230 +138,173 @@
         // State
         let w, h;
         let particles = [];
-        let mouse = { x: -1000, y: -1000 };
-        let useFallback = false;
+        let mouse = { x: -5000, y: -5000 };
 
-        // --- ASSETS ---
+        // Assets
         const cleanImg = new Image();
         const chaosImg = new Image();
+        let assetsReady = false;
+        let loadCount = 0;
 
-        let loadedCount = 0;
+        const checkLoad = () => { loadCount++; if (loadCount >= 2) { assetsReady = true; resize(); } };
+        cleanImg.onload = checkLoad; cleanImg.src = config.cleanImgSrc;
+        chaosImg.onload = checkLoad; chaosImg.src = config.chaosImgSrc;
 
-        const checkLoad = (name) => {
-            loadedCount++;
-            log(`${name} Loaded. (${loadedCount}/2)`, 'ok');
-            if (name === 'Clean') setStatus('status-clean', `${cleanImg.width}x${cleanImg.height}`, 'ok');
-            if (name === 'Chaos') setStatus('status-chaos', `${chaosImg.width}x${chaosImg.height}`, 'ok');
+        // Force resize handling
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
 
-            if (loadedCount >= 2) {
-                log('Assets Ready.', 'ok');
-                resize();
-            }
-        };
-
-        const handleErr = (name, e) => {
-            log(`Failed to load ${name}`, 'error');
-            setStatus(`status-${name.toLowerCase()}`, 'FAILED', 'err');
-        };
-
-        cleanImg.onload = () => checkLoad('Clean');
-        cleanImg.onerror = (e) => handleErr('Clean', e);
-        cleanImg.src = config.cleanImgSrc;
-
-        chaosImg.onload = () => checkLoad('Chaos');
-        chaosImg.onerror = (e) => handleErr('Chaos', e);
-        chaosImg.src = config.chaosImgSrc;
-
-        // Buffers
-        const maskCanvas = document.createElement('canvas'); // The eraser trail
-        const maskCtx = maskCanvas.getContext('2d');
-        const cleanCanvas = document.createElement('canvas'); // Bottom Layer
+        // Toggle Clean Canvas (Cached)
+        const cleanCanvas = document.createElement('canvas');
         const cleanCtx = cleanCanvas.getContext('2d');
-        const chaosMapCanvas = document.createElement('canvas'); // Source for chaos colors
+        const chaosMapCanvas = document.createElement('canvas');
         const chaosMapCtx = chaosMapCanvas.getContext('2d');
-        const chaosCanvas = document.createElement('canvas'); // Top Layer Frame
-        const chaosCtx = chaosCanvas.getContext('2d');
 
         function resize() {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
-            setStatus('status-canvas', `${w}x${h}`, 'ok');
+            cleanCanvas.width = w; cleanCanvas.height = h;
+            chaosMapCanvas.width = w; chaosMapCanvas.height = h;
 
-            [maskCanvas, cleanCanvas, chaosMapCanvas, chaosCanvas].forEach(c => { c.width = w; c.height = h; });
-            maskCtx.clearRect(0, 0, w, h);
-
-            try {
-                if (loadedCount >= 1 && !useFallback) {
-                    drawCover(cleanCtx, cleanImg);
-                } else {
-                    cleanCtx.fillStyle = '#0d1117'; cleanCtx.fillRect(0, 0, w, h);
-                    cleanCtx.fillStyle = '#fff'; cleanCtx.font = '30px monospace'; cleanCtx.fillText('CLEAN LAYER (FALLBACK)', 50, h / 2);
-                }
-
-                if (loadedCount >= 2 && !useFallback) {
-                    generateTiledChaos(chaosMapCtx, chaosImg);
-                }
-
-                initParticles();
-            } catch (e) {
-                log(`Resize Error: ${e.message}`, 'error');
+            if (assetsReady) {
+                drawCover(cleanCtx, cleanImg);
+                generateTiledChaos(chaosMapCtx, chaosImg);
             }
+            initParticles();
         }
 
-        function drawCover(targetCtx, img) {
-            if (!img.width) return;
+        function drawCover(ctx, img) {
             const ratio = Math.max(w / img.width, h / img.height);
             const nw = img.width * ratio;
             const nh = img.height * ratio;
             const ix = (w - nw) / 2;
             const iy = (h - nh) / 2;
-            targetCtx.drawImage(img, ix, iy, nw, nh);
+            ctx.drawImage(img, ix, iy, nw, nh);
         }
 
-        function generateTiledChaos(targetCtx, img) {
-            // Tile and Randomize
-            const tileW = img.width;
-            const tileH = img.height;
-            const cols = Math.ceil(w / tileW);
-            const rows = Math.ceil(h / tileH);
-
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    targetCtx.save();
-                    // Center of tile
-                    const cx = c * tileW + tileW / 2;
-                    const cy = r * tileH + tileH / 2;
-                    targetCtx.translate(cx, cy);
-
-                    // Rotations
-                    const rot = Math.floor(Math.random() * 4) * (Math.PI / 2);
-                    targetCtx.rotate(rot);
-
-                    // Flips
-                    const sx = Math.random() > 0.5 ? 1 : -1;
-                    const sy = Math.random() > 0.5 ? 1 : -1;
-                    targetCtx.scale(sx, sy);
-
-                    targetCtx.drawImage(img, -tileW / 2, -tileH / 2);
-                    targetCtx.restore();
+        function generateTiledChaos(ctx, img) {
+            const tw = img.width; const th = img.height;
+            const cols = Math.ceil(w / tw); const rows = Math.ceil(h / th);
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    ctx.save();
+                    ctx.translate(x * tw + tw / 2, y * th + th / 2);
+                    ctx.rotate(Math.floor(Math.random() * 4) * Math.PI / 2);
+                    ctx.scale(Math.random() > .5 ? 1 : -1, Math.random() > .5 ? 1 : -1);
+                    ctx.drawImage(img, -tw / 2, -th / 2);
+                    ctx.restore();
                 }
             }
-            log('Generated Tiled Chaos Map.', 'ok');
         }
 
         function initParticles() {
-            const cols = Math.ceil(w / config.pixelSize);
-            const rows = Math.ceil(h / config.pixelSize);
             particles = [];
+            const pc = Math.ceil(w / config.pixelSize);
+            const pr = Math.ceil(h / config.pixelSize);
 
-            // Sample colors from Chaos Map
-            let buffer = null;
-            try {
-                if (loadedCount >= 2 && !useFallback) {
-                    buffer = chaosMapCtx.getImageData(0, 0, w, h).data;
-                }
-            } catch (e) {
-                log('Security/CORS Error reading pixels. Using fallback colors.', 'error');
-            }
+            // Sample colors
+            let data = null;
+            if (assetsReady) data = chaosMapCtx.getImageData(0, 0, w, h).data;
 
-            for (let y = 0; y < rows; y++) {
-                for (let x = 0; x < cols; x++) {
+            for (let y = 0; y < pr; y++) {
+                for (let x = 0; x < pc; x++) {
                     const px = x * config.pixelSize;
                     const py = y * config.pixelSize;
+                    let color = '#0e4429';
 
-                    let color = `hsl(${Math.random() * 360}, 50%, 20%)`;
-
-                    if (buffer) {
+                    if (data) {
                         const cx = Math.floor(px + config.pixelSize / 2);
                         const cy = Math.floor(py + config.pixelSize / 2);
                         const i = (cy * w + cx) * 4;
-                        if (buffer[i] !== undefined) {
-                            color = `rgb(${buffer[i]}, ${buffer[i + 1]}, ${buffer[i + 2]})`;
-                        }
-                    } else if (useFallback) {
-                        color = `hsl(${(x + y) * 5}, 50%, 50%)`;
-                    } else {
-                        color = '#0e4429';
+                        color = `rgb(${data[i]},${data[i + 1]},${data[i + 2]})`;
                     }
 
                     particles.push({
                         x: px, y: py,
-                        ox: px, oy: py,
+                        ox: px, oy: py, // Original Grid Pos (Jitter anchor)
                         color: color,
-                        dx: 0, dy: 0
+                        dx: 0, dy: 0,   // Jitter offset
+                        state: 0,       // 0=IDLE, 1=SUCKED, 2=DEAD
+                        size: config.pixelSize
                     });
                 }
             }
-            setStatus('status-parts', particles.length, 'ok');
+            diagnostics.log.textContent = "Particles Reset";
         }
 
-        // --- INTERACTION ---
-        window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', e => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-
-            const g = maskCtx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, config.revealRadius);
-            g.addColorStop(0, 'rgba(255,255,255,1)');
-            g.addColorStop(1, 'rgba(255,255,255,0)');
-
-            maskCtx.globalCompositeOperation = 'source-over';
-            maskCtx.fillStyle = g;
-            maskCtx.beginPath();
-            maskCtx.arc(mouse.x, mouse.y, config.revealRadius, 0, Math.PI * 2);
-            maskCtx.fill();
-        });
-
-        const slider = document.getElementById('jitterSlider');
-        slider.addEventListener('input', (e) => {
-            // Range 17 - 170 => 0.017 - 0.170
-            config.jitterSpeed = parseInt(e.target.value) / 1000;
-            document.getElementById('status-jitter').textContent = config.jitterSpeed.toFixed(3);
-        });
-
+        // --- PHYSICS LOOP ---
         function frame() {
-            ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, w, h);
-
-            // 1. Draw Clean Bottom
+            // Background: Clean Layer
             ctx.globalCompositeOperation = 'source-over';
-            ctx.drawImage(cleanCanvas, 0, 0);
+            if (assetsReady) ctx.drawImage(cleanCanvas, 0, 0);
+            else { ctx.fillStyle = '#111'; ctx.fillRect(0, 0, w, h); }
 
-            // 2. Prepare Chaos Top
-            chaosCtx.clearRect(0, 0, w, h);
+            let activeCount = 0;
 
-            particles.forEach(p => {
-                if (Math.random() < config.jitterSpeed) {
-                    p.dx = (Math.random() - 0.5) * config.jitterAmount;
-                    p.dy = (Math.random() - 0.5) * config.jitterAmount;
+            // Update & Draw Particles
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+
+                if (p.state === 2) continue; // Skip Dead
+                activeCount++;
+
+                // --- LOGIC ---
+                if (p.state === 0) { // IDLE
+                    // Jitter
+                    if (Math.random() < config.jitterSpeed) {
+                        p.dx = (Math.random() - 0.5) * config.jitterAmount;
+                        p.dy = (Math.random() - 0.5) * config.jitterAmount;
+                    }
+
+                    // Check Black Hole Distance
+                    const dx = mouse.x - p.x;
+                    const dy = mouse.y - p.y;
+                    const distSq = dx * dx + dy * dy;
+
+                    if (distSq < config.suckRadius * config.suckRadius) {
+                        p.state = 1; // Event Horizon Crossed
+                    }
+
+                    // Draw Idle
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.ox + p.dx, p.oy + p.dy, config.pixelSize + 0.5, config.pixelSize + 0.5);
+
+                } else if (p.state === 1) { // SUCKED
+                    // Move towards mouse
+                    const dx = mouse.x - p.x;
+                    const dy = mouse.y - p.y;
+
+                    p.x += dx * config.suckSpeed;
+                    p.y += dy * config.suckSpeed;
+                    p.size *= 0.85; // Shrink
+
+                    // Draw Sucked
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.size, p.size);
+
+                    // Kill condition
+                    if (p.size < 1 || (Math.abs(dx) < 5 && Math.abs(dy) < 5)) {
+                        p.state = 2; // Dead (Singularity reached)
+                    }
                 }
-                chaosCtx.fillStyle = p.color;
-                chaosCtx.fillRect(p.ox + p.dx, p.oy + p.dy, config.pixelSize + 0.5, config.pixelSize + 0.5);
-            });
+            }
 
-            // 3. Mask Chaos
-            chaosCtx.globalCompositeOperation = 'destination-out';
-            chaosCtx.drawImage(maskCanvas, 0, 0);
-            chaosCtx.globalCompositeOperation = 'source-over';
-
-            // 4. Combine
-            ctx.drawImage(chaosCanvas, 0, 0);
-
+            diagnostics.count.textContent = activeCount;
             requestAnimationFrame(frame);
         }
 
-        function resetMask() { maskCtx.clearRect(0, 0, w, h); log('Trail Reset.'); }
-        function forceRestart() { loadedCount = 2; resize(); }
-        function toggleFallback() {
-            useFallback = !useFallback;
-            log(`Fallback Mode: ${useFallback}`);
-            resize();
-        }
+        // --- CONTROLS ---
+        const slider = document.getElementById('jitterSlider');
+        slider.addEventListener('input', e => {
+            config.jitterSpeed = parseInt(e.target.value) / 10000;
+            diagnostics.jitter.textContent = config.jitterSpeed.toFixed(4);
+        });
 
-        setTimeout(() => {
-            if (loadedCount < 2) {
-                log('Timeout waiting for images. Try "Toggle Fallback".', 'warn');
-            }
-        }, 3000);
+        // Auto-fix for local testing delays
+        setTimeout(() => { if (!assetsReady) resize(); }, 1500);
 
         resize();
         frame();
