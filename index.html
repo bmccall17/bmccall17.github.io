@@ -59,20 +59,61 @@
           <a href="darketype/index.html" class="glitch-link">enter_darketype_mode();</a>
         </div>
         <!-- visual approximation of a commit graph -->
-        <div class="calendar-graph">
-          <!-- javascript could generate this, but let's just do a static vibe for now -->
-          <script>
-            for (let i = 0; i < 52; i++) {
-              // random activity
-              let level = Math.floor(Math.random() * 5);
-              let color = level === 0 ? '#161b22' :
-                level === 1 ? '#0e4429' :
-                  level === 2 ? '#006d32' :
-                    level === 3 ? '#26a641' : '#39d353';
-              document.write(`<div class="day" style="background-color: ${color}; height: ${10 + Math.random() * 40}px; width: 8px;"></div>`);
-            }
-          </script>
+        <div class="calendar-graph" id="calendar-graph">
+          <!-- populated by js -->
         </div>
+
+        <script>
+          async function loadHeatmap() {
+            const container = document.getElementById('calendar-graph');
+            try {
+              const res = await fetch('heatmap.json');
+              if (!res.ok) throw new Error('no data');
+              const dates = await res.json();
+
+              // simple visualization: last 52 updates (or days)
+              // if match, green. else, dim.
+
+              const now = new Date();
+              const oneDay = 24 * 60 * 60 * 1000;
+
+              let html = '';
+              for (let i = 52; i >= 0; i--) {
+                // date i days ago
+                const d = new Date(now.getTime() - (i * oneDay * 3)); // *3 to span ~5 months approx visually
+                const dateStr = d.toISOString().split('T')[0];
+
+                // check if any entry matches this date
+                const activity = dates.filter(entryDate => entryDate === dateStr).length;
+
+                let level = 0;
+                if (activity > 0) level = 1;
+                if (activity > 1) level = 2;
+                if (activity > 3) level = 4;
+
+                // randomize slightly for "glitch" aesthetic if no data
+                if (level === 0 && Math.random() > 0.9) level = 1;
+
+                let color = level === 0 ? '#161b22' :
+                  level === 1 ? '#0e4429' :
+                    level === 2 ? '#006d32' :
+                      level === 3 ? '#26a641' : '#39d353';
+
+                html += `<div class="day" title="${dateStr}" style="background-color: ${color}; height: ${10 + Math.random() * 40}px; width: 8px;"></div>`;
+              }
+              container.innerHTML = html;
+
+            } catch (e) {
+              console.log('heatmap-glitch', e);
+              // fallback to static if fetch fails
+              for (let i = 0; i < 52; i++) {
+                let color = Math.random() > 0.8 ? '#0e4429' : '#161b22';
+                container.innerHTML += `<div class="day" style="background-color: ${color}; height: ${10 + Math.random() * 40}px; width: 8px;"></div>`;
+              }
+            }
+          }
+          loadHeatmap();
+        </script>
         <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
           1,337 contributions in the last year. <span style="color: var(--glitch-color-1);">glitches detected.</span>
         </p>

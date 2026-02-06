@@ -65,6 +65,11 @@ function build() {
     fs.writeFileSync(INDEX_FILE, newHtml);
     console.log(`✅ indexed ${posts.length} messes.`);
     console.log(`   - latest: ${posts[0]?.title}`);
+
+    // 5. generate heatmap data
+    const heatmapData = posts.map(p => p.date);
+    fs.writeFileSync(path.join(__dirname, '../heatmap.json'), JSON.stringify(heatmapData, null, 2));
+    console.log('✅ generated heatmap.json');
 }
 
 build();
