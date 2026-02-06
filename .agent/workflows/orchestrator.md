@@ -29,6 +29,12 @@ review these files:
 - **if YES**: stop. initiate **complexity protocol** (see `RULES.md`).
   > "i notice this is complex. shall we define the test case first?"
 
+### context headroom report
+- **current context**: [low/medium/high/critical]
+- **estimated headroom**: [x] turns remaining
+- **reset recommendation**: [keep going / ship & clear]
+- *note: if context is critical, we must ship pending changes to `devnotes/releases` and reset.*
+
 ## 2. progress report
 when asked "what's the status?" or "where are we?":
 ### format
@@ -36,7 +42,9 @@ when asked "what's the status?" or "where are we?":
 ## project status: darketype portfolio
 **current phase**: [0/1/2] - [phase name]
 **operating level**: [1/2/3] - [observer/sandbox/lead]
+**operating level**: [1/2/3] - [observer/sandbox/lead]
 **phase progress**: [x]% complete
+**context**: [low/med/high] - [reset in X turns?]
 
 
 ### completed this phase

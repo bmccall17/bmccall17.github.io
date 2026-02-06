@@ -153,3 +153,9 @@ a:hover {
 html {
   cursor: text;
 }
+
+.ciphered {
+  color: var(--dim-color);
+  letter-spacing: 1px;
+  font-size: 0.9em;
+}

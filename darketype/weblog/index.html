@@ -24,13 +24,67 @@
 
             <p class="dim">chronological collection of failures and semi-successes.</p>
 
+            <!-- Mess Heatmap -->
+            <div id="mess-heatmap"
+                style="display: flex; gap: 2px; margin: 32px 0; height: 60px; align-items: flex-end; opacity: 0.8;">
+                <!-- populated by js -->
+            </div>
+            <script>
+                async function loadHeatmap() {
+                    const container = document.getElementById('mess-heatmap');
+                    try {
+                        const res = await fetch('../../heatmap.json');
+                        if (!res.ok) throw new Error('no data');
+                        const dates = await res.json();
+
+                        // Show last 60 days
+                        const now = new Date();
+                        const html = [];
+
+                        for (let i = 60; i >= 0; i--) {
+                            const d = new Date(now.getTime() - (i * 24 * 60 * 60 * 1000));
+                            const dateStr = d.toISOString().split('T')[0];
+                            const count = dates.filter(activeDate => activeDate === dateStr).length;
+
+                            // Visuals: Height based on activity, random jitter for "mess"
+                            let h = 4; // base height
+                            let opacity = 0.2;
+                            if (count > 0) {
+                                h = 10 + (count * 10) + (Math.random() * 10);
+                                opacity = 0.8 + (Math.random() * 0.2);
+                            } else {
+                                // noise
+                                if (Math.random() > 0.9) { h = 6 + Math.random() * 4; opacity = 0.4; }
+                            }
+
+                            const color = count > 0 ? 'var(--accent)' : 'var(--text-dim)';
+
+                            const bar = document.createElement('div');
+                            bar.style.width = '100%';
+                            bar.style.flex = '1';
+                            bar.style.height = `${h}px`;
+                            bar.style.background = color;
+                            bar.style.opacity = opacity;
+                            bar.title = `${dateStr}: ${count} entries`;
+
+                            container.appendChild(bar);
+                        }
+                    } catch (e) {
+                        console.error('heatmap fail', e);
+                        container.innerHTML = '<div class="dim">chaos tracking offline...</div>';
+                    }
+                }
+                loadHeatmap();
+            </script>
+
             <br>
 
             <ul class="mess-list">
 
                 <li>
                     <span class="dim">[2026-02-06]</span>
-                    <a href="../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md">phase zero: the gentle rebellion</a>
+                    <a href="../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md">phase zero: the gentle
+                        rebellion</a>
                     <span class="dim">_mess</span>
                 </li>
 
@@ -42,10 +96,11 @@
 
                 <li>
                     <span class="dim">[2026-02-06]</span>
-                    <a href="../entry.html?log=entries/2026-02-06_the_origin_story.md">the origin story: portfolio + darketype</a>
+                    <a href="../entry.html?log=entries/2026-02-06_the_origin_story.md">the origin story: portfolio +
+                        darketype</a>
                     <span class="dim">_seed</span>
                 </li>
-                </ul>
+            </ul>
 
             <br>
             <hr class="dim">
@@ -59,6 +114,42 @@
             </p>
 
         </main>
+
+        <!-- Progressive Legibility Script -->
+        <script>
+            function cipher(text) {
+                const chars = '01'; // binary aesthetic
+                return text.split('').map(c => {
+                    if (c === ' ') return ' ';
+                    return Math.random() > 0.5 ? '1' : '0';
+                }).join('');
+            }
+
+            const links = document.querySelectorAll('.mess-list a');
+
+            links.forEach(link => {
+                const original = link.innerText;
+                link.dataset.original = original;
+
+                // Set initial state to ciphered
+                link.innerText = cipher(original);
+                link.classList.add('ciphered');
+
+                // Hover Reveal
+                link.addEventListener('mouseenter', () => {
+                    link.innerText = link.dataset.original;
+                    link.classList.remove('ciphered');
+                });
+
+                link.addEventListener('mouseleave', () => {
+                    link.innerText = cipher(link.dataset.original);
+                    link.classList.add('ciphered');
+                });
+            });
+
+            // Optional: Global Toggle
+            // If we want a button to clean everything up.
+        </script>
     </div>
 
 </body>
