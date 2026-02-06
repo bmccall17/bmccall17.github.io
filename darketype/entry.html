@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>darketype // reader</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- minimal markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .metadata-block {
+            border-bottom: 1px dashed var(--dim-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <nav>
+                <a href="weblog/index.html" class="dim">&lt; return to log</a>
+                <span class="dim"> // </span>
+                <span class="glitch-text" id="header-title">loading...</span>
+            </nav>
+        </header>
+
+        <main id="content" style="margin-top: 2rem; min-height: 50vh;">
+            <!-- content injected here -->
+            <p class="dim">accessing archive...</p>
+        </main>
+
+        <footer>
+            <hr class="dim">
+            <p class="dim" style="font-size: 0.8rem;">
+                <span id="meta-date"></span><br>
+                <span id="meta-state"></span>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // the "leak" reader logic
+        async function loadEntry() {
+            const params = new URLSearchParams(window.location.search);
+            const entry = params.get('log'); // e.g., 'entries/2026...md'
+
+            if (!entry) {
+                document.getElementById('content').innerHTML = '<p class="alert">error: no entry specified.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(entry);
+                if (!response.ok) throw new Error('entry not found');
+                const text = await response.text();
+
+                // separate frontmatter from body (rudimentary check)
+                let body = text;
+                let meta = {};
+
+                if (text.startsWith('---')) {
+                    const parts = text.split('---');
+                    if (parts.length >= 3) {
+                        const frontmatter = parts[1];
+                        body = parts.slice(2).join('---');
+
+                        // parse basic yaml-like lines
+                        frontmatter.split('\n').forEach(line => {
+                            const [key, ...val] = line.split(':');
+                            if (key && val) meta[key.trim()] = val.join(':').trim().replace(/['"]/g, '');
+                        });
+                    }
+                }
+
+                // render
+                document.getElementById('header-title').innerText = meta.title || 'untitled mess';
+                document.getElementById('content').innerHTML = marked.parse(body);
+                document.title = `darketype // ${meta.title || 'entry'}`;
+
+                // metadata
+                if (meta.date) document.getElementById('meta-date').innerText = `logged: ${meta.date}`;
+                if (meta.state) document.getElementById('meta-state').innerText = `state: ${meta.state}`;
+
+                // Prism/Highlighter could go here if we were fancy
+
+            } catch (err) {
+                document.getElementById('content').innerHTML = `<p class="alert">fatal error: ${err.message}</p>`;
+            }
+        }
+
+        loadEntry();
+    </script>
+</body>
+
+</html>
