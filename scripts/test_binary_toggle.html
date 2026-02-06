@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test Bench: Polished Leak (Pixel Reveal)</title>
+    <style>
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        canvas {
+            border: 1px solid #30363d;
+            cursor: pointer;
+            image-rendering: pixelated;
+            /* Essential for the vibe */
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        .instructions {
+            color: #8b949e;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="instructions">
+        <h2>Refining the Leak</h2>
+        <p>State A (Default): Zoomed-in Pixels (Binary Chaos)<br>
+            State B (Hover/Click): Polished Header (Order)</p>
+        <p><em>Hover the canvas to test the transition.</em></p>
+    </div>
+
+    <!-- The Stage -->
+    <canvas id="leakCanvas" width="800" height="200"></canvas>
+
+    <div class="controls">
+        <button onclick="reset()">Reset</button>
+        <button onclick="toggleDebug()">Debug: Show Grid</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('leakCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Configuration
+        const config = {
+            text: "Brett A McCall",
+            subtext: "Head of Product | 0→1 Product Manager",
+            pixelSize: 20, // Size of the "big" pixels in Chaos mode
+            palette: [
+                '#e91e63', // pink
+                '#9c27b0', // purple
+                '#2196f3', // blue
+                '#03a9f4', // light blue
+                '#ffffff', // white
+                '#0d1117'  // bg (void)
+            ],
+            transitionSpeed: 0.1, // 0 to 1 per frame
+            isHovered: false
+        };
+
+        // State
+        let progress = 0; // 0 = Chaos, 1 = Order
+        let debug = false;
+        let particles = [];
+
+        // Initialize Grid
+        function init() {
+            const cols = Math.ceil(canvas.width / config.pixelSize);
+            const rows = Math.ceil(canvas.height / config.pixelSize);
+            particles = [];
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    particles.push({
+                        x: c * config.pixelSize,
+                        y: r * config.pixelSize,
+                        color: config.palette[Math.floor(Math.random() * config.palette.length)],
+                        targetColor: null // Will calculate text mask later
+                    });
+                }
+            }
+        }
+
+        // Draw Frame
+        function draw() {
+            // Clear
+            ctx.fillStyle = '#0d1117';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 1. Draw The "Order" State (Hidden buffer logic effectively)
+            // We need to know what color pixels SHOULD be if they form text
+            // For simplicity in this test, we render text to an offscreen canvas to sample it? 
+            // OR we just draw text on top with alpha? 
+            // Let's go cleaner: 
+
+            // Render Chaos Layer
+            if (progress < 1) {
+                particles.forEach(p => {
+                    // Size shrinks as we approach order? or alpha fades?
+                    // Let's try: Chaos Pixels fade out, Text fades in.
+
+                    ctx.fillStyle = p.color;
+                    // Jitter effect
+                    const jitter = (1 - progress) * 10;
+                    const dx = (Math.random() - 0.5) * jitter;
+                    const dy = (Math.random() - 0.5) * jitter;
+
+                    const size = config.pixelSize * (1 - progress * 0.8); // Pixels shrink
+
+                    ctx.globalAlpha = 1 - progress; // Fade out chaos
+                    ctx.fillRect(p.x + dx, p.y + dy, size, size);
+                });
+            }
+
+            // Render Order Layer (Text)
+            ctx.globalAlpha = Math.pow(progress, 3); // Ease in text
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // Header
+            ctx.font = 'bold 60px -apple-system, sans-serif';
+            ctx.fillStyle = '#c9d1d9'; // GitHub text
+            ctx.fillText(config.text, canvas.width / 2, canvas.height / 2 - 20);
+
+            // Subtext
+            ctx.font = '300 20px -apple-system, sans-serif';
+            ctx.fillStyle = '#8b949e'; // GitHub muted
+            ctx.fillText(config.subtext, canvas.width / 2, canvas.height / 2 + 40);
+
+            ctx.globalAlpha = 1.0;
+
+            // Debug Grid
+            if (debug) {
+                ctx.strokeStyle = '#30363d';
+                ctx.beginPath();
+                for (let x = 0; x < canvas.width; x += config.pixelSize) { ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); }
+                for (let y = 0; y < canvas.height; y += config.pixelSize) { ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); }
+                ctx.stroke();
+            }
+        }
+
+        // Animation Loop
+        function animate() {
+            // Target progress
+            const target = config.isHovered ? 1 : 0;
+            const diff = target - progress;
+
+            if (Math.abs(diff) > 0.01) {
+                progress += diff * 0.1; // Ease
+            } else {
+                progress = target; // Snap
+            }
+
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        // Interactions
+        canvas.addEventListener('mouseenter', () => config.isHovered = true);
+        canvas.addEventListener('mouseleave', () => config.isHovered = false);
+
+        function toggleDebug() { debug = !debug; draw(); }
+        function reset() { progress = 0; init(); }
+
+        // Start
+        init();
+        animate();
+
+    </script>
+</body>
+
+</html>
