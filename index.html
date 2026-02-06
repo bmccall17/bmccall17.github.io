@@ -6,11 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>brett a mccall (bmccall17)</title>
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/singularity.css">
   <meta name="description"
     content="product leadership for the spatial web. creative technology, xr, and strategic innovation.">
 </head>
 
 <body>
+
+  <!-- Singularity Background -->
+  <canvas id="bgCanvas"></canvas>
+
+  <div class="controls-panel">
+    <!-- Range: 17 to 1700 (0.0017 to 0.17) -->
+    <input type="range" id="jitterSlider" min="17" max="1700" value="17" step="1" title="Entropy">
+    <button class="reset-btn" onclick="resetSingularity()" title="Reset Entropy"></button>
+  </div>
 
   <div class="container">
     <!-- left sidebar: profile -->
@@ -208,6 +218,7 @@
     </main>
   </div>
 
+  <script src="scripts/singularity.js"></script>
 </body>
 
 </html>
