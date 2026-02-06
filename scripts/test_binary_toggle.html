@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Test Bench: Polished Leak (Final)</title>
+    <title>Test Bench: Polished Leak (Diagnostic Mode)</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             background: #0d1117;
             color: #c9d1d9;
-            font-family: -apple-system, sans-serif;
+            font-family: monospace;
             overflow: hidden;
         }
 
@@ -23,7 +23,7 @@
             z-index: -1;
         }
 
-        /* Unlabelled Controls */
+        /* Left Controls */
         .controls-panel {
             position: fixed;
             top: 50%;
@@ -34,13 +34,10 @@
             align-items: center;
             gap: 20px;
             z-index: 100;
-            opacity: 0.3;
-            /* Subtle */
-            transition: opacity 0.3s;
-        }
-
-        .controls-panel:hover {
-            opacity: 1.0;
+            padding: 10px;
+            background: rgba(13, 17, 23, 0.5);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         input[type=range] {
@@ -52,6 +49,7 @@
             height: 200px;
             background: #30363d;
             accent-color: #238636;
+            cursor: ns-resize;
         }
 
         button.reset-btn {
@@ -59,8 +57,51 @@
             height: 20px;
             border-radius: 50%;
             background: #f85149;
-            border: none;
+            border: 1px solid #fff;
             cursor: pointer;
+            box-shadow: 0 0 5px #f85149;
+        }
+
+        /* Diagnostic Panel */
+        #diagnostics {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #30363d;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 1000;
+            display: block;
+            /* Visible by default for debugging */
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 2px;
+        }
+
+        .status-ok {
+            color: #238636;
+        }
+
+        .status-err {
+            color: #f85149;
+        }
+
+        .log-box {
+            height: 100px;
+            overflow-y: auto;
+            background: #000;
+            border: 1px solid #30363d;
+            padding: 5px;
+            margin-top: 10px;
+            color: #8b949e;
         }
     </style>
 </head>
@@ -70,85 +111,132 @@
     <canvas id="bgCanvas"></canvas>
 
     <div class="controls-panel">
-        <input type="range" id="jitterSlider" min="1" max="17" value="1" step="1">
-        <button class="reset-btn" onclick="resetMask()" title="Reset"></button>
+        <input type="range" id="jitterSlider" min="1" max="17" value="1" step="1" title="Jitter Speed">
+        <button class="reset-btn" onclick="resetMask()" title="Reset Trail"></button>
+    </div>
+
+    <!-- Diagnostic Overlay -->
+    <div id="diagnostics">
+        <h3>System Diagnostics</h3>
+        <div class="status-row"><span>Canvas:</span> <span id="status-canvas">Waiting...</span></div>
+        <div class="status-row"><span>Clean Image:</span> <span id="status-clean">Loading...</span></div>
+        <div class="status-row"><span>Chaos Image:</span> <span id="status-chaos">Loading...</span></div>
+        <div class="status-row"><span>Particles:</span> <span id="status-parts">0</span></div>
+        <div class="status-row"><span>Jitter:</span> <span id="status-jitter">0.01</span></div>
+        <div class="log-box" id="logBox">Initializing...<br></div>
+        <div style="margin-top:10px; text-align:right;">
+            <button onclick="forceRestart()">Force Restart</button>
+            <button onclick="toggleFallback()">Toggle Fallback</button>
+        </div>
     </div>
 
     <script>
+        function log(msg, type = 'info') {
+            const box = document.getElementById('logBox');
+            const line = document.createElement('div');
+            line.style.color = type === 'error' ? '#f85149' : '#8b949e';
+            line.textContent = `> ${msg}`;
+            box.appendChild(line);
+            box.scrollTop = box.scrollHeight;
+            console.log(msg);
+        }
+
+        function setStatus(id, text, type) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            el.className = type === 'ok' ? 'status-ok' : (type === 'err' ? 'status-err' : '');
+        }
+
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
 
         const config = {
             pixelSize: 20,
             jitterAmount: 2,
-            jitterSpeed: 0.01, // Default Ultra Slow (will be mapped from slider)
+            jitterSpeed: 0.01,
             revealRadius: 80,
             cleanImgSrc: '../assets/header.png',
-            chaosImgSrc: '../assets/pixels.png' // New Green Seed
+            chaosImgSrc: '../assets/pixels.png'
         };
 
         // State
         let w, h;
         let particles = [];
         let mouse = { x: -1000, y: -1000 };
+        let useFallback = false;
 
         // --- ASSETS ---
         const cleanImg = new Image();
         const chaosImg = new Image();
+        // cleanImg.crossOrigin = "Anonymous"; // Try avoiding this for local files unless needed
+        // chaosImg.crossOrigin = "Anonymous";
+
         let loadedCount = 0;
 
-        const checkLoad = () => {
+        const checkLoad = (name) => {
             loadedCount++;
+            log(`${name} Loaded. (${loadedCount}/2)`, 'ok');
+            if (name === 'Clean') setStatus('status-clean', `${cleanImg.width}x${cleanImg.height}`, 'ok');
+            if (name === 'Chaos') setStatus('status-chaos', `${chaosImg.width}x${chaosImg.height}`, 'ok');
+
             if (loadedCount >= 2) {
-                console.log('All assets loaded');
+                log('All assets ready. Starting engine.');
                 resize();
             }
         };
 
+        const handleErr = (name, e) => {
+            log(`Failed to load ${name}`, 'error');
+            setStatus(`status-${name.toLowerCase()}`, 'FAILED', 'err');
+        };
+
+        cleanImg.onload = () => checkLoad('Clean');
+        cleanImg.onerror = (e) => handleErr('Clean', e);
         cleanImg.src = config.cleanImgSrc;
-        cleanImg.onload = checkLoad;
-        cleanImg.onerror = () => console.log('Clean img missing');
 
+        chaosImg.onload = () => checkLoad('Chaos');
+        chaosImg.onerror = (e) => handleErr('Chaos', e);
         chaosImg.src = config.chaosImgSrc;
-        chaosImg.onload = checkLoad;
-        chaosImg.onerror = () => console.log('Chaos img missing');
 
-        // --- BUFFERS ---
+        // Buffers
         const maskCanvas = document.createElement('canvas'); // The eraser trail
         const maskCtx = maskCanvas.getContext('2d');
-
         const cleanCanvas = document.createElement('canvas'); // Bottom Layer
         const cleanCtx = cleanCanvas.getContext('2d');
-
         const chaosMapCanvas = document.createElement('canvas'); // Source for chaos colors
         const chaosMapCtx = chaosMapCanvas.getContext('2d');
-
         const chaosCanvas = document.createElement('canvas'); // Top Layer Frame
         const chaosCtx = chaosCanvas.getContext('2d');
 
-        // --- INIT ---
         function resize() {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
+            setStatus('status-canvas', `${w}x${h}`, 'ok');
 
             [maskCanvas, cleanCanvas, chaosMapCanvas, chaosCanvas].forEach(c => { c.width = w; c.height = h; });
+            maskCtx.clearRect(0, 0, w, h);
 
-            maskCtx.clearRect(0, 0, w, h); // Empty mask
+            try {
+                if (loadedCount >= 1 && !useFallback) {
+                    drawCover(cleanCtx, cleanImg);
+                } else {
+                    // Fallback Clean
+                    cleanCtx.fillStyle = '#0d1117'; cleanCtx.fillRect(0, 0, w, h);
+                    cleanCtx.fillStyle = '#fff'; cleanCtx.font = '30px monospace'; cleanCtx.fillText('CLEAN LAYER (FALLBACK)', 50, h / 2);
+                }
 
-            if (loadedCount >= 1) {
-                // Draw Clean Layer (Bottom)
-                drawCover(cleanCtx, cleanImg);
+                if (loadedCount >= 2 && !useFallback) {
+                    drawCover(chaosMapCtx, chaosImg);
+                }
+
+                initParticles();
+            } catch (e) {
+                log(`Resize Error: ${e.message}`, 'error');
             }
-
-            if (loadedCount >= 2) {
-                // Draw Chaos Source Map (used for sampling colors)
-                drawCover(chaosMapCtx, chaosImg);
-            }
-
-            initParticles();
         }
 
         function drawCover(targetCtx, img) {
+            if (!img.width) return;
             const ratio = Math.max(w / img.width, h / img.height);
             const nw = img.width * ratio;
             const nh = img.height * ratio;
@@ -163,11 +251,13 @@
             particles = [];
 
             // Sample colors from Chaos Map
-            // If chaosMap is empty (image failed), we fallback to cleanMap or green.
-
             let buffer = null;
-            if (loadedCount >= 2) {
-                buffer = chaosMapCtx.getImageData(0, 0, w, h).data;
+            try {
+                if (loadedCount >= 2 && !useFallback) {
+                    buffer = chaosMapCtx.getImageData(0, 0, w, h).data;
+                }
+            } catch (e) {
+                log('Security/CORS Error reading pixels. Using fallback colors.', 'error');
             }
 
             for (let y = 0; y < rows; y++) {
@@ -175,13 +265,21 @@
                     const px = x * config.pixelSize;
                     const py = y * config.pixelSize;
 
-                    let color = '#0e4429'; // Base Github Green
+                    let color = `hsl(${Math.random() * 360}, 50%, 20%)`;
 
                     if (buffer) {
                         const cx = Math.floor(px + config.pixelSize / 2);
                         const cy = Math.floor(py + config.pixelSize / 2);
                         const i = (cy * w + cx) * 4;
-                        color = `rgb(${buffer[i]}, ${buffer[i + 1]}, ${buffer[i + 2]})`;
+                        // verify pixel exists
+                        if (buffer[i] !== undefined) {
+                            color = `rgb(${buffer[i]}, ${buffer[i + 1]}, ${buffer[i + 2]})`;
+                        }
+                    } else if (useFallback) {
+                        color = `hsl(${(x + y) * 5}, 50%, 50%)`;
+                    } else {
+                        // Default Github Green if image loaded but buffer failed
+                        color = '#0e4429';
                     }
 
                     particles.push({
@@ -192,6 +290,8 @@
                     });
                 }
             }
+            setStatus('status-parts', particles.length, 'ok');
+            log(`Initialized ${particles.length} particles.`);
         }
 
         // --- INTERACTION ---
@@ -211,20 +311,21 @@
             maskCtx.fill();
         });
 
-        // Slider Logic
         const slider = document.getElementById('jitterSlider');
         slider.addEventListener('input', (e) => {
-            // Map 1-17 to 0.01 - 0.17
             config.jitterSpeed = parseInt(e.target.value) / 100;
+            document.getElementById('status-jitter').textContent = config.jitterSpeed;
         });
 
-        // --- RENDER LOOP ---
         function frame() {
+            // Clear Main
+            // ctx.clearRect(0,0,w,h); 
+            // Better: Fill with fallback just in case
+            ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, w, h);
 
             // 1. Draw Clean Bottom
             ctx.globalCompositeOperation = 'source-over';
-            if (loadedCount >= 1) ctx.drawImage(cleanCanvas, 0, 0);
-            else { ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, w, h); }
+            ctx.drawImage(cleanCanvas, 0, 0);
 
             // 2. Prepare Chaos Top
             chaosCtx.clearRect(0, 0, w, h);
@@ -249,11 +350,23 @@
             requestAnimationFrame(frame);
         }
 
-        function resetMask() { maskCtx.clearRect(0, 0, w, h); }
+        function resetMask() { maskCtx.clearRect(0, 0, w, h); log('Trail Reset.'); }
+        function forceRestart() { loadedCount = 2; resize(); }
+        function toggleFallback() {
+            useFallback = !useFallback;
+            log(`Fallback Mode: ${useFallback}`);
+            resize();
+        }
 
-        // Init
-        // (Wait for images or timeout)
-        setTimeout(() => { if (loadedCount < 2) resize(); }, 1000);
+        // Timeout check
+        setTimeout(() => {
+            if (loadedCount < 2) {
+                log('Timeout waiting for images. Try "Toggle Fallback".', 'error');
+            }
+        }, 3000);
+
+        resize(); // Initial sizing (empty)
+        frame(); // Start loop
 
     </script>
 </body>
