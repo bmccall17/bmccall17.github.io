@@ -92,6 +92,7 @@
         let cols, rows;
         let particles = [];
         let mouse = { x: -1000, y: -1000 };
+        let useImage = true; // Default to true
 
         // Image Asset
         const img = new Image();
@@ -101,9 +102,13 @@
         img.onload = () => {
             imageLoaded = true;
             resize(); // Force re-init with colors
+            console.log('Image loaded:', config.imageSrc);
         };
-        // Fallback for no image
-        img.onerror = () => { console.log("No image found in assets/header.png, using procedural colors."); };
+        img.onerror = () => {
+            console.log("No image found, switching to fallback.");
+            // Don't auto-switch useImage, keep it true so we know it FAILED.
+            // But visually we need to handle it.
+        };
 
         // Mask Canvas (Offscreen) to track trails
         const maskCanvas = document.createElement('canvas');
@@ -116,18 +121,22 @@
             maskCanvas.width = w;
             maskCanvas.height = h;
 
-            // Init Mask to Black (Hidden)
+            // Init Mask to Black (Hidden) -- preserve trail if resizing? nah reset.
             maskCtx.fillStyle = 'black';
             maskCtx.fillRect(0, 0, w, h);
 
-            // Init Grid
+            initParticles();
+        }
+
+        function initParticles() {
             cols = Math.ceil(w / config.pixelSize);
             rows = Math.ceil(h / config.pixelSize);
             particles = [];
 
             // Create temporary canvas to sample image data
             let bufferData = null;
-            if (imageLoaded) {
+
+            if (useImage && imageLoaded) {
                 const bC = document.createElement('canvas');
                 bC.width = w; bC.height = h;
                 const bX = bC.getContext('2d');
@@ -144,14 +153,17 @@
                     const x = c * config.pixelSize;
                     const y = r * config.pixelSize;
 
-                    let color = `hsl(${Math.random() * 360}, 50%, 50%)`; // Fallback
+                    let color;
 
-                    if (bufferData) {
+                    if (useImage && bufferData) {
                         // Sample center of pixel
                         const sx = Math.floor(x + config.pixelSize / 2);
                         const sy = Math.floor(y + config.pixelSize / 2);
                         const i = (sy * w + sx) * 4;
                         color = `rgb(${bufferData[i]}, ${bufferData[i + 1]}, ${bufferData[i + 2]})`;
+                    } else {
+                        // Fallback Procedural
+                        color = `hsl(${Math.random() * 360}, 50%, 40%)`;
                     }
 
                     particles.push({
@@ -172,74 +184,11 @@
             mouse.x = e.clientX;
             mouse.y = e.clientY;
 
-            // Paint to mask
-            // We use 'destination-out' to carve transparent holes? 
-            // Or just draw white on black and treat white as "Show Clean".
-            // Let's draw White on Mask.
-
             maskCtx.beginPath();
             maskCtx.arc(mouse.x, mouse.y, config.revealRadius, 0, Math.PI * 2);
             maskCtx.fillStyle = 'white';
             maskCtx.fill();
         });
-
-        function draw() {
-            // 1. Clear Screen
-            // ctx.fillStyle = '#0d1117';
-            // ctx.fillRect(0, 0, w, h); 
-            // actually, we don't need to clear if we draw the full image? 
-            // well, pixels leave gaps if they jitter, so yes.
-            ctx.fillStyle = '#0d1117';
-            ctx.fillRect(0, 0, w, h);
-
-            // 2. Draw Chaos Layer (The big pixels)
-            // Optimization: Only update their positions based on jitterSpeed
-            particles.forEach(p => {
-                // Slow Jitter
-                if (Math.random() < config.jitterSpeed) {
-                    p.dx = (Math.random() - 0.5) * config.jitterAmount;
-                    p.dy = (Math.random() - 0.5) * config.jitterAmount;
-                }
-
-                ctx.fillStyle = p.color;
-                ctx.fillRect(p.originX + p.dx, p.originY + p.dy, config.pixelSize, config.pixelSize);
-            });
-
-            // 3. Draw Clean Layer (The Image) masked by the Mask
-            if (imageLoaded) {
-                ctx.save();
-
-                // Create path from mask? No, composite operations.
-                // Draw Image centered
-                // We need to draw the Reveal Mask into a buffer?
-                // Actually, let's use the maskCanvas we painted.
-
-                // Strategy: 
-                // Draw MaskCanvas (White spots)
-                // Source-In the Image (Only keeps image where mask is white)
-                // Draw that on top of Canvas.
-
-                // But wait, we are drawing ON TOP of the chaos.
-                // So...
-
-                const ratio = Math.max(w / img.width, h / img.height);
-                const nw = img.width * ratio;
-                const nh = img.height * ratio;
-                const ix = (w - nw) / 2;
-                const iy = (h - nh) / 2;
-
-                // We need a temp canvas for the compositing
-                // Or just be clever with globalCompositeOperation directly on main canvas?
-                // If we draw the mask on top, then source-in the image?
-                // That would erase the chaos below.
-
-                // Correct approach:
-                // Draw Chaos (Done)
-                // Draw Image masked by Mask.
-
-                // We'll use a second offscreen canvas for the clean layer composite.
-            }
-        }
 
         // Better Loop for Compositing
         function renderLoop() {
@@ -257,29 +206,8 @@
             });
 
             // B. Draw Clean Overlay
-            if (imageLoaded) {
+            if (useImage && imageLoaded) {
                 ctx.save();
-
-                // 1. Draw the image (Clean)
-                const ratio = Math.max(w / img.width, h / img.height);
-                const nw = img.width * ratio;
-                const nh = img.height * ratio;
-                const ix = (w - nw) / 2;
-                const iy = (h - nh) / 2;
-
-                // We need to clip this image using the maskCanvas.
-                // Since we can't easily "clip using an image" on the same canvas without erasing what's under...
-                // We iterate.
-
-                // Easier: Draw the Chaos.
-                // Then draw the Mask Canvas using 'destination-in' on top of a separate Image Canvas?
-                // No, simpler:
-
-                // 1. Scale and draw the FULL clean image to a temporary offscreen canvas.
-                // 2. Draw the Mask to that same offscreen canvas using 'destination-in' (Alpha Masking).
-                // 3. Draw the result to the main canvas.
-
-                // Ideally we cache the scaled image, but for now we draw it every frame (expensive-ish).
 
                 // Let's use a scratch canvas
                 if (!window.scratch) {
@@ -288,12 +216,20 @@
                     window.scratch.height = h;
                     window.sCtx = window.scratch.getContext('2d');
                 }
+                // sync Scratch size if resize happened (basic check)
+                if (window.scratch.width !== w) { window.scratch.width = w; window.scratch.height = h; }
 
                 // Clear scratch
                 window.sCtx.globalCompositeOperation = 'source-over';
                 window.sCtx.clearRect(0, 0, w, h);
 
                 // Draw Clean Image
+                const ratio = Math.max(w / img.width, h / img.height);
+                const nw = img.width * ratio;
+                const nh = img.height * ratio;
+                const ix = (w - nw) / 2;
+                const iy = (h - nh) / 2;
+
                 window.sCtx.drawImage(img, ix, iy, nw, nh);
 
                 // Apply Mask
@@ -303,6 +239,14 @@
                 // Draw scratch to main
                 ctx.drawImage(window.scratch, 0, 0);
 
+                ctx.restore();
+            } else if (!useImage) {
+                // Procedural Reveal (just show white blocks or something?)
+                // Or just show simpler reveal for fallback mode
+                ctx.save();
+                // Draw mask as white overlay to prove it works
+                ctx.globalAlpha = 0.2;
+                ctx.drawImage(maskCanvas, 0, 0);
                 ctx.restore();
             }
 
@@ -316,12 +260,21 @@
         }
 
         function toggleImage() {
-            // Debug helper to verify paths
-            alert('Looking for: ' + config.imageSrc);
+            useImage = !useImage;
+            initParticles(); // Re-sample colors
+            console.log('Mode:', useImage ? 'Image' : 'Fallback');
         }
 
         // Init
-        resize();
+        // Wait for load or force init if cached
+        if (img.complete) {
+            imageLoaded = true;
+            resize();
+        } else {
+            // resize called on load
+            // but call it once for fallback init
+            resize();
+        }
         renderLoop();
 
     </script>
