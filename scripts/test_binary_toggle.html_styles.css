@@ -1,0 +1,72 @@
+/* Singularity Effect (Black Hole Gradient) */
+
+#bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: auto;
+    /* MUST interact with mouse/touch */
+}
+
+/* UI Container */
+.controls-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    z-index: 100;
+    width: auto;
+    padding: 0;
+}
+
+/* Custom Slider Styling */
+input[type=range] {
+    writing-mode: bt-lr;
+    /* IE */
+    -webkit-appearance: slider-vertical;
+    /* Webkit */
+    width: 8px;
+    /* Desktop Default */
+    height: 200px;
+    background: transparent;
+    cursor: ns-resize;
+    margin: 0;
+    appearance: slider-vertical;
+}
+
+/* Reset Button */
+button.reset-btn {
+    width: 12px;
+    height: 12px;
+    background: #f85149;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 2px;
+    margin: 0;
+}
+
+button.reset-btn:hover {
+    transform: scale(1.5);
+}
+
+/* Mobile Overrides (5x Bigger) */
+@media (max-width: 768px) {
+    input[type=range] {
+        width: 40px;
+        height: 300px;
+    }
+
+    button.reset-btn {
+        width: 60px;
+        height: 60px;
+    }
+}
