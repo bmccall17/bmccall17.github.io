@@ -152,10 +152,33 @@
 
         // Force resize handling
         window.addEventListener('resize', resize);
+
+        // Input Handling (Mouse & Touch)
+        const updateInput = (x, y, type) => {
+            mouse.x = x;
+            mouse.y = y;
+            // Optional: Log input type once to verify
+            if (diagnostics.log.textContent !== type) {
+                diagnostics.log.textContent = `Input: ${type}`;
+            }
+        };
+
         window.addEventListener('mousemove', e => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
+            updateInput(e.clientX, e.clientY, 'Mouse');
         });
+
+        // Touch Support
+        window.addEventListener('touchmove', e => {
+            e.preventDefault(); // Stop scrolling while dragging
+            const t = e.touches[0];
+            updateInput(t.clientX, t.clientY, 'Touch');
+        }, { passive: false });
+
+        window.addEventListener('touchstart', e => {
+            e.preventDefault();
+            const t = e.touches[0];
+            updateInput(t.clientX, t.clientY, 'Touch');
+        }, { passive: false });
 
         // Toggle Clean Canvas (Cached)
         const cleanCanvas = document.createElement('canvas');
