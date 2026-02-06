@@ -20,7 +20,7 @@ const config = {
     // Image Alignment (0.0 = Left/Top, 0.5 = Center, 1.0 = Right/Bottom)
     // "Slightly off center" - adjust these to match the face position in the image
     imgFocusX: 0.5,
-    imgFocusY: 0.35 // Bias towards top (faces are usually in upper third)
+    imgFocusY: 0.45 // Shifted down a bit more (0.35 -> 0.45 moves image UP in viewport)
 };
 
 // State
