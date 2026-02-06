@@ -11,7 +11,7 @@ run this at the start of each session:
 ### current phase assessment
 - [ ] which phase are we in? (0-2 based on `devnotes/portfolio+darketype.md`)
 - [ ] what's the phase deliverable target?
-- [ ] what's the phase deliverable target?
+
 - [ ] what work remains in current phase?
 - [ ] **operating level check**: which level are we in? (1=observer, 2=sandbox, 3=lead)
 
@@ -37,7 +37,7 @@ when asked "what's the status?" or "where are we?":
 **current phase**: [0/1/2] - [phase name]
 **operating level**: [1/2/3] - [observer/sandbox/lead]
 **phase progress**: [x]% complete
-**phase progress**: [x]% complete
+
 
 ### completed this phase
 - [x] item 1
