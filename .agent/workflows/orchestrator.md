@@ -11,7 +11,9 @@ run this at the start of each session:
 ### current phase assessment
 - [ ] which phase are we in? (0-2 based on `devnotes/portfolio+darketype.md`)
 - [ ] what's the phase deliverable target?
+- [ ] what's the phase deliverable target?
 - [ ] what work remains in current phase?
+- [ ] **operating level check**: which level are we in? (1=observer, 2=sandbox, 3=lead)
 
 ### quick health check
 ```
@@ -21,12 +23,20 @@ review these files:
 - SHIP_LOG.md → recent updates
 ```
 
+### friction check
+- **are we stuck?** (circling without code or confusing requirements?)
+- **is it complex?** (requires multiple files or logic steps?)
+- **if YES**: stop. initiate **complexity protocol** (see `RULES.md`).
+  > "i notice this is complex. shall we define the test case first?"
+
 ## 2. progress report
 when asked "what's the status?" or "where are we?":
 ### format
 ```
 ## project status: darketype portfolio
 **current phase**: [0/1/2] - [phase name]
+**operating level**: [1/2/3] - [observer/sandbox/lead]
+**phase progress**: [x]% complete
 **phase progress**: [x]% complete
 
 ### completed this phase
@@ -81,6 +91,6 @@ for quick progress updates:
 ## 6. operating level reminder
 at session start, confirm operating level:
 - **level 1 (observer)**: read-only, planning mode
-- **level 2 (contained)**: scoped edits
+- **level 2 (contained / sandbox)**: writing content, tweaking css (no ship cycle needed).
 - **level 3 (lead)**: full autonomy
 default: level 1 until explicitly elevated.

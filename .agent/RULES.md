@@ -44,7 +44,13 @@ we are revolting against the grammar police.
 - **pre-api protocol**: before adding any features requiring keys, we must **stop** and configure `.gitignore` and environment variables properly (a dedicated phase 0 task).
 - **confidentiality**: until `.gitignore` is active, assume *everything* is public.
 
-## 4. integrity checks (run before /ship)
+## 4. the complexity protocol (test first)
+for complex tasks, we follow a red-green-refactor loop:
+1.  **definition of done**: define what "done" looks like via a test case (automated script or specific manual verification steps) *before* building.
+2.  **the red state**: the test *must fail* initially. if it passes before you build, the test is wrong.
+3.  **planning connection**: phase 0 now includes "writing the failing test" for complex features.
+
+## 5. integrity checks (run before /ship)
 
 ### 4.1 design integrity
 - [ ] does `darketype` feel distinct from the main portfolio?
@@ -64,5 +70,7 @@ we are revolting against the grammar police.
 ## 5. operating levels
 
 - **level 1 (observer)**: planning, reviewing.
-- **level 2 (contained)**: writing content, tweaking css.
+- **level 2 (contained / sandbox)**: writing content, tweaking css.
+  - *rule*: small iterations (glitch adjustments, copy edits) do not require a task entry or `/ship` cycle.
+  - *protocol*: act fast, break small things. only ship when the session ends or a feature is complete.
 - **level 3 (lead)**: structural changes, workflow updates.

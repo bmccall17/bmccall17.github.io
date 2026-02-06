@@ -6,7 +6,8 @@
 
 :root {
   --bg-color: #0a0a0a;
-  --text-color: #00ff41; /* classic terminal green */
+  --text-color: #00ff41;
+  /* classic terminal green */
   --dim-color: #008f11;
   --alert-color: #ff3333;
   --font-main: 'Courier New', Courier, monospace;
@@ -29,7 +30,9 @@ body {
 }
 
 /* typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: normal;
   text-transform: lowercase;
   margin-top: 2rem;
@@ -43,11 +46,7 @@ a {
   border-bottom: 1px solid var(--dim-color);
 }
 
-a:hover {
-  background-color: var(--text-color);
-  color: var(--bg-color);
-  cursor: help; /* chaos */
-}
+/* a:hover handled in interactive chaos block below */
 
 /* the artifacts */
 .manifesto-block {
@@ -75,14 +74,82 @@ a:hover {
 }
 
 /* utility */
-.dim { color: var(--dim-color); }
-.alert { color: var(--alert-color); }
+.dim {
+  color: var(--dim-color);
+}
+
+.alert {
+  color: var(--alert-color);
+}
 
 /* chaos animations */
 @keyframes glitch {
-  0% { transform: skew(0deg); }
-  20% { transform: skew(-2deg); }
-  40% { transform: skew(2deg); }
-  60% { transform: skew(0deg); }
-  100% { transform: skew(0deg); }
+  0% {
+    transform: skew(0deg);
+  }
+
+  20% {
+    transform: skew(-10deg);
+    text-shadow: 2px 0 red, -2px 0 blue;
+  }
+
+  40% {
+    transform: skew(10deg);
+    text-shadow: -2px 0 red, 2px 0 blue;
+  }
+
+  60% {
+    transform: skew(0deg);
+    text-shadow: none;
+  }
+
+  100% {
+    transform: skew(0deg);
+  }
+}
+
+@keyframes shiver {
+  0% {
+    transform: translate(1px, 1px);
+  }
+
+  25% {
+    transform: translate(-1px, 0);
+  }
+
+  50% {
+    transform: translate(0, -1px);
+  }
+
+  75% {
+    transform: translate(-1px, 1px);
+  }
+
+  100% {
+    transform: translate(1px, -1px);
+  }
+}
+
+/* interactive chaos */
+h1:hover,
+h2:hover,
+.glitch-text:hover {
+  animation: shiver 0.2s infinite;
+  color: var(--text-color);
+  text-shadow: 2px 2px var(--dim-color);
+  cursor: crosshair;
+}
+
+a:hover {
+  background-color: transparent;
+  color: var(--text-color);
+  text-shadow: 2px 0 var(--alert-color), -2px 0 var(--dim-color);
+  animation: glitch 0.5s infinite;
+  border-bottom: 2px solid var(--text-color);
+  cursor: help;
+}
+
+/* global cursor override for the nerd vibe */
+html {
+  cursor: text;
 }

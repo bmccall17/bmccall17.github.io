@@ -85,6 +85,12 @@ report to user:
 - **SHIP_LOG.md:** updated
 - **next step:** user handles git commit/push.
 
+### step 6: cleanup
+1.  **reset artifacts**:
+    - clear `implementation_plan.md` (retain headers, delete specific content).
+    - check `task.md`: ensure completed tasks are visually distinct (or move to an archive file if too long).
+2.  **close mental tabs**: explicitly state "cleanup complete. ready for next phase."
+
 ## key files
 - `SHIP_LOG.md` - project root, main changelog
 - `devnotes/releases/` - release note storage
