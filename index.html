@@ -59,6 +59,171 @@
       </div>
     </aside>
 
+    <a href="https://brettamccall.com" class="back-to-surface">← Return to Surface</a>
+
+    <style>
+      /* Darketype Overhaul Styles */
+      .high-contrast-text {
+        text-shadow: 0 0 10px #000, 0 0 5px #000;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 4px 8px;
+        border-radius: 4px;
+        display: inline-block;
+        /* Wraps tightly */
+      }
+
+      .back-to-surface {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        color: #00ff41;
+        font-family: monospace;
+        text-decoration: none;
+        border: 1px solid #00ff41;
+        padding: 10px 20px;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .back-to-surface:hover {
+        background: #00ff41;
+        color: #000;
+        box-shadow: 0 0 15px #00ff41;
+      }
+
+      /* Ghost Tile Layout */
+      .stream-layout {
+        grid-column: 1 / -1;
+        /* Span full width if in grid */
+        display: flex;
+        flex-direction: column;
+        gap: 150px;
+        /* Large gaps for scroll impact */
+        margin-top: 100px;
+        padding-bottom: 200px;
+        align-items: center;
+        /* Center stream */
+        width: 100%;
+      }
+
+      .ghost-card {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        /* Large format */
+        height: 500px;
+        opacity: 0.91;
+        /* 9% transparency as requested */
+        transition: opacity 0.3s, transform 0.3s;
+        border: 1px solid rgba(0, 255, 65, 0.2);
+        background: #000;
+        /* Fallback */
+        overflow: hidden;
+      }
+
+      .ghost-card:nth-child(even) {
+        align-self: flex-end;
+        /* Staggered effect? or just keep centered? User said 'different layout' */
+        /* Let's keep them centered but maybe offset slightly via margin if desired. For now, centered stack is strong. */
+      }
+
+      .ghost-card:hover {
+        opacity: 1.0;
+        transform: scale(1.02);
+        border-color: #00ff41;
+        z-index: 10;
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+      }
+
+      .ghost-card a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+      }
+
+      .ghost-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+        /* Let background bleed through image too */
+        filter: grayscale(100%) contrast(1.2) sepia(20%) hue-rotate(90deg);
+        /* Matrix-ish filter */
+        transition: all 0.5s;
+      }
+
+      .ghost-card:hover img {
+        filter: grayscale(0%) contrast(1.0) sepia(0%);
+        opacity: 1.0;
+      }
+
+      .ghost-content {
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        right: 40px;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .ghost-content h3 {
+        font-size: 3rem;
+        color: #fff;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        background: #000;
+        color: #00ff41;
+        display: inline-block;
+        padding: 0 10px;
+        margin-bottom: 10px;
+        border: 1px solid #00ff41;
+      }
+
+      .ghost-content p {
+        color: #fff;
+        font-family: monospace;
+        font-size: 1.1rem;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 15px;
+        max-width: 600px;
+        border-left: 4px solid #00ff41;
+      }
+
+      /* Global Text Contrast Enforcement */
+      .profile-sidebar,
+      .leak-section {
+        background: rgba(0, 0, 0, 0.85);
+        /* Stronger backdrop */
+        padding: 30px;
+        border: 1px solid #333;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      }
+
+      .profile-sidebar {
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      a {
+        text-shadow: 0 2px 4px #000;
+      }
+
+      /* Hide the original pinned section if we are replacing it, or keep it? 
+       User said "bring in the rest of the tiles... show me a different layout"
+       I will append the stream below the current content.
+    */
+    </style>
+
     <!-- main content -->
     <main class="main-content">
 
@@ -125,7 +290,8 @@
           loadHeatmap();
         </script>
         <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
-          1,337 contributions in the last year. <span style="color: var(--glitch-color-1);">glitches detected.</span>
+          1,337 contributions in the last year. <span style="color: var(--glitch-color-1);">glitches
+            detected.</span>
         </p>
       </section>
 
@@ -153,7 +319,8 @@
               <a href="https://ptom.net/xr/" target="_blank">
                 <h3>Mural XR</h3>
               </a>
-              <p>translating 2d collaboration into 3d spatial intuition. project planning in a spatial environment.</p>
+              <p>translating 2d collaboration into 3d spatial intuition. project planning in a spatial environment.
+              </p>
             </div>
             <div class="project-meta">
               <span>xr/spatial</span>
