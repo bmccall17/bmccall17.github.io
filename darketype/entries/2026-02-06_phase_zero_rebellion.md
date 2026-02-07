@@ -1,6 +1,6 @@
 ---
 title: "phase zero: the gentle rebellion"
-date: 2026-02-06
+date: "2026-02-06T10:00:00"
 state: "mess"
 tags: [meta, phase-zero, rebellion]
 next_experiment: "the first real mess"

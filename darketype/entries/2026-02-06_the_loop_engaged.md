@@ -1,6 +1,6 @@
 ---
 title: "the loop engaged: v0.1.1"
-date: 2026-02-06
+date: "2026-02-06T12:00:00"
 state: "shipped"
 tags: [release, loop, github]
 next_experiment: "phase 2: signature visuals"
