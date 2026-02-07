@@ -38,8 +38,19 @@ const checkLoad = () => { loadCount++; if (loadCount >= 2) { assetsReady = true;
 cleanImg.onload = checkLoad; cleanImg.src = config.cleanImgSrc;
 chaosImg.onload = checkLoad; chaosImg.src = config.chaosImgSrc;
 
-// Force resize handling
-window.addEventListener('resize', resize);
+// Force resize handling (Debounced)
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        // Only resize if dimensions changed significantly (ignore mobile URL bar toggle < 100px height)
+        const newW = window.innerWidth;
+        const newH = window.innerHeight;
+        if (newW !== w || Math.abs(newH - h) > 100) {
+            resize();
+        }
+    }, 200);
+});
 
 // Input Handling (Mouse & Touch)
 const updateInput = (x, y) => {
@@ -51,18 +62,18 @@ window.addEventListener('mousemove', e => {
     updateInput(e.clientX, e.clientY);
 });
 
-// Touch Support
+// Touch Support (Passive for better scroll performance)
 window.addEventListener('touchmove', e => {
-    e.preventDefault(); // Stop scrolling while dragging (Scroll Lock Constraint)
+    // e.preventDefault(); // REMOVED: Allow scrolling
     const t = e.touches[0];
     updateInput(t.clientX, t.clientY);
-}, { passive: false });
+}, { passive: true });
 
 window.addEventListener('touchstart', e => {
-    e.preventDefault();
+    // e.preventDefault(); // REMOVED: Allow scrolling/clicking
     const t = e.touches[0];
     updateInput(t.clientX, t.clientY);
-}, { passive: false });
+}, { passive: true });
 
 
 // Offscreen Buffers

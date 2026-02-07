@@ -159,3 +159,36 @@ html {
   letter-spacing: 1px;
   font-size: 0.9em;
 }
+
+/* heatmap */
+.heatmap-bar {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.heatmap-bar:hover {
+  background-color: var(--text-color) !important;
+  opacity: 1 !important;
+  height: 50px !important;
+  box-shadow: 0 0 10px var(--text-color);
+}
+
+@keyframes bar-flicker {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.8;
+    height: 20px;
+    background: var(--alert-color);
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.bar-glitch {
+  animation: bar-flicker 0.1s infinite;
+}

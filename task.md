@@ -1,28 +1,22 @@
 # Task: Darketype Phase 2 (Signature Visuals)
 
-## Active: Cross-site Leakage
-- [x] **Cross-Site Leakage Protocol (CSLP)**:
-    - [x] Defined in `devnotes/cross_site_leakage_protocol.md`.
-    - [x] Implemented core logic in `scripts/leak_core.js`.
-    - [x] Integrated into Darketype (`darketype/index.html`).
-- [x] **Portfolio Implementation (Local)**:
-    - [x] Updated `../portfolio/static/js/binary-leak.js` to implement:
-          - Infection monitoring (`localStorage`).
-          - Glitch text mutation (`d a r k e t y p e`).
-          - Singularity Button assembly (Level 0.8+).
+## Active: Polish & Deployment
+- [x] **Mobile Optimization**:
+    - [x] Removed scroll blocking in `singularity.js`.
+    - [x] Added resize debounce.
+- [x] **Refine Heatmap Visuals**:
+    - [x] Added `heatmap-bar` class with hover grow effect.
+    - [x] Added random `bar-glitch` animation.
 
 ## Completed Phase 2 Items
+- [x] **Cross-Site Leakage Protocol (CSLP)**:
+    - [x] Defined Protocol.
+    - [x] Implemented `leak_core.js` (Darketype) & `binary-leak.js` (Portfolio).
 - [x] **Singularity Integration**:
-    - [x] Prototype (`test_binary_toggle.html`)
-    - [x] Refactor to `scripts/singularity.js` & `css/singularity.css`
-    - [x] Integrated & verified.
-- [x] **Mess Heatmap Timeline**:
-    - [x] Backend: `scripts/build_weblog.js`.
-    - [x] Frontend: `darketype/weblog/index.html`.
+    - [x] Prototype, Refactor, Integrate.
 - [x] **Progressive Legibility**:
-    - [x] `.cipher` aesthetic & JS logic.
+    - [x] Cipher effect.
 
-## Backlog / Polish
-- [ ] Mobile optimization & performance tuning
-- [ ] Refine Heatmap visuals
-- [ ] Deploy Portfolio updates (User Action: Commit & Push Portfolio Repo)
+## Ready to Ship (Phase 2 Complete)
+- [ ] **User Action**: Deploy `bmccall17.github.io` (commit & push).
+- [ ] **User Action**: Deploy `../portfolio` (commit & push).

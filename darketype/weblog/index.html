@@ -60,6 +60,10 @@
                             const color = count > 0 ? 'var(--accent)' : 'var(--text-dim)';
 
                             const bar = document.createElement('div');
+                            bar.className = 'heatmap-bar';
+                            if (h > 20 && Math.random() > 0.8) bar.classList.add('bar-glitch'); // if tall, glitch more likely
+                            else if (Math.random() > 0.98) bar.classList.add('bar-glitch');
+
                             bar.style.width = '100%';
                             bar.style.flex = '1';
                             bar.style.height = `${h}px`;
@@ -83,9 +87,20 @@
 
                 <li>
                     <span class="dim">[2026-02-06]</span>
-                    <a href="../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md">phase zero: the gentle
-                        rebellion</a>
+                    <a href="../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md">phase zero: the gentle rebellion</a>
                     <span class="dim">_mess</span>
+                </li>
+
+                <li>
+                    <span class="dim">[2026-02-06]</span>
+                    <a href="../entry.html?log=entries/2026-02-06_singularity.md">singularity</a>
+                    <span class="dim">_void</span>
+                </li>
+
+                <li>
+                    <span class="dim">[2026-02-06]</span>
+                    <a href="../entry.html?log=entries/2026-02-06_singularity_release_v0.2.0.md">event horizon (v0.2.0)</a>
+                    <span class="dim">_void</span>
                 </li>
 
                 <li>
@@ -96,11 +111,10 @@
 
                 <li>
                     <span class="dim">[2026-02-06]</span>
-                    <a href="../entry.html?log=entries/2026-02-06_the_origin_story.md">the origin story: portfolio +
-                        darketype</a>
+                    <a href="../entry.html?log=entries/2026-02-06_the_origin_story.md">the origin story: portfolio + darketype</a>
                     <span class="dim">_seed</span>
                 </li>
-            </ul>
+                </ul>
 
             <br>
             <hr class="dim">
