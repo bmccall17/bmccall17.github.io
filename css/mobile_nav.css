@@ -1,0 +1,160 @@
+/* Mobile Navigation & Layout Overrides */
+@media (max-width: 768px) {
+
+    /* Disable native scrolling */
+    html,
+    body {
+        overflow: hidden;
+        height: 100%;
+        touch-action: none;
+        /* Disable browser handling of gestures */
+    }
+
+    /* Stacked Layout */
+    .stream-layout {
+        gap: 0;
+        /* Remove gap, we manage via JS/transform */
+        margin-top: 0;
+        padding-bottom: 0;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        perspective: 1000px;
+        /* For 3D depth effect */
+    }
+
+    .ghost-card {
+        position: absolute;
+        /* Stack them on top of each other */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        pointer-events: none;
+        /* Clickable only when active */
+        width: 85vw;
+        max-width: 400px;
+        height: 60vh;
+        max-height: 500px;
+        z-index: 1;
+        border: 1px solid rgba(0, 255, 65, 0.1);
+        background: #000;
+        /* Ensure opacity blocks cards behind */
+    }
+
+    .ghost-card.active {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        z-index: 10;
+        pointer-events: auto;
+        box-shadow: 0 0 50px rgba(0, 255, 65, 0.15);
+        border: 1px solid #00ff41;
+    }
+
+    .ghost-card.prev {
+        opacity: 0.3;
+        transform: translate(-50%, -120%) scale(0.9) rotateX(20deg);
+        z-index: 5;
+    }
+
+    .ghost-card.next {
+        opacity: 0.3;
+        transform: translate(-50%, 20%) scale(0.9) rotateX(-20deg);
+        z-index: 5;
+    }
+
+    /* Make sure image is visible in active card */
+    .ghost-card.active img {
+        filter: grayscale(0%) contrast(1.0) sepia(0%);
+        opacity: 1.0;
+    }
+
+    /* Hide sidebar on mobile to focus on stream? 
+       Or keep it as first "slide"? 
+       Let's treat the Profile as the first "card" effectively, 
+       or just overlay it. User said "tiles themselves... stacked".
+       Let's keep sidebar as is but maybe hidden or collapsed?
+       Actually, "mobile access to this site" likely implies the whole site flow.
+       For now, let's keep the sidebar scrollable or fixed?
+       If we disable body scroll, we lose access to sidebar if it's not part of the stack.
+       
+       DECISION: Move .profile-sidebar into the "stream" logic or specific handling?
+       For now, let's assume the STREAM is the main content. 
+       Maybe we should make the sidebar a "slide" too? 
+       A simpler approach for now:
+       - Keep sidebar as a "header" or separate overlay?
+       - OR, finding that the user wants to scroll through ITEMS.
+       - Let's make the profile sidebar "Item 0".
+    */
+
+    .profile-sidebar {
+        /* If we want it to be part of the flow, we'd need JS to manage it.
+           For now, let's just let it sit at top? But overflow is hidden.
+           Issue: If overflow is hidden, sidebar is cut off.
+        */
+        display: none;
+        /* Hide for now to focus on the requested "tiles" stack? */
+        /* Wait, we shouldn't just hide the bio. 
+           Let's make the Sidebar separate or toggleable?
+           Or maybe effective "Card 0".
+        */
+    }
+
+    /* We need a "Home" or "Info" card if we hide the sidebar. 
+       For this specific request "tiles themselves could be much closer", 
+       let's assume we focus on the tiles. 
+       We can add a "Info" button to show sidebar.
+    */
+
+    /* Navigation Arrows */
+    .mobile-nav-arrows {
+        position: fixed;
+        right: 20px;
+        bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        z-index: 1000;
+        mix-blend-mode: exclusion;
+    }
+
+    .nav-arrow {
+        width: 50px;
+        height: 50px;
+        border: 2px solid #00ff41;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #00ff41;
+        font-size: 24px;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.5);
+        transition: all 0.2s;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-arrow:active {
+        background: #00ff41;
+        color: #000;
+        transform: scale(0.9);
+    }
+
+    .nav-arrow.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+        border-color: #555;
+        color: #555;
+    }
+
+    /* Adjust controls panel (singularity reset) */
+    .controls-panel {
+        bottom: 20px;
+        left: 20px;
+        opacity: 0.5;
+    }
+}
