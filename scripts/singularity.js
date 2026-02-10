@@ -187,8 +187,10 @@ function frame() {
     else { ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, w, h); }
 
     // Update & Draw Particles
+    let activeCount = 0;
     for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
+        if (p.state === 1) activeCount++;
 
         if (p.state === 2) continue; // Skip Dead
 
@@ -230,6 +232,18 @@ function frame() {
             if (p.size < 1 || (Math.abs(dx) < 5 && Math.abs(dy) < 5)) {
                 p.state = 2; // Dead (Singularity reached)
             }
+        }
+    }
+
+    // Update Avatar (Reactive)
+    const avatar = document.querySelector('.glitch-avatar');
+    if (avatar) {
+        if (activeCount > 0) {
+            avatar.classList.add('chaos-mode');
+            const speed = Math.max(0.08, 0.6 - (activeCount / 150));
+            avatar.style.setProperty('--glitch-duration', `${speed}s`);
+        } else {
+            avatar.classList.remove('chaos-mode');
         }
     }
 
