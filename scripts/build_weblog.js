@@ -23,29 +23,42 @@ function build() {
     const files = fs.readdirSync(ENTRIES_DIR).filter(f => f.endsWith('.md') && f !== 'TEMPLATE.md');
 
     const posts = files.map(file => {
-        const content = fs.readFileSync(path.join(ENTRIES_DIR, file), 'utf-8');
+        const filePath = path.join(ENTRIES_DIR, file);
+        const content = fs.readFileSync(filePath, 'utf-8');
+        const stats = fs.statSync(filePath);
         const meta = parseFrontmatter(content);
+
+        // Use creation time (birthtime) if available, fall back to mtime
+        const created = stats.birthtimeMs ? stats.birthtime : stats.mtime;
+
         return {
             file,
-            title: meta.title || file,
-            date: meta.date || '1970-01-01',
+            title: meta.title || file, // Fallback title
+            date: meta.date || '1970-01-01', // Frontmatter date
+            // Actual file creation timestamp
+            timestampIso: created.toISOString(),
+            epoch: created.getTime(),
             state: meta.state || 'void',
             path: `../entry.html?log=entries/${file}`
         };
     });
 
-    // 2. sort by date desc
-    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // 2. sort by creation time desc (newest first)
+    posts.sort((a, b) => b.epoch - a.epoch);
 
-    // 3. generate html
+    // 3. Generate JSON Manifest (for dynamic loading)
+    const jsonPath = path.join(__dirname, '../darketype/entries.json');
+    fs.writeFileSync(jsonPath, JSON.stringify(posts, null, 2));
+    console.log(`✅ generated entries.json with ${posts.length} entries.`);
+
+    // 4. Update HTML (Static Fallback)
     const listHtml = posts.map(post => `
                 <li>
-                    <span class="dim">[${post.date}]</span>
-                    <a href="${post.path}">${post.title.toLowerCase()}</a>
+                    <span class="dim">[${post.timestampIso.split('T')[0]}]</span>
+                    <a href="${post.path}" data-title="${post.title}" data-epoch="${post.epoch}">${post.title.toLowerCase()}</a>
                     <span class="dim">_${post.state}</span>
                 </li>`).join('\n');
 
-    // 4. inject into index.html
     let html = fs.readFileSync(INDEX_FILE, 'utf-8');
     const startMarker = '<ul class="mess-list">';
     const endMarker = '</ul>';
@@ -59,15 +72,14 @@ function build() {
     }
 
     const newHtml = html.substring(0, startIndex + startMarker.length) +
-        '\n' + listHtml + '\n                ' +
+        '\n' + listHtml + '\n            ' +
         html.substring(endIndex);
 
     fs.writeFileSync(INDEX_FILE, newHtml);
-    console.log(`✅ indexed ${posts.length} messes.`);
-    console.log(`   - latest: ${posts[0]?.title}`);
+    console.log(`✅ updated index.html`);
 
     // 5. generate heatmap data
-    const heatmapData = posts.map(p => p.date);
+    const heatmapData = posts.map(p => p.timestampIso.split('T')[0]); // Use actual creation dates
     fs.writeFileSync(path.join(__dirname, '../heatmap.json'), JSON.stringify(heatmapData, null, 2));
     console.log('✅ generated heatmap.json');
 }

@@ -87,42 +87,66 @@
             <ul class="mess-list">
 
                 <li>
-                    <span class="dim">[2026-02-10T17:30:00]</span>
-                    <a href="../entry.html?log=entries/2026-02-10_optimism_and_ted.md">optimism and the ted stage</a>
+                    <span class="dim">[2026-02-12]</span>
+                    <a href="../entry.html?log=entries/2026-02-11_the_autopsy.md"
+                        data-title="the autopsy: auditing my own game engine" data-epoch="1770859971051">the autopsy:
+                        auditing my own game engine</a>
+                    <span class="dim">_learning</span>
+                </li>
+
+                <li>
+                    <span class="dim">[2026-02-10]</span>
+                    <a href="../entry.html?log=entries/2026-02-10_optimism_and_ted.md"
+                        data-title="optimism and the ted stage" data-epoch="1770762676049">optimism and the ted
+                        stage</a>
                     <span class="dim">_optimistic</span>
                 </li>
 
                 <li>
-                    <span class="dim">[2026-02-06T16:00:00]</span>
-                    <a href="../entry.html?log=entries/2026-02-06_cslp_infection.md">cross-site leakage protocol
-                        (cslp)</a>
+                    <span class="dim">[2026-02-07]</span>
+                    <a href="../entry.html?log=entries/2026-02-07_leaking_pixels.md"
+                        data-title="leaking pixels: cross-site data vapor" data-epoch="1770497210754">leaking pixels:
+                        cross-site data vapor</a>
                     <span class="dim">_shipped</span>
                 </li>
 
                 <li>
-                    <span class="dim">[2026-02-06T14:00:00]</span>
-                    <a href="../entry.html?log=entries/2026-02-06_singularity.md">event horizon (singularity v0.1.2)</a>
-                    <span class="dim">_void</span>
-                </li>
-
-                <li>
-                    <span class="dim">[2026-02-06T12:00:00]</span>
-                    <a href="../entry.html?log=entries/2026-02-06_the_loop_engaged.md">the loop engaged: v0.1.1</a>
+                    <span class="dim">[2026-02-07]</span>
+                    <a href="../entry.html?log=entries/2026-02-06_cslp_infection.md"
+                        data-title="cross-site leakage protocol (cslp)" data-epoch="1770440361834">cross-site leakage
+                        protocol (cslp)</a>
                     <span class="dim">_shipped</span>
-                </li>
-
-                <li>
-                    <span class="dim">[2026-02-06T10:00:00]</span>
-                    <a href="../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md">phase zero: the gentle
-                        rebellion</a>
-                    <span class="dim">_mess</span>
                 </li>
 
                 <li>
                     <span class="dim">[2026-02-06]</span>
-                    <a href="../entry.html?log=entries/2026-02-06_the_origin_story.md">the origin story: portfolio +
-                        darketype</a>
+                    <a href="../entry.html?log=entries/2026-02-06_singularity.md"
+                        data-title="event horizon (singularity v0.1.2)" data-epoch="1770405282911">event horizon
+                        (singularity v0.1.2)</a>
+                    <span class="dim">_void</span>
+                </li>
+
+                <li>
+                    <span class="dim">[2026-02-06]</span>
+                    <a href="../entry.html?log=entries/2026-02-06_the_loop_engaged.md"
+                        data-title="the loop engaged: v0.1.1" data-epoch="1770378500036">the loop engaged: v0.1.1</a>
+                    <span class="dim">_shipped</span>
+                </li>
+
+                <li>
+                    <span class="dim">[2026-02-06]</span>
+                    <a href="../entry.html?log=entries/2026-02-06_the_origin_story.md"
+                        data-title="the origin story: portfolio + darketype" data-epoch="1770377773776">the origin
+                        story: portfolio + darketype</a>
                     <span class="dim">_seed</span>
+                </li>
+
+                <li>
+                    <span class="dim">[2026-02-06]</span>
+                    <a href="../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md"
+                        data-title="phase zero: the gentle rebellion" data-epoch="1770376291077">phase zero: the gentle
+                        rebellion</a>
+                    <span class="dim">_mess</span>
                 </li>
             </ul>
 
@@ -142,37 +166,86 @@
         <!-- Progressive Legibility Script -->
         <script>
             function cipher(text) {
-                const chars = '01'; // binary aesthetic
                 return text.split('').map(c => {
                     if (c === ' ') return ' ';
                     return Math.random() > 0.5 ? '1' : '0';
                 }).join('');
             }
 
-            const links = document.querySelectorAll('.mess-list a');
+            // CSR Fetch Logic to ensure dynamic updates without full HTML rebuild dependency
+            // This runs if the user hasn't rebuilt the HTML manually but entries.json is updated.
+            async function syncEntries() {
+                try {
+                    const res = await fetch('../entries.json?t=' + Date.now());
+                    if (res.ok) {
+                        const entries = await res.json();
+                        // Only update if count differs or force update? 
+                        // Actually, simpler to just re-render cleanly.
+                        renderList(entries);
+                    }
+                } catch (e) { console.log('using static entries'); attachListeners(); }
+            }
 
-            links.forEach(link => {
-                const original = link.innerText;
-                link.dataset.original = original;
+            function renderList(entries) {
+                const list = document.querySelector('.mess-list');
+                list.innerHTML = '';
 
-                // Set initial state to ciphered
-                link.innerText = cipher(original);
-                link.classList.add('ciphered');
+                entries.forEach(entry => {
+                    const li = document.createElement('li');
 
-                // Hover Reveal
-                link.addEventListener('mouseenter', () => {
-                    link.innerText = link.dataset.original;
-                    link.classList.remove('ciphered');
+                    const spanDate = document.createElement('span');
+                    spanDate.className = 'dim';
+                    spanDate.innerText = `[${entry.timestampIso.split('T')[0]}]`;
+
+                    const a = document.createElement('a');
+                    a.href = entry.path;
+                    a.innerText = entry.title.toLowerCase();
+                    a.dataset.title = entry.title.toLowerCase();
+                    a.dataset.epoch = entry.epoch;
+
+                    const spanState = document.createElement('span');
+                    spanState.className = 'dim';
+                    spanState.innerText = `_${entry.state}`;
+
+                    li.appendChild(spanDate);
+                    li.appendChild(document.createTextNode(' '));
+                    li.appendChild(a);
+                    li.appendChild(document.createTextNode(' '));
+                    li.appendChild(spanState);
+
+                    list.appendChild(li);
                 });
+                attachListeners();
+            }
 
-                link.addEventListener('mouseleave', () => {
-                    link.innerText = cipher(link.dataset.original);
-                    link.classList.add('ciphered');
+            function attachListeners() {
+                const links = document.querySelectorAll('.mess-list a');
+                links.forEach(link => {
+                    const originalTitle = link.dataset.title || link.innerText;
+                    const timestampSpan = link.previousElementSibling;
+                    const originalDate = timestampSpan.innerText;
+                    const epoch = link.dataset.epoch;
+
+                    link.addEventListener('mouseenter', () => {
+                        link.innerText = cipher(originalTitle);
+                        link.classList.add('ciphered');
+                        if (epoch) timestampSpan.innerText = `[${epoch}]`;
+                    });
+
+                    link.addEventListener('mouseleave', () => {
+                        link.innerText = originalTitle;
+                        link.classList.remove('ciphered');
+                        timestampSpan.innerText = originalDate;
+                    });
                 });
-            });
+            }
 
-            // Optional: Global Toggle
-            // If we want a button to clean everything up.
+            // Try to fetch latest, fallback to existing static listeners
+            if (document.querySelector('.mess-list li')) {
+                attachListeners();
+            }
+            syncEntries();
+
         </script>
     </div>
 
