@@ -1,5 +1,14 @@
 [
   {
+    "file": "2026-02-13_dynamic_chaos.md",
+    "title": "dynamic chaos: v0.1.4",
+    "date": "2026-02-13",
+    "timestampIso": "2026-02-13T20:02:10.306Z",
+    "epoch": 1771012930306,
+    "state": "mess",
+    "path": "../entry.html?log=entries/2026-02-13_dynamic_chaos.md"
+  },
+  {
     "file": "2026-02-11_the_autopsy.md",
     "title": "the autopsy: auditing my own game engine",
     "date": "2026-02-11",
