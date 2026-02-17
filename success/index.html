@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog && window.posthog.__loaded) || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init rs ls yi ns us ts ss capture calculateEventProperties vs register register_once register_for_session unregister unregister_for_session gs getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags setGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty fs ds createPersonProfile setInternalOrTestUser ps Qr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing hs debug M cs getPageViewId captureTraceFeedback captureTraceMetric Kr".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+    posthog.init('phc_21ojMbvL2fR9lqHt84cFmuKCKLNWUqNHJTVJORXzmvn', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2025-11-30',
+        person_profiles: 'identified_only',
+    })
+</script>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brett A McCall - Technical CSM / TAM</title>
+    <meta name="description"
+        content="Technical Customer Success Manager specializing in AI and Developer Tools. Driving adoption, health scoring, and QBRs.">
+    <script src="https://unpkg.com/colcade@0/colcade.js"></script>
+    <script src="./static/js/binary-leak.js"></script>
+    <link rel="stylesheet" href="./static/css/v2-design.css">
+
+    <style>
+        /* CSS Reset & Defaults from copied site */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #191919;
+            background: #fff;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark {
+            background: #191919;
+            color: #fff;
+        }
+
+        body.fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark header {
+            background: rgba(25, 25, 25, 0.95);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid currentColor;
+            color: inherit;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .theme-toggle:hover {
+            background: currentColor;
+            color: #fff;
+        }
+
+        body.dark .theme-toggle:hover {
+            background: currentColor;
+            color: #191919;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: #e5e5e5;
+            color: #333333;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark .hero {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('./static/images/about/profile-hero.jpg') center/cover;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            border: 2px solid #667eea;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .cta-button:hover {
+            background: #5a67d8;
+            border-color: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: inherit;
+            border-color: currentColor;
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(128, 128, 128, 0.1);
+            color: inherit;
+        }
+
+        body.dark .cta-button {
+            background: #764ba2;
+            border-color: #764ba2;
+        }
+
+        body.dark .cta-button:hover {
+            background: #6c3f96;
+            border-color: #6c3f96;
+        }
+
+        body.dark .cta-button.secondary {
+            background: transparent;
+            border-color: currentColor;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section-content {
+            display: grid;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        /* Callouts */
+        .callout {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 30px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark .callout {
+            background: #2a2a2a;
+            border-left-color: #764ba2;
+        }
+
+        .callout:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .callout h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        body.dark .callout h3 {
+            color: #764ba2;
+        }
+
+        .callout ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .callout li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .callout li::before {
+            content: "•";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        body.dark .callout li::before {
+            color: #764ba2;
+        }
+
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        /* Portfolio Grid */
+        .portfolio {
+            transition: background-color 0.3s ease;
+        }
+
+        .project-grid {
+            margin-top: 60px;
+        }
+
+        .project-grid::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .grid-col {
+            float: left;
+            width: calc(33.333% - 20px);
+            margin-right: 30px;
+        }
+
+        .grid-col:last-child {
+            margin-right: 0;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        body.dark .project-card {
+            background: #333;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        body.dark .project-content h3 {
+            color: #fff;
+        }
+
+        .project-content p {
+            color: #505050;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        body.dark .project-content p {
+            color: #ccc;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-link:hover {
+            opacity: 0.7;
+        }
+
+        .cs-tags {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 10px;
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 15px 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #191919;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        /* Responsiveness */
+        @media (min-width: 601px) and (max-width: 991px) {
+            .grid-col {
+                width: calc(50% - 15px);
+                margin-right: 30px;
+            }
+
+            .grid-col:nth-child(2n) {
+                margin-right: 0;
+            }
+
+            .grid-col:nth-child(n+3) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .grid-col {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+
+        #binary-leak {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body class="fade-in">
+    <canvas id="binary-leak"></canvas>
+    <header>
+        <nav class="container">
+            <div class="logo">Brett A McCall</div>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Customer Work</a></li>
+                    <li><a href="#connect">Connect</a></li>
+                </ul>
+                <div class="header-ctas" style="display: flex; gap: 10px;">
+                    <a href="https://calendly.com/brettamccall" target="_blank" class="cta-button">Book a 15-min
+                        chat</a>
+                    <a href="./static/BrettMcCall_Resume.pdf" target="_blank" class="cta-button secondary">Download
+                        resume</a>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                    <span aria-hidden="true">🌓</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Brett A McCall</h1>
+                    <div class="subtitle">Technical CSM/TAM for AI + developer tools: implementation success, adoption,
+                        renewal outcomes.</div>
+                    <p class="description">Technical Customer Success Manager | Adoption + GRR | Health Scoring + QBRs.
+                        <br><br>
+                        I help technical products land well with real humans. Known for de-risking onboarding, building
+                        health signals, and running QBRs that drive expansion.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About</h2>
+                <div class="section-content">
+                    <div class="callout">
+                        <h3>Candidate-Market Fit</h3>
+                        <ul>
+                            <li><strong>Target roles:</strong> Technical CSM / TAM (Commercial CSM secondary)</li>
+                            <li><strong>Target companies:</strong> mission-driven SaaS, 25–500, AI platforms,
+                                devtools/observability, analytics</li>
+                            <li><strong>Location:</strong> relocate-ready; Vancouver, Seattle/Bellevue, SF Bay, NYC
+                                (plus open to remote if true)</li>
+                            <li><strong>Signature:</strong> implementation quality + behavior change + product feedback
+                                loop</li>
+                            <li><strong>Ownership:</strong> onboarding/implementation, adoption plan, health + risk, QBR
+                                cadence, escalations, renewal/expansion motion</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic;">I’m strongest in the messy middle between
+                            humans and systems: readiness workflows, remote troubleshooting, and champion enablement.
+                        </p>
+                    </div>
+
+                    <div class="callout">
+                        <h3>First 30/60/90 Days</h3>
+                        <ul>
+                            <li><strong>30:</strong> implementation readiness, success plan, instrumentation/health
+                                baseline, stakeholder map</li>
+                            <li><strong>60:</strong> adoption campaigns, QBR operating cadence, risk playbooks, exec
+                                comms</li>
+                            <li><strong>90:</strong> expansion signals, repeatable enablement, VOC loop with
+                                Product/Eng, measurable GRR impact</li>
+                        </ul>
+                    </div>
+
+                    <div class="columns">
+                        <div class="callout">
+                            <h3>Key Achievements</h3>
+                            <ul>
+                                <li><strong>Implementation / time-to-value:</strong> Reduced development cycles by 30%
+                                    for Philanthrosphere through ruthless subtraction.</li>
+                                <li><strong>Adoption lift / behavior change:</strong> Achieved 40% increase in repeat
+                                    engagement for Mural XR Project Canvas.</li>
+                                <li><strong>Retention / Renewal:</strong> Served as Technical Producer for TEDxAsheville
+                                    for 14 years, ensuring 100% uptime and resilience.</li>
+                                <li><strong>Cross-functional escalation leadership:</strong> Navigated high-stakes live
+                                    event production and complex stakeholder environments.</li>
+                            </ul>
+                        </div>
+
+                        <div class="callout">
+                            <h3>Professional Values</h3>
+                            <ul>
+                                <li><strong>Calm escalation leadership</strong></li>
+                                <li><strong>Clarity and follow-through</strong></li>
+                                <li><strong>Customer outcomes over activity</strong></li>
+                                <li><strong>Strong POV + low ego collaboration</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="callout" style="text-align: center;">
+                        <p><strong>Technical Fluency:</strong> Fluent in APIs, logs/traces, dashboards, SQL-adjacent
+                            thinking, integrations, and debugging workflows with Eng.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section portfolio">
+            <div class="container">
+                <h2>Customer Outcomes and Systems</h2>
+                <div class="project-grid" data-colcade="columns: .grid-col, items: .project-card">
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+
+                    <!-- TEDx -> Case Study C -->
+                    <div class="project-card">
+                        <img src="./static/images/about/tedx-bio.png" alt="TEDxAsheville" class="project-image">
+                        <div class="project-content">
+                            <h3>Outcome: Resilience & Uptime (TEDxAsheville)</h3>
+                            <p><strong>Context:</strong> High-stakes volunteer organization requiring 100%
+                                reliability.<br>
+                                <strong>Result:</strong> Built a "Production OS" that delivered 14 years of sold-out
+                                events and calm execution.
+                            </p>
+                            <div class="cs-tags">Health, Renewal, Escalations</div>
+                            <a href="case-study-c.html" class="project-link">View Case Study →</a>
+                        </div>
+                    </div>
+
+                    <!-- Mural XR -> Case Study B -->
+                    <div class="project-card">
+                        <img src="./static/images/projects/mural-xr/hero.png" alt="Mural XR" class="project-image">
+                        <div class="project-content">
+                            <h3>Outcome: Adoption Lift (Mural XR)</h3>
+                            <p><strong>Context:</strong> Remote teams struggling with flat collaboration tools.<br>
+                                <strong>Result:</strong> Implemented spatial canvas that drove 40% increase in repeat
+                                engagement.
+                            </p>
+                            <div class="cs-tags">Adoption, Enablement, VOC</div>
+                            <a href="case-study-b.html" class="project-link">View Case Study →</a>
+                        </div>
+                    </div>
+
+                    <!-- Philanthrosphere -> Case Study A -->
+                    <div class="project-card">
+                        <img src="./static/images/projects/philanthrosphere/hero.png" alt="Philanthrosphere"
+                            class="project-image">
+                        <div class="project-content">
+                            <h3>Outcome: Reduced Friction (Philanthrosphere)</h3>
+                            <p><strong>Context:</strong> Legacy fundraising platform with bloated features.<br>
+                                <strong>Result:</strong> Reduced dev cycles by 30% through feature auditing and
+                                simplified workflow implementation.
+                            </p>
+                            <div class="cs-tags">Implementation, Health, Expansion</div>
+                            <a href="case-study-a.html" class="project-link">View Case Study →</a>
+                        </div>
+                    </div>
+
+                    <!-- TarotTALKS -->
+                    <div class="project-card">
+                        <img src="./static/images/projects/tarottalks.png" alt="TarotTALKS" class="project-image">
+                        <div class="project-content">
+                            <h3>Outcome: Content Discovery System (TarotTALKS)</h3>
+                            <p><strong>Context:</strong> Mapping ancient wisdom to modern ideas.<br>
+                                <strong>Result:</strong> Created a semantic matching engine connecting Tarot archetypes
+                                to TED talks.
+                            </p>
+                            <div class="cs-tags">Implementation, Enablement</div>
+                            <a href="https://tarottalks.app/" class="project-link" target="_blank">Live Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- AVL1000 -->
+                    <div class="project-card">
+                        <img src="./static/images/projects/avl1000.png" alt="AVL1000" class="project-image">
+                        <div class="project-content">
+                            <h3>Outcome: Community Engagement (AVL1000)</h3>
+                            <p><strong>Context:</strong> Curating meaningful professional connections.<br>
+                                <strong>Result:</strong> Designed a system to identify the "10 most important people to
+                                meet next."
+                            </p>
+                            <div class="cs-tags">Adoption, Network Health</div>
+                            <a href="https://avl1000demo.figma.site/" class="project-link" target="_blank">In Production
+                                →</a>
+                        </div>
+                    </div>
+
+                    <!-- YESYESNO Bot -->
+                    <div class="project-card">
+                        <img src="./static/images/projects/yesyesno-bot/hero.png" alt="YESYESNO Bot"
+                            class="project-image">
+                        <div class="project-content">
+                            <h3>Outcome: AI Interaction Constraints (YESYESNO)</h3>
+                            <p><strong>Context:</strong> Exploring boundaries of human-AI interaction.<br>
+                                <strong>Result:</strong> Implemented safe-to-fail conversational boundaries for
+                                workplace intelligence.
+                            </p>
+                            <div class="cs-tags">AI, Implementation, Risk</div>
+                            <a href="https://chatgpt.com/g/g-68853015ce74819184da33338ebce8a3-yesyesno"
+                                class="project-link" target="_blank">Learn More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="connect" class="section contact">
+            <div class="container">
+                <h2>Connect</h2>
+                <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+                    <div class="callout"
+                        style="background: rgba(255,255,255,0.1); border-left: 4px solid #fff; color: white;">
+                        <h3 style="color: white;">How I Can Help</h3>
+                        <ul style="list-style: none;">
+                            <li>✅ Hiring Technical CSM / TAM</li>
+                            <li>✅ Introductions to CS leaders in AI/devtools/observability</li>
+                            <li>✅ Customers who need onboarding/adoption rescue (consulting)</li>
+                        </ul>
+                        <p style="margin-top: 20px; font-style: italic; font-weight: 500;">
+                            "Technical CSM with 10+ years exp in high-touch implementation and adoption. Specialist in
+                            devtools/AI. Relocating to major hubs."
+                        </p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/brettmccall" class="social-link" target="_blank">LinkedIn</a>
+                    <a href="mailto:hello@brettamccall.com" class="social-link">Email Me</a>
+                    <a href="https://github.com/bmccall17" class="social-link" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Brett A McCall. All rights reserved.</p>
+            <p style="margin-top: 10px; opacity: 0.7;">
+                <em>Helping technical products land well with real humans.</em>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        window.__webStartTime = performance.now();
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            const toggle = document.querySelector('.theme-toggle');
+            if (toggle) toggle.setAttribute('aria-pressed', isDark);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.body.classList.add('dark');
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.callout, .project-card').forEach(el => observer.observe(el));
+
+            // Colcade Init
+            if (typeof Colcade !== 'undefined') {
+                const grid = document.querySelector('.project-grid');
+                if (grid) {
+                    const colcade = new Colcade(grid, { columns: '.grid-col', items: '.project-card' });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
