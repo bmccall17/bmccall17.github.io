@@ -97,32 +97,74 @@ function resize() {
 
 function drawCover(ctx, img) {
     if (!img.width) return;
-    const ratio = Math.max(w / img.width, h / img.height);
-    const nw = img.width * ratio;
-    const nh = img.height * ratio;
 
-    // Focus Point Logic:
-    // We want the point (nw * imgFocusX) to lie at the screen center (w * 0.5)
-    // unless that pushes the image edge off screen.
+    const screenAspect = w / h;
+    const imgAspect = img.width / img.height;
 
-    let ix = (w * 0.5) - (nw * config.imgFocusX);
-    let iy = (h * 0.5) - (nh * config.imgFocusY);
+    // If screen is wider than image (Landscape Screen vs Portrait Image),
+    // Standard "cover" logic would scale by Width, making Height huge and cropping the top/bottom.
+    // User wants "eyes always in frame" (top visible) and suggested tiling.
+    if (screenAspect > imgAspect) {
+        // Tiling Mode: Fit Height
+        const ratio = h / img.height;
+        const nw = img.width * ratio;
+        const nh = img.height * ratio; // Matches h exactly
 
-    // Constrain to prevent empty space (if image is larger than screen)
-    // If nw > w, then ix can be negative, but ix + nw must be >= w
-    if (nw > w) {
-        ix = Math.min(0, Math.max(w - nw, ix));
+        // Center the main tile
+        // Use imgFocusX to determine center alignment if desired, but user asked for "one tile in the center"
+        // so strictly centering the tile frame is safest.
+        let startX = (w - nw) / 2;
+        let y = 0; // Fit Height means top aligns with 0
+
+        // Draw Center Tile
+        ctx.drawImage(img, startX, y, nw, nh);
+
+        // Tile Left
+        let loopX = startX - nw;
+        while (loopX + nw > 0) {
+            ctx.drawImage(img, loopX, y, nw, nh);
+            loopX -= nw;
+        }
+
+        // Tile Right
+        loopX = startX + nw;
+        while (loopX < w) {
+            ctx.drawImage(img, loopX, y, nw, nh);
+            loopX += nw;
+        }
+
     } else {
-        ix = (w - nw) / 2; // Center if smaller (shouldn't happen with cover ratio)
-    }
+        // Portrait/Tall Screen:
+        // Standard Cover logic works fine here because it scales by Height (to fill vertical),
+        // or scales by Width (if screen is super narrow) which covers smoothly.
+        // Actually, if screen is taller than image (Aspect < ImgAspect), we maximize ratio.
+        // Math.max(w/W, h/H).
+        // Since h/H > w/W, ratio = h/H.
+        // So nh = h. Fits height perfectly. No vertical cropping!
+        // So we can keep existing logic for this case.
 
-    if (nh > h) {
-        iy = Math.min(0, Math.max(h - nh, iy));
-    } else {
-        iy = (h - nh) / 2;
-    }
+        const ratio = Math.max(w / img.width, h / img.height);
+        const nw = img.width * ratio;
+        const nh = img.height * ratio;
 
-    ctx.drawImage(img, ix, iy, nw, nh);
+        // Focus Point Logic (Existing)
+        let ix = (w * 0.5) - (nw * config.imgFocusX);
+        let iy = (h * 0.5) - (nh * config.imgFocusY);
+
+        if (nw > w) {
+            ix = Math.min(0, Math.max(w - nw, ix));
+        } else {
+            ix = (w - nw) / 2;
+        }
+
+        if (nh > h) {
+            iy = Math.min(0, Math.max(h - nh, iy));
+        } else {
+            iy = (h - nh) / 2;
+        }
+
+        ctx.drawImage(img, ix, iy, nw, nh);
+    }
 }
 
 function generateTiledChaos(ctx, img) {
