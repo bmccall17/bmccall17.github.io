@@ -21,9 +21,53 @@
     <script src="https://unpkg.com/colcade@0/colcade.js"></script>
     <script src="./static/js/binary-leak.js"></script>
     <link rel="stylesheet" href="./static/css/v2-design.css">
+    <!-- Calendly -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <style>
+        /* === Calendly popup overrides: indigo/purple theme === */
+        .calendly-overlay {
+            background: rgba(10, 8, 30, 0.88) !important;
+        }
+
+        .calendly-overlay .calendly-popup {
+            border: 1px solid #667eea !important;
+            box-shadow: 0 0 0 1px #764ba2, 0 20px 60px rgba(102, 126, 234, 0.25) !important;
+            border-radius: 12px !important;
+            overflow: hidden !important;
+        }
+
+        .calendly-overlay .calendly-popup-close {
+            background: #667eea !important;
+            border: none !important;
+            color: #fff !important;
+            border-radius: 50% !important;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.5) !important;
+            transition: background 0.2s, transform 0.2s !important;
+        }
+
+        .calendly-overlay .calendly-popup-close:hover {
+            background: #764ba2 !important;
+            transform: scale(1.1) !important;
+        }
+
+        /* Calendly trigger button in nav — same pill shape as .cta-button */
+        .cta-button.calendly-nav {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .cta-button.calendly-nav:hover {
+            background: linear-gradient(135deg, #5a67d8, #6c3f96);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+    </style>
 
     <!-- Open Graph / Social Share -->
-    <meta property="og:title" content="Brett A McCall - Technical CSM/TAM, Forward Deployed Engineer/Solutions Engineer">
+    <meta property="og:title"
+        content="Brett A McCall - Technical CSM/TAM, Forward Deployed Engineer/Solutions Engineer">
     <meta property="og:description"
         content="Technical Customer Success Manager specializing in AI and Developer Tools. Driving adoption, health scoring, and QBRs. Also capable of being embedded with customer teams, rapid prototypes → production to close loops back to core product.">
     <meta property="og:image" content="https://bmccall17.github.io/assets/social/social-share-professional.png">
@@ -520,7 +564,9 @@
                     <li><a href="#connect">Connect</a></li>
                 </ul>
                 <div class="header-ctas" style="display: flex; gap: 10px;">
-                    <!-- <a href="https://calendly.com/bambtu/29min" target="_blank" class="cta-button">Book a 15-min chat</a> -->
+                    <a href="" class="cta-button calendly-nav"
+                        onclick="Calendly.initPopupWidget({url: 'https://calendly.com/bambtu'});return false;">Book a
+                        Call</a>
                     <a href="./static/BrettAMcCall_Resume.pdf" target="_blank" class="cta-button secondary">Download
                         resume</a>
                 </div>
@@ -536,10 +582,13 @@
             <div class="container">
                 <div class="hero-content">
                     <h1>Brett A McCall</h1>
-                    <div class="subtitle">Technical CSM/TAM for AI + developer tools: implementation success, adoption, renewal outcomes.</div>
+                    <div class="subtitle">Technical CSM/TAM for AI + developer tools: implementation success, adoption,
+                        renewal outcomes.</div>
                     <p class="description">Technical Customer Success Manager | Adoption + GRR | Health Scoring + QBRs.
                         <br><br>
-                        I help technical products land well with real humans. Known for de-risking onboarding, building health signals, and running QBRs that drive expansion. Also capable of being embedded with customer teams, rapid prototypes → production to close loops back to core product.
+                        I help technical products land well with real humans. Known for de-risking onboarding, building
+                        health signals, and running QBRs that drive expansion. Also capable of being embedded with
+                        customer teams, rapid prototypes → production to close loops back to core product.
                     </p>
                 </div>
             </div>
@@ -552,13 +601,20 @@
                     <div class="callout">
                         <h3>Currently seeking my next role with an amazing team....</h3>
                         <ul>
-                            <li><strong>Target roles:</strong> Technical CSM/TAM or Forward Deployed Engineer/Solutions Engineer</li>
-                            <li><strong>Target companies:</strong> mission-driven SaaS, 25–500, AI platforms, devtools/observability, analytics</li>
-                            <li><strong>Location:</strong> relocate-ready; Vancouver, Seattle/Bellevue, SF Bay, NYC (plus open to remote/hybrid if true for your team)</li>
-                            <li><strong>Signature:</strong> patience in the face of pressure + implementation quality + product feedback loop + customer-embedded build work</li>
-                            <li><strong>Ownership:</strong> onboarding/implementation, adoption plan, health + risk, QBR cadence, escalations, renewal/expansion motion, solution design, prototype delivery, guardrails/evals, production handoff to Eng</li>
+                            <li><strong>Target roles:</strong> Technical CSM/TAM or Forward Deployed Engineer/Solutions
+                                Engineer</li>
+                            <li><strong>Target companies:</strong> mission-driven SaaS, 25–500, AI platforms,
+                                devtools/observability, analytics</li>
+                            <li><strong>Location:</strong> relocate-ready; Vancouver, Seattle/Bellevue, SF Bay, NYC
+                                (plus open to remote/hybrid if true for your team)</li>
+                            <li><strong>Signature:</strong> patience in the face of pressure + implementation quality +
+                                product feedback loop + customer-embedded build work</li>
+                            <li><strong>Ownership:</strong> onboarding/implementation, adoption plan, health + risk, QBR
+                                cadence, escalations, renewal/expansion motion, solution design, prototype delivery,
+                                guardrails/evals, production handoff to Eng</li>
                         </ul>
-                        <p style="margin-top: 15px; font-style: italic;">I’m strongest in the messy middle between humans and systems: readiness workflows, remote troubleshooting, and champion enablement.
+                        <p style="margin-top: 15px; font-style: italic;">I’m strongest in the messy middle between
+                            humans and systems: readiness workflows, remote troubleshooting, and champion enablement.
                         </p>
                     </div>
 
@@ -579,10 +635,14 @@
                     <div class="callout">
                         <h3>Key Achievements</h3>
                         <ul>
-                            <li><strong>Implementation / time-to-value:</strong> Reduced development cycles by 30% for Philanthrosphere through ruthless subtraction.</li>
-                            <li><strong>Adoption lift / behavior change:</strong> Achieved 40% increase in repeat engagement for Mural XR Project Canvas.</li>
-                            <li><strong>Retention / Renewal:</strong> Served as Technical Producer for TEDxAsheville for 14 years, ensuring 100% uptime and resilience.</li>
-                            <li><strong>Cross-functional escalation leadership:</strong> Navigated high-stakes live event production and complex stakeholder environments.</li>
+                            <li><strong>Implementation / time-to-value:</strong> Reduced development cycles by 30% for
+                                Philanthrosphere through ruthless subtraction.</li>
+                            <li><strong>Adoption lift / behavior change:</strong> Achieved 40% increase in repeat
+                                engagement for Mural XR Project Canvas.</li>
+                            <li><strong>Retention / Renewal:</strong> Served as Technical Producer for TEDxAsheville for
+                                14 years, ensuring 100% uptime and resilience.</li>
+                            <li><strong>Cross-functional escalation leadership:</strong> Navigated high-stakes live
+                                event production and complex stakeholder environments.</li>
                         </ul>
                     </div>
                     <!--
@@ -598,7 +658,9 @@
                     </div>
 -->
                     <div class="callout" style="text-align: center;">
-                        <p><strong>Technical Fluency:</strong> Fluent in APIs, instrument, debug, ship fixes; integrate APIs; validate success metrics with customer, integrations, and debugging workflows with Eng.</p>
+                        <p><strong>Technical Fluency:</strong> Fluent in APIs, instrument, debug, ship fixes; integrate
+                            APIs; validate success metrics with customer, integrations, and debugging workflows with
+                            Eng.</p>
                     </div>
                 </div>
             </div>
@@ -619,7 +681,9 @@
                         <div class="project-content">
                             <h3>Outcome: Ecosystem Building (Winter VR Summit)</h3>
                             <p><strong>Context:</strong> Fragmented VR industry needing coalition.<br>
-                                <strong>Result:</strong> Annual conference bringing together industry leaders to explore the future of immersive tech. Followed by ongoing VR-Champions to provide continuous feedback to the product team.
+                                <strong>Result:</strong> Annual conference bringing together industry leaders to explore
+                                the future of immersive tech. Followed by ongoing VR-Champions to provide continuous
+                                feedback to the product team.
                             </p>
                             <div class="cs-tags">Community, Thought Leadership</div>
                             <a href="./static/BTU_GWG2022Summit-EventReport_PresentationFINAL.pdf" class="project-link"
@@ -633,7 +697,9 @@
                         <div class="project-content">
                             <h3>Outcome: Adoption Lift (Mural XR)</h3>
                             <p><strong>Context:</strong> Remote teams struggling with flat collaboration tools.<br>
-                                <strong>Result:</strong> Implemented spatial canvas that drove 40% increase in repeat engagement. Supported product team during embedded pilot, fast iteration cycles, and requirements back to engineering.
+                                <strong>Result:</strong> Implemented spatial canvas that drove 40% increase in repeat
+                                engagement. Supported product team during embedded pilot, fast iteration cycles, and
+                                requirements back to engineering.
                             </p>
                             <div class="cs-tags">Adoption, Enablement, VOC</div>
                             <a href="https://ptom.net/xr/" class="project-link">Learn More on Paul's canvas →</a>
@@ -646,8 +712,11 @@
                             class="project-image">
                         <div class="project-content">
                             <h3>Outcome: Reduced Friction (Philanthrosphere)</h3>
-                            <p><strong>Context:</strong> Fundraising platform with bloated features. Constraint-based scoping, deprecations, workflow redesign, adoption instrumentation, rollout enablement.<br>
-                                <strong>Result:</strong> Reduced dev cycles by 30% through feature auditing and simplified workflow implementation.
+                            <p><strong>Context:</strong> Fundraising platform with bloated features. Constraint-based
+                                scoping, deprecations, workflow redesign, adoption instrumentation, rollout
+                                enablement.<br>
+                                <strong>Result:</strong> Reduced dev cycles by 30% through feature auditing and
+                                simplified workflow implementation.
                             </p>
                             <div class="cs-tags">Implementation, Health, Expansion</div>
                             <a href="https://www.philanthrosphere.com/" class="project-link">Visit Site →</a>
@@ -661,7 +730,8 @@
                 <h2 style="font-size: 2rem; opacity: 0.8; margin-bottom: 10px;">Creative Context & Technical Experiments
                 </h2>
                 <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; color: var(--text-muted);">
-                    A selection of personal projects, experiments, and creative production work. I prototype in public, ship frequently, playtest, again, and again...
+                    A selection of personal projects, experiments, and creative production work. I prototype in public,
+                    ship frequently, playtest, again, and again...
                 </p>
 
                 <div class="project-grid" data-colcade="columns: .grid-col, items: .project-card">
@@ -706,7 +776,8 @@
                         <img src="./static/images/ai-journey/hero.png" alt="My AI Journey" class="project-image">
                         <div class="project-content">
                             <h3>My AI Journey: 1993–Present</h3>
-                            <p>I started training language models at Texas Instruments in 1993, back when "AI" meant Hidden Markov Models and dial-up internet. A lifetime of conversation with machines.</p>
+                            <p>I started training language models at Texas Instruments in 1993, back when "AI" meant
+                                Hidden Markov Models and dial-up internet. A lifetime of conversation with machines.</p>
                             <div class="cs-tags">History, Context</div>
                             <a href="https://betterthanunicorns.notion.site/Brett-s-AI-Journey-From-1993-to-Now-1e61b1c63fd6801294becd2db64201b5"
                                 class="project-link" target="_blank">Read the Timeline →</a>
@@ -718,7 +789,8 @@
                         <img src="./static/images/media/hero.png" alt="Production Portfolio" class="project-image">
                         <div class="project-content">
                             <h3>Media Production Portfolio</h3>
-                            <p>The "creative" side of the coin. Producer, talent, and executive credits across film, esports, and audio. Yes, that's my voice on the podcast.</p>
+                            <p>The "creative" side of the coin. Producer, talent, and executive credits across film,
+                                esports, and audio. Yes, that's my voice on the podcast.</p>
                             <div class="cs-tags">Storytelling, Production</div>
                             <a href="https://www.notion.so/Film-Video-Podcast-Production-Portfolio-Brett-A-McCall-18d1b1c63fd680b886f8d9af851dd03b"
                                 class="project-link" target="_blank">Call Time →</a>
@@ -730,7 +802,8 @@
                         <img src="./static/images/projects/avl1000.png" alt="AVL1000" class="project-image">
                         <div class="project-content">
                             <h3>AVL1000: Social Graphing</h3>
-                            <p>"Who are the 10 people you need to meet next?" An experiment in curating high-signal professional connections and mapping community density.</p>
+                            <p>"Who are the 10 people you need to meet next?" An experiment in curating high-signal
+                                professional connections and mapping community density.</p>
                             <div class="cs-tags">Community, Network Theory</div>
                             <a href="https://avl1000demo.figma.site/" class="project-link" target="_blank">In Production
                                 →</a>
@@ -743,7 +816,8 @@
                             class="project-image">
                         <div class="project-content">
                             <h3>YESYESNO: AI Constraints</h3>
-                            <p>Exploring the boundaries of human-AI interaction. What happens when you force a conversational agent to be extremely opinionated? (It gets interesting).</p>
+                            <p>Exploring the boundaries of human-AI interaction. What happens when you force a
+                                conversational agent to be extremely opinionated? (It gets interesting).</p>
                             <div class="cs-tags">AI, Experiment</div>
                             <a href="https://chatgpt.com/g/g-68853015ce74819184da33338ebce8a3-yesyesno"
                                 class="project-link" target="_blank">Chat with Bot →</a>
@@ -754,7 +828,8 @@
                 <section id="connect" class="section contact">
                     <div class="container">
                         <h2>Connect</h2>
-                        <h3 style="color: white;">If you need someone to embed, ship, and translate field reality into product improvements—let’s talk.</h3>
+                        <h3 style="color: white;">If you need someone to embed, ship, and translate field reality into
+                            product improvements—let’s talk.</h3>
                         <!--                <div style="max-width: 800px; margin: 0 auto; text-align: left;">
                     <div class="callout"
                         style="background: rgba(255,255,255,0.1); border-left: 4px solid #fff; color: white;">
@@ -779,7 +854,9 @@
                             <a href="https://x.com/bmccall17" class="social-link" target="_blank">Twitter</a>
                             <a href="https://www.crunchbase.com/person/brett-mccall-7ea2" class="social-link"
                                 target="_blank">Crunchbase</a>
-                            <a href="https://calendly.com/bambtu/29min" class="social-link" target="_blank">My Bookable</a>
+                            <a href="" class="social-link"
+                                onclick="Calendly.initPopupWidget({url: 'https://calendly.com/bambtu'});return false;">Book
+                                a Call</a>
 
                         </div>
                     </div>
