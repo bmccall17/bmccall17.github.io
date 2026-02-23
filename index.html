@@ -8,6 +8,49 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicons/main.svg">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/singularity.css">
+  <!-- Calendly -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <style>
+    /* === Calendly popup overrides: matrix / terminal theme === */
+    .calendly-overlay .calendly-popup {
+      border: 1px solid #00ff41 !important;
+      box-shadow: 0 0 40px rgba(0, 255, 65, 0.3), 0 0 80px rgba(0, 0, 0, 0.9) !important;
+      border-radius: 0 !important;
+      background: #060c06 !important;
+    }
+
+    .calendly-overlay .calendly-popup-close {
+      background: #000 !important;
+      border: 1px solid #00ff41 !important;
+      color: #00ff41 !important;
+      font-family: monospace !important;
+      border-radius: 0 !important;
+      box-shadow: 0 0 8px rgba(0, 255, 65, 0.4) !important;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .calendly-overlay .calendly-popup-close:hover {
+      background: #00ff41 !important;
+      color: #000 !important;
+    }
+
+    .calendly-overlay {
+      background: rgba(0, 6, 0, 0.92) !important;
+    }
+
+    /* "book a call" link styled like the rest of the sidebar socials */
+    a[data-calendly] {
+      position: relative;
+      cursor: pointer;
+    }
+
+    a[data-calendly]::after {
+      content: ' ↗';
+      font-size: 0.75em;
+      opacity: 0.6;
+    }
+  </style>
   <meta name="description"
     content="product leadership for the spatial web. creative technology, xr, and strategic innovation.">
 
@@ -165,7 +208,8 @@
         <a href="https://x.com/bmccall17" target="_blank">@bmccall17</a>
         <a href="https://betterthanunicorns.notion.site/gamedesign-resources-9ed90e9fa8be4b8c91b81e0442da3ea1"
           target="_blank">#gamedesignresources</a>
-        <a href="https://www.betterthanunicorns.com/brett" target="_blank">book a call</a>
+        <a href="" data-calendly
+          onclick="Calendly.initPopupWidget({url: 'https://calendly.com/bambtu'});return false;">book a call</a>
       </div>
 
       <hr style="border: 0; border-top: 1px solid var(--border); width: 100%; margin: 16px 0;">
