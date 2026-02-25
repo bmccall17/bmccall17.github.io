@@ -98,6 +98,17 @@
           font-weight: bold;
           border: 2px solid #00ff41;
           box-shadow: 0 0 10px #00ff41;
+          /* Progressive glow driven by --absorption (0→1) from singularity.js */
+          --absorption: 0;
+          transition: box-shadow 0.5s ease, border-color 0.5s ease;
+        }
+
+        /* Progressive glow: scales with absorption ratio */
+        .glitch-avatar:not(.singularity-maxed) {
+          box-shadow:
+            0 0 calc(10px + 30px * var(--absorption)) rgba(0, 255, 65, calc(0.4 + 0.6 * var(--absorption))),
+            0 0 calc(5px + 60px * var(--absorption)) rgba(0, 255, 65, calc(0.1 + 0.4 * var(--absorption)));
+          border-color: hsl(calc(130 - 10 * var(--absorption)), 100%, calc(50% + 20% * var(--absorption)));
         }
 
         .glitch-avatar:after {
@@ -109,6 +120,33 @@
         /* Reactive Class triggered by JS */
         .glitch-avatar.chaos-mode:after {
           animation: glitch-text var(--glitch-duration, 0.5s) infinite steps(1);
+        }
+
+        /* === EASTER EGG: Singularity Maxed — Pulsation === */
+        .glitch-avatar.singularity-maxed {
+          animation: singularity-pulse 2s infinite ease-in-out;
+          cursor: pointer;
+          border-color: #aaffaa;
+        }
+
+        @keyframes singularity-pulse {
+
+          0%,
+          100% {
+            box-shadow:
+              0 0 40px rgba(0, 255, 65, 0.9),
+              0 0 80px rgba(0, 255, 65, 0.5),
+              0 0 120px rgba(0, 255, 65, 0.2);
+            transform: scale(1);
+          }
+
+          50% {
+            box-shadow:
+              0 0 60px rgba(0, 255, 65, 1),
+              0 0 100px rgba(0, 255, 65, 0.7),
+              0 0 160px rgba(0, 255, 65, 0.3);
+            transform: scale(1.06);
+          }
         }
 
         @keyframes pulse-text {

@@ -49,6 +49,23 @@ body {
     z-index: 10;
 }
 
+.header-back {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+}
+
+.header-back:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent-dim);
+}
+
 .header-title {
     font-size: 11px;
     font-weight: 600;

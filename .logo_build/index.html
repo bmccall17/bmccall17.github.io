@@ -2,202 +2,208 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAM Logo Factory</title>
-    <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BAM Logo Factory</title>
+        <link rel="icon" type="image/svg+xml" href="../assets/favicons/logo_factory.svg">
+        <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ═══ HEADER BAR ═══ -->
-    <header id="app-header">
-        <span class="header-title">⚡ BAM LOGO FACTORY</span>
-        <div class="header-actions">
-            <button id="btn-reset" class="btn-ghost" title="Reset to defaults">↻ Reset</button>
+        <!-- ═══ HEADER BAR ═══ -->
+        <header id="app-header">
+                <a href="/" class="header-back" title="Back to bmccall17.github.io">← site</a>
+                <span class="header-title">⚡ BAM LOGO FACTORY</span>
+                <div class="header-actions">
+                        <button id="btn-reset" class="btn-ghost" title="Reset to defaults">↻ Reset</button>
+                </div>
+        </header>
+
+        <!-- ═══ MAIN LAYOUT ═══ -->
+        <div id="app-layout">
+
+                <!-- LEFT: Controls Panel -->
+                <aside id="controls-panel">
+
+                        <!-- CIRCLE -->
+                        <details class="ctrl-group" open>
+                                <summary>Circle</summary>
+                                <label>Radius <input type="range" id="circleRadius" min="120" max="300" value="242"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Fill Darkness <input type="range" id="circleFillDark" min="0" max="40" value="8"
+                                                data-unit=""><span class="val"></span></label>
+                                <label>Ring Stroke <input type="range" id="ringStroke" min="0.5" max="8" value="2.5"
+                                                step="0.1" data-unit="px"><span class="val"></span></label>
+                                <label>Inner Ring <input type="range" id="innerRingOpacity" min="0" max="100" value="18"
+                                                data-unit="%"><span class="val"></span></label>
+                        </details>
+
+                        <!-- CHROMATIC ABERRATION -->
+                        <details class="ctrl-group" open>
+                                <summary>Chromatic Aberration</summary>
+                                <label>Red X Offset <input type="range" id="chromRedX" min="-20" max="20" value="4"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Red Y Offset <input type="range" id="chromRedY" min="-20" max="20" value="-1"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Cyan X Offset <input type="range" id="chromCyanX" min="-20" max="20" value="-4"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Cyan Y Offset <input type="range" id="chromCyanY" min="-20" max="20" value="1"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Chrom Opacity <input type="range" id="chromOpacity" min="0" max="100" value="22"
+                                                data-unit="%"><span class="val"></span></label>
+                                <label>Chrom Stroke <input type="range" id="chromStrokeW" min="0.5" max="8" value="2.5"
+                                                step="0.1" data-unit="px"><span class="val"></span></label>
+                        </details>
+
+                        <!-- NEON GLOW -->
+                        <details class="ctrl-group">
+                                <summary>Neon Glow</summary>
+                                <label>Ring Glow Blur <input type="range" id="ringGlowBlur" min="0" max="80" value="28"
+                                                data-unit=""><span class="val"></span></label>
+                                <label>Ring Glow Opacity <input type="range" id="ringGlowOpacity" min="0" max="100"
+                                                value="70" data-unit="%"><span class="val"></span></label>
+                                <label>BAM Glow Blur <input type="range" id="bamGlowBlur" min="0" max="60" value="18"
+                                                data-unit=""><span class="val"></span></label>
+                                <label>BAM Glow Opacity <input type="range" id="bamGlowOpacity" min="0" max="100"
+                                                value="55" data-unit="%"><span class="val"></span></label>
+                                <label>Name Glow Blur <input type="range" id="nameGlowBlur" min="0" max="40" value="12"
+                                                data-unit=""><span class="val"></span></label>
+                                <label>Name Glow Opacity <input type="range" id="nameGlowOpacity" min="0" max="100"
+                                                value="45" data-unit="%"><span class="val"></span></label>
+                        </details>
+
+                        <!-- GLITCH SLICES -->
+                        <details class="ctrl-group" open>
+                                <summary>Glitch Slices</summary>
+                                <label>Slice Count <input type="range" id="sliceCount" min="0" max="6" value="3"><span
+                                                class="val"></span></label>
+                                <label>Slice 1 Y <input type="range" id="slice1Y" min="38" max="522" value="193"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Slice 1 Height <input type="range" id="slice1H" min="2" max="40" value="16"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Slice 1 Shift <input type="range" id="slice1X" min="-40" max="40" value="13"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Slice 2 Y <input type="range" id="slice2Y" min="38" max="522" value="321"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Slice 2 Height <input type="range" id="slice2H" min="2" max="40" value="10"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Slice 2 Shift <input type="range" id="slice2X" min="-40" max="40" value="-9"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Slice 3 Y <input type="range" id="slice3Y" min="38" max="522" value="360"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Slice 3 Height <input type="range" id="slice3H" min="2" max="40" value="5"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Slice 3 Shift <input type="range" id="slice3X" min="-40" max="40" value="19"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Extend to Name <input type="checkbox" id="sliceExtend"><span
+                                                class="val"></span></label>
+                        </details>
+
+                        <!-- SCAN LINES -->
+                        <details class="ctrl-group">
+                                <summary>Scan Lines</summary>
+                                <label>Show Scan Line <input type="checkbox" id="scanLineOn" checked><span
+                                                class="val"></span></label>
+                                <label>Scan Line Y <input type="range" id="scanLineY" min="38" max="522" value="204"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Scan Line Width <input type="range" id="scanLineW" min="50" max="1600"
+                                                value="340" data-unit="px"><span class="val"></span></label>
+                                <label>Scan Line Height <input type="range" id="scanLineH" min="0.5" max="5" value="1.5"
+                                                step="0.1" data-unit="px"><span class="val"></span></label>
+                                <label>Scan Opacity <input type="range" id="scanLineOpacity" min="0" max="100"
+                                                value="35" data-unit="%"><span class="val"></span></label>
+                        </details>
+
+                        <!-- BAM TEXT -->
+                        <details class="ctrl-group" open>
+                                <summary>BAM Text</summary>
+                                <label>Font Size <input type="range" id="bamFontSize" min="60" max="220" value="148"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Letter Spacing <input type="range" id="bamLetterSpacing" min="-10" max="20"
+                                                value="-2" data-unit="px"><span class="val"></span></label>
+                                <label>Y Offset <input type="range" id="bamYOffset" min="-60" max="60" value="30"
+                                                data-unit="px"><span class="val"></span></label>
+                        </details>
+
+                        <!-- NAME TEXT -->
+                        <details class="ctrl-group">
+                                <summary>Name Text</summary>
+                                <label>X Offset <input type="range" id="nameX" min="500" max="900" value="620"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Brett Size <input type="range" id="brettSize" min="60" max="200" value="148"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Brett Y <input type="range" id="brettY" min="80" max="300" value="170"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>"a" Size <input type="range" id="aSize" min="40" max="160" value="100"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>"a" Y <input type="range" id="aY" min="200" max="400" value="305"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>McCall Size <input type="range" id="mccallSize" min="60" max="200" value="148"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>McCall Y <input type="range" id="mccallY" min="300" max="500" value="392"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Name Spacing <input type="range" id="nameLetterSpacing" min="-10" max="20"
+                                                value="-2" data-unit="px"><span class="val"></span></label>
+                        </details>
+
+                        <!-- COLORS -->
+                        <details class="ctrl-group" open>
+                                <summary>Colors</summary>
+                                <label>Primary Green <input type="color" id="colorPrimary" value="#39ff14"><span
+                                                class="val"></span></label>
+                                <label>Ring Green <input type="color" id="colorRing" value="#2dff05"><span
+                                                class="val"></span></label>
+                                <label>Chrom Red <input type="color" id="colorChromRed" value="#ff2255"><span
+                                                class="val"></span></label>
+                                <label>Chrom Cyan <input type="color" id="colorChromCyan" value="#00ffee"><span
+                                                class="val"></span></label>
+                                <label>Slice 2 Tint <input type="color" id="colorSliceTint" value="#00ffcc"><span
+                                                class="val"></span></label>
+                        </details>
+
+                        <!-- RING DISTORTION -->
+                        <details class="ctrl-group">
+                                <summary>Ring Distortion</summary>
+                                <label>Freq X <input type="range" id="distortFreqX" min="0" max="100" value="35"
+                                                data-unit="‰"><span class="val"></span></label>
+                                <label>Freq Y <input type="range" id="distortFreqY" min="0" max="200" value="90"
+                                                data-unit="‰"><span class="val"></span></label>
+                                <label>Scale <input type="range" id="distortScale" min="0" max="30" value="7"
+                                                data-unit=""><span class="val"></span></label>
+                                <label>Seed <input type="range" id="distortSeed" min="0" max="100" value="17"
+                                                data-unit=""><span class="val"></span></label>
+                        </details>
+
+                </aside>
+
+                <!-- CENTER: SVG Canvas -->
+                <main id="canvas-area">
+                        <div id="canvas-wrapper">
+                                <svg id="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560"
+                                        width="1600" height="560">
+                                        <!-- Populated by JS -->
+                                </svg>
+                        </div>
+                </main>
+
         </div>
-    </header>
 
-    <!-- ═══ MAIN LAYOUT ═══ -->
-    <div id="app-layout">
+        <!-- ═══ EXPORT BAR ═══ -->
+        <footer id="export-bar">
+                <div class="export-bg-select">
+                        <span class="export-label">Background:</span>
+                        <button class="bg-btn active" data-bg="transparent">Transparent</button>
+                        <button class="bg-btn" data-bg="#ffffff">White</button>
+                        <button class="bg-btn" data-bg="#000000">Black</button>
+                </div>
+                <div class="export-actions">
+                        <button id="btn-export-svg" class="btn-export">⬇ Download SVG</button>
+                        <button id="btn-export-png" class="btn-export btn-export-alt">⬇ Download PNG (2×)</button>
+                </div>
+        </footer>
 
-        <!-- LEFT: Controls Panel -->
-        <aside id="controls-panel">
-
-            <!-- CIRCLE -->
-            <details class="ctrl-group" open>
-                <summary>Circle</summary>
-                <label>Radius <input type="range" id="circleRadius" min="120" max="300" value="242" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Fill Darkness <input type="range" id="circleFillDark" min="0" max="40" value="8"
-                        data-unit=""><span class="val"></span></label>
-                <label>Ring Stroke <input type="range" id="ringStroke" min="0.5" max="8" value="2.5" step="0.1"
-                        data-unit="px"><span class="val"></span></label>
-                <label>Inner Ring <input type="range" id="innerRingOpacity" min="0" max="100" value="18"
-                        data-unit="%"><span class="val"></span></label>
-            </details>
-
-            <!-- CHROMATIC ABERRATION -->
-            <details class="ctrl-group" open>
-                <summary>Chromatic Aberration</summary>
-                <label>Red X Offset <input type="range" id="chromRedX" min="-20" max="20" value="4" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Red Y Offset <input type="range" id="chromRedY" min="-20" max="20" value="-1"
-                        data-unit="px"><span class="val"></span></label>
-                <label>Cyan X Offset <input type="range" id="chromCyanX" min="-20" max="20" value="-4"
-                        data-unit="px"><span class="val"></span></label>
-                <label>Cyan Y Offset <input type="range" id="chromCyanY" min="-20" max="20" value="1"
-                        data-unit="px"><span class="val"></span></label>
-                <label>Chrom Opacity <input type="range" id="chromOpacity" min="0" max="100" value="22"
-                        data-unit="%"><span class="val"></span></label>
-                <label>Chrom Stroke <input type="range" id="chromStrokeW" min="0.5" max="8" value="2.5" step="0.1"
-                        data-unit="px"><span class="val"></span></label>
-            </details>
-
-            <!-- NEON GLOW -->
-            <details class="ctrl-group">
-                <summary>Neon Glow</summary>
-                <label>Ring Glow Blur <input type="range" id="ringGlowBlur" min="0" max="80" value="28"
-                        data-unit=""><span class="val"></span></label>
-                <label>Ring Glow Opacity <input type="range" id="ringGlowOpacity" min="0" max="100" value="70"
-                        data-unit="%"><span class="val"></span></label>
-                <label>BAM Glow Blur <input type="range" id="bamGlowBlur" min="0" max="60" value="18" data-unit=""><span
-                        class="val"></span></label>
-                <label>BAM Glow Opacity <input type="range" id="bamGlowOpacity" min="0" max="100" value="55"
-                        data-unit="%"><span class="val"></span></label>
-                <label>Name Glow Blur <input type="range" id="nameGlowBlur" min="0" max="40" value="12"
-                        data-unit=""><span class="val"></span></label>
-                <label>Name Glow Opacity <input type="range" id="nameGlowOpacity" min="0" max="100" value="45"
-                        data-unit="%"><span class="val"></span></label>
-            </details>
-
-            <!-- GLITCH SLICES -->
-            <details class="ctrl-group" open>
-                <summary>Glitch Slices</summary>
-                <label>Slice Count <input type="range" id="sliceCount" min="0" max="6" value="3"><span
-                        class="val"></span></label>
-                <label>Slice 1 Y <input type="range" id="slice1Y" min="38" max="522" value="193" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Slice 1 Height <input type="range" id="slice1H" min="2" max="40" value="16" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Slice 1 Shift <input type="range" id="slice1X" min="-40" max="40" value="13" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Slice 2 Y <input type="range" id="slice2Y" min="38" max="522" value="321" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Slice 2 Height <input type="range" id="slice2H" min="2" max="40" value="10" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Slice 2 Shift <input type="range" id="slice2X" min="-40" max="40" value="-9" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Slice 3 Y <input type="range" id="slice3Y" min="38" max="522" value="360" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Slice 3 Height <input type="range" id="slice3H" min="2" max="40" value="5" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Slice 3 Shift <input type="range" id="slice3X" min="-40" max="40" value="19" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Extend to Name <input type="checkbox" id="sliceExtend"><span class="val"></span></label>
-            </details>
-
-            <!-- SCAN LINES -->
-            <details class="ctrl-group">
-                <summary>Scan Lines</summary>
-                <label>Show Scan Line <input type="checkbox" id="scanLineOn" checked><span class="val"></span></label>
-                <label>Scan Line Y <input type="range" id="scanLineY" min="38" max="522" value="204"
-                        data-unit="px"><span class="val"></span></label>
-                <label>Scan Line Width <input type="range" id="scanLineW" min="50" max="1600" value="340"
-                        data-unit="px"><span class="val"></span></label>
-                <label>Scan Line Height <input type="range" id="scanLineH" min="0.5" max="5" value="1.5" step="0.1"
-                        data-unit="px"><span class="val"></span></label>
-                <label>Scan Opacity <input type="range" id="scanLineOpacity" min="0" max="100" value="35"
-                        data-unit="%"><span class="val"></span></label>
-            </details>
-
-            <!-- BAM TEXT -->
-            <details class="ctrl-group" open>
-                <summary>BAM Text</summary>
-                <label>Font Size <input type="range" id="bamFontSize" min="60" max="220" value="148"
-                        data-unit="px"><span class="val"></span></label>
-                <label>Letter Spacing <input type="range" id="bamLetterSpacing" min="-10" max="20" value="-2"
-                        data-unit="px"><span class="val"></span></label>
-                <label>Y Offset <input type="range" id="bamYOffset" min="-60" max="60" value="30" data-unit="px"><span
-                        class="val"></span></label>
-            </details>
-
-            <!-- NAME TEXT -->
-            <details class="ctrl-group">
-                <summary>Name Text</summary>
-                <label>X Offset <input type="range" id="nameX" min="500" max="900" value="620" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Brett Size <input type="range" id="brettSize" min="60" max="200" value="148" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Brett Y <input type="range" id="brettY" min="80" max="300" value="170" data-unit="px"><span
-                        class="val"></span></label>
-                <label>"a" Size <input type="range" id="aSize" min="40" max="160" value="100" data-unit="px"><span
-                        class="val"></span></label>
-                <label>"a" Y <input type="range" id="aY" min="200" max="400" value="305" data-unit="px"><span
-                        class="val"></span></label>
-                <label>McCall Size <input type="range" id="mccallSize" min="60" max="200" value="148"
-                        data-unit="px"><span class="val"></span></label>
-                <label>McCall Y <input type="range" id="mccallY" min="300" max="500" value="392" data-unit="px"><span
-                        class="val"></span></label>
-                <label>Name Spacing <input type="range" id="nameLetterSpacing" min="-10" max="20" value="-2"
-                        data-unit="px"><span class="val"></span></label>
-            </details>
-
-            <!-- COLORS -->
-            <details class="ctrl-group" open>
-                <summary>Colors</summary>
-                <label>Primary Green <input type="color" id="colorPrimary" value="#39ff14"><span
-                        class="val"></span></label>
-                <label>Ring Green <input type="color" id="colorRing" value="#2dff05"><span class="val"></span></label>
-                <label>Chrom Red <input type="color" id="colorChromRed" value="#ff2255"><span
-                        class="val"></span></label>
-                <label>Chrom Cyan <input type="color" id="colorChromCyan" value="#00ffee"><span
-                        class="val"></span></label>
-                <label>Slice 2 Tint <input type="color" id="colorSliceTint" value="#00ffcc"><span
-                        class="val"></span></label>
-            </details>
-
-            <!-- RING DISTORTION -->
-            <details class="ctrl-group">
-                <summary>Ring Distortion</summary>
-                <label>Freq X <input type="range" id="distortFreqX" min="0" max="100" value="35" data-unit="‰"><span
-                        class="val"></span></label>
-                <label>Freq Y <input type="range" id="distortFreqY" min="0" max="200" value="90" data-unit="‰"><span
-                        class="val"></span></label>
-                <label>Scale <input type="range" id="distortScale" min="0" max="30" value="7" data-unit=""><span
-                        class="val"></span></label>
-                <label>Seed <input type="range" id="distortSeed" min="0" max="100" value="17" data-unit=""><span
-                        class="val"></span></label>
-            </details>
-
-        </aside>
-
-        <!-- CENTER: SVG Canvas -->
-        <main id="canvas-area">
-            <div id="canvas-wrapper">
-                <svg id="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560" width="1600" height="560">
-                    <!-- Populated by JS -->
-                </svg>
-            </div>
-        </main>
-
-    </div>
-
-    <!-- ═══ EXPORT BAR ═══ -->
-    <footer id="export-bar">
-        <div class="export-bg-select">
-            <span class="export-label">Background:</span>
-            <button class="bg-btn active" data-bg="transparent">Transparent</button>
-            <button class="bg-btn" data-bg="#ffffff">White</button>
-            <button class="bg-btn" data-bg="#000000">Black</button>
-        </div>
-        <div class="export-actions">
-            <button id="btn-export-svg" class="btn-export">⬇ Download SVG</button>
-            <button id="btn-export-png" class="btn-export btn-export-alt">⬇ Download PNG (2×)</button>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
+        <script src="app.js"></script>
 </body>
 
 </html>

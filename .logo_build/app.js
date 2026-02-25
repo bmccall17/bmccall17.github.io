@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════
    BAM LOGO FACTORY — Engine
+   https://bmccall17.github.io/.logo_build
    ═══════════════════════════════════════════ */
 
 const SVG_NS = 'http://www.w3.org/2000/svg';

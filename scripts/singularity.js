@@ -287,6 +287,20 @@ function frame() {
         } else {
             avatar.classList.remove('chaos-mode');
         }
+
+        // === EASTER EGG: Absorption → Glow Progression ===
+        let deadCount = 0;
+        for (let j = 0; j < particles.length; j++) {
+            if (particles[j].state === 2) deadCount++;
+        }
+        const absorptionRatio = particles.length > 0 ? deadCount / particles.length : 0;
+        avatar.style.setProperty('--absorption', absorptionRatio.toFixed(3));
+
+        if (absorptionRatio >= 0.99) {
+            avatar.classList.add('singularity-maxed');
+        } else {
+            avatar.classList.remove('singularity-maxed');
+        }
     }
 
     requestAnimationFrame(frame);
@@ -301,6 +315,17 @@ if (slider) {
     });
 }
 window.resetSingularity = initParticles; // Export for button
+
+// === EASTER EGG: Click maxed avatar → Logo Factory ===
+const bamAvatar = document.querySelector('.glitch-avatar');
+if (bamAvatar) {
+    bamAvatar.style.cursor = 'default';
+    bamAvatar.addEventListener('click', () => {
+        if (bamAvatar.classList.contains('singularity-maxed')) {
+            window.location.href = '.logo_build/index.html';
+        }
+    });
+}
 
 // Auto-fix for local testing delays
 setTimeout(() => { if (!assetsReady) resize(); }, 1500);
