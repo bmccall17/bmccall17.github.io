@@ -9,24 +9,24 @@ const canvasArea = document.getElementById('canvas-area');
 
 // ── Default values (matching the original SVG) ──
 const DEFAULTS = {
-    circleRadius: 242, circleFillDark: 8, ringStroke: 2.5, innerRingOpacity: 18,
-    chromRedX: 4, chromRedY: -1, chromCyanX: -4, chromCyanY: 1,
-    chromOpacity: 22, chromStrokeW: 2.5,
-    ringGlowBlur: 28, ringGlowOpacity: 70,
-    bamGlowBlur: 18, bamGlowOpacity: 55,
-    nameGlowBlur: 12, nameGlowOpacity: 45,
-    sliceCount: 3,
-    slice1Y: 193, slice1H: 16, slice1X: 13,
-    slice2Y: 321, slice2H: 10, slice2X: -9,
+    circleRadius: 242, circleFillDark: 11, ringStroke: 6.2, innerRingOpacity: 46,
+    chromRedX: 12, chromRedY: 5, chromCyanX: -9, chromCyanY: -1,
+    chromOpacity: 40, chromStrokeW: 2.9,
+    ringGlowBlur: 25, ringGlowOpacity: 37,
+    bamGlowBlur: 35, bamGlowOpacity: 52,
+    nameGlowBlur: 31, nameGlowOpacity: 52,
+    sliceCount: 2,
+    slice1Y: 192, slice1H: 15, slice1X: 12,
+    slice2Y: 341, slice2H: 18, slice2X: 11,
     slice3Y: 360, slice3H: 5, slice3X: 19,
     sliceExtend: false,
-    scanLineOn: false, scanLineY: 490, scanLineW: 785, scanLineH: 2.2, scanLineOpacity: 29,
+    scanLineOn: false, scanLineY: 486, scanLineW: 765, scanLineH: 2.3, scanLineOpacity: 39,
     bamFontSize: 178, bamLetterSpacing: 6, bamYOffset: 12,
-    nameX: 695, brettSize: 166, brettY: 114, aSize: 106, aY: 236,
-    mccallSize: 168, mccallY: 319, nameLetterSpacing: -2,
+    nameX: 595, brettSize: 160, brettY: 114, aSize: 160, aY: 216,
+    mccallSize: 160, mccallY: 319, nameLetterSpacing: -2,
     colorPrimary: '#39ff14', colorRing: '#2dff05',
     colorChromRed: '#ff2255', colorChromCyan: '#00ffee', colorSliceTint: '#00ffcc',
-    distortFreqX: 27, distortFreqY: 24, distortScale: 7, distortSeed: 85
+    distortFreqX: 97, distortFreqY: 24, distortScale: 2, distortSeed: 85
 };
 
 let bgMode = 'transparent';
