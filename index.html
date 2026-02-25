@@ -54,19 +54,20 @@
     /* === TELEMETRY HUD === */
     #telemetry-hud {
       position: fixed;
-      bottom: 220px;
+      bottom: 0;
       left: 0;
-      width: 200px;
-      background: rgba(5, 5, 5, 0.88);
+      width: 210px;
+      background: rgba(5, 5, 5, 0.92);
       border: 1px solid #1a3a1a;
       border-left: none;
-      border-radius: 0 2px 2px 0;
-      padding: 8px 10px;
+      border-bottom: none;
+      border-radius: 0 4px 0 0;
+      padding: 8px 10px 6px;
       font-family: 'Courier New', monospace;
       font-size: 10px;
       line-height: 1.6;
       color: #008f11;
-      z-index: 99;
+      z-index: 2;
       pointer-events: none;
       user-select: none;
       overflow: hidden;
@@ -149,6 +150,74 @@
       text-shadow: 0 0 5px rgba(210, 153, 34, 0.4);
     }
 
+    /* --- HUD Controls (slider + reset inside HUD) --- */
+    .hud-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+      pointer-events: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hud-controls .hud-label {
+      flex-shrink: 0;
+    }
+
+    #telemetry-hud input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      flex: 1;
+      height: 4px;
+      background: #0a2a0a;
+      border: 1px solid #1a3a1a;
+      border-radius: 0;
+      outline: none;
+      cursor: ew-resize;
+      margin: 0;
+      writing-mode: horizontal-tb;
+    }
+
+    #telemetry-hud input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 8px;
+      height: 12px;
+      background: #00ff41;
+      border: none;
+      border-radius: 0;
+      cursor: ew-resize;
+      box-shadow: 0 0 4px rgba(0, 255, 65, 0.5);
+    }
+
+    #telemetry-hud input[type=range]::-moz-range-thumb {
+      width: 8px;
+      height: 12px;
+      background: #00ff41;
+      border: none;
+      border-radius: 0;
+      cursor: ew-resize;
+      box-shadow: 0 0 4px rgba(0, 255, 65, 0.5);
+    }
+
+    #telemetry-hud .hud-reset-btn {
+      width: 10px;
+      height: 10px;
+      flex-shrink: 0;
+      background: #f85149;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      padding: 0;
+    }
+
+    #telemetry-hud .hud-reset-btn:hover {
+      transform: scale(1.4);
+      box-shadow: 0 0 6px rgba(248, 81, 73, 0.6);
+    }
+
     @keyframes hud-blink {
 
       0%,
@@ -163,19 +232,19 @@
 
     @keyframes hud-scanflicker {
       0% {
-        opacity: 0.88;
+        opacity: 0.92;
       }
 
       4% {
-        opacity: 0.85;
+        opacity: 0.88;
       }
 
       8% {
-        opacity: 0.90;
+        opacity: 0.92;
       }
 
       50% {
-        opacity: 0.88;
+        opacity: 0.90;
       }
 
       52% {
@@ -183,11 +252,11 @@
       }
 
       54% {
-        opacity: 0.88;
+        opacity: 0.90;
       }
 
       100% {
-        opacity: 0.88;
+        opacity: 0.92;
       }
     }
 
@@ -242,11 +311,17 @@
     <hr class="hud-divider">
     <div class="hud-row"><span class="hud-label">FPS</span><span class="hud-value" id="hud-fps">---</span></div>
     <div class="hud-row"><span class="hud-label">UPTIME</span><span class="hud-value" id="hud-uptime">00:00</span></div>
+    <hr class="hud-divider">
+    <div class="hud-controls">
+      <span class="hud-label">E_CTRL</span>
+      <input type="range" id="jitterSlider" min="17" max="1700" value="17" step="1" title="Entropy">
+      <button class="hud-reset-btn" onclick="resetSingularity()" title="Reset Particles"></button>
+    </div>
   </div>
 
+  <!-- Mobile-only fallback controls (HUD is hidden on mobile) -->
   <div class="controls-panel">
-    <!-- Range: 17 to 1700 (0.0017 to 0.17) -->
-    <input type="range" id="jitterSlider" min="17" max="1700" value="17" step="1" title="Entropy">
+    <input type="range" id="jitterSliderMobile" min="17" max="1700" value="17" step="1" title="Entropy">
     <button class="reset-btn" onclick="resetSingularity()" title="Reset Entropy"></button>
   </div>
 

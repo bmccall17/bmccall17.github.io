@@ -48,6 +48,8 @@ a:hover {
     grid-template-columns: 296px 1fr;
     /* github sidebar ratio */
     gap: 24px;
+    position: relative;
+    z-index: 10;
 }
 
 @media (max-width: 768px) {

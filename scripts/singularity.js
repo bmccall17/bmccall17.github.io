@@ -373,13 +373,19 @@ function frame() {
 }
 
 // --- CONTROLS ---
-// Wired up to index.html elements
+// Wired up to index.html elements (HUD slider + mobile fallback)
 const slider = document.getElementById('jitterSlider');
-if (slider) {
-    slider.addEventListener('input', e => {
-        config.jitterSpeed = parseInt(e.target.value) / 10000;
-    });
+const sliderMobile = document.getElementById('jitterSliderMobile');
+
+function onSliderInput(e) {
+    config.jitterSpeed = parseInt(e.target.value) / 10000;
+    // Sync both sliders
+    if (slider) slider.value = e.target.value;
+    if (sliderMobile) sliderMobile.value = e.target.value;
 }
+
+if (slider) slider.addEventListener('input', onSliderInput);
+if (sliderMobile) sliderMobile.addEventListener('input', onSliderInput);
 window.resetSingularity = initParticles; // Export for button
 
 // === EASTER EGG: Click maxed avatar → Logo Factory ===

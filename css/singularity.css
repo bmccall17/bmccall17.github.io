@@ -11,91 +11,65 @@
     /* MUST interact with mouse/touch */
 }
 
-/* UI Container */
+/* Mobile-only fallback controls (hidden on desktop — HUD has the controls) */
 .controls-panel {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    top: auto;
-    transform: none;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    z-index: 100;
-    width: auto;
-    padding: 0;
+    display: none;
 }
 
-/* Custom Slider Styling */
-input[type=range] {
-    writing-mode: bt-lr;
-    /* IE */
-    -webkit-appearance: slider-vertical;
-    /* Webkit */
-    width: 8px;
-    /* Desktop Default */
-    height: 200px;
-    background: transparent;
-    cursor: ns-resize;
-    margin: 0;
-    appearance: slider-vertical;
-}
-
-/* Thumb Styling (Square, Green Gradient) */
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 8px;
-    height: 8px;
-    background: linear-gradient(to bottom, #238636, #000000);
-    border: none;
-    border-radius: 0;
-}
-
-input[type=range]::-moz-range-thumb {
-    width: 8px;
-    height: 8px;
-    background: linear-gradient(to bottom, #238636, #000000);
-    border: none;
-    border-radius: 0;
-}
-
-/* Reset Button */
-button.reset-btn {
-    width: 12px;
-    height: 12px;
-    background: #f85149;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-bottom: 2px;
-    margin: 0;
-}
-
-button.reset-btn:hover {
-    transform: scale(1.5);
-}
-
-/* Mobile Overrides (5x Bigger) */
 @media (max-width: 768px) {
-    input[type=range] {
+    .controls-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        z-index: 100;
+        width: auto;
+        padding: 0;
+    }
+
+    .controls-panel input[type=range] {
+        writing-mode: bt-lr;
+        -webkit-appearance: slider-vertical;
+        appearance: slider-vertical;
         width: 40px;
         height: 300px;
+        background: transparent;
+        cursor: ns-resize;
+        margin: 0;
     }
 
-    input[type=range]::-webkit-slider-thumb {
+    .controls-panel input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
         width: 40px;
         height: 40px;
+        background: linear-gradient(to bottom, #238636, #000000);
+        border: none;
+        border-radius: 0;
     }
 
-    input[type=range]::-moz-range-thumb {
+    .controls-panel input[type=range]::-moz-range-thumb {
         width: 40px;
         height: 40px;
+        background: linear-gradient(to bottom, #238636, #000000);
+        border: none;
+        border-radius: 0;
     }
 
-    button.reset-btn {
+    .controls-panel button.reset-btn {
         width: 60px;
         height: 60px;
+        background: #f85149;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin: 0;
+    }
+
+    .controls-panel button.reset-btn:hover {
+        transform: scale(1.5);
     }
 }
