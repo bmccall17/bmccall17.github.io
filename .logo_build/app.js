@@ -496,6 +496,41 @@ document.getElementById('btn-export-png').addEventListener('click', () => {
     img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgStr)));
 });
 
+// ── Download JPG (high-res for print) ──
+document.getElementById('btn-export-jpg').addEventListener('click', () => {
+    const svgStr = buildExportSVG();
+    const scale = 4; // 4× = 6400×2240 for print
+    const w = 1600 * scale;
+    const h = 560 * scale;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d');
+
+    // JPG has no alpha — fill with selected bg or white if transparent
+    const fill = (bgMode === 'transparent') ? '#ffffff' : bgMode;
+    ctx.fillStyle = fill;
+    ctx.fillRect(0, 0, w, h);
+
+    const img = new Image();
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0, w, h);
+        canvas.toBlob(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            const suffix = bgMode === 'transparent' ? 'white' : (bgMode === '#ffffff' ? 'white' : 'black');
+            a.download = `bam_logo_print_${suffix}.jpg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 'image/jpeg', 0.95);
+    };
+    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgStr)));
+});
+
 // ── Boot — randomize on every load ──
 randomizeControls();
 render();
