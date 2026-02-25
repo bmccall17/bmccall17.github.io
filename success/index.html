@@ -84,6 +84,11 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             line-height: 1.6;
@@ -518,9 +523,32 @@
             }
         }
 
+        .header-ctas {
+            display: flex;
+            gap: 10px;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+            }
+
+            .hero,
+            .section {
+                padding: 60px 0;
+            }
+
+            .callout {
+                padding: 20px;
+            }
+
+            .header-ctas {
+                gap: 5px;
+            }
+
+            .header-ctas .cta-button {
+                padding: 6px 10px;
+                font-size: 0.8rem;
             }
 
             .hero h1 {
@@ -530,6 +558,10 @@
             .grid-col {
                 width: 100%;
                 margin-right: 0;
+            }
+
+            .project-image {
+                height: 200px;
             }
 
             .social-links {
@@ -543,7 +575,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
             z-index: -1;
             pointer-events: none;
@@ -563,7 +595,7 @@
                     <li><a href="#portfolio">Customer Work</a></li>
                     <li><a href="#connect">Connect</a></li>
                 </ul>
-                <div class="header-ctas" style="display: flex; gap: 10px;">
+                <div class="header-ctas">
                     <a href="" class="cta-button calendly-nav"
                         onclick="Calendly.initPopupWidget({url: 'https://calendly.com/bambtu/29min'});return false;">Book
                         a
