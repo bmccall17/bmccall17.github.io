@@ -1,5 +1,14 @@
 [
   {
+    "file": "2026-02-25_logo_factory.md",
+    "title": "the logo factory: when ai iteration fails, build your own tool",
+    "date": "2026-02-25",
+    "timestampIso": "2026-02-25T13:19:00.000Z",
+    "epoch": 1772057940000,
+    "state": "shipped",
+    "path": "../entry.html?log=entries/2026-02-25_logo_factory.md"
+  },
+  {
     "file": "2026-02-13_dynamic_chaos.md",
     "title": "dynamic chaos: v0.1.4",
     "date": "2026-02-13",

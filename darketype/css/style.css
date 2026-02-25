@@ -192,3 +192,19 @@ html {
 .bar-glitch {
   animation: bar-flicker 0.1s infinite;
 }
+
+/* entry images */
+#content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem 0;
+  border: 1px solid var(--dim-color);
+  border-radius: 2px;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.15));
+}
+
+#content img:hover {
+  border-color: var(--text-color);
+  filter: drop-shadow(0 0 12px rgba(0, 255, 65, 0.3));
+}
