@@ -169,28 +169,6 @@
             opacity: 0.7;
         }
 
-        .theme-toggle {
-            background: none;
-            border: 2px solid currentColor;
-            color: inherit;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            margin-left: 20px;
-        }
-
-        .theme-toggle:hover {
-            background: currentColor;
-            color: #fff;
-        }
-
-        body.dark .theme-toggle:hover {
-            background: currentColor;
-            color: #191919;
-        }
-
         main {
             margin-top: 80px;
         }
@@ -533,13 +511,22 @@
                 display: none;
             }
 
+            .hero::before {
+                background-position: center 15% !important;
+            }
+
             .hero,
             .section {
-                padding: 60px 0;
+                padding: 35px 0;
+            }
+
+            .section-content {
+                margin-top: 30px;
+                gap: 20px;
             }
 
             .callout {
-                padding: 20px;
+                padding: 15px;
             }
 
             .header-ctas {
@@ -552,7 +539,19 @@
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+
+            .hero .description {
+                font-size: 1rem;
+                margin-bottom: 20px;
+                line-height: 1.5;
             }
 
             .grid-col {
@@ -603,9 +602,6 @@
                     <a href="./static/BrettAMcCall_Resume.pdf" target="_blank" class="cta-button secondary">Download
                         resume</a>
                 </div>
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-                    <span aria-hidden="true">🌓</span>
-                </button>
             </div>
         </nav>
     </header>
@@ -908,20 +904,7 @@
     <script>
         window.__webStartTime = performance.now();
 
-        function toggleTheme() {
-            document.body.classList.toggle('dark');
-            const isDark = document.body.classList.contains('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            const toggle = document.querySelector('.theme-toggle');
-            if (toggle) toggle.setAttribute('aria-pressed', isDark);
-        }
-
         document.addEventListener('DOMContentLoaded', function () {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                document.body.classList.add('dark');
-            }
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
