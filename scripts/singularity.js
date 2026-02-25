@@ -7,6 +7,24 @@
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
 
+// === TELEMETRY HUD ===
+const HUD = {
+    el: document.getElementById('telemetry-hud'),
+    particles: document.getElementById('hud-particles'),
+    absorbed: document.getElementById('hud-absorbed'),
+    entropy: document.getElementById('hud-entropy'),
+    absorbPct: document.getElementById('hud-absorb-pct'),
+    horizon: document.getElementById('hud-horizon'),
+    input: document.getElementById('hud-input'),
+    cursor: document.getElementById('hud-cursor'),
+    fps: document.getElementById('hud-fps'),
+    uptime: document.getElementById('hud-uptime'),
+};
+const _hudStart = Date.now();
+let _hudFrameCount = 0;
+let _hudLastFpsTime = performance.now();
+let _hudInputType = '---';
+
 const config = {
     pixelSize: 20,
     jitterSpeed: 0.0017, // Low end (0.0017 - 0.17)
@@ -53,26 +71,27 @@ window.addEventListener('resize', () => {
 });
 
 // Input Handling (Mouse & Touch)
-const updateInput = (x, y) => {
+const updateInput = (x, y, type) => {
     mouse.x = x;
     mouse.y = y;
+    if (type) _hudInputType = type;
 };
 
 window.addEventListener('mousemove', e => {
-    updateInput(e.clientX, e.clientY);
+    updateInput(e.clientX, e.clientY, 'Mouse');
 });
 
 // Touch Support (Passive for better scroll performance)
 window.addEventListener('touchmove', e => {
     // e.preventDefault(); // REMOVED: Allow scrolling
     const t = e.touches[0];
-    updateInput(t.clientX, t.clientY);
+    updateInput(t.clientX, t.clientY, 'Touch');
 }, { passive: true });
 
 window.addEventListener('touchstart', e => {
     // e.preventDefault(); // REMOVED: Allow scrolling/clicking
     const t = e.touches[0];
-    updateInput(t.clientX, t.clientY);
+    updateInput(t.clientX, t.clientY, 'Touch');
 }, { passive: true });
 
 
@@ -300,6 +319,53 @@ function frame() {
             avatar.classList.add('singularity-maxed');
         } else {
             avatar.classList.remove('singularity-maxed');
+        }
+    }
+
+    // === TELEMETRY HUD UPDATE ===
+    if (HUD.el) {
+        // Particle counts
+        const totalParticles = particles.length;
+        let deadCount = 0;
+        for (let j = 0; j < totalParticles; j++) {
+            if (particles[j].state === 2) deadCount++;
+        }
+        const aliveCount = totalParticles - deadCount;
+        const absorbRatio = totalParticles > 0 ? deadCount / totalParticles : 0;
+
+        HUD.particles.textContent = aliveCount.toLocaleString();
+        HUD.absorbed.textContent = deadCount.toLocaleString();
+        HUD.entropy.textContent = config.jitterSpeed.toFixed(4);
+
+        const absorbPctVal = (absorbRatio * 100).toFixed(1);
+        HUD.absorbPct.textContent = absorbPctVal + '%';
+        HUD.absorbPct.className = 'hud-value' +
+            (absorbRatio > 0.9 ? ' hud-alert' : absorbRatio > 0.5 ? ' hud-warn' : '');
+
+        HUD.horizon.textContent = config.suckRadius;
+        HUD.input.textContent = _hudInputType;
+        HUD.cursor.textContent = mouse.x > -1000
+            ? Math.round(mouse.x) + ',' + Math.round(mouse.y)
+            : '---';
+
+        // FPS
+        _hudFrameCount++;
+        const fpsNow = performance.now();
+        if (fpsNow - _hudLastFpsTime >= 1000) {
+            HUD.fps.textContent = _hudFrameCount;
+            _hudFrameCount = 0;
+            _hudLastFpsTime = fpsNow;
+        }
+
+        // Uptime
+        const elapsed = Math.floor((Date.now() - _hudStart) / 1000);
+        const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+        const secs = String(elapsed % 60).padStart(2, '0');
+        HUD.uptime.textContent = mins + ':' + secs;
+
+        // Activate flicker once live
+        if (!HUD.el.classList.contains('hud-live')) {
+            HUD.el.classList.add('hud-live');
         }
     }
 
