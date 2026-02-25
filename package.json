@@ -1,0 +1,24 @@
+{
+  "name": "bmccall17.github.io",
+  "version": "1.0.0",
+  "description": "curious if this landing page on Github actually works...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmccall17/bmccall17.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bmccall17/bmccall17.github.io/issues"
+  },
+  "homepage": "https://github.com/bmccall17/bmccall17.github.io#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

@@ -29,6 +29,8 @@ body {
     color: var(--text);
     font-family: var(--font-main);
     line-height: 1.5;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll from any stray elements */
 }
 
 a {
@@ -55,6 +57,49 @@ a:hover {
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .avatar {
+        width: 150px;
+        height: 150px;
+        font-size: 2.5rem;
+        margin: 0 auto;
+    }
+
+    .profile-sidebar {
+        align-items: center;
+        text-align: center;
+        position: static;
+        padding: 20px 16px;
+    }
+
+    .names h1 {
+        font-size: 20px;
+    }
+
+    .names p {
+        font-size: 16px;
+    }
+
+    .socials {
+        align-items: center;
+        margin-top: 8px;
+        word-break: break-all;
+        /* Prevent long URLs from causing horizontal overflow */
+    }
+
+    .bio {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+
+    /* Any fixed-position element must not exceed viewport width */
+    .main-content,
+    .leak-section {
+        max-width: 100%;
+        overflow: hidden;
     }
 }
 
@@ -192,6 +237,17 @@ a:hover {
     display: flex;
     gap: 3px;
     opacity: 0.6;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.calendar-graph::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
 }
 
 .day {

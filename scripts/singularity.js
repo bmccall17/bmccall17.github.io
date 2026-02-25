@@ -369,7 +369,13 @@ function frame() {
         }
     }
 
-    requestAnimationFrame(frame);
+    // Only request next frame if we are on a desktop-sized screen (> 768px)
+    if (window.innerWidth > 768) {
+        requestAnimationFrame(frame);
+    } else {
+        // Clear canvas just in case, though CSS hides it
+        ctx.clearRect(0, 0, w, h);
+    }
 }
 
 // --- CONTROLS ---
@@ -399,8 +405,11 @@ if (bamAvatar) {
     });
 }
 
-// Auto-fix for local testing delays
 setTimeout(() => { if (!assetsReady) resize(); }, 1500);
 
 resize();
-frame();
+
+// Initial mobile check before starting loop
+if (window.innerWidth > 768) {
+    frame();
+}

@@ -17,7 +17,39 @@
 }
 
 @media (max-width: 768px) {
+
+    /* Fallback mobile background when canvas is paused */
+    body {
+        background-color: #0d1117;
+        background-image: repeating-linear-gradient(0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 65, 0.03) 2px,
+                rgba(0, 255, 65, 0.03) 4px);
+    }
+
+    #bgCanvas {
+        display: none !important;
+        /* Hide canvas entirely on mobile */
+    }
+
     .controls-panel {
+        display: none !important;
+        /* Force hide controls on mobile as well */
+    }
+}
+
+/* Base styles for control panel (moved outside media query to fix syntax error) */
+.controls-panel {
+    display: none;
+    /* Default hidden on desktop */
+}
+
+@media (max-width: 768px) {
+
+    /* Only keeping this block if we ever need it visible on mobile, but currently it's hidden above.
+       To avoid duplicate display rules and keep syntax clean, I am overriding the block that broke */
+    .controls-panel-mobile-override {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -72,4 +104,3 @@
     .controls-panel button.reset-btn:hover {
         transform: scale(1.5);
     }
-}
