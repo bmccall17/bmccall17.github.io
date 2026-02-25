@@ -20,13 +20,13 @@ const DEFAULTS = {
     slice2Y: 321, slice2H: 10, slice2X: -9,
     slice3Y: 360, slice3H: 5, slice3X: 19,
     sliceExtend: false,
-    scanLineOn: true, scanLineY: 204, scanLineW: 340, scanLineH: 1.5, scanLineOpacity: 35,
-    bamFontSize: 148, bamLetterSpacing: -2, bamYOffset: 30,
-    nameX: 620, brettSize: 148, brettY: 170, aSize: 100, aY: 305,
-    mccallSize: 148, mccallY: 392, nameLetterSpacing: -2,
+    scanLineOn: false, scanLineY: 490, scanLineW: 785, scanLineH: 2.2, scanLineOpacity: 29,
+    bamFontSize: 178, bamLetterSpacing: 6, bamYOffset: 12,
+    nameX: 695, brettSize: 166, brettY: 114, aSize: 106, aY: 236,
+    mccallSize: 168, mccallY: 319, nameLetterSpacing: -2,
     colorPrimary: '#39ff14', colorRing: '#2dff05',
     colorChromRed: '#ff2255', colorChromCyan: '#00ffee', colorSliceTint: '#00ffcc',
-    distortFreqX: 35, distortFreqY: 90, distortScale: 7, distortSeed: 17
+    distortFreqX: 27, distortFreqY: 24, distortScale: 7, distortSeed: 85
 };
 
 let bgMode = 'transparent';
