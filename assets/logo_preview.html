@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAM Logo Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #1a1a1a;
+        }
+
+        .header {
+            padding: 24px 40px 12px;
+            color: #555;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .preview-section {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .preview-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 0 0 12px 0;
+        }
+
+        /* WHITE BACKGROUND PREVIEW */
+        .preview-white {
+            background: #ffffff;
+            padding: 60px 80px;
+            border-radius: 4px;
+        }
+
+        .preview-white .preview-label {
+            color: #999;
+        }
+
+        .preview-white img {
+            width: 100%;
+            max-width: 900px;
+            display: block;
+        }
+
+        /* CONTEXT: simulating the "Our Lead Team" card use case */
+        .preview-card-context {
+            background: #f5f5f5;
+            padding: 60px;
+            border-radius: 4px;
+        }
+
+        .preview-card-context .preview-label {
+            color: #999;
+        }
+
+        .team-card {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 32px 28px;
+            width: 240px;
+            vertical-align: top;
+        }
+
+        .team-card .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #ccc;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .team-card .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #222;
+            text-align: center;
+        }
+
+        .team-card .role {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            margin-top: -10px;
+        }
+
+        .team-card .logo-area {
+            width: 100%;
+            background: white;
+            padding: 8px 0;
+        }
+
+        .team-card .logo-area img {
+            width: 100%;
+            display: block;
+        }
+
+        /* DARK PREVIEW */
+        .preview-dark {
+            background: #0a0a0a;
+            padding: 60px 80px;
+            border-radius: 4px;
+        }
+
+        .preview-dark .preview-label {
+            color: #444;
+        }
+
+        .preview-dark img {
+            width: 100%;
+            max-width: 900px;
+            display: block;
+        }
+
+        .divider {
+            height: 1px;
+            background: #2a2a2a;
+            margin: 0 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">BAM Logo — Preview</div>
+
+    <div class="preview-section">
+        <div class="preview-white">
+            <div class="preview-label" style="color:#bbb">White background</div>
+            <img src="bam_logo_horizontal.svg" alt="BAM Logo Horizontal">
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="preview-section">
+        <div class="preview-card-context">
+            <div class="preview-label" style="color:#bbb; margin-bottom:32px">In context — team card simulation</div>
+            <div class="team-card">
+                <div class="avatar">[ photo ]</div>
+                <div class="name">Brett McCall</div>
+                <div class="role">License Holder</div>
+                <div class="logo-area">
+                    <img src="bam_logo_horizontal.svg" alt="BAM Logo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="preview-section">
+        <div class="preview-dark">
+            <div class="preview-label">Dark background</div>
+            <img src="bam_logo_horizontal.svg" alt="BAM Logo Horizontal">
+        </div>
+    </div>
+
+</body>
+
+</html>
