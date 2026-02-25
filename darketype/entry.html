@@ -34,6 +34,152 @@
             margin-bottom: 2rem;
             padding-bottom: 1rem;
         }
+
+        /* === TELEMETRY HUD === */
+        #telemetry-hud {
+            position: fixed;
+            bottom: 12px;
+            left: 12px;
+            width: 220px;
+            background: rgba(5, 5, 5, 0.92);
+            border: 1px solid var(--dim-color);
+            border-radius: 2px;
+            padding: 10px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            line-height: 1.6;
+            color: var(--dim-color);
+            z-index: 9999;
+            pointer-events: none;
+            user-select: none;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 143, 17, 0.08), inset 0 0 30px rgba(0, 0, 0, 0.4);
+            transition: opacity 0.4s ease;
+        }
+
+        #telemetry-hud::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 65, 0.015) 2px,
+                    rgba(0, 255, 65, 0.015) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #telemetry-hud .hud-header {
+            color: var(--text-color);
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--dim-color);
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #telemetry-hud .hud-header .hud-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--text-color);
+            border-radius: 50%;
+            animation: hud-pulse 1.5s ease-in-out infinite;
+            box-shadow: 0 0 4px var(--text-color);
+        }
+
+        .hud-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 1px 0;
+        }
+
+        .hud-label {
+            color: var(--dim-color);
+            font-size: 9px;
+            letter-spacing: 0.5px;
+        }
+
+        .hud-value {
+            color: var(--text-color);
+            font-size: 10px;
+            font-weight: bold;
+            text-shadow: 0 0 6px rgba(0, 255, 65, 0.4);
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .hud-divider {
+            border: none;
+            border-top: 1px dashed rgba(0, 143, 17, 0.3);
+            margin: 4px 0;
+        }
+
+        .hud-value.alert-val {
+            color: var(--alert-color);
+            text-shadow: 0 0 6px rgba(255, 51, 51, 0.4);
+        }
+
+        @keyframes hud-pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes hud-flicker {
+            0% {
+                opacity: 0.92;
+            }
+
+            5% {
+                opacity: 0.88;
+            }
+
+            10% {
+                opacity: 0.94;
+            }
+
+            50% {
+                opacity: 0.92;
+            }
+
+            52% {
+                opacity: 0.80;
+            }
+
+            54% {
+                opacity: 0.92;
+            }
+
+            100% {
+                opacity: 0.92;
+            }
+        }
+
+        #telemetry-hud.active {
+            animation: hud-flicker 4s ease-in-out infinite;
+        }
+
+        /* hide on very small screens */
+        @media (max-width: 480px) {
+            #telemetry-hud {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -60,6 +206,33 @@
                 <span id="meta-state"></span>
             </p>
         </footer>
+    </div>
+
+    <!-- TELEMETRY HUD -->
+    <div id="telemetry-hud">
+        <div class="hud-header">
+            <span>▮ telemetry</span>
+            <div class="hud-dot"></div>
+        </div>
+        <div class="hud-row"><span class="hud-label">ENTROPY</span><span class="hud-value" id="hud-entropy">---</span>
+        </div>
+        <div class="hud-row"><span class="hud-label">GLYPH_CT</span><span class="hud-value" id="hud-glyphs">---</span>
+        </div>
+        <div class="hud-row"><span class="hud-label">WORD_CT</span><span class="hud-value" id="hud-words">---</span>
+        </div>
+        <div class="hud-row"><span class="hud-label">READ_T</span><span class="hud-value" id="hud-readtime">---</span>
+        </div>
+        <hr class="hud-divider">
+        <div class="hud-row"><span class="hud-label">DOM_NODES</span><span class="hud-value" id="hud-dom">---</span>
+        </div>
+        <div class="hud-row"><span class="hud-label">SCROLL_Δ</span><span class="hud-value" id="hud-scroll">0.00%</span>
+        </div>
+        <div class="hud-row"><span class="hud-label">FPS</span><span class="hud-value" id="hud-fps">---</span></div>
+        <hr class="hud-divider">
+        <div class="hud-row"><span class="hud-label">LEAK_ID</span><span class="hud-value" id="hud-hash">---</span>
+        </div>
+        <div class="hud-row"><span class="hud-label">UPTIME</span><span class="hud-value" id="hud-uptime">00:00</span>
+        </div>
     </div>
 
     <script>
@@ -113,6 +286,126 @@
         }
 
         loadEntry();
+    </script>
+
+    <!-- TELEMETRY ENGINE -->
+    <script>
+        (function () {
+            const HUD = {
+                entropy: document.getElementById('hud-entropy'),
+                glyphs: document.getElementById('hud-glyphs'),
+                words: document.getElementById('hud-words'),
+                readtime: document.getElementById('hud-readtime'),
+                dom: document.getElementById('hud-dom'),
+                scroll: document.getElementById('hud-scroll'),
+                fps: document.getElementById('hud-fps'),
+                hash: document.getElementById('hud-hash'),
+                uptime: document.getElementById('hud-uptime'),
+            };
+            const hudEl = document.getElementById('telemetry-hud');
+            const startTime = Date.now();
+
+            // Shannon entropy of a string
+            function shannonEntropy(str) {
+                if (!str || str.length === 0) return 0;
+                const freq = {};
+                for (const ch of str) freq[ch] = (freq[ch] || 0) + 1;
+                const len = str.length;
+                let ent = 0;
+                for (const ch in freq) {
+                    const p = freq[ch] / len;
+                    if (p > 0) ent -= p * Math.log2(p);
+                }
+                return ent;
+            }
+
+            // Simple hash (djb2) -> hex
+            function djb2Hash(str) {
+                let hash = 5381;
+                for (let i = 0; i < str.length; i++) {
+                    hash = ((hash << 5) + hash) + str.charCodeAt(i);
+                    hash = hash & 0xFFFFFFFF;
+                }
+                return (hash >>> 0).toString(16).padStart(8, '0');
+            }
+
+            // Populate static metrics once content is loaded
+            function computeStaticMetrics(rawText) {
+                const entropy = shannonEntropy(rawText);
+                HUD.entropy.textContent = entropy.toFixed(4);
+
+                // color entropy: > 4.5 is "high chaos"
+                if (entropy > 4.5) HUD.entropy.classList.add('alert-val');
+                else HUD.entropy.classList.remove('alert-val');
+
+                HUD.glyphs.textContent = rawText.length.toLocaleString();
+
+                const words = rawText.trim().split(/\s+/).filter(w => w.length > 0).length;
+                HUD.words.textContent = words.toLocaleString();
+
+                // avg reading speed ~220 wpm
+                const minutes = words / 220;
+                if (minutes < 1) {
+                    HUD.readtime.textContent = '<1 min';
+                } else {
+                    HUD.readtime.textContent = Math.ceil(minutes) + ' min';
+                }
+
+                HUD.hash.textContent = '0x' + djb2Hash(rawText).toUpperCase();
+
+                hudEl.classList.add('active');
+            }
+
+            // Watch for content load (MutationObserver on #content)
+            const contentEl = document.getElementById('content');
+            let metricsComputed = false;
+
+            const observer = new MutationObserver(() => {
+                if (!metricsComputed && contentEl.innerText.length > 50) {
+                    metricsComputed = true;
+                    computeStaticMetrics(contentEl.innerText);
+                    observer.disconnect();
+                }
+            });
+            observer.observe(contentEl, { childList: true, subtree: true });
+
+            // --- LIVE METRICS ---
+
+            // Scroll depth
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                HUD.scroll.textContent = pct.toFixed(1) + '%';
+            });
+
+            // FPS counter
+            let frameCount = 0;
+            let lastFpsTime = performance.now();
+            function fpsLoop() {
+                frameCount++;
+                const now = performance.now();
+                if (now - lastFpsTime >= 1000) {
+                    HUD.fps.textContent = frameCount;
+                    frameCount = 0;
+                    lastFpsTime = now;
+                }
+                requestAnimationFrame(fpsLoop);
+            }
+            requestAnimationFrame(fpsLoop);
+
+            // Uptime + DOM node count (update every second)
+            setInterval(() => {
+                // Uptime
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+                const secs = String(elapsed % 60).padStart(2, '0');
+                HUD.uptime.textContent = mins + ':' + secs;
+
+                // DOM nodes
+                HUD.dom.textContent = document.getElementsByTagName('*').length;
+            }, 1000);
+        })();
     </script>
 </body>
 
