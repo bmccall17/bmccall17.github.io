@@ -31,6 +31,104 @@ const DEFAULTS = {
 
 let bgMode = 'transparent';
 
+// ── Seeded PRNG (mulberry32) — timestamp-based seed ──
+function mulberry32(seed) {
+    return function () {
+        seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+        let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+}
+
+// Create PRNG seeded with current millisecond timestamp
+const rng = mulberry32(Date.now());
+
+// ── Randomize controls within tasteful ranges ──
+function randomizeControls() {
+    // Helper: random float in [min, max]
+    const rf = (min, max) => min + rng() * (max - min);
+    // Helper: random int in [min, max]
+    const ri = (min, max) => Math.round(rf(min, max));
+    // Helper: random hex color with hue jitter
+    const rHue = (baseH, range) => {
+        const h = (baseH + ri(-range, range) + 360) % 360;
+        const s = ri(80, 100);
+        const l = ri(45, 65);
+        return hslToHex(h, s, l);
+    };
+
+    function hslToHex(h, s, l) {
+        s /= 100; l /= 100;
+        const a = s * Math.min(l, 1 - l);
+        const f = n => { const k = (n + h / 30) % 12; return l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1); };
+        return '#' + [f(0), f(8), f(4)].map(x => Math.round(x * 255).toString(16).padStart(2, '0')).join('');
+    }
+
+    const vals = {
+        circleRadius: ri(200, 280),
+        circleFillDark: ri(4, 16),
+        ringStroke: rf(1.5, 5),
+        innerRingOpacity: ri(10, 40),
+        chromRedX: ri(2, 12),
+        chromRedY: ri(-6, 6),
+        chromCyanX: ri(-12, -2),
+        chromCyanY: ri(-6, 6),
+        chromOpacity: ri(15, 40),
+        chromStrokeW: rf(1.5, 5),
+        ringGlowBlur: ri(15, 55),
+        ringGlowOpacity: ri(50, 90),
+        bamGlowBlur: ri(10, 35),
+        bamGlowOpacity: ri(35, 70),
+        nameGlowBlur: ri(6, 25),
+        nameGlowOpacity: ri(25, 60),
+        sliceCount: ri(1, 5),
+        slice1Y: ri(150, 250),
+        slice1H: ri(4, 25),
+        slice1X: ri(5, 25),
+        slice2Y: ri(280, 370),
+        slice2H: ri(3, 18),
+        slice2X: ri(-25, -3),
+        slice3Y: ri(340, 420),
+        slice3H: ri(2, 12),
+        slice3X: ri(8, 30),
+        sliceExtend: rng() > 0.6,
+        scanLineOn: rng() > 0.3,
+        scanLineY: ri(160, 350),
+        scanLineW: ri(200, 600),
+        scanLineH: rf(0.8, 3),
+        scanLineOpacity: ri(20, 55),
+        bamFontSize: ri(120, 180),
+        bamLetterSpacing: ri(-6, 4),
+        bamYOffset: ri(15, 45),
+        nameX: ri(560, 700),
+        brettSize: ri(120, 175),
+        brettY: ri(130, 210),
+        aSize: ri(70, 130),
+        aY: ri(260, 340),
+        mccallSize: ri(120, 175),
+        mccallY: ri(350, 440),
+        nameLetterSpacing: ri(-5, 3),
+        colorPrimary: rHue(120, 30),
+        colorRing: rHue(115, 25),
+        colorChromRed: rHue(345, 20),
+        colorChromCyan: rHue(175, 25),
+        colorSliceTint: rHue(160, 30),
+        distortFreqX: ri(15, 70),
+        distortFreqY: ri(40, 150),
+        distortScale: ri(3, 15),
+        distortSeed: ri(0, 100)
+    };
+
+    for (const [key, val] of Object.entries(vals)) {
+        const input = document.getElementById(key);
+        if (!input) continue;
+        if (input.type === 'checkbox') input.checked = val;
+        else input.value = typeof val === 'number' ? (Number.isInteger(val) ? val : val.toFixed(1)) : val;
+        updateValDisplay(input);
+    }
+}
+
 // ── Helper: read all control values ──
 function getValues() {
     const v = {};
@@ -398,6 +496,6 @@ document.getElementById('btn-export-png').addEventListener('click', () => {
     img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgStr)));
 });
 
-// ── Boot ──
-initControls();
+// ── Boot — randomize on every load ──
+randomizeControls();
 render();
