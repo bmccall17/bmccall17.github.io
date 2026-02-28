@@ -13,6 +13,7 @@ const HUD = {
     particles: document.getElementById('hud-particles'),
     absorbed: document.getElementById('hud-absorbed'),
     entropy: document.getElementById('hud-entropy'),
+    turbulence: document.getElementById('hud-turbulence'),
     absorbPct: document.getElementById('hud-absorb-pct'),
     horizon: document.getElementById('hud-horizon'),
     input: document.getElementById('hud-input'),
@@ -298,13 +299,33 @@ function frame() {
 
     // Update Avatar (Reactive)
     const avatar = document.querySelector('.glitch-avatar');
+    let surgeAmount = 0;
     if (avatar) {
         if (activeCount > 0) {
             avatar.classList.add('chaos-mode');
             const speed = Math.max(0.08, 0.6 - (activeCount / 150));
             avatar.style.setProperty('--glitch-duration', `${speed}s`);
+
+            // Apply turbulence surge scaling
+            surgeAmount = Math.min(60, activeCount * 2);
+            const turbNoise = document.getElementById('turb-noise');
+            const turbDisplace = document.getElementById('turb-displace');
+            if (turbNoise && turbDisplace) {
+                turbDisplace.setAttribute('scale', surgeAmount);
+                // Undulate by animating baseFrequency slightly
+                const time = Date.now() / 1000;
+                const freqX = 0.08 + Math.sin(time * 2) * 0.02;
+                const freqY = 0.08 + Math.cos(time * 3) * 0.02;
+                turbNoise.setAttribute('baseFrequency', `${freqX} ${freqY}`);
+                // Shift seed randomly occasionally for glitchy feel
+                if (Math.random() > 0.8) turbNoise.setAttribute('seed', Math.floor(Math.random() * 100));
+            }
         } else {
             avatar.classList.remove('chaos-mode');
+            const turbDisplace = document.getElementById('turb-displace');
+            if (turbDisplace && turbDisplace.getAttribute('scale') !== '0') {
+                turbDisplace.setAttribute('scale', '0');
+            }
         }
 
         // === EASTER EGG: Absorption → Glow Progression ===
@@ -336,6 +357,15 @@ function frame() {
         HUD.particles.textContent = aliveCount.toLocaleString();
         HUD.absorbed.textContent = deadCount.toLocaleString();
         HUD.entropy.textContent = config.jitterSpeed.toFixed(4);
+
+        if (HUD.turbulence) {
+            HUD.turbulence.textContent = surgeAmount.toFixed(1);
+            if (surgeAmount > 0) {
+                HUD.turbulence.classList.add('hud-warn');
+            } else {
+                HUD.turbulence.classList.remove('hud-warn');
+            }
+        }
 
         const absorbPctVal = (absorbRatio * 100).toFixed(1);
         HUD.absorbPct.textContent = absorbPctVal + '%';

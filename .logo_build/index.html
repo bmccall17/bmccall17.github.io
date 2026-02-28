@@ -27,8 +27,8 @@
                 <aside id="controls-panel">
 
                         <!-- CIRCLE -->
-                        <details class="ctrl-group" open>
-                                <summary>Circle</summary>
+                        <details class="ctrl-group" open data-group="circle">
+                                <summary><input type="checkbox" id="toggleCircle" checked> Circle</summary>
                                 <label>Radius <input type="range" id="circleRadius" min="120" max="300" value="242"
                                                 data-unit="px"><span class="val"></span></label>
                                 <label>Fill Darkness <input type="range" id="circleFillDark" min="0" max="40" value="8"
@@ -40,8 +40,9 @@
                         </details>
 
                         <!-- CHROMATIC ABERRATION -->
-                        <details class="ctrl-group" open>
-                                <summary>Chromatic Aberration</summary>
+                        <details class="ctrl-group" open data-group="chromatic">
+                                <summary><input type="checkbox" id="toggleChromatic" checked> Chromatic Aberration
+                                </summary>
                                 <label>Red X Offset <input type="range" id="chromRedX" min="-20" max="20" value="4"
                                                 data-unit="px"><span class="val"></span></label>
                                 <label>Red Y Offset <input type="range" id="chromRedY" min="-20" max="20" value="-1"
@@ -57,8 +58,8 @@
                         </details>
 
                         <!-- NEON GLOW -->
-                        <details class="ctrl-group">
-                                <summary>Neon Glow</summary>
+                        <details class="ctrl-group" data-group="neon">
+                                <summary><input type="checkbox" id="toggleNeon" checked> Neon Glow</summary>
                                 <label>Ring Glow Blur <input type="range" id="ringGlowBlur" min="0" max="80" value="28"
                                                 data-unit=""><span class="val"></span></label>
                                 <label>Ring Glow Opacity <input type="range" id="ringGlowOpacity" min="0" max="100"
@@ -74,8 +75,8 @@
                         </details>
 
                         <!-- GLITCH SLICES -->
-                        <details class="ctrl-group" open>
-                                <summary>Glitch Slices</summary>
+                        <details class="ctrl-group" open data-group="glitch">
+                                <summary><input type="checkbox" id="toggleGlitch" checked> Glitch Slices</summary>
                                 <label>Slice Count <input type="range" id="sliceCount" min="0" max="6" value="3"><span
                                                 class="val"></span></label>
                                 <label>Slice 1 Y <input type="range" id="slice1Y" min="38" max="522" value="193"
@@ -101,8 +102,8 @@
                         </details>
 
                         <!-- SCAN LINES -->
-                        <details class="ctrl-group">
-                                <summary>Scan Lines</summary>
+                        <details class="ctrl-group" data-group="scanlines">
+                                <summary><input type="checkbox" id="toggleScanLines" checked> Scan Lines</summary>
                                 <label>Show Scan Line <input type="checkbox" id="scanLineOn" checked><span
                                                 class="val"></span></label>
                                 <label>Scan Line Y <input type="range" id="scanLineY" min="38" max="522" value="204"
@@ -116,8 +117,8 @@
                         </details>
 
                         <!-- BAM TEXT -->
-                        <details class="ctrl-group" open>
-                                <summary>BAM Text</summary>
+                        <details class="ctrl-group" open data-group="bamText">
+                                <summary><input type="checkbox" id="toggleBamText" checked> BAM Text</summary>
                                 <label>Font Size <input type="range" id="bamFontSize" min="60" max="220" value="148"
                                                 data-unit="px"><span class="val"></span></label>
                                 <label>Letter Spacing <input type="range" id="bamLetterSpacing" min="-10" max="20"
@@ -127,8 +128,8 @@
                         </details>
 
                         <!-- NAME TEXT -->
-                        <details class="ctrl-group">
-                                <summary>Name Text</summary>
+                        <details class="ctrl-group" data-group="nameText">
+                                <summary><input type="checkbox" id="toggleNameText" checked> Name Text</summary>
                                 <label>X Offset <input type="range" id="nameX" min="500" max="900" value="620"
                                                 data-unit="px"><span class="val"></span></label>
                                 <label>Brett Size <input type="range" id="brettSize" min="60" max="200" value="148"
@@ -148,7 +149,7 @@
                         </details>
 
                         <!-- COLORS -->
-                        <details class="ctrl-group" open>
+                        <details class="ctrl-group" open data-group="colors">
                                 <summary>Colors</summary>
                                 <label>Primary Green <input type="color" id="colorPrimary" value="#39ff14"><span
                                                 class="val"></span></label>
@@ -163,8 +164,9 @@
                         </details>
 
                         <!-- TURBULENT SURGE -->
-                        <details class="ctrl-group" open>
-                                <summary>Turbulent Surge (Splitting)</summary>
+                        <details class="ctrl-group" open data-group="surge">
+                                <summary><input type="checkbox" id="toggleSurge" checked> Turbulent Surge (Splitting)
+                                </summary>
                                 <label>Turbulence Amount <input type="range" id="turbAmount" min="0" max="100"
                                                 value="35" data-unit="%"><span class="val"></span></label>
                                 <label>Turb Frequency <input type="range" id="turbFreq" min="1" max="200" value="80"
@@ -182,8 +184,8 @@
                         </details>
 
                         <!-- RING DISTORTION -->
-                        <details class="ctrl-group">
-                                <summary>Ring Distortion</summary>
+                        <details class="ctrl-group" data-group="distortion">
+                                <summary><input type="checkbox" id="toggleDistortion" checked> Ring Distortion</summary>
                                 <label>Freq X <input type="range" id="distortFreqX" min="0" max="100" value="35"
                                                 data-unit="‰"><span class="val"></span></label>
                                 <label>Freq Y <input type="range" id="distortFreqY" min="0" max="200" value="90"

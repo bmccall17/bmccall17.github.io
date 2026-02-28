@@ -285,6 +285,18 @@
 
 <body>
 
+  <!-- Inline SVG for Turbulence Surge -->
+  <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+    <defs>
+      <filter id="filament-distort" x="-30%" y="-30%" width="160%" height="160%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="3" seed="42" result="noise"
+          id="turb-noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"
+          id="turb-displace" />
+      </filter>
+    </defs>
+  </svg>
+
   <!-- Singularity Background -->
   <canvas id="bgCanvas"></canvas>
 
@@ -299,6 +311,8 @@
     <div class="hud-row"><span class="hud-label">ABSORBED</span><span class="hud-value" id="hud-absorbed">---</span>
     </div>
     <div class="hud-row"><span class="hud-label">ENTROPY</span><span class="hud-value" id="hud-entropy">0.0017</span>
+    </div>
+    <div class="hud-row"><span class="hud-label">TURBULENCE</span><span class="hud-value" id="hud-turbulence">0.0</span>
     </div>
     <div class="hud-row"><span class="hud-label">ABSORB_%</span><span class="hud-value" id="hud-absorb-pct">0.0%</span>
     </div>
@@ -474,6 +488,10 @@
         }
 
         /* Reactive Class triggered by JS */
+        .glitch-avatar.chaos-mode {
+          filter: url(#filament-distort);
+        }
+
         .glitch-avatar.chaos-mode:after {
           animation: glitch-text var(--glitch-duration, 0.5s) infinite steps(1);
         }

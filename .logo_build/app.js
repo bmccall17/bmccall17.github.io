@@ -27,7 +27,8 @@ const DEFAULTS = {
     colorPrimary: '#39ff14', colorRing: '#2dff05',
     colorChromRed: '#ff2255', colorChromCyan: '#00ffee', colorSliceTint: '#00ffcc',
     turbAmount: 35, turbFreq: 80, filamentCount: 15, chaosSpread: 25, clustering: 60, chaosSeed: 42,
-    distortFreqX: 97, distortFreqY: 24, distortScale: 2, distortSeed: 85
+    distortFreqX: 97, distortFreqY: 24, distortScale: 2, distortSeed: 85,
+    toggleCircle: true, toggleChromatic: true, toggleNeon: true, toggleGlitch: true, toggleScanLines: true, toggleBamText: true, toggleNameText: true, toggleSurge: true, toggleDistortion: true
 };
 
 let bgMode = 'transparent';
@@ -124,7 +125,16 @@ function randomizeControls() {
         distortFreqX: ri(15, 70),
         distortFreqY: ri(40, 150),
         distortScale: ri(3, 15),
-        distortSeed: ri(0, 100)
+        distortSeed: ri(0, 100),
+        toggleCircle: true,
+        toggleChromatic: Math.random() > 0.3,
+        toggleNeon: Math.random() > 0.2,
+        toggleGlitch: Math.random() > 0.3,
+        toggleScanLines: Math.random() > 0.5,
+        toggleBamText: true,
+        toggleNameText: Math.random() > 0.4,
+        toggleSurge: Math.random() > 0.3,
+        toggleDistortion: Math.random() > 0.3
     };
 
     for (const [key, val] of Object.entries(vals)) {
@@ -170,7 +180,7 @@ function render() {
     // — Defs —
     const defs = el('defs');
 
-    // Neon glow filter for BAM text
+
     const neonGlow = el('filter', { id: 'neon-glow', x: '-70%', y: '-70%', width: '240%', height: '240%' });
     neonGlow.append(
         el('feGaussianBlur', { in: 'SourceGraphic', stdDeviation: '6', result: 'b1' }),
@@ -249,34 +259,46 @@ function render() {
     // — Background rect (only for export preview) —
     // not added here; handled in export
 
-    // — Outer atmospheric glow ring —
-    svg.append(el('circle', {
-        cx, cy, r: r + 3, fill: 'none', stroke: v.colorPrimary,
-        'stroke-width': '5', filter: 'url(#ring-glow)', opacity: String(v.ringGlowOpacity / 100)
-    }));
+    // — Background outer atmospheric glow ring (Neon) —
+    if (v.toggleNeon) {
+        svg.append(el('circle', {
+            cx, cy, r: r + 3, fill: 'none', stroke: v.colorPrimary,
+            'stroke-width': '5', filter: 'url(#ring-glow)', opacity: String(v.ringGlowOpacity / 100)
+        }));
+    }
 
     // — Circle body —
-    svg.append(el('circle', { cx, cy, r, fill: 'url(#circle-fill)' }));
+    if (v.toggleCircle) {
+        svg.append(el('circle', { cx, cy, r, fill: 'url(#circle-fill)' }));
+    }
 
     // — Chromatic aberration rings —
-    svg.append(el('circle', {
-        cx: cx + v.chromRedX, cy: cy + v.chromRedY, r, fill: 'none',
-        stroke: v.colorChromRed, 'stroke-width': String(v.chromStrokeW), opacity: String(v.chromOpacity / 100)
-    }));
-    svg.append(el('circle', {
-        cx: cx + v.chromCyanX, cy: cy + v.chromCyanY, r, fill: 'none',
-        stroke: v.colorChromCyan, 'stroke-width': String(v.chromStrokeW), opacity: String(v.chromOpacity / 100)
-    }));
+    if (v.toggleChromatic) {
+        svg.append(el('circle', {
+            cx: cx + v.chromRedX, cy: cy + v.chromRedY, r, fill: 'none',
+            stroke: v.colorChromRed, 'stroke-width': String(v.chromStrokeW), opacity: String(v.chromOpacity / 100)
+        }));
+        svg.append(el('circle', {
+            cx: cx + v.chromCyanX, cy: cy + v.chromCyanY, r, fill: 'none',
+            stroke: v.colorChromCyan, 'stroke-width': String(v.chromStrokeW), opacity: String(v.chromOpacity / 100)
+        }));
+    }
 
     // — Main ring (distorted) —
-    svg.append(el('circle', {
-        cx, cy, r, fill: 'none', stroke: v.colorRing, 'stroke-width': String(v.ringStroke),
-        filter: 'url(#ring-distort)', opacity: '0.92'
-    }));
+    if (v.toggleCircle) {
+        const ringAttrs = {
+            cx, cy, r, fill: 'none', stroke: v.colorRing, 'stroke-width': String(v.ringStroke),
+            opacity: '0.92'
+        };
+        if (v.toggleDistortion) {
+            ringAttrs.filter = 'url(#ring-distort)';
+        }
+        svg.append(el('circle', ringAttrs));
+    }
 
     // — Turbulent Surge (Energy Splitting Filaments) —
     // We bundle the filaments into a group to apply the unified wobbly fractal noise
-    if (v.filamentCount > 0) {
+    if (v.toggleSurge && v.filamentCount > 0) {
         const srng = mulberry32(v.chaosSeed); // Predictable PRNG for this seed to generate filaments
         const filGroup = el('g', { filter: 'url(#filament-distort)' });
 
@@ -318,88 +340,96 @@ function render() {
     }
 
     // — Inner ring accent —
-    svg.append(el('circle', {
-        cx, cy, r: r - 6, fill: 'none', stroke: v.colorPrimary,
-        'stroke-width': '0.8', opacity: String(v.innerRingOpacity / 100)
-    }));
+    if (v.toggleCircle) {
+        svg.append(el('circle', {
+            cx, cy, r: r - 6, fill: 'none', stroke: v.colorPrimary,
+            'stroke-width': '0.8', opacity: String(v.innerRingOpacity / 100)
+        }));
+    }
 
-    // — BAM text glow —
+    // — BAM text —
     const bamY = cy + v.bamYOffset;
-    const bamAttrs = {
-        x: cx, y: bamY, 'text-anchor': 'middle', 'dominant-baseline': 'middle',
-        'font-family': fontStack, 'font-weight': '700',
-        'font-size': String(v.bamFontSize), 'letter-spacing': String(v.bamLetterSpacing)
-    };
-    svg.append(el('text', { ...bamAttrs, fill: v.colorPrimary, filter: 'url(#neon-glow)', opacity: String(v.bamGlowOpacity / 100) }, 'bam'));
-    svg.append(el('text', { ...bamAttrs, fill: v.colorPrimary }, 'bam'));
+    if (v.toggleBamText) {
+        const bamAttrs = {
+            x: cx, y: bamY, 'text-anchor': 'middle', 'dominant-baseline': 'middle',
+            'font-family': fontStack, 'font-weight': '700',
+            'font-size': String(v.bamFontSize), 'letter-spacing': String(v.bamLetterSpacing)
+        };
+        if (v.toggleNeon) {
+            svg.append(el('text', { ...bamAttrs, fill: v.colorPrimary, filter: 'url(#neon-glow)', opacity: String(v.bamGlowOpacity / 100) }, 'bam'));
+        }
+        svg.append(el('text', { ...bamAttrs, fill: v.colorPrimary }, 'bam'));
+    }
 
     // — Glitch slices —
-    const sliceShifts = [v.slice1X, v.slice2X, v.slice3X];
-    const sliceColors = [v.colorPrimary, v.colorSliceTint, v.colorPrimary];
-    const sliceOpacities = [0.88, 0.85, 0.95];
-    const sliceTextOpacities = [0.9, 0.8, 0.75];
+    if (v.toggleGlitch) {
+        const sliceShifts = [v.slice1X, v.slice2X, v.slice3X];
+        const sliceColors = [v.colorPrimary, v.colorSliceTint, v.colorPrimary];
+        const sliceOpacities = [0.88, 0.85, 0.95];
+        const sliceTextOpacities = [0.9, 0.8, 0.75];
 
-    for (let i = 0; i < Math.min(v.sliceCount, 3); i++) {
-        const shift = sliceShifts[i];
-        const g = el('g', { 'clip-path': `url(#gc${i + 1})` });
+        for (let i = 0; i < Math.min(v.sliceCount, 3); i++) {
+            const shift = sliceShifts[i];
+            const g = el('g', { 'clip-path': `url(#gc${i + 1})` });
 
-        // Shifted circle body
-        g.append(el('circle', { cx: cx + shift, cy, r, fill: 'url(#circle-fill)', opacity: String(sliceOpacities[i]) }));
-        // Shifted ring
-        if (i < 2) {
-            g.append(el('circle', { cx: cx + shift, cy, r, fill: 'none', stroke: v.colorRing, 'stroke-width': '2', opacity: String(0.7 - i * 0.1) }));
-        }
-        // Shifted BAM text
-        g.append(el('text', {
-            x: cx + shift, y: bamY, 'text-anchor': 'middle', 'dominant-baseline': 'middle',
-            'font-family': fontStack, 'font-weight': '700',
-            'font-size': String(v.bamFontSize), 'letter-spacing': String(v.bamLetterSpacing),
-            fill: sliceColors[i], opacity: String(sliceTextOpacities[i])
-        }, 'bam'));
-
-        // If extending, also shift name text
-        if (v.sliceExtend) {
-            const nameTexts = [
-                { text: 'brett', size: v.brettSize, y: v.brettY },
-                { text: 'a', size: v.aSize, y: v.aY },
-                { text: 'mccall', size: v.mccallSize, y: v.mccallY }
-            ];
-            for (const nt of nameTexts) {
-                g.append(el('text', {
-                    x: v.nameX + shift, y: nt.y, 'dominant-baseline': 'hanging',
-                    'font-family': fontStack, 'font-weight': '700',
-                    'font-size': String(nt.size), 'letter-spacing': String(v.nameLetterSpacing),
-                    fill: sliceColors[i], opacity: String(sliceTextOpacities[i])
-                }, nt.text));
+            // Shifted circle body
+            g.append(el('circle', { cx: cx + shift, cy, r, fill: 'url(#circle-fill)', opacity: String(sliceOpacities[i]) }));
+            // Shifted ring
+            if (i < 2) {
+                g.append(el('circle', { cx: cx + shift, cy, r, fill: 'none', stroke: v.colorRing, 'stroke-width': '2', opacity: String(0.7 - i * 0.1) }));
             }
+            // Shifted BAM text
+            g.append(el('text', {
+                x: cx + shift, y: bamY, 'text-anchor': 'middle', 'dominant-baseline': 'middle',
+                'font-family': fontStack, 'font-weight': '700',
+                'font-size': String(v.bamFontSize), 'letter-spacing': String(v.bamLetterSpacing),
+                fill: sliceColors[i], opacity: String(sliceTextOpacities[i])
+            }, 'bam'));
+
+            // If extending, also shift name text
+            if (v.sliceExtend) {
+                const nameTexts = [
+                    { text: 'brett', size: v.brettSize, y: v.brettY },
+                    { text: 'a', size: v.aSize, y: v.aY },
+                    { text: 'mccall', size: v.mccallSize, y: v.mccallY }
+                ];
+                for (const nt of nameTexts) {
+                    g.append(el('text', {
+                        x: v.nameX + shift, y: nt.y, 'dominant-baseline': 'hanging',
+                        'font-family': fontStack, 'font-weight': '700',
+                        'font-size': String(nt.size), 'letter-spacing': String(v.nameLetterSpacing),
+                        fill: sliceColors[i], opacity: String(sliceTextOpacities[i])
+                    }, nt.text));
+                }
+            }
+
+            svg.append(g);
         }
 
-        svg.append(g);
-    }
+        // Extra slices 4-6 (generated automatically)
+        for (let i = 3; i < v.sliceCount; i++) {
+            const autoY = 150 + i * 70;
+            const autoH = 3 + Math.random() * 8;
+            const autoShift = (i % 2 === 0 ? 1 : -1) * (5 + i * 4);
+            const cpId = `gc-auto-${i}`;
+            const cp = el('clipPath', { id: cpId });
+            cp.append(el('rect', { x: '0', y: String(autoY), width: String(clipW), height: String(autoH) }));
+            defs.append(cp);
 
-    // Extra slices 4-6 (generated automatically)
-    for (let i = 3; i < v.sliceCount; i++) {
-        const autoY = 150 + i * 70;
-        const autoH = 3 + Math.random() * 8;
-        const autoShift = (i % 2 === 0 ? 1 : -1) * (5 + i * 4);
-        const cpId = `gc-auto-${i}`;
-        const cp = el('clipPath', { id: cpId });
-        cp.append(el('rect', { x: '0', y: String(autoY), width: String(clipW), height: String(autoH) }));
-        defs.append(cp);
-
-        const g = el('g', { 'clip-path': `url(#${cpId})` });
-        g.append(el('circle', { cx: cx + autoShift, cy, r, fill: 'url(#circle-fill)', opacity: '0.85' }));
-        g.append(el('text', {
-            x: cx + autoShift, y: bamY, 'text-anchor': 'middle', 'dominant-baseline': 'middle',
-            'font-family': fontStack, 'font-weight': '700',
-            'font-size': String(v.bamFontSize), 'letter-spacing': String(v.bamLetterSpacing),
-            fill: v.colorPrimary, opacity: '0.7'
-        }, 'bam'));
-        svg.append(g);
-    }
+            const g = el('g', { 'clip-path': `url(#${cpId})` });
+            g.append(el('circle', { cx: cx + autoShift, cy, r, fill: 'url(#circle-fill)', opacity: '0.85' }));
+            g.append(el('text', {
+                x: cx + autoShift, y: bamY, 'text-anchor': 'middle', 'dominant-baseline': 'middle',
+                'font-family': fontStack, 'font-weight': '700',
+                'font-size': String(v.bamFontSize), 'letter-spacing': String(v.bamLetterSpacing),
+                fill: v.colorPrimary, opacity: '0.7'
+            }, 'bam'));
+            svg.append(g);
+        }
+    } // End glitch slices block
 
     // — Scan line artifact —
-    if (v.scanLineOn) {
+    if (v.toggleScanLines && v.scanLineOn) {
         svg.append(el('rect', {
             x: '90', y: String(v.scanLineY), width: String(v.scanLineW),
             height: String(v.scanLineH), fill: v.colorPrimary, opacity: String(v.scanLineOpacity / 100)
@@ -413,16 +443,20 @@ function render() {
         { text: 'mccall', size: v.mccallSize, y: v.mccallY, spacing: v.nameLetterSpacing }
     ];
 
-    for (const nt of nameTextData) {
-        const a = {
-            x: v.nameX, y: nt.y, 'dominant-baseline': 'hanging',
-            'font-family': fontStack, 'font-weight': '700',
-            'font-size': String(nt.size), 'letter-spacing': String(nt.spacing)
-        };
-        // glow
-        svg.append(el('text', { ...a, fill: v.colorPrimary, filter: 'url(#text-glow)', opacity: String(v.nameGlowOpacity / 100) }, nt.text));
-        // crisp
-        svg.append(el('text', { ...a, fill: v.colorPrimary }, nt.text));
+    if (v.toggleNameText) {
+        for (const nt of nameTextData) {
+            const a = {
+                x: v.nameX, y: nt.y, 'dominant-baseline': 'hanging',
+                'font-family': fontStack, 'font-weight': '700',
+                'font-size': String(nt.size), 'letter-spacing': String(nt.spacing)
+            };
+            // glow
+            if (v.toggleNeon) {
+                svg.append(el('text', { ...a, fill: v.colorPrimary, filter: 'url(#text-glow)', opacity: String(v.nameGlowOpacity / 100) }, nt.text));
+            }
+            // crisp
+            svg.append(el('text', { ...a, fill: v.colorPrimary }, nt.text));
+        }
     }
 }
 
@@ -441,6 +475,7 @@ function updateValDisplay(input) {
     const span = input.parentElement?.querySelector('.val');
     if (!span) return;
     if (input.type === 'checkbox') {
+        // Only update 'val' span if it exists (the new toggle checkboxes don't have .val spans)
         span.textContent = input.checked ? 'ON' : 'OFF';
     } else if (input.type === 'color') {
         span.textContent = input.value;
@@ -449,6 +484,11 @@ function updateValDisplay(input) {
         span.textContent = input.value + unit;
     }
 }
+
+// Prevent details accordion toggle when clicking category checkboxes
+document.querySelectorAll('summary input[type="checkbox"]').forEach(chk => {
+    chk.addEventListener('click', e => e.stopPropagation());
+});
 
 // ── Wire up live controls ──
 document.querySelectorAll('#controls-panel input').forEach(input => {
