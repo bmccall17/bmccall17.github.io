@@ -26,6 +26,7 @@ const DEFAULTS = {
     mccallSize: 160, mccallY: 319, nameLetterSpacing: -2,
     colorPrimary: '#39ff14', colorRing: '#2dff05',
     colorChromRed: '#ff2255', colorChromCyan: '#00ffee', colorSliceTint: '#00ffcc',
+    arcCount: 2, arcSpread: 6, arcRotation: 35, arcStrokeW: 1.5, arcOpacity: 80,
     distortFreqX: 97, distortFreqY: 24, distortScale: 2, distortSeed: 85
 };
 
@@ -114,6 +115,11 @@ function randomizeControls() {
         colorChromRed: rHue(345, 20),
         colorChromCyan: rHue(175, 25),
         colorSliceTint: rHue(160, 30),
+        arcCount: ri(1, 5),
+        arcSpread: rf(2, 15),
+        arcRotation: ri(-180, 180),
+        arcStrokeW: rf(0.5, 3),
+        arcOpacity: ri(30, 90),
         distortFreqX: ri(15, 70),
         distortFreqY: ri(40, 150),
         distortScale: ri(3, 15),
@@ -258,6 +264,24 @@ function render() {
         cx, cy, r, fill: 'none', stroke: v.colorRing, 'stroke-width': String(v.ringStroke),
         filter: 'url(#ring-distort)', opacity: '0.92'
     }));
+
+    // — Wave Arcs (Energy Splitting) —
+    for (let i = 1; i <= v.arcCount; i++) {
+        // Stretch into ellipse to peel away from main circle
+        const sx = 1 + (v.arcSpread / 100) * (i * 0.4);
+        const sy = 1 - (v.arcSpread / 100) * (i * 0.4);
+
+        // Offset rotation slightly for each layer to create criss-cross energy
+        const rot = v.arcRotation + (i * 12 * (i % 2 === 0 ? -1 : 1));
+        const arcOp = (v.arcOpacity / 100) * (1 - (i * 0.15));
+
+        svg.append(el('ellipse', {
+            cx, cy, rx: String(r * sx), ry: String(r * sy),
+            fill: 'none', stroke: v.colorRing, 'stroke-width': String(Math.max(0.5, v.arcStrokeW - (i * 0.2))),
+            transform: `rotate(${rot}, ${cx}, ${cy})`,
+            filter: 'url(#ring-distort)', opacity: String(Math.max(0.05, arcOp))
+        }));
+    }
 
     // — Inner ring accent —
     svg.append(el('circle', {
