@@ -27,6 +27,7 @@ const DEFAULTS = {
     colorPrimary: '#39ff14', colorRing: '#2dff05',
     colorChromRed: '#ff2255', colorChromCyan: '#00ffee', colorSliceTint: '#00ffcc',
     arcCount: 2, arcSpread: 6, arcRotation: 35, arcStrokeW: 1.5, arcOpacity: 80,
+    arcLength: 30, arcOffset: 25,
     distortFreqX: 97, distortFreqY: 24, distortScale: 2, distortSeed: 85
 };
 
@@ -120,6 +121,8 @@ function randomizeControls() {
         arcRotation: ri(-180, 180),
         arcStrokeW: rf(0.5, 3),
         arcOpacity: ri(30, 90),
+        arcLength: ri(15, 100),
+        arcOffset: ri(-100, 100),
         distortFreqX: ri(15, 70),
         distortFreqY: ri(40, 150),
         distortScale: ri(3, 15),
@@ -275,12 +278,22 @@ function render() {
         const rot = v.arcRotation + (i * 12 * (i % 2 === 0 ? -1 : 1));
         const arcOp = (v.arcOpacity / 100) * (1 - (i * 0.15));
 
-        svg.append(el('ellipse', {
+        const ellipseAttrs = {
             cx, cy, rx: String(r * sx), ry: String(r * sy),
             fill: 'none', stroke: v.colorRing, 'stroke-width': String(Math.max(0.5, v.arcStrokeW - (i * 0.2))),
             transform: `rotate(${rot}, ${cx}, ${cy})`,
             filter: 'url(#ring-distort)', opacity: String(Math.max(0.05, arcOp))
-        }));
+        };
+
+        if (v.arcLength < 100) {
+            ellipseAttrs.pathLength = '100';
+            ellipseAttrs['stroke-dasharray'] = `${v.arcLength} 100`;
+            const offsetVariation = i * (v.arcCount > 1 ? (15 / v.arcCount) * (i % 2 === 0 ? 1 : -1) : 0);
+            ellipseAttrs['stroke-dashoffset'] = String(-(v.arcOffset + offsetVariation));
+            ellipseAttrs['stroke-linecap'] = 'round';
+        }
+
+        svg.append(el('ellipse', ellipseAttrs));
     }
 
     // — Inner ring accent —
