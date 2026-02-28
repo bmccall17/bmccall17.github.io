@@ -26,8 +26,7 @@ const DEFAULTS = {
     mccallSize: 160, mccallY: 319, nameLetterSpacing: -2,
     colorPrimary: '#39ff14', colorRing: '#2dff05',
     colorChromRed: '#ff2255', colorChromCyan: '#00ffee', colorSliceTint: '#00ffcc',
-    arcCount: 2, arcSpread: 6, arcRotation: 35, arcStrokeW: 1.5, arcOpacity: 80,
-    arcLength: 30, arcOffset: 25,
+    turbAmount: 35, turbFreq: 80, filamentCount: 15, chaosSpread: 25, clustering: 60, chaosSeed: 42,
     distortFreqX: 97, distortFreqY: 24, distortScale: 2, distortSeed: 85
 };
 
@@ -116,13 +115,12 @@ function randomizeControls() {
         colorChromRed: rHue(345, 20),
         colorChromCyan: rHue(175, 25),
         colorSliceTint: rHue(160, 30),
-        arcCount: ri(1, 5),
-        arcSpread: rf(2, 15),
-        arcRotation: ri(-180, 180),
-        arcStrokeW: rf(0.5, 3),
-        arcOpacity: ri(30, 90),
-        arcLength: ri(15, 100),
-        arcOffset: ri(-100, 100),
+        turbAmount: ri(10, 60),
+        turbFreq: ri(30, 150),
+        filamentCount: ri(5, 30),
+        chaosSpread: ri(5, 40),
+        clustering: ri(20, 80),
+        chaosSeed: ri(0, 1000),
         distortFreqX: ri(15, 70),
         distortFreqY: ri(40, 150),
         distortScale: ri(3, 15),
@@ -215,6 +213,14 @@ function render() {
     );
     defs.append(ringDistort);
 
+    // Filament distortion filter (The Turbulent Surge)
+    const filamentDistort = el('filter', { id: 'filament-distort', x: '-30%', y: '-30%', width: '160%', height: '160%' });
+    filamentDistort.append(
+        el('feTurbulence', { type: 'fractalNoise', baseFrequency: String(v.turbFreq / 1000), numOctaves: '3', seed: String(v.chaosSeed), result: 'noise' }),
+        el('feDisplacementMap', { in: 'SourceGraphic', in2: 'noise', scale: String(v.turbAmount), xChannelSelector: 'R', yChannelSelector: 'G' })
+    );
+    defs.append(filamentDistort);
+
     // Circle fill gradient
     const grad = el('radialGradient', { id: 'circle-fill', cx: '50%', cy: '42%', r: '62%' });
     const d1 = Math.round(dark * 2.3);
@@ -268,32 +274,47 @@ function render() {
         filter: 'url(#ring-distort)', opacity: '0.92'
     }));
 
-    // — Wave Arcs (Energy Splitting) —
-    for (let i = 1; i <= v.arcCount; i++) {
-        // Stretch into ellipse to peel away from main circle
-        const sx = 1 + (v.arcSpread / 100) * (i * 0.4);
-        const sy = 1 - (v.arcSpread / 100) * (i * 0.4);
+    // — Turbulent Surge (Energy Splitting Filaments) —
+    // We bundle the filaments into a group to apply the unified wobbly fractal noise
+    if (v.filamentCount > 0) {
+        const srng = mulberry32(v.chaosSeed); // Predictable PRNG for this seed to generate filaments
+        const filGroup = el('g', { filter: 'url(#filament-distort)' });
 
-        // Offset rotation slightly for each layer to create criss-cross energy
-        const rot = v.arcRotation + (i * 12 * (i % 2 === 0 ? -1 : 1));
-        const arcOp = (v.arcOpacity / 100) * (1 - (i * 0.15));
+        for (let i = 0; i < v.filamentCount; i++) {
+            // Apply non-uniform density clustering: pushes random offsets closer to 0 when high
+            const clusterPower = 1 + (v.clustering / 20);
+            const spreadMag = Math.pow(srng(), clusterPower) * v.chaosSpread;
 
-        const ellipseAttrs = {
-            cx, cy, rx: String(r * sx), ry: String(r * sy),
-            fill: 'none', stroke: v.colorRing, 'stroke-width': String(Math.max(0.5, v.arcStrokeW - (i * 0.2))),
-            transform: `rotate(${rot}, ${cx}, ${cy})`,
-            filter: 'url(#ring-distort)', opacity: String(Math.max(0.05, arcOp))
-        };
+            // Random angle to offset the center of the filament, making it overlap and stray away from the main arc
+            const angle = srng() * Math.PI * 2;
+            const fx = cx + Math.cos(angle) * spreadMag;
+            const fy = cy + Math.sin(angle) * spreadMag;
 
-        if (v.arcLength < 100) {
-            ellipseAttrs.pathLength = '100';
-            ellipseAttrs['stroke-dasharray'] = `${v.arcLength} 100`;
-            const offsetVariation = i * (v.arcCount > 1 ? (15 / v.arcCount) * (i % 2 === 0 ? 1 : -1) : 0);
-            ellipseAttrs['stroke-dashoffset'] = String(-(v.arcOffset + offsetVariation));
-            ellipseAttrs['stroke-linecap'] = 'round';
+            // Randomize radius slightly to criss-cross lines further instead of perfectly parallel
+            const fr = r + (srng() - 0.5) * (v.chaosSpread * 0.5);
+
+            const opacity = 0.4 + (srng() * 0.6); // Variable intensities
+            const strokeW = 0.5 + (srng() * 1.5); // Thin erratic threads matching neon plasma
+
+            // Color clustering (mostly green, occasional bright core/cyan)
+            const colorVar = srng();
+            let fColor = v.colorRing;
+            if (colorVar > 0.8) fColor = '#ffffff';
+            else if (colorVar > 0.6) fColor = v.colorSliceTint || '#00ffcc';
+
+            filGroup.append(el('circle', {
+                cx: String(fx), cy: String(fy), r: String(fr), fill: 'none',
+                stroke: fColor, 'stroke-width': String(strokeW), opacity: String(opacity)
+            }));
         }
 
-        svg.append(el('ellipse', ellipseAttrs));
+        // Include one solid core ring in the distortion to anchor the volatile splinters
+        filGroup.append(el('circle', {
+            cx: String(cx), cy: String(cy), r: String(r), fill: 'none',
+            stroke: '#ffffff', 'stroke-width': '1.5', opacity: '0.5'
+        }));
+
+        svg.append(filGroup);
     }
 
     // — Inner ring accent —
@@ -443,6 +464,19 @@ document.getElementById('btn-reset').addEventListener('click', () => {
     initControls();
     render();
 });
+
+// ── Random Chaos Reroll Button ──
+const rerollBtn = document.getElementById('btn-reroll-chaos');
+if (rerollBtn) {
+    rerollBtn.addEventListener('click', () => {
+        const el = document.getElementById('chaosSeed');
+        if (el) {
+            el.value = Math.floor(Math.random() * 1000);
+            updateValDisplay(el);
+            render();
+        }
+    });
+}
 
 // ── Background mode toggle ──
 canvasArea.classList.add('bg-transparent');

@@ -162,23 +162,23 @@
                                                 class="val"></span></label>
                         </details>
 
-                        <!-- WAVE ARCS -->
+                        <!-- TURBULENT SURGE -->
                         <details class="ctrl-group" open>
-                                <summary>Wave Arcs (Splitting)</summary>
-                                <label>Arc Count <input type="range" id="arcCount" min="0" max="8" value="2"><span
+                                <summary>Turbulent Surge (Splitting)</summary>
+                                <label>Turbulence Amount <input type="range" id="turbAmount" min="0" max="100"
+                                                value="35" data-unit="%"><span class="val"></span></label>
+                                <label>Turb Frequency <input type="range" id="turbFreq" min="1" max="200" value="80"
+                                                data-unit="‰"><span class="val"></span></label>
+                                <label>Filament Count <input type="range" id="filamentCount" min="0" max="50"
+                                                value="15"><span class="val"></span></label>
+                                <label>Chaos Spread <input type="range" id="chaosSpread" min="0" max="100" value="25"
+                                                data-unit="px"><span class="val"></span></label>
+                                <label>Density Clustering <input type="range" id="clustering" min="0" max="100"
+                                                value="60" data-unit="%"><span class="val"></span></label>
+                                <label>Chaos Seed <input type="range" id="chaosSeed" min="0" max="1000" value="42"><span
                                                 class="val"></span></label>
-                                <label>Arc Length <input type="range" id="arcLength" min="5" max="100" value="30"
-                                                data-unit="%"><span class="val"></span></label>
-                                <label>Arc Start Offset <input type="range" id="arcOffset" min="-100" max="100"
-                                                value="25" data-unit="%"><span class="val"></span></label>
-                                <label>Distortion Spread <input type="range" id="arcSpread" min="0" max="25" value="6"
-                                                step="0.5" data-unit="%"><span class="val"></span></label>
-                                <label>Phase Rotation <input type="range" id="arcRotation" min="-180" max="180"
-                                                value="35" data-unit="°"><span class="val"></span></label>
-                                <label>Arc Stroke <input type="range" id="arcStrokeW" min="0.5" max="8" value="1.5"
-                                                step="0.1" data-unit="px"><span class="val"></span></label>
-                                <label>Arc Opacity <input type="range" id="arcOpacity" min="0" max="100" value="80"
-                                                data-unit="%"><span class="val"></span></label>
+                                <button id="btn-reroll-chaos" class="btn-ghost" style="width:100%; margin-top:10px;">🎲
+                                        Reroll Chaos Seed</button>
                         </details>
 
                         <!-- RING DISTORTION -->
