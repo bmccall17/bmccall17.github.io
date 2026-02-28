@@ -408,40 +408,68 @@
         }
 
         .glitch-avatar.wave-split-active::before {
-          animation: wave-split 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+          animation: wave-jitter 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        @keyframes wave-split {
+        @keyframes wave-jitter {
 
           0%,
           100% {
-            transform: scale(1);
+            border-radius: 50%;
+            transform: scale(1) rotate(0deg);
             opacity: 1;
+            border-width: 2px;
             box-shadow:
               calc(-3px * var(--absorption)) 0 0 rgba(255, 0, 85, calc(0.7 * var(--absorption))),
               calc(3px * var(--absorption)) 0 0 rgba(0, 255, 255, calc(0.7 * var(--absorption)));
           }
 
-          40% {
-            transform: scale(1.08);
-            /* The wave split outwards */
-            opacity: 0.8;
+          20% {
+            /* Wavy separation / Energy Arcs */
+            border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%;
+            transform: scale(1.06) rotate(15deg);
+            border-width: 1px;
             box-shadow:
-              calc(-10px * var(--absorption)) 0 10px rgba(255, 0, 85, calc(0.9 * var(--absorption))),
-              calc(10px * var(--absorption)) 0 10px rgba(0, 255, 255, calc(0.9 * var(--absorption))),
-              0 0 15px rgba(0, 255, 65, var(--absorption));
-            border-color: rgba(0, 255, 65, calc(0.5 * var(--absorption)));
+              -6px 0 10px rgba(255, 0, 85, 0.8),
+              6px 0 10px rgba(0, 255, 255, 0.8),
+              0 0 15px rgba(0, 255, 65, 0.6);
+            border-color: rgba(0, 255, 65, 0.8);
+          }
+
+          40% {
+            /* Jitter and distortion */
+            border-radius: 55% 45% 60% 40% / 45% 55% 40% 60%;
+            transform: scale(1.02) rotate(-10deg) translate(-2px, 2px);
+            border-width: 3px;
+            box-shadow:
+              -2px 4px 5px rgba(255, 0, 85, 0.9),
+              2px -4px 5px rgba(0, 255, 255, 0.9);
+            border-color: rgba(0, 255, 65, 0.4);
+            opacity: 0.8;
+          }
+
+          60% {
+            /* Waveform oscillation */
+            border-radius: 35% 65% 50% 50% / 60% 40% 60% 40%;
+            transform: scale(1.08) rotate(25deg);
+            border-width: 1.5px;
+            box-shadow:
+              -8px -4px 15px rgba(255, 0, 85, 0.7),
+              8px 4px 15px rgba(0, 255, 255, 0.7),
+              inset 0 0 10px rgba(0, 255, 65, 0.5);
+            border-color: rgba(0, 255, 65, 1);
           }
 
           80% {
-            transform: scale(1.15);
-            /* Dissipate */
-            opacity: 0;
+            /* High frequency corruption */
+            border-radius: 60% 40% 45% 55% / 40% 60% 55% 45%;
+            transform: scale(1.04) rotate(-20deg) translate(2px, -2px);
+            border-width: 2px;
             box-shadow:
-              calc(-20px * var(--absorption)) 0 20px rgba(255, 0, 85, 0),
-              calc(20px * var(--absorption)) 0 20px rgba(0, 255, 255, 0),
-              0 0 30px rgba(0, 255, 65, 0);
-            border-color: rgba(0, 255, 65, 0);
+              4px 2px 8px rgba(255, 0, 85, 0.8),
+              -4px -2px 8px rgba(0, 255, 255, 0.8);
+            border-color: rgba(0, 255, 65, 0.6);
+            opacity: 0.9;
           }
         }
 
