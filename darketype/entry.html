@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- minimal markdown parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- dompurify for sanitization -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js"></script>
 
     <!-- Open Graph / Social Share -->
     <meta property="og:type" content="article">
@@ -98,7 +100,7 @@
 
                 // render
                 document.getElementById('header-title').innerText = meta.title || 'untitled mess';
-                document.getElementById('content').innerHTML = marked.parse(body);
+                document.getElementById('content').innerHTML = DOMPurify.sanitize(marked.parse(body));
                 document.title = `darketype // ${meta.title || 'entry'}`;
 
                 // metadata
@@ -108,7 +110,7 @@
                 // Prism/Highlighter could go here if we were fancy
 
             } catch (err) {
-                document.getElementById('content').innerHTML = `<p class="alert">fatal error: ${err.message}</p>`;
+                document.getElementById('content').innerHTML = DOMPurify.sanitize(`<p class="alert">fatal error: ${err.message}</p>`);
             }
         }
 
