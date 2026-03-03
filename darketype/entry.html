@@ -30,6 +30,25 @@
         content="chronological collection of failures, semi-successes, and the messy middle.">
     <meta name="twitter:image" content="https://bmccall17.github.io/assets/social/darketype-og.png">
 
+    <!-- Twitter Widgets (for embedded tweets) -->
+    <script>
+        window.twttr = (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function (f) {
+                t._e.push(f);
+            };
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
+
     <style>
         .metadata-block {
             border-bottom: 1px dashed var(--dim-color);
@@ -100,7 +119,7 @@
 
                 // render
                 document.getElementById('header-title').innerText = meta.title || 'untitled mess';
-                document.getElementById('content').innerHTML = DOMPurify.sanitize(marked.parse(body));
+                document.getElementById('content').innerHTML = DOMPurify.sanitize(marked.parse(body), { ADD_ATTR: ['data-media-max-width'] });
                 document.title = `darketype // ${meta.title || 'entry'}`;
 
                 // metadata
@@ -108,6 +127,13 @@
                 if (meta.state) document.getElementById('meta-state').innerText = `state: ${meta.state}`;
 
                 // Prism/Highlighter could go here if we were fancy
+
+                // Render any embedded tweets dynamically inside the content
+                if (window.twttr && window.twttr.ready) {
+                    window.twttr.ready(function (twttr) {
+                        twttr.widgets.load(document.getElementById('content'));
+                    });
+                }
 
             } catch (err) {
                 document.getElementById('content').innerHTML = DOMPurify.sanitize(`<p class="alert">fatal error: ${err.message}</p>`);
