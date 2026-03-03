@@ -82,6 +82,21 @@ a {
   color: var(--alert-color);
 }
 
+.embed-right {
+  float: right;
+  max-width: 450px;
+  width: 100%;
+  margin: 0 0 1rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .embed-right {
+    float: none;
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+}
+
 /* chaos animations */
 @keyframes glitch {
   0% {
