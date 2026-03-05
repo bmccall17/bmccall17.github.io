@@ -1,14 +1,74 @@
 [
-  "2026-03-05",
-  "2026-03-03",
-  "2026-02-25",
-  "2026-02-13",
-  "2026-02-12",
-  "2026-02-10",
-  "2026-02-07",
-  "2026-02-07",
-  "2026-02-06",
-  "2026-02-06",
-  "2026-02-06",
-  "2026-02-06"
+  {
+    "date": "2026-03-05",
+    "state": "debugging",
+    "title": "runbooks and the power of diagnostic tools",
+    "path": "../entry.html?log=entries/2026-03-05_runbooks_tarottalks.md"
+  },
+  {
+    "date": "2026-03-03",
+    "state": "learning",
+    "title": "data points for what not to do (Kahn and KTANE)",
+    "path": "../entry.html?log=entries/2026-03-03_kahn_ktane_mazes.md"
+  },
+  {
+    "date": "2026-02-25",
+    "state": "shipped",
+    "title": "the logo factory: when ai iteration fails, build your own tool",
+    "path": "../entry.html?log=entries/2026-02-25_logo_factory.md"
+  },
+  {
+    "date": "2026-02-13",
+    "state": "mess",
+    "title": "dynamic chaos: v0.1.4",
+    "path": "../entry.html?log=entries/2026-02-13_dynamic_chaos.md"
+  },
+  {
+    "date": "2026-02-11",
+    "state": "learning",
+    "title": "the autopsy: auditing my own game engine",
+    "path": "../entry.html?log=entries/2026-02-11_the_autopsy.md"
+  },
+  {
+    "date": "2026-02-10",
+    "state": "optimistic",
+    "title": "optimism and the ted stage",
+    "path": "../entry.html?log=entries/2026-02-10_optimism_and_ted.md"
+  },
+  {
+    "date": "2026-02-07",
+    "state": "shipped",
+    "title": "leaking pixels: cross-site data vapor",
+    "path": "../entry.html?log=entries/2026-02-07_leaking_pixels.md"
+  },
+  {
+    "date": "2026-02-06",
+    "state": "shipped",
+    "title": "cross-site leakage protocol (cslp)",
+    "path": "../entry.html?log=entries/2026-02-06_cslp_infection.md"
+  },
+  {
+    "date": "2026-02-06",
+    "state": "void",
+    "title": "event horizon (singularity v0.1.2)",
+    "path": "../entry.html?log=entries/2026-02-06_singularity.md"
+  },
+  {
+    "date": "2026-02-06",
+    "state": "shipped",
+    "title": "the loop engaged: v0.1.1",
+    "path": "../entry.html?log=entries/2026-02-06_the_loop_engaged.md"
+  },
+  {
+    "date": "2026-02-06",
+    "state": "seed",
+    "title": "the origin story: portfolio + darketype",
+    "path": "../entry.html?log=entries/2026-02-06_the_origin_story.md"
+  },
+  {
+    "date": "2026-02-06",
+    "state": "mess",
+    "title": "phase zero: the gentle rebellion",
+    "path": "../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md"
+  }
 ]

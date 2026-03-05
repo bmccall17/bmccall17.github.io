@@ -44,54 +44,139 @@
             <p class="dim">chronological collection of the harvests from failures and semi-successes.</p>
 
             <!-- Mess Heatmap -->
-            <div id="mess-heatmap"
-                style="display: flex; gap: 2px; margin: 32px 0; height: 60px; align-items: flex-end; opacity: 0.8;">
-                <!-- populated by js -->
+            <div id="mess-heatmap-wrap" style="margin: 32px 0;">
+                <div id="mess-heatmap"
+                    style="display: flex; gap: 3px; height: 64px; align-items: flex-end; position: relative;">
+                    <!-- populated by js -->
+                </div>
+                <!-- Tooltip -->
+                <div id="heatmap-tooltip" style="
+                    display: none;
+                    position: fixed;
+                    background: #0a0a0a;
+                    border: 1px solid var(--accent);
+                    color: var(--accent);
+                    font-family: monospace;
+                    font-size: 11px;
+                    padding: 6px 10px;
+                    pointer-events: none;
+                    z-index: 1000;
+                    max-width: 280px;
+                    box-shadow: 0 0 10px rgba(0,255,65,0.2);
+                "></div>
+                <!-- State legend -->
+                <div id="heatmap-legend" style="display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap;"></div>
             </div>
             <script>
+                const STATE_COLORS = {
+                    'shipped': { color: '#39d353', label: '_shipped' },
+                    'learning': { color: '#f0a500', label: '_learning' },
+                    'mess': { color: '#cf222e', label: '_mess' },
+                    'debugging': { color: '#ff6b35', label: '_debugging' },
+                    'optimistic': { color: '#58a6ff', label: '_optimistic' },
+                    'seed': { color: '#7c3aed', label: '_seed' },
+                    'void': { color: '#444', label: '_void' },
+                };
+                const DEFAULT_COLOR = { color: '#555', label: '_unknown' };
+
+                function stateColor(state) {
+                    return (STATE_COLORS[state] || DEFAULT_COLOR).color;
+                }
+
                 async function loadHeatmap() {
                     const container = document.getElementById('mess-heatmap');
+                    const tooltip = document.getElementById('heatmap-tooltip');
+                    const legend = document.getElementById('heatmap-legend');
+
                     try {
                         const res = await fetch('../../heatmap.json');
                         if (!res.ok) throw new Error('no data');
-                        const dates = await res.json();
+                        const entries = await res.json();
 
-                        // Show last 60 days
+                        // Build a map of date -> [entries] for quick lookup
+                        const byDate = {};
+                        entries.forEach(e => {
+                            if (!byDate[e.date]) byDate[e.date] = [];
+                            byDate[e.date].push(e);
+                        });
+
+                        // Show last 60 calendar days
                         const now = new Date();
-                        const html = [];
+                        const seenStates = new Set();
 
                         for (let i = 60; i >= 0; i--) {
                             const d = new Date(now.getTime() - (i * 24 * 60 * 60 * 1000));
                             const dateStr = d.toISOString().split('T')[0];
-                            const count = dates.filter(activeDate => activeDate === dateStr).length;
+                            const dayEntries = byDate[dateStr] || [];
+                            const count = dayEntries.length;
 
-                            // Visuals: Height based on activity, random jitter for "mess"
-                            let h = 4; // base height
-                            let opacity = 0.2;
+                            // Pick the "dominant" state for color (first entry's state)
+                            const dominantState = count > 0 ? dayEntries[0].state : null;
+                            if (dominantState) seenStates.add(dominantState);
+
+                            // Height: active days taller, inactive tiny with occasional noise
+                            let h = 4;
+                            let opacity = 0.18;
                             if (count > 0) {
-                                h = 10 + (count * 10) + (Math.random() * 10);
-                                opacity = 0.8 + (Math.random() * 0.2);
-                            } else {
-                                // noise
-                                if (Math.random() > 0.9) { h = 6 + Math.random() * 4; opacity = 0.4; }
+                                h = 14 + (count * 12) + (Math.random() * 8);
+                                opacity = 0.85 + (Math.random() * 0.15);
+                            } else if (Math.random() > 0.88) {
+                                h = 5 + Math.random() * 5;
+                                opacity = 0.25;
                             }
 
-                            const color = count > 0 ? 'var(--accent)' : 'var(--text-dim)';
+                            const color = count > 0 ? stateColor(dominantState) : '#1a2a1a';
 
                             const bar = document.createElement('div');
                             bar.className = 'heatmap-bar';
-                            if (h > 20 && Math.random() > 0.8) bar.classList.add('bar-glitch'); // if tall, glitch more likely
-                            else if (Math.random() > 0.98) bar.classList.add('bar-glitch');
+                            if (count > 0 && h > 24 && Math.random() > 0.75) bar.classList.add('bar-glitch');
 
-                            bar.style.width = '100%';
                             bar.style.flex = '1';
-                            bar.style.height = `${h}px`;
+                            bar.style.height = `${Math.min(h, 60)}px`;
                             bar.style.background = color;
                             bar.style.opacity = opacity;
-                            bar.title = `${dateStr}: ${count} entries`;
+                            bar.style.transition = 'height 0.2s ease, opacity 0.2s ease';
+                            bar.style.cursor = count > 0 ? 'pointer' : 'default';
+                            bar.dataset.date = dateStr;
+                            bar.dataset.count = count;
+
+                            // Hover: show tooltip
+                            if (count > 0) {
+                                bar.addEventListener('mouseenter', (e) => {
+                                    bar.style.opacity = '1';
+                                    bar.style.height = `${Math.min(h + 6, 64)}px`;
+                                    const labels = dayEntries.map(en =>
+                                        `• ${en.title.toLowerCase()} [_${en.state}]`
+                                    ).join('<br>');
+                                    tooltip.innerHTML = `<span style="color:#555">${dateStr}</span><br>${labels}`;
+                                    tooltip.style.display = 'block';
+                                });
+                                bar.addEventListener('mousemove', (e) => {
+                                    tooltip.style.left = (e.clientX + 14) + 'px';
+                                    tooltip.style.top = (e.clientY - 32) + 'px';
+                                });
+                                bar.addEventListener('mouseleave', () => {
+                                    bar.style.opacity = opacity;
+                                    bar.style.height = `${Math.min(h, 60)}px`;
+                                    tooltip.style.display = 'none';
+                                });
+                                // Click: if single entry, go direct; if multiple, go to first
+                                bar.addEventListener('click', () => {
+                                    window.location.href = dayEntries[0].path;
+                                });
+                            }
 
                             container.appendChild(bar);
                         }
+
+                        // Render legend — only states actually present in the last 60 days
+                        const legendStates = Object.entries(STATE_COLORS).filter(([k]) => seenStates.has(k));
+                        legend.innerHTML = legendStates.map(([k, v]) =>
+                            `<span style="font-family:monospace;font-size:11px;color:${v.color};opacity:0.8;">
+                                ▪ ${v.label}
+                            </span>`
+                        ).join('');
+
                     } catch (e) {
                         console.error('heatmap fail', e);
                         container.innerHTML = '<div class="dim">chaos tracking offline...</div>';
@@ -108,7 +193,7 @@
                 <li>
                     <span class="dim">[2026-03-05]</span>
                     <a href="../entry.html?log=entries/2026-03-05_runbooks_tarottalks.md" data-title="runbooks and the power of diagnostic tools" data-epoch="1772719245417">runbooks and the power of diagnostic tools</a>
-                    <span class="dim">_learning</span>
+                    <span class="dim">_debugging</span>
                 </li>
 
                 <li>

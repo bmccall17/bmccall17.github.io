@@ -78,8 +78,13 @@ function build() {
     fs.writeFileSync(INDEX_FILE, newHtml);
     console.log(`✅ updated index.html`);
 
-    // 5. generate heatmap data
-    const heatmapData = posts.map(p => p.timestampIso.split('T')[0]); // Use actual creation dates
+    // 5. generate heatmap data — rich objects with date, state, title, path
+    const heatmapData = posts.map(p => ({
+        date: (p.date || p.timestampIso).slice(0, 10), // always YYYY-MM-DD
+        state: p.state || 'void',
+        title: p.title,
+        path: p.path
+    }));
     fs.writeFileSync(path.join(__dirname, '../heatmap.json'), JSON.stringify(heatmapData, null, 2));
     console.log('✅ generated heatmap.json');
 }

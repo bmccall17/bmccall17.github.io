@@ -1,0 +1,66 @@
+# Fetches real GitHub contribution data daily and writes contributions.json
+# The static site reads this file at runtime — no token ever exposed client-side.
+name: Sync GitHub Contributions
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # daily at 6am UTC
+  workflow_dispatch:        # also runnable manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  sync-contributions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch and transform contribution data
+        env:
+          GH_PAT: ${{ secrets.GH_CONTRIBUTIONS_PAT }}
+        run: |
+          RESPONSE=$(curl -s -X POST https://api.github.com/graphql \
+            -H "Authorization: bearer $GH_PAT" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "query": "query { user(login: \"bmccall17\") { contributionsCollection { contributionCalendar { totalContributions weeks { contributionDays { date contributionCount } } } } } }"
+            }')
+
+          echo "$RESPONSE" | python3 - <<'EOF'
+          import json, sys
+          from datetime import datetime, timezone
+
+          raw = json.load(sys.stdin)
+          cal = raw["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+
+          out = {
+            "total": cal["totalContributions"],
+            "generatedAt": datetime.now(timezone.utc).isoformat(),
+            "weeks": [
+              {
+                "days": [
+                  { "date": d["date"], "count": d["contributionCount"] }
+                  for d in week["contributionDays"]
+                ]
+              }
+              for week in cal["weeks"]
+            ]
+          }
+
+          with open("contributions.json", "w") as f:
+            json.dump(out, f, indent=2)
+
+          print(f"✅ contributions.json written — {out['total']} total contributions")
+          EOF
+
+      - name: Commit contributions.json if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add contributions.json
+          git diff --staged --quiet || git commit -m "chore: sync github contributions [skip ci]"
+          git push
