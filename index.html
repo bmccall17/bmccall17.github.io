@@ -760,9 +760,12 @@
       /* Mobile Ghost Card Enhancements */
       @media (max-width: 768px) {
 
-        /* Fix the sidebar padding causing text to spill */
-        .profile-sidebar,
         .leak-section {
+          display: none !important;
+        }
+
+        /* Fix the sidebar padding causing text to spill */
+        .profile-sidebar {
           padding: 16px !important;
           box-sizing: border-box;
         }
