@@ -916,67 +916,85 @@
             <a href="darketype/index.html" class="glitch-link">enter_darketype_mode();</a>
           </div>
         </div>
-        <!-- visual approximation of a commit graph -->
-        <div class="calendar-graph" id="calendar-graph">
-          <!-- populated by js -->
-        </div>
+
+        <!-- GitHub-style 52-week contribution calendar -->
+        <div id="calendar-graph" style="display: flex; gap: 2px; align-items: flex-end; overflow: hidden;"></div>
 
         <script>
-          async function loadHeatmap() {
+          async function loadContributions() {
             const container = document.getElementById('calendar-graph');
+            const footer = document.getElementById('contributions-footer');
+
             try {
-              const res = await fetch('heatmap.json');
+              const res = await fetch('contributions.json?t=' + Date.now());
               if (!res.ok) throw new Error('no data');
-              const dates = await res.json();
+              const data = await res.json();
 
-              // simple visualization: last 52 updates (or days)
-              // if match, green. else, dim.
+              // Contribution count → color level
+              function levelColor(count) {
+                if (count === 0) return '#161b22';
+                if (count <= 2) return '#0e4429';
+                if (count <= 5) return '#006d32';
+                if (count <= 9) return '#26a641';
+                return '#39d353';
+              }
 
+              // Render last 52 weeks (GitHub style: columns of 7 days)
+              // Flatten all days from the data
+              const allDays = {};
+              data.weeks.forEach(week => {
+                week.days.forEach(d => { allDays[d.date] = d.count; });
+              });
+
+              // Build 52 week columns anchored to today
               const now = new Date();
-              const oneDay = 24 * 60 * 60 * 1000;
+              // Start from 52 weeks ago, aligned to the preceding Sunday
+              const start = new Date(now.getTime() - (52 * 7 * 24 * 60 * 60 * 1000));
+              start.setDate(start.getDate() - start.getDay()); // align to Sunday
 
               let html = '';
-              for (let i = 52; i >= 0; i--) {
-                // date i days ago
-                const d = new Date(now.getTime() - (i * oneDay * 3)); // *3 to span ~5 months approx visually
-                const dateStr = d.toISOString().split('T')[0];
-
-                // check if any entry matches this date
-                const activity = dates.filter(entryDate => entryDate === dateStr).length;
-
-                let level = 0;
-                if (activity > 0) level = 1;
-                if (activity > 1) level = 2;
-                if (activity > 3) level = 4;
-
-                // randomize slightly for "glitch" aesthetic if no data
-                if (level === 0 && Math.random() > 0.9) level = 1;
-
-                let color = level === 0 ? '#161b22' :
-                  level === 1 ? '#0e4429' :
-                    level === 2 ? '#006d32' :
-                      level === 3 ? '#26a641' : '#39d353';
-
-                html += `<div class="day" title="${dateStr}" style="background-color: ${color}; height: ${10 + Math.random() * 40}px; width: 8px;"></div>`;
+              for (let week = 0; week < 52; week++) {
+                html += '<div style="display:flex;flex-direction:column;gap:2px;">';
+                for (let day = 0; day < 7; day++) {
+                  const d = new Date(start.getTime() + ((week * 7 + day) * 24 * 60 * 60 * 1000));
+                  const dateStr = d.toISOString().split('T')[0];
+                  const count = allDays[dateStr] || 0;
+                  const color = levelColor(count);
+                  const title = count > 0 ? `${dateStr}: ${count} contribution${count !== 1 ? 's' : ''}` : dateStr;
+                  html += `<div style="width:10px;height:10px;background:${color};border-radius:2px;" title="${title}"></div>`;
+                }
+                html += '</div>';
               }
               container.innerHTML = html;
 
+              // Update footer with real data
+              const since = new Date(data.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+              footer.innerHTML = `${data.total.toLocaleString()} contributions in the last year. <span style="color:var(--glitch-color-1)">synced ${since}.</span>`;
+
             } catch (e) {
-              console.log('heatmap-glitch', e);
-              // fallback to static if fetch fails
-              for (let i = 0; i < 52; i++) {
-                let color = Math.random() > 0.8 ? '#0e4429' : '#161b22';
-                container.innerHTML += `<div class="day" style="background-color: ${color}; height: ${10 + Math.random() * 40}px; width: 8px;"></div>`;
+              console.log('contributions-offline', e);
+              // Graceful fallback: noise pattern while contributions.json is being built
+              let html = '';
+              for (let week = 0; week < 52; week++) {
+                html += '<div style="display:flex;flex-direction:column;gap:2px;">';
+                for (let day = 0; day < 7; day++) {
+                  const color = Math.random() > 0.82 ? '#0e4429' : '#161b22';
+                  html += `<div style="width:10px;height:10px;background:${color};border-radius:2px;"></div>`;
+                }
+                html += '</div>';
               }
+              container.innerHTML = html;
+              footer.innerHTML = `contributions syncing... <span style="color:var(--glitch-color-1)">run workflow to populate.</span>`;
             }
           }
-          loadHeatmap();
+          loadContributions();
         </script>
-        <p style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
-          1,337 contributions in the last year. <span style="color: var(--glitch-color-1);">glitches
-            detected.</span>
+
+        <p id="contributions-footer" style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
+          loading...
         </p>
       </section>
+
 
       <!-- Ghost Stream -->
       <section class="stream-layout">
