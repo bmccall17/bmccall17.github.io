@@ -923,7 +923,6 @@
         <script>
           async function loadContributions() {
             const container = document.getElementById('calendar-graph');
-            const footer = document.getElementById('contributions-footer');
 
             try {
               const res = await fetch('contributions.json?t=' + Date.now());
@@ -969,7 +968,7 @@
 
               // Update footer with real data
               const since = new Date(data.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-              footer.innerHTML = `${data.total.toLocaleString()} contributions in the last year. <span style="color:var(--glitch-color-1)">synced ${since}.</span>`;
+              document.getElementById('contributions-footer').innerHTML = `${data.total.toLocaleString()} contributions in the last year. <span style="color:var(--glitch-color-1)">synced ${since}.</span>`;
 
             } catch (e) {
               console.log('contributions-offline', e);
@@ -984,7 +983,7 @@
                 html += '</div>';
               }
               container.innerHTML = html;
-              footer.innerHTML = `contributions syncing... <span style="color:var(--glitch-color-1)">run workflow to populate.</span>`;
+              document.getElementById('contributions-footer').innerHTML = `contributions syncing... <span style="color:var(--glitch-color-1)">run workflow to populate.</span>`;
             }
           }
           loadContributions();
