@@ -920,9 +920,14 @@
         <!-- GitHub-style 52-week contribution calendar -->
         <div id="calendar-graph" style="display: flex; gap: 2px; align-items: flex-end; overflow: hidden;"></div>
 
+        <p id="contributions-footer" style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
+          loading...
+        </p>
+
         <script>
           async function loadContributions() {
             const container = document.getElementById('calendar-graph');
+            const footer = document.getElementById('contributions-footer');
 
             try {
               const res = await fetch('contributions.json?t=' + Date.now());
@@ -968,7 +973,7 @@
 
               // Update footer with real data
               const since = new Date(data.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-              document.getElementById('contributions-footer').innerHTML = `${data.total.toLocaleString()} contributions in the last year. <span style="color:var(--glitch-color-1)">synced ${since}.</span>`;
+              if (footer) footer.innerHTML = `${data.total.toLocaleString()} contributions in the last year. <span style="color:var(--glitch-color-1)">synced ${since}.</span>`;
 
             } catch (e) {
               console.log('contributions-offline', e);
@@ -983,15 +988,12 @@
                 html += '</div>';
               }
               container.innerHTML = html;
-              document.getElementById('contributions-footer').innerHTML = `contributions syncing... <span style="color:var(--glitch-color-1)">run workflow to populate.</span>`;
+              if (footer) footer.innerHTML = `contributions syncing... <span style="color:var(--glitch-color-1)">run workflow to populate.</span>`;
             }
           }
           loadContributions();
         </script>
 
-        <p id="contributions-footer" style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
-          loading...
-        </p>
       </section>
 
 
