@@ -1,10 +1,19 @@
 [
   {
+    "file": "2026-03-05_runbooks_tarottalks.md",
+    "title": "runbooks and the power of diagnostic tools",
+    "date": "2026-03-05",
+    "timestampIso": "2026-03-05T14:00:45.417Z",
+    "epoch": 1772719245417,
+    "state": "learning",
+    "path": "../entry.html?log=entries/2026-03-05_runbooks_tarottalks.md"
+  },
+  {
     "file": "2026-03-03_kahn_ktane_mazes.md",
     "title": "data points for what not to do (Kahn and KTANE)",
     "date": "2026-03-03",
-    "timestampIso": "2026-03-03T18:00:58.000Z",
-    "epoch": 1772560858000,
+    "timestampIso": "2026-03-03T18:03:20.710Z",
+    "epoch": 1772561000710,
     "state": "learning",
     "path": "../entry.html?log=entries/2026-03-03_kahn_ktane_mazes.md"
   },
@@ -12,8 +21,8 @@
     "file": "2026-02-25_logo_factory.md",
     "title": "the logo factory: when ai iteration fails, build your own tool",
     "date": "2026-02-25",
-    "timestampIso": "2026-02-25T13:19:00.000Z",
-    "epoch": 1772057940000,
+    "timestampIso": "2026-02-25T13:22:12.210Z",
+    "epoch": 1772025732210,
     "state": "shipped",
     "path": "../entry.html?log=entries/2026-02-25_logo_factory.md"
   },
