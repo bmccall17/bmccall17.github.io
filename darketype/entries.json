@@ -1,82 +1,28 @@
 [
   {
-    "file": "2026-03-05_runbooks_tarottalks.md",
-    "title": "runbooks and the power of diagnostic tools",
-    "date": "2026-03-05",
-    "timestampIso": "2026-03-05T14:00:45.417Z",
-    "epoch": 1772719245417,
-    "state": "debugging",
-    "path": "../entry.html?log=entries/2026-03-05_runbooks_tarottalks.md"
-  },
-  {
-    "file": "2026-03-03_kahn_ktane_mazes.md",
-    "title": "data points for what not to do (Kahn and KTANE)",
-    "date": "2026-03-03",
-    "timestampIso": "2026-03-03T18:03:20.710Z",
-    "epoch": 1772561000710,
-    "state": "learning",
-    "path": "../entry.html?log=entries/2026-03-03_kahn_ktane_mazes.md"
-  },
-  {
-    "file": "2026-02-25_logo_factory.md",
-    "title": "the logo factory: when ai iteration fails, build your own tool",
-    "date": "2026-02-25",
-    "timestampIso": "2026-02-25T13:22:12.210Z",
-    "epoch": 1772025732210,
-    "state": "shipped",
-    "path": "../entry.html?log=entries/2026-02-25_logo_factory.md"
-  },
-  {
-    "file": "2026-02-13_dynamic_chaos.md",
-    "title": "dynamic chaos: v0.1.4",
-    "date": "2026-02-13",
-    "timestampIso": "2026-02-13T20:02:10.306Z",
-    "epoch": 1771012930306,
-    "state": "mess",
-    "path": "../entry.html?log=entries/2026-02-13_dynamic_chaos.md"
-  },
-  {
-    "file": "2026-02-11_the_autopsy.md",
-    "title": "the autopsy: auditing my own game engine",
-    "date": "2026-02-11",
-    "timestampIso": "2026-02-12T01:32:51.051Z",
-    "epoch": 1770859971051,
-    "state": "learning",
-    "path": "../entry.html?log=entries/2026-02-11_the_autopsy.md"
-  },
-  {
-    "file": "2026-02-10_optimism_and_ted.md",
-    "title": "optimism and the ted stage",
-    "date": "2026-02-10",
-    "timestampIso": "2026-02-10T22:31:16.049Z",
-    "epoch": 1770762676049,
-    "state": "optimistic",
-    "path": "../entry.html?log=entries/2026-02-10_optimism_and_ted.md"
-  },
-  {
-    "file": "2026-02-07_leaking_pixels.md",
-    "title": "leaking pixels: cross-site data vapor",
-    "date": "2026-02-07",
-    "timestampIso": "2026-02-07T20:46:50.754Z",
-    "epoch": 1770497210754,
-    "state": "shipped",
-    "path": "../entry.html?log=entries/2026-02-07_leaking_pixels.md"
-  },
-  {
     "file": "2026-02-06_cslp_infection.md",
     "title": "cross-site leakage protocol (cslp)",
     "date": "2026-02-06T16:00:00",
-    "timestampIso": "2026-02-07T04:59:21.834Z",
-    "epoch": 1770440361834,
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
     "state": "shipped",
     "path": "../entry.html?log=entries/2026-02-06_cslp_infection.md"
+  },
+  {
+    "file": "2026-02-06_phase_zero_rebellion.md",
+    "title": "phase zero: the gentle rebellion",
+    "date": "2026-02-06T10:00:00",
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
+    "state": "mess",
+    "path": "../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md"
   },
   {
     "file": "2026-02-06_singularity.md",
     "title": "event horizon (singularity v0.1.2)",
     "date": "2026-02-06T14:00:00",
-    "timestampIso": "2026-02-06T19:14:42.911Z",
-    "epoch": 1770405282911,
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
     "state": "void",
     "path": "../entry.html?log=entries/2026-02-06_singularity.md"
   },
@@ -84,8 +30,8 @@
     "file": "2026-02-06_the_loop_engaged.md",
     "title": "the loop engaged: v0.1.1",
     "date": "2026-02-06T12:00:00",
-    "timestampIso": "2026-02-06T11:48:20.036Z",
-    "epoch": 1770378500036,
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
     "state": "shipped",
     "path": "../entry.html?log=entries/2026-02-06_the_loop_engaged.md"
   },
@@ -93,18 +39,72 @@
     "file": "2026-02-06_the_origin_story.md",
     "title": "the origin story: portfolio + darketype",
     "date": "2026-02-06",
-    "timestampIso": "2026-02-06T11:36:13.776Z",
-    "epoch": 1770377773776,
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
     "state": "seed",
     "path": "../entry.html?log=entries/2026-02-06_the_origin_story.md"
   },
   {
-    "file": "2026-02-06_phase_zero_rebellion.md",
-    "title": "phase zero: the gentle rebellion",
-    "date": "2026-02-06T10:00:00",
-    "timestampIso": "2026-02-06T11:11:31.077Z",
-    "epoch": 1770376291077,
+    "file": "2026-02-07_leaking_pixels.md",
+    "title": "leaking pixels: cross-site data vapor",
+    "date": "2026-02-07",
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
+    "state": "shipped",
+    "path": "../entry.html?log=entries/2026-02-07_leaking_pixels.md"
+  },
+  {
+    "file": "2026-02-10_optimism_and_ted.md",
+    "title": "optimism and the ted stage",
+    "date": "2026-02-10",
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
+    "state": "optimistic",
+    "path": "../entry.html?log=entries/2026-02-10_optimism_and_ted.md"
+  },
+  {
+    "file": "2026-02-11_the_autopsy.md",
+    "title": "the autopsy: auditing my own game engine",
+    "date": "2026-02-11",
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
+    "state": "learning",
+    "path": "../entry.html?log=entries/2026-02-11_the_autopsy.md"
+  },
+  {
+    "file": "2026-02-13_dynamic_chaos.md",
+    "title": "dynamic chaos: v0.1.4",
+    "date": "2026-02-13",
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
     "state": "mess",
-    "path": "../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md"
+    "path": "../entry.html?log=entries/2026-02-13_dynamic_chaos.md"
+  },
+  {
+    "file": "2026-02-25_logo_factory.md",
+    "title": "the logo factory: when ai iteration fails, build your own tool",
+    "date": "2026-02-25",
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
+    "state": "shipped",
+    "path": "../entry.html?log=entries/2026-02-25_logo_factory.md"
+  },
+  {
+    "file": "2026-03-03_kahn_ktane_mazes.md",
+    "title": "data points for what not to do (Kahn and KTANE)",
+    "date": "2026-03-03",
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
+    "state": "learning",
+    "path": "../entry.html?log=entries/2026-03-03_kahn_ktane_mazes.md"
+  },
+  {
+    "file": "2026-03-05_runbooks_tarottalks.md",
+    "title": "runbooks and the power of diagnostic tools",
+    "date": "2026-03-05",
+    "timestampIso": "2026-03-05T16:16:21.086Z",
+    "epoch": 1772727381086,
+    "state": "debugging",
+    "path": "../entry.html?log=entries/2026-03-05_runbooks_tarottalks.md"
   }
 ]
