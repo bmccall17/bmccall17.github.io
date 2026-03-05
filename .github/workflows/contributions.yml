@@ -23,18 +23,25 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_CONTRIBUTIONS_PAT }}
         run: |
-          RESPONSE=$(curl -s -X POST https://api.github.com/graphql \
+          # Step 1: write raw GraphQL response to a temp file
+          curl -s -X POST https://api.github.com/graphql \
             -H "Authorization: bearer $GH_PAT" \
             -H "Content-Type: application/json" \
             -d '{
               "query": "query { user(login: \"bmccall17\") { contributionsCollection { contributionCalendar { totalContributions weeks { contributionDays { date contributionCount } } } } } }"
-            }')
+            }' > /tmp/gh_raw.json
 
-          echo "$RESPONSE" | python3 - <<'EOF'
-          import json, sys
+          echo "curl exit: $?"
+          wc -c /tmp/gh_raw.json
+
+          # Step 2: transform with Python (reads file, not stdin — no pipe conflict)
+          python3 << 'PYEOF'
+          import json
           from datetime import datetime, timezone
 
-          raw = json.load(sys.stdin)
+          with open('/tmp/gh_raw.json') as f:
+              raw = json.load(f)
+
           cal = raw["data"]["user"]["contributionsCollection"]["contributionCalendar"]
 
           out = {
@@ -52,10 +59,10 @@ jobs:
           }
 
           with open("contributions.json", "w") as f:
-            json.dump(out, f, indent=2)
+              json.dump(out, f, indent=2)
 
           print(f"✅ contributions.json written — {out['total']} total contributions")
-          EOF
+          PYEOF
 
       - name: Commit contributions.json if changed
         run: |
