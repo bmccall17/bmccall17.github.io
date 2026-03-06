@@ -8,7 +8,7 @@ next_experiment: "scorecards and the comparison page"
 
 # the setup
 
-i'm building a comparison page inside [repOptics](https://github.com/bmccall17/repOptics) that shows how my repo-level scoring tool stacks up against Port.io's org-scale software catalog. the plan was simple: use Port's GitHub Ocean integration to sync my repos into their catalog, create some scorecards, then render both perspectives side by side. i figured this would take 30 minutes. it took the entire evening and left me genuinely frustrated.
+i'm building a comparison page inside [repOptics](https://rep-optics.onrender.com/port-compare) that shows how my repo-level scoring tool stacks up against Port.io's org-scale software catalog. the plan was simple: use Port's GitHub Ocean integration to sync my repos into their catalog, create some scorecards, then render both perspectives side by side. i figured this would take 30 minutes. it took the entire evening and left me genuinely frustrated.
 
 # the mess
 
