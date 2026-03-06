@@ -78,12 +78,12 @@ add entry to the **ship log** table in `SHIP_LOG.md` (insert at top of data rows
 
 **date format:** jan 01, 2026.
 
-### step 5: confirm completion
+### step 5: confirm & deploy
 report to user:
 - **version:** vX.Y.Z
 - **release notes created:** `devnotes/releases/vX.Y.Z.md`
 - **SHIP_LOG.md:** updated
-- **next step:** user handles git commit/push.
+- **deployment:** automatically run `git commit` and `git push origin main` using antigravity to deploy the site.
 
 ### step 6: cleanup
 1.  **reset artifacts**:

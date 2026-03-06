@@ -36,8 +36,9 @@ we are revolting against the grammar police.
 - **transparency**: we tell users we are tracking them for "science and curiosity."
 
 ### deployment & testing
-- **manual deploy**: agent stages changes (creates files); user handles git commit/push to github. agent *never* runs `git push` without explicit override.
-- **production first**: default testing happens on the live production server (after user push). local server is secondary.
+- **git operations**: all git actions (commit, push, etc.) are handled here through antigravity.
+- **branching strategy**: always push directly to the `main` branch unless explicitly stated otherwise.
+- **production first**: default testing happens on the live production server (after push). local server is secondary.
 
 ### security & secrets
 - **no secrets in code**: never hardcode api keys, tokens, or passwords.
