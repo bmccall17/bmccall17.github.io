@@ -9,6 +9,15 @@
     "path": "../entry.html?log=entries/2026-03-06_antigravity_takes_the_wheel_v0.1.5.md"
   },
   {
+    "file": "2026-03-06_port_pushes_back.md",
+    "title": "port pushes back (and then it doesnt)",
+    "date": "2026-03-06",
+    "timestampIso": "2026-03-06T00:00:00.000Z",
+    "epoch": 1772755200000,
+    "state": "learning",
+    "path": "../entry.html?log=entries/2026-03-06_port_pushes_back.md"
+  },
+  {
     "file": "2026-03-05_port_ocean_pain.md",
     "title": "the port.io ocean integration disaster",
     "date": "2026-03-05",
