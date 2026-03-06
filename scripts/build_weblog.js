@@ -28,14 +28,16 @@ function build() {
         const stats = fs.statSync(filePath);
         const meta = parseFrontmatter(content);
 
-        // Use creation time (birthtime) if available, fall back to mtime
-        const created = stats.birthtimeMs ? stats.birthtime : stats.mtime;
+        // Use frontmatter date, fall back to creation time if not available
+        let created = meta.date ? new Date(meta.date) : new Date(NaN);
+        if (isNaN(created.getTime())) {
+            created = stats.birthtimeMs ? stats.birthtime : stats.mtime;
+        }
 
         return {
             file,
             title: meta.title || file, // Fallback title
-            date: meta.date || '1970-01-01', // Frontmatter date
-            // Actual file creation timestamp
+            date: meta.date || created.toISOString().split('T')[0], // Frontmatter date
             timestampIso: created.toISOString(),
             epoch: created.getTime(),
             state: meta.state || 'void',
