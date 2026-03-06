@@ -19,7 +19,7 @@ if a new mess entry is provided in the prompt, or you are executing this, ensure
 - ensure the markdown file exists in `darketype/entries/` and has valid frontmatter matching `darketype/entries/TEMPLATE.md`.
   - fields needed: `title`, `date` (YYYY-MM-DD), `state` (mess, learning, shipped, broken, etc.), `tags`.
   - if drafting a new entry, create the filename as `YYYY-MM-DD_title_slug.md`.
-- **grammar-police-dodging:** verify the entire entry strictly follows the "darketype" styling—all lowercase titles, headings, and body text. absolutely no capital letters unless deeply intentional for code.
+- **grammar-police-dodging:** verify the entire entry strictly follows the "darketype" styling—all lowercase titles, headings, and body text. absolutely no capital letters unless deeply intentional for code or for proper names of people or brands or... proper names, you get it right?!
 - ensure `tags` are relevant and exist as an active array in the frontmatter.
 
 ### step 2: build architecture
