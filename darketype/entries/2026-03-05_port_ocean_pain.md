@@ -42,6 +42,21 @@ the Port UI has a multi-step wizard: Personal Access Token > CI > Prerequisites.
 
 the docs URL has query params that should show the right tab combination: `?auth=pat&installation-methods=one-time-ci&cicd-method=github&method=pat`. but the page uses JavaScript-rendered tabs, so if you try to share, link, or programmatically read the docs, you get a generic page with none of the specific instructions visible. the interactive elements don't degrade gracefully.
 
+## the scorecard form
+
+after the integration finally worked, i moved on to creating scorecards — Port's way of grading entities against rules. i got one created through the UI (Delivery Maturity) but the form for the other two kept fighting me. the conditions dropdown is unintuitive: "Properties" appears as a category header that you have to click to expand, but it looks like a label. the available properties don't show their types, so you're guessing whether `readme` is a boolean or string (it's a string — the actual README content, not a flag). operators change based on type but there's no tooltip explaining which operators work with which types.
+
+i gave up on the form and created the remaining two scorecards via the REST API:
+
+```bash
+curl -s -X POST "https://api.getport.io/v1/blueprints/githubRepository/scorecards" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{ "identifier": "decision_clarity", "title": "Decision Clarity", ... }'
+```
+
+two `curl` calls, each took about 2 seconds. the form had eaten 15+ minutes without success. this is becoming a pattern: the Port REST API is excellent, the UI layers on top of it add friction instead of removing it.
+
 ## the silent region assignment
 
 my Port credentials only authenticate against `api.getport.io` (EU), not `api.us.getport.io` (US). i live in North Carolina. there was no region selection during signup, no confirmation of which instance i was assigned to, and no indication in the dashboard. i only discovered this by trial and error — the US endpoint returned `invalid_credentials` for perfectly valid keys. the EU endpoint worked fine. there's no "region" label in the Port UI settings, no mention in the onboarding flow. you just have to... guess? and then debug authentication failures that have nothing to do with your actual credentials.
