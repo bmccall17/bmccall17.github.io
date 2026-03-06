@@ -88,6 +88,10 @@ no docker image. no ocean-sail. no ambiguous secret naming. just curl, jq, and t
 
 3. **this is actually useful TSM context.** if i'm going to be a Technical Success Manager at Port, i now viscerally understand what a new user hits on day one. i can advocate for fixing this because i lived it. the product is strong; the on-ramp needs work.
 
+4. **the Port AI is the redeeming moment.** after hours of fighting wizards, grayed-out buttons, and conflicting docs, the Port AI chat actually came through. i asked it to help me get past the setup checklist and build a table view of my scorecards by repo — and it just did it. within a minute i was looking at all 13 repos with Decision Clarity, Governance Standards, and Delivery Maturity columns, color-coded by level. that's the moment Port clicked. the product underneath is genuinely powerful once you get there. the AI understood my catalog, knew what scorecards existed, and helped me build the view i wanted conversationally. if Port leaned harder into this as the onboarding path — "just talk to the AI and it'll set things up" — the entire evening of pain could have been 10 minutes.
+
+![port.io scorecards](media/port.io_scorecards.png)
+
 # distillation
 
-the best developer tools have a property: the first 5 minutes feel like magic. port's first 5 minutes felt like a puzzle with missing pieces. the API underneath is clean and well-designed. the layers on top of it need to get out of the way.
+the best developer tools have a property: the first 5 minutes feel like magic. port's first 5 minutes felt like a puzzle with missing pieces. the API underneath is clean and well-designed. the layers on top of it need to get out of the way. but when Port's AI took the wheel, i finally saw the vision — a platform where you describe what you want and it builds the view. the rough edges are real, but so is the potential.
