@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-03-06",
+    "state": "learning",
+    "title": "antigravity takes the wheel",
+    "path": "../entry.html?log=entries/2026-03-06_antigravity_takes_the_wheel_v0.1.5.md"
+  },
+  {
     "date": "2026-03-05",
     "state": "broken",
     "title": "the port.io ocean integration disaster",
