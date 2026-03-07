@@ -28,7 +28,7 @@ this isn't social networking in 3D. this is a sixth sense that only exists becau
 
 # the mess
 
-this started as a rambling voice note to ChatGPT at like 7am. the raw thought was a collision between Philip Pullman's daemons and a question that's been eating at me: what's the *native* way to find your people in a reality that doesn't have to follow the rules of the one we were born into?
+this idea has been  percolating for a while, but it really started to take shape when i was in a gathering in Walkabout Minigolf. the raw thought was a collision between Philip Pullman's daemons and a question that's been eating at me: what's the *native* way to find your people in a reality that doesn't have to follow the rules of the one we were born into?
 
 and the answer can't be "profiles" or "name tags" or "interest badges." those are borrowed from a world with gravity and physical proximity and limited bandwidth. virtual worlds have *none* of those constraints. so why are we still designing like they do?
 
