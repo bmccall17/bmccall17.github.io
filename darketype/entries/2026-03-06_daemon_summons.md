@@ -6,77 +6,78 @@ tags: [daemon, metaverse, hackathon, ai, spatial, pullman, social-signaling]
 next_experiment: "build the mvp this weekend"
 ---
 
-# the problem
+# the feeling
 
-you show up to a virtual world and you're... a floating name tag. maybe a 3D scan of your face stretched over a mannequin. and everyone else is the same. a room full of strangers standing in a circle, visually identical in their ambiguity, and the only way to know if someone shares your obsession with procedural generation or accessibility or weird card games is to... walk up to each one individually and ask.
+imagine you step into a world where the laws are different. not just the physics — the *social* physics. in this place, your curiosity has a shape. your openness has a color. the thing you can't stop thinking about — procedural generation, accessibility, weird card games, whatever — it radiates off you like heat. and everyone can see it. not because you told them. because it's just... *how things work here*.
 
-conferences solved this in meatspace decades ago with lanyards and badges and that awkward "what do you do?" loop. the metaverse just... didn't. we rebuilt the rooms without rebuilding the social legibility.
+that's the world i want to build. not a simulation of a conference hall. not a virtual recreation of something we already have. something that could only exist *here*, in a space where we get to invent the rules from scratch.
 
 # the idea
 
 what if every avatar had a daemon?
 
-not "daemon" like a unix background process (although... kind of). daemon like Philip Pullman. a shape-shifting companion animal that follows you everywhere, learns who you are, and — here's the part that matters — *shows it*.
+not "daemon" like a unix background process (although... kind of). daemon like Philip Pullman. a shape-shifting companion creature that follows you, learns you, and *becomes* a living expression of who you are in this moment. your daemon is the part of you that the world around you can feel.
 
-your daemon sits at the intersection of two things that virtual worlds are currently terrible at:
+it does two things at once, and the second one is where it gets wild:
 
-1. **personal companion** — the daemon knows you. it watches how you move through spaces, what you linger on, who you talk to. it becomes an AI reflection of your social self. it can whisper to you privately. it can suggest who to approach. it can tell you when you're spiraling. it's not a chatbot bolted to an avatar; it's a *familiar*.
+1. **familiar** — the daemon knows you. it absorbs how you move through spaces, what catches your attention, who you gravitate toward. it whispers to you. it nudges you. it's not a chatbot bolted onto a character model — it's your *other self*, the one that lives in the space between you and everyone else. think less "AI assistant" and more *patronus that evolves*.
 
-2. **ambient social signal** — and this is the gold. the daemon doesn't just serve *you*. it serves *everyone around you*. its form, its color, its posture, its projections above your head — all of this broadcasts your current state to the room. open to chat? deep in focus? "ask me about worldbuilding"? the daemon shows it. visually. spatially. from across the room.
+2. **resonance** — this is where the impossible kicks in. your daemon doesn't just serve you. it radiates. its form, its luminance, the way it moves and breathes and shifts — all of that is *felt* by the daemons around it. you don't "read a profile." you don't "check a badge." you feel someone's daemon harmonize with yours before you even see them. like tuning forks finding each other across a room that has no walls.
 
-remember second life? you could click on any avatar and pull up a profile card. name, bio, interests. those profiles were like showing up to the festival wearing a sign that said "here is who i am, here is what you can ask me about." daemon is that concept evolved — except it's alive, it's spatial, and it doesn't require someone to click on you to see it.
+this isn't social networking in 3D. this is a sixth sense that only exists because the world allows it.
 
 # the mess
 
-this started as a rambling voice note to ChatGPT at like 7am. i was thinking about The Future of Meetings (a group i've been in touch with) and how conference participants cluster. how when you're at a good conference, you eventually find your people... but it takes *hours*. sometimes the conference ends before you find them. sometimes you find them at the afterparty when it's too late.
+this started as a rambling voice note to ChatGPT at like 7am. the raw thought was a collision between Philip Pullman's daemons and a question that's been eating at me: what's the *native* way to find your people in a reality that doesn't have to follow the rules of the one we were born into?
 
-so the daemon doesn't just reflect you — it *projects* what you want to talk about. a symbol, a glyph, a banner, an aura floating above your head. "i'm here to talk about AI agents." "i'm here to talk about accessibility." "i'm here to talk about spatial audio." and when multiple people nearby share the same signal? the daemons *merge*. the signals amplify. you get emergent "conversation gravity" — visible clusters forming in the room that other people can navigate toward.
+and the answer can't be "profiles" or "name tags" or "interest badges." those are borrowed from a world with gravity and physical proximity and limited bandwidth. virtual worlds have *none* of those constraints. so why are we still designing like they do?
 
-that image — multiple daemons converging, their projected topics resonating, pulling a group together that didn't exist five minutes ago — that's the hackathon demo moment.
+the daemon is the answer that feels right. your companion projects what you're thinking about — not as text, not as an icon, but as something alive. a shape, a frequency, an aura. and when two daemons near each other share a resonance? they *respond*. they shift. they pull toward each other. and when a critical mass of compatible daemons cluster — the signal doesn't just add up, it *transforms*. emergent gravity. a living beacon that other people can feel from anywhere in the space, pulling a group together that didn't exist a minute ago.
+
+that moment — daemons converging, amplifying, *becoming something new together* — that's the interaction design we need to nail. it's the mario jump. the gravity gun. the thing that makes you go "oh, this couldn't exist anywhere else, and now i can't imagine existing without it."
+
+we haven't figured out exactly what that feels like yet. and that's the point. that's the work.
 
 # why now
 
-the [Open Metaverse Hackathon](https://omb.metaverse-standards.org/en/hackathon) is this weekend (march 7–8, 2026). the AI track is explicitly calling for "spatial AI agents, digital assistants, and tools that help shape spatial experiences across devices without platform lock-in." daemon fits that brief like it was written for it.
+the [Open Metaverse Hackathon](https://omb.metaverse-standards.org/en/hackathon) is happening this weekend (march 7–8, 2026). the AI track is calling for "spatial AI agents, digital assistants, and tools that help shape spatial experiences across devices without platform lock-in." daemon fits that brief like it was summoned for it.
 
-the strongest framing isn't the pullman metaphor (though it's the soul of the thing). for judges it's this:
+for the judges, the clean version:
 
 **daemons are interoperable spatial AI companions that make human intention visible in shared virtual spaces.**
 
-identity. social presence. discoverability. group formation. open metaverse interoperability. all packed into a shape-shifting animal companion. the metaphor does the heavy lifting.
+but what we're actually building is weirder and better than that sentence. we're building the first creatures native to a world that doesn't exist yet.
 
 # the mvp
 
-not trying to build the full lifelong daemon this weekend. the narrow demo:
+the full daemon — the one that grows with you, that dreams, that knows your name — that's not this weekend. this weekend is about proving the *feel*:
 
-- a multiplayer spatial scene (browser-based 3D room)
-- each avatar gets a daemon that follows them
-- daemon displays one of a set of social states (open to chat, looking for collaborators, deep in focus, just browsing)
-- daemon displays a selected topic/interest
-- daemon visually transforms based on state and topic
-- nearby compatible daemons detect each other
-- signals merge or amplify when users cluster
+- a multiplayer spatial scene where each avatar has a daemon
+- the daemon shifts form and energy based on your state and what you're drawn to
+- nearby daemons sense each other — resonance is visible, tangible, unmistakable
+- when compatible daemons cluster, the signal amplifies into something greater than the sum
+- the whole thing feels alive. not functional. *alive*.
 
-that's shippable. that proves the magic.
+that's the demo. not a feature list. a feeling.
 
 # the pitch
 
-> daemon turns presence into signal: an AI companion that makes what you care about, how you feel, and who you want to meet legible in the open metaverse.
+> daemon turns presence into resonance: an AI companion that makes what you care about, how you feel, and who you want to find *felt* across the open metaverse.
 
 # the future (if we get past this weekend)
 
-- daemon learns from conversations and profile history over time
-- private whisper mode between human and daemon
-- daemon suggests who to meet next based on mutual resonance
-- daemons negotiate social introductions with *each other* before the humans even talk
-- interoperable companion identity that moves across worlds
-- accessibility modes for neurodivergent social navigation
-- and maybe the wildest one: a prototype for a new open standard around **machine-readable social presence signals**
+- daemon learns and evolves from how you move through worlds over time
+- private whisper mode — a conversation between you and your daemon that no one else can hear
+- daemon-to-daemon negotiation: your daemons introduce you before you even speak
+- interoperable companion identity that moves across worlds and platforms
+- accessibility modes for people who experience social spaces differently
+- and the big one: a prototype for an open standard around **machine-readable social presence signals** — giving the open metaverse a shared language for what it feels like to be near someone
 
 # distillation
 
-virtual worlds rebuilt the rooms but forgot the body language. daemon puts the body language back — except now it's AI-powered, interoperable, and visible from across the venue. your daemon is your signal. your familiar. your flag in the crowd.
+we have the chance to invent a new sense. not borrow from the old world — not "virtual business cards" or "VR conferences." something native. something that couldn't exist anywhere but here. your daemon is how the world knows you before you say a word.
 
-i'm building this remote from asheville, and i'm looking for a team. if you're reading this because you found my discord post, or because you poked around my site and stumbled into the weblog — well, the daemon already found you. 
+i'm building this remote from asheville, and i'm looking for a team. if you're reading this because you found my discord post, or because you poked around my site and stumbled into the mess — the daemon already felt you here.
 
 come build with me.
 

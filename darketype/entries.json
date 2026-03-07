@@ -102,8 +102,8 @@
     "file": "2026-02-06_cslp_infection.md",
     "title": "cross-site leakage protocol (cslp)",
     "date": "2026-02-06T16:00:00",
-    "timestampIso": "2026-02-06T16:00:00.000Z",
-    "epoch": 1770393600000,
+    "timestampIso": "2026-02-06T21:00:00.000Z",
+    "epoch": 1770411600000,
     "state": "shipped",
     "path": "../entry.html?log=entries/2026-02-06_cslp_infection.md"
   },
@@ -111,8 +111,8 @@
     "file": "2026-02-06_singularity.md",
     "title": "event horizon (singularity v0.1.2)",
     "date": "2026-02-06T14:00:00",
-    "timestampIso": "2026-02-06T14:00:00.000Z",
-    "epoch": 1770386400000,
+    "timestampIso": "2026-02-06T19:00:00.000Z",
+    "epoch": 1770404400000,
     "state": "void",
     "path": "../entry.html?log=entries/2026-02-06_singularity.md"
   },
@@ -120,8 +120,8 @@
     "file": "2026-02-06_the_loop_engaged.md",
     "title": "the loop engaged: v0.1.1",
     "date": "2026-02-06T12:00:00",
-    "timestampIso": "2026-02-06T12:00:00.000Z",
-    "epoch": 1770379200000,
+    "timestampIso": "2026-02-06T17:00:00.000Z",
+    "epoch": 1770397200000,
     "state": "shipped",
     "path": "../entry.html?log=entries/2026-02-06_the_loop_engaged.md"
   },
@@ -129,8 +129,8 @@
     "file": "2026-02-06_phase_zero_rebellion.md",
     "title": "phase zero: the gentle rebellion",
     "date": "2026-02-06T10:00:00",
-    "timestampIso": "2026-02-06T10:00:00.000Z",
-    "epoch": 1770372000000,
+    "timestampIso": "2026-02-06T15:00:00.000Z",
+    "epoch": 1770390000000,
     "state": "mess",
     "path": "../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md"
   },
