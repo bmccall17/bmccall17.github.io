@@ -1,15 +1,15 @@
 [
   {
     "date": "2026-03-06",
-    "state": "learning",
-    "title": "antigravity takes the wheel",
-    "path": "../entry.html?log=entries/2026-03-06_antigravity_takes_the_wheel_v0.1.5.md"
-  },
-  {
-    "date": "2026-03-06",
     "state": "mess",
     "title": "daemon summons",
     "path": "../entry.html?log=entries/2026-03-06_daemon_summons.md"
+  },
+  {
+    "date": "2026-03-06",
+    "state": "learning",
+    "title": "antigravity takes the wheel",
+    "path": "../entry.html?log=entries/2026-03-06_antigravity_takes_the_wheel_v0.1.5.md"
   },
   {
     "date": "2026-03-06",

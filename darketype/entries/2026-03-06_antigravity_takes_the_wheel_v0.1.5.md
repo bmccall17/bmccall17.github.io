@@ -1,6 +1,6 @@
 ---
 title: "antigravity takes the wheel"
-date: 2026-03-06
+date: 2026-03-06T15:00:00
 state: "learning"
 tags: [git, automation, antigravity, workflows]
 next_experiment: "more pure content generation"
