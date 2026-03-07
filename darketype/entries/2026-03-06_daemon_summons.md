@@ -80,4 +80,4 @@ i'm building this remote from Asheville, and i'm looking for a team. if you're r
 
 come build with me.
 
-[full concept document](../daemon/daemonconcept.md)
+[full concept document](../daemon-mvp)
