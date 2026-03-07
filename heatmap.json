@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-03-07",
+    "state": "shipped",
+    "title": "the alignment game",
+    "path": "../entry.html?log=entries/2026-03-07_the_alignment_game_v0.1.6.md"
+  },
+  {
     "date": "2026-03-06",
     "state": "mess",
     "title": "daemon summons",
