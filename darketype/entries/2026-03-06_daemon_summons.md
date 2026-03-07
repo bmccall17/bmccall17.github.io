@@ -20,6 +20,8 @@ not "daemon" like a unix background process (although... kind of). daemon like P
 
 it does two things at once, and the second one is where it gets wild:
 
+[demo site](https://bmccall17.github.io/daemon-mvp/)
+
 1. **familiar** — the daemon knows you. it absorbs how you move through spaces, what catches your attention, who you gravitate toward. when you first arrive somewhere new, it's your guide — it flies over to the thing you need to see, nudges you toward where you belong. as it learns you, it becomes less tour guide and more *other self*. you can talk to it privately — a mode where no one else hears the conversation. you can also tell it to stop listening, stop learning. "don't pay attention to this one." the boundary is yours. think less "AI assistant" and more *patronus that evolves*.
 
 2. **resonance** — this is where the impossible kicks in. your daemon doesn't just serve you. it radiates. its form, its luminance, the way it moves and breathes and shifts — all of that is *felt* by the daemons around it. you don't "read a profile." you don't "check a badge." you feel someone's daemon harmonize with yours before you even see them. like tuning forks finding each other across a room that has no walls.
