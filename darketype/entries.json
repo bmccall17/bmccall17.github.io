@@ -3,8 +3,8 @@
     "file": "2026-03-06_daemon_summons.md",
     "title": "daemon summons",
     "date": "2026-03-06T20:00:00",
-    "timestampIso": "2026-03-07T01:00:00.000Z",
-    "epoch": 1772845200000,
+    "timestampIso": "2026-03-06T20:00:00.000Z",
+    "epoch": 1772827200000,
     "state": "mess",
     "path": "../entry.html?log=entries/2026-03-06_daemon_summons.md"
   },
@@ -12,8 +12,8 @@
     "file": "2026-03-06_antigravity_takes_the_wheel_v0.1.5.md",
     "title": "antigravity takes the wheel",
     "date": "2026-03-06T15:00:00",
-    "timestampIso": "2026-03-06T20:00:00.000Z",
-    "epoch": 1772827200000,
+    "timestampIso": "2026-03-06T15:00:00.000Z",
+    "epoch": 1772809200000,
     "state": "learning",
     "path": "../entry.html?log=entries/2026-03-06_antigravity_takes_the_wheel_v0.1.5.md"
   },
@@ -21,8 +21,8 @@
     "file": "2026-03-06_port_pushes_back.md",
     "title": "port pushes back (and then it doesnt)",
     "date": "2026-03-06T09:00:00",
-    "timestampIso": "2026-03-06T14:00:00.000Z",
-    "epoch": 1772805600000,
+    "timestampIso": "2026-03-06T09:00:00.000Z",
+    "epoch": 1772787600000,
     "state": "learning",
     "path": "../entry.html?log=entries/2026-03-06_port_pushes_back.md"
   },
