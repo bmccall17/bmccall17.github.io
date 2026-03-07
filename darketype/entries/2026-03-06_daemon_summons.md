@@ -16,11 +16,11 @@ that's the world i want to build. not a simulation of a conference hall. not a v
 
 what if every avatar had a daemon?
 
-not "daemon" like a unix background process (although... kind of). daemon like Philip Pullman. a shape-shifting companion creature that follows you, learns you, and *becomes* a living expression of who you are in this moment. your daemon is the part of you that the world around you can feel.
+not "daemon" like a unix background process (although... kind of). daemon like Philip Pullman. a shape-shifting companion creature that follows you, learns you, and *becomes* a living expression of who you are in this moment. it might be an animal. it might be something gaseous, abstract, formless — not an obvious creature at all. it shape-shifts not because it's cute but because *you* shift. your daemon is the part of you that the world around you can feel.
 
 it does two things at once, and the second one is where it gets wild:
 
-1. **familiar** — the daemon knows you. it absorbs how you move through spaces, what catches your attention, who you gravitate toward. it whispers to you. it nudges you. it's not a chatbot bolted onto a character model — it's your *other self*, the one that lives in the space between you and everyone else. think less "AI assistant" and more *patronus that evolves*.
+1. **familiar** — the daemon knows you. it absorbs how you move through spaces, what catches your attention, who you gravitate toward. when you first arrive somewhere new, it's your guide — it flies over to the thing you need to see, nudges you toward where you belong. as it learns you, it becomes less tour guide and more *other self*. you can talk to it privately — a mode where no one else hears the conversation. you can also tell it to stop listening, stop learning. "don't pay attention to this one." the boundary is yours. think less "AI assistant" and more *patronus that evolves*.
 
 2. **resonance** — this is where the impossible kicks in. your daemon doesn't just serve you. it radiates. its form, its luminance, the way it moves and breathes and shifts — all of that is *felt* by the daemons around it. you don't "read a profile." you don't "check a badge." you feel someone's daemon harmonize with yours before you even see them. like tuning forks finding each other across a room that has no walls.
 
@@ -32,7 +32,7 @@ this started as a rambling voice note to ChatGPT at like 7am. the raw thought wa
 
 and the answer can't be "profiles" or "name tags" or "interest badges." those are borrowed from a world with gravity and physical proximity and limited bandwidth. virtual worlds have *none* of those constraints. so why are we still designing like they do?
 
-the daemon is the answer that feels right. your companion projects what you're thinking about — not as text, not as an icon, but as something alive. a shape, a frequency, an aura. and when two daemons near each other share a resonance? they *respond*. they shift. they pull toward each other. and when a critical mass of compatible daemons cluster — the signal doesn't just add up, it *transforms*. emergent gravity. a living beacon that other people can feel from anywhere in the space, pulling a group together that didn't exist a minute ago.
+the daemon is the answer that feels right. your daemon stays yours — unique to you, always. but it can *project*. above your avatar, your daemon raises a signal — not as text... more like a flag, a beacon, something alive and logo-ish and recognizable at a distance. you can let it emerge naturally from whatever you're engaged in, or you can pin it: "fix in the shape of a solar system. that's what i want to talk about at this table." and when two daemons near each other share a resonance? they *respond*. they shift. they pull toward each other. and when a critical mass of compatible daemons cluster — the signal doesn't just add up, it *transforms*. the beacon becomes a shared act. emergent gravity. a living signal that other people can feel from anywhere in the space, pulling a group together that didn't exist a minute ago.
 
 that moment — daemons converging, amplifying, *becoming something new together* — that's the interaction design we need to nail. it's the mario jump. the gravity gun. the thing that makes you go "oh, this couldn't exist anywhere else, and now i can't imagine existing without it."
 
@@ -40,13 +40,10 @@ we haven't figured out exactly what that feels like yet. and that's the point. t
 
 # why now
 
-the [Open Metaverse Hackathon](https://omb.metaverse-standards.org/en/hackathon) is happening this weekend (march 7–8, 2026). the AI track is calling for "spatial AI agents, digital assistants, and tools that help shape spatial experiences across devices without platform lock-in." daemon fits that brief like it was summoned for it.
-
-for the judges, the clean version:
+the [Open Metaverse Hackathon](https://omb.metaverse-standards.org/en/hackathon) is happening this weekend (march 7–8, 2026). the AI track is calling for "spatial AI agents, digital assistants, and tools that help shape spatial experiences across devices without platform lock-in." daemon fits that brief like it was summoned for it. and the cross-platform piece is fundamental — you should be able to encounter your daemon whether you're in a headset, on a desktop, or on a phone. the daemon lives where you are, not where a specific device puts you.
 
 **daemons are interoperable spatial AI companions that make human intention visible in shared virtual spaces.**
-
-but what we're actually building is weirder and better than that sentence. we're building the first creatures native to a world that doesn't exist yet.
+...but what we're actually building is weirder and better than that sentence. we're building the first creatures native to a world that doesn't exist yet. like in the His Dark Materials universe the daemons only exist in the presence of humans... never alone or acting on their own intent or will separate from humans.
 
 # the mvp
 
