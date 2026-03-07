@@ -74,7 +74,7 @@ that's the demo. not a feature list. a feeling.
 
 we have the chance to invent a new sense. not borrow from the old world — not "virtual business cards" or "VR conferences." something native. something that couldn't exist anywhere but here. your daemon is how the world knows you before you say a word.
 
-i'm building this remote from asheville, and i'm looking for a team. if you're reading this because you found my discord post, or because you poked around my site and stumbled into the mess — the daemon already felt you here.
+i'm building this remote from Asheville, and i'm looking for a team. if you're reading this because you found my discord post, or because you poked around my site and stumbled into the mess — the daemon already felt you here.
 
 come build with me.
 
