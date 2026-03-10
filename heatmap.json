@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-03-09",
+    "state": "optimistic",
+    "title": "when the port.io pattern meets vertex ai",
+    "path": "../entry.html?log=entries/2026-03-09_repoptics_meets_vertex.md"
+  },
+  {
     "date": "2026-03-06",
     "state": "mess",
     "title": "daemon summons",
