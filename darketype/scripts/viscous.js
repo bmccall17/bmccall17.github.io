@@ -137,6 +137,7 @@
 
   // Proximity config
   var PROX_RADIUS = 250; // px — how far the chromatic field extends from cursor
+  var contentActivity = 0; // 0-1, ramps with movement, decays when still
 
   function refreshContentBlocks() {
     contentBlocks = [];
@@ -294,6 +295,13 @@
     if (contentEl) {
       if (contentBlocksDirty) refreshContentBlocks();
 
+      // Activity: ramps up when cursor moves over content, decays when still
+      if (isHoveringContent && velocity > 1) {
+        contentActivity = clamp(contentActivity + 0.08, 0, 1);
+      } else {
+        contentActivity = clamp(contentActivity - 0.02, 0, 1); // ~1.5s fade
+      }
+
       // Ripple state
       var rippleProgress = 0;
       if (ripple.active) {
@@ -311,16 +319,16 @@
         var elCY = clamp(mouseY, rect.top, rect.bottom);
         var newShadow = '';
 
-        // 1. Cursor proximity chromatic fringe
-        if (isHoveringContent) {
+        // 1. Cursor proximity chromatic fringe (fades when mouse stops)
+        if (contentActivity > 0.01) {
           var pdx = mouseX - elCX;
           var pdy = mouseY - elCY;
           var pDist = Math.sqrt(pdx * pdx + pdy * pdy);
 
           if (pDist < PROX_RADIUS) {
-            // Linear falloff with a soft toe — visible across more of the radius
+            // Linear falloff with a soft toe, scaled by activity
             var pIntensity = 1 - (pDist / PROX_RADIUS);
-            pIntensity = pIntensity * (0.4 + pIntensity * 0.6); // soft curve, not as harsh as quadratic
+            pIntensity = pIntensity * (0.4 + pIntensity * 0.6) * contentActivity;
 
             // Chromatic direction: R/B pushed away from cursor along the vector
             var angle = Math.atan2(pdy, pdx);
