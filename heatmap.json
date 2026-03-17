@@ -2,6 +2,12 @@
   {
     "date": "2026-03-17",
     "state": "shipped",
+    "title": "pressing your finger into the screen",
+    "path": "../entry.html?log=entries/2026-03-17_viscous_lcd.md"
+  },
+  {
+    "date": "2026-03-17",
+    "state": "shipped",
     "title": "the widget that finally learned where it was",
     "path": "../entry.html?log=entries/2026-03-17_widget_woke_up.md"
   },

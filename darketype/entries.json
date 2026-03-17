@@ -1,5 +1,14 @@
 [
   {
+    "file": "2026-03-17_viscous_lcd.md",
+    "title": "pressing your finger into the screen",
+    "date": "2026-03-17T18:00:00",
+    "timestampIso": "2026-03-17T18:00:00.000Z",
+    "epoch": 1773770400000,
+    "state": "shipped",
+    "path": "../entry.html?log=entries/2026-03-17_viscous_lcd.md"
+  },
+  {
     "file": "2026-03-17_widget_woke_up.md",
     "title": "the widget that finally learned where it was",
     "date": "2026-03-17",
