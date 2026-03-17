@@ -46,11 +46,37 @@
   var cDispG = document.getElementById('vc-disp-g');
   var cDispB = document.getElementById('vc-disp-b');
 
-  // 4. FIND: heading elements (h1, h2, .glitch-text)
-  var headingEls = document.querySelectorAll('h1, h2, .glitch-text');
+  // 4. FIND: heading elements
+  // .glitch-text always has the filter (via CSS). h1/h2 get it only on engagement.
+  // Exclude headings inside #content — they use the content filter instead.
+  var contentEl = document.getElementById('content');
+  var glitchEls = document.querySelectorAll('.glitch-text');
+  var headingEls = [];
+  document.querySelectorAll('h1, h2').forEach(function (el) {
+    if (!contentEl || !contentEl.contains(el)) headingEls.push(el);
+  });
+  var allViscousEls = Array.prototype.slice.call(glitchEls).concat(headingEls);
+
+  // Track which h1/h2 are currently "active" (filter applied)
+  var activeHeading = null;
+
+  function activateHeading(el) {
+    if (el.classList.contains('glitch-text')) return; // always has filter via CSS
+    el.style.filter = 'url(#viscous-turb)';
+    el.style.willChange = 'filter';
+    activeHeading = el;
+  }
+
+  function deactivateHeading() {
+    if (activeHeading && !activeHeading.classList.contains('glitch-text')) {
+      activeHeading.style.filter = '';
+      activeHeading.style.willChange = '';
+    }
+    activeHeading = null;
+  }
 
   // 5. RANDOMIZE: glitch animation timing on .glitch-text elements
-  document.querySelectorAll('.glitch-text').forEach(function (el) {
+  glitchEls.forEach(function (el) {
     function randomizeDuration() {
       el.style.animationDuration = (1.5 + Math.random() * 1.5).toFixed(2) + 's';
     }
@@ -62,18 +88,31 @@
   var mouseX = 0, mouseY = 0, prevX = 0, prevY = 0;
   var velocity = 0;
   var isHoveringHeading = false;
+  var hoveredEl = null;
 
   document.addEventListener('mousemove', function (e) {
     mouseX = e.clientX;
     mouseY = e.clientY;
   }, { passive: true });
 
-  headingEls.forEach(function (el) {
-    el.addEventListener('mouseenter', function () { isHoveringHeading = true; });
-    el.addEventListener('mouseleave', function () { isHoveringHeading = false; });
+  allViscousEls.forEach(function (el) {
+    el.addEventListener('mouseenter', function () {
+      isHoveringHeading = true;
+      hoveredEl = el;
+      activateHeading(el);
+    });
+    el.addEventListener('mouseleave', function () {
+      isHoveringHeading = false;
+      hoveredEl = null;
+      // Don't deactivate during drip — let it finish
+      if (state !== STATE_DRIP) {
+        deactivateHeading();
+      }
+    });
     // Click on heading triggers drip
     el.addEventListener('click', function (e) {
       if (state !== STATE_DRIP) {
+        activateHeading(el);
         state = STATE_DRIP;
         dripStart = performance.now();
         dripDuration = rand(2500, 3500);
@@ -89,9 +128,9 @@
   var dripDuration = 3000;
   var dripStart = 0;
 
-  // Current + target interpolated params
-  var cur = { scaleR: 1, scaleG: 1, scaleB: 1, freqX: 0.015, freqY: 0.015, octaves: 3 };
-  var tgt = { scaleR: 1, scaleG: 1, scaleB: 1, freqX: 0.015, freqY: 0.015, octaves: 3 };
+  // Current + target interpolated params (idle = zero displacement)
+  var cur = { scaleR: 0, scaleG: 0, scaleB: 0, freqX: 0.015, freqY: 0.015, octaves: 3 };
+  var tgt = { scaleR: 0, scaleG: 0, scaleB: 0, freqX: 0.015, freqY: 0.015, octaves: 3 };
 
   var seed = 0;
   var nextSeedChange = 0;
@@ -107,7 +146,7 @@
   // ────────────────────────────────────────────────
   // 8. CONTENT EFFECT — cursor-relative chromatic + click-drip
   // ────────────────────────────────────────────────
-  var contentEl = document.getElementById('content');
+  // contentEl already declared in section 4
   var contentDripping = false;
   var contentDripStart = 0;
   var contentDripDuration = 3000;
@@ -169,6 +208,7 @@
         idleTimer = 0;
       } else if (dripPhase >= 1) {
         state = STATE_IDLE;
+        if (!isHoveringHeading) deactivateHeading();
       }
     } else if (!isHoveringHeading && state !== STATE_DRIP) {
       state = STATE_IDLE;
@@ -179,6 +219,9 @@
     var lerpFactor = 0.06;
 
     if (state === STATE_IDLE) {
+      // Subtle shimmer for .glitch-text (always filtered via CSS).
+      // h1/h2 don't have the filter applied when idle, so these values
+      // only visually affect .glitch-text.
       tgt.scaleR = rand(1, 2);
       tgt.scaleG = rand(1, 2);
       tgt.scaleB = rand(1, 2);

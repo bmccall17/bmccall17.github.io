@@ -147,17 +147,18 @@ a {
   }
 }
 
-/* interactive chaos — headings + glitch-text get viscous filter */
-h1,
-h2 {
-  filter: url(#viscous-turb);
-  will-change: filter;
-}
-
+/* interactive chaos */
 h1:hover,
 h2:hover,
 .glitch-text:hover {
   cursor: crosshair;
+}
+
+/* content headings inherit content filter — no double filter */
+#content h1,
+#content h2,
+#content h3 {
+  filter: none;
 }
 
 a:hover {
