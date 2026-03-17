@@ -147,15 +147,15 @@ a {
   }
 }
 
-/* interactive chaos */
-h1:hover,
-h2:hover {
-  animation: shiver 0.2s infinite;
-  color: var(--text-color);
-  text-shadow: 2px 2px var(--dim-color);
-  cursor: crosshair;
+/* interactive chaos — headings + glitch-text get viscous filter */
+h1,
+h2 {
+  filter: url(#viscous-turb);
+  will-change: filter;
 }
 
+h1:hover,
+h2:hover,
 .glitch-text:hover {
   cursor: crosshair;
 }
