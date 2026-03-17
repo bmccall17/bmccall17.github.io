@@ -133,10 +133,10 @@
   var isHoveringContent = false;
 
   // Click ripple state
-  var ripple = { active: false, x: 0, y: 0, radius: 0, startTime: 0, duration: 2000, maxRadius: 600 };
+  var ripple = { active: false, x: 0, y: 0, radius: 0, startTime: 0, duration: 6000, maxRadius: 800 };
 
   // Proximity config
-  var PROX_RADIUS = 200; // px — how far the chromatic field extends from cursor
+  var PROX_RADIUS = 250; // px — how far the chromatic field extends from cursor
 
   function refreshContentBlocks() {
     contentBlocks = [];
@@ -175,8 +175,8 @@
       ripple.y = e.clientY;
       ripple.radius = 0;
       ripple.startTime = performance.now();
-      ripple.duration = rand(1800, 2500);
-      ripple.maxRadius = rand(450, 650);
+      ripple.duration = rand(5000, 7000);
+      ripple.maxRadius = rand(700, 900);
     });
   }
 
@@ -296,22 +296,19 @@
 
       // Ripple state
       var rippleProgress = 0;
-      var rippleFade = 1;
       if (ripple.active) {
         rippleProgress = clamp((now - ripple.startTime) / ripple.duration, 0, 1);
         ripple.radius = rippleProgress * ripple.maxRadius;
-        rippleFade = 1 - rippleProgress; // overall intensity fades as it expands
         if (rippleProgress >= 1) ripple.active = false;
       }
-
-      var BAND = 80; // ripple ring width in px
 
       for (var i = 0; i < contentBlocks.length; i++) {
         var block = contentBlocks[i];
         var el = block.el;
         var rect = el.getBoundingClientRect();
-        var elCX = rect.left + rect.width / 2;
-        var elCY = rect.top + rect.height / 2;
+        // Use closest edge point, not center — feels more precise for wide blocks
+        var elCX = clamp(mouseX, rect.left, rect.right);
+        var elCY = clamp(mouseY, rect.top, rect.bottom);
         var newShadow = '';
 
         // 1. Cursor proximity chromatic fringe
@@ -321,48 +318,87 @@
           var pDist = Math.sqrt(pdx * pdx + pdy * pdy);
 
           if (pDist < PROX_RADIUS) {
+            // Linear falloff with a soft toe — visible across more of the radius
             var pIntensity = 1 - (pDist / PROX_RADIUS);
-            pIntensity *= pIntensity; // quadratic falloff — sharp center, soft edges
+            pIntensity = pIntensity * (0.4 + pIntensity * 0.6); // soft curve, not as harsh as quadratic
 
             // Chromatic direction: R/B pushed away from cursor along the vector
             var angle = Math.atan2(pdy, pdx);
-            var spread = pIntensity * 2.5;
+            // If cursor is inside the element, use velocity direction instead
+            if (pDist < 5 && velocity > 0.5) {
+              angle = Math.atan2(mouseY - prevY, mouseX - prevX);
+            }
+            var spread = pIntensity * 5;
             var rOff = Math.cos(angle) * spread;
             var rOffY = Math.sin(angle) * spread;
-            var alpha = (pIntensity * 0.18).toFixed(2);
+            var alpha = (pIntensity * 0.4).toFixed(2);
 
             newShadow =
-              rOff.toFixed(1) + 'px ' + rOffY.toFixed(1) + 'px rgba(255,0,0,' + alpha + '), ' +
-              (-rOff).toFixed(1) + 'px ' + (-rOffY).toFixed(1) + 'px rgba(0,100,255,' + alpha + ')';
+              rOff.toFixed(1) + 'px ' + rOffY.toFixed(1) + 'px rgba(255,20,20,' + alpha + '), ' +
+              (-rOff).toFixed(1) + 'px ' + (-rOffY).toFixed(1) + 'px rgba(30,80,255,' + alpha + ')';
+
+            // Add green channel ghost at high proximity
+            if (pIntensity > 0.5) {
+              var gAlpha = ((pIntensity - 0.5) * 0.3).toFixed(2);
+              newShadow += ', 0px ' + (pIntensity * 2).toFixed(1) + 'px rgba(0,255,65,' + gAlpha + ')';
+            }
           }
         }
 
-        // 2. Click ripple — expanding chromatic ring radiating from click point
+        // 2. Click ripple — expanding ring + dissolving wake from click origin
         if (ripple.active) {
-          var rdx = ripple.x - elCX;
-          var rdy = ripple.y - elCY;
+          // Distance from click origin to element center (use actual center for ripple geometry)
+          var blockCX = rect.left + rect.width / 2;
+          var blockCY = rect.top + rect.height / 2;
+          var rdx = blockCX - ripple.x;
+          var rdy = blockCY - ripple.y;
           var rDist = Math.sqrt(rdx * rdx + rdy * rdy);
+
+          // Radial angle from click origin to element
+          var rAngle = Math.atan2(rdy, rdx);
+
+          // The wavefront ring: sharp leading edge
+          var BAND = 100;
           var distFromFront = Math.abs(rDist - ripple.radius);
-
+          var frontIntensity = 0;
           if (distFromFront < BAND) {
-            var ringIntensity = (1 - distFromFront / BAND) * rippleFade;
-            ringIntensity *= ringIntensity;
+            frontIntensity = 1 - (distFromFront / BAND);
+            frontIntensity *= frontIntensity;
+          }
 
-            // Ripple pushes chromatic separation outward from click origin
-            var rAngle = Math.atan2(rdy, rdx);
-            var rSpread = ringIntensity * 4; // more dramatic than hover
-            var rrOff = Math.cos(rAngle) * rSpread;
-            var rrOffY = Math.sin(rAngle) * rSpread;
-            // Vertical drip bias — add downward component during ripple
-            var dripBias = ringIntensity * 2 * rippleProgress;
-            var rAlpha = (ringIntensity * 0.25).toFixed(2);
+          // The wake: elements already passed by the wavefront dissolve slowly
+          var wakeIntensity = 0;
+          if (rDist < ripple.radius && ripple.radius > 10) {
+            // How far behind the front (0 = just passed, 1 = at click origin)
+            var behindRatio = 1 - (rDist / ripple.radius);
+            // Wake fades based on overall progress — dissolves over time
+            wakeIntensity = (1 - behindRatio * 0.5) * (1 - rippleProgress);
+            wakeIntensity = clamp(wakeIntensity, 0, 1);
+          }
+
+          var totalRipple = clamp(frontIntensity * 1.2 + wakeIntensity * 0.7, 0, 1);
+
+          if (totalRipple > 0.02) {
+            // Spread: front hits hard, wake is wider but softer
+            var rSpread = frontIntensity * 7 + wakeIntensity * 4;
+
+            // Direction: starts radial from click, rotates toward downward over time
+            // Drip angle blends from radial → straight down as ripple progresses
+            var dripAngle = rAngle + (Math.PI / 2 - rAngle) * rippleProgress * 0.6;
+            var rrOff = Math.cos(dripAngle) * rSpread;
+            var rrOffY = Math.sin(dripAngle) * rSpread;
+
+            // Vertical drip component increases with time
+            var dripDrift = totalRipple * rippleProgress * 6;
+
+            var rAlpha = (totalRipple * 0.45).toFixed(2);
+            var gAlpha = (totalRipple * 0.15).toFixed(2);
 
             var rippleShadow =
-              rrOff.toFixed(1) + 'px ' + (rrOffY + dripBias).toFixed(1) + 'px rgba(255,0,0,' + rAlpha + '), ' +
-              (-rrOff).toFixed(1) + 'px ' + (-rrOffY + dripBias).toFixed(1) + 'px rgba(0,100,255,' + rAlpha + '), ' +
-              '0px ' + (dripBias * 1.5).toFixed(1) + 'px rgba(0,255,65,' + (ringIntensity * 0.1).toFixed(2) + ')';
+              rrOff.toFixed(1) + 'px ' + (rrOffY + dripDrift).toFixed(1) + 'px rgba(255,20,20,' + rAlpha + '), ' +
+              (-rrOff).toFixed(1) + 'px ' + (-rrOffY + dripDrift).toFixed(1) + 'px rgba(30,80,255,' + rAlpha + '), ' +
+              '0px ' + (dripDrift * 1.5).toFixed(1) + 'px rgba(0,255,65,' + gAlpha + ')';
 
-            // Combine with proximity shadow
             newShadow = newShadow ? newShadow + ', ' + rippleShadow : rippleShadow;
           }
         }

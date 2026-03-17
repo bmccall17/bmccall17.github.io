@@ -48,18 +48,41 @@ four behaviors, three states, zero CSS animations:
 
 **click** — same drip sequence but triggered instantly on click. heading doesn't need to be hovered first. you tap it, it bleeds.
 
-### the content layer
+### the content layer — proximity, not uniformity
 
-blog entry bodies (`#content`) get a separate, subtler system. a second SVG filter (`#viscous-content`) with its own parameter set, plus a cursor-relative chromatic `text-shadow`:
+the first attempt at content effects was wrong. a shared SVG filter on the entire `#content` div meant every paragraph, heading, and list item distorted at the same intensity simultaneously. it looked like the whole page was shimmering, not like something was being *pushed*. the LCD metaphor requires a point of contact — a specific location where the pressure originates.
 
+the fix: no SVG filter on content at all. instead, per-element chromatic `text-shadow` that scales with distance from the cursor. each block element (`p`, `li`, `pre`, `blockquote`, etc.) independently calculates its proximity to the mouse:
+
+```js
+var pDist = distance(cursor, closestEdgeOfElement);
+var pIntensity = 1 - (pDist / PROX_RADIUS);          // linear base
+pIntensity = pIntensity * (0.4 + pIntensity * 0.6);   // soft curve
 ```
-textShadow = `${cx * 2}px ${cy * 0.8}px rgba(255,0,0,0.12),
-              ${-cx * 2}px ${-cy * 0.8}px rgba(0,100,255,0.12)`
+
+distance is measured to the *nearest edge* of the element's bounding rect, not the center — so hovering directly over text gives maximum intensity even on wide paragraphs. the falloff curve sits between linear and quadratic: visible across most of the 250px radius but still sharp at the center.
+
+the chromatic split direction follows the cursor-to-element vector. R pushes one way, B pushes the other, spread up to 5px at 0.4 alpha. when the cursor is directly over the element and moving, it switches to velocity direction instead — so the fringe follows your movement like light refracting through liquid. above 50% intensity, a green channel ghost appears with a slight downward offset, completing the RGB trifecta.
+
+elements outside the radius: untouched. no shadow, no processing, no overhead.
+
+### the click ripple — wavefront + wake
+
+click empty space in the content and a chromatic shockwave expands outward from the click point. `e.target.closest('a, button, img')` guards interactive elements.
+
+the ripple has two components:
+
+**the wavefront** — a 100px-wide ring expanding from click origin at ~130px/s. elements inside the ring get a sharp chromatic burst (7px spread, 0.45 alpha). the ring travels outward for 5-7 seconds, reaching 700-900px from origin.
+
+**the wake** — everything the wavefront has already passed through. instead of snapping back to clean, passed elements retain a dissolving chromatic shadow that fades as the overall ripple progresses. the wake intensity is proportional to how recently the front passed and how far along the total animation is.
+
+the direction of the chromatic split *rotates over time*. at the moment of impact, R/B separate radially — away from click origin, like a shockwave. as the ripple ages, the split direction rotates toward straight down — the LCD "drip." this blend creates a natural transition from explosive impact to gravitational settle:
+
+```js
+var dripAngle = rAngle + (PI/2 - rAngle) * rippleProgress * 0.6;
 ```
 
-`cx` and `cy` are the cursor's normalized position within the content div (-0.5 to 0.5). move your cursor left and the red shadow drifts left while blue drifts right. move down and the vertical offset follows. the effect is subtle — 0.12 opacity — but it creates a sense that the text has depth, like the characters are printed on layers of glass that shift relative to each other as you move your viewpoint.
-
-click empty space in the content and you get the full drip sequence through the content filter. click a link or image and nothing happens — `e.target.closest('a, button, img')` guards against triggering the effect on interactive elements.
+a vertical drift component also increases with time, so the entire chromatic field slowly sags downward as the ripple dissolves. three shadow layers per affected element: red, blue, and a faint green drip ghost.
 
 ### making the glitch less metronomic
 
@@ -80,10 +103,13 @@ the 30fps throttle on DOM writes means the SVG filter attributes update at half 
 ### the guard rails
 
 - `window.innerWidth < 768`: entire system disabled on mobile. feTurbulence on a phone GPU is antisocial behavior.
-- `#content h1, #content h2, #content h3 { filter: none; }`: headings inside markdown content don't double-filter. they inherit the content div's filter system.
+- `#content h1, #content h2, #content h3 { filter: none; }`: content headings don't get the SVG heading filter — they participate in the proximity text-shadow system instead.
+- content blocks use per-element `text-shadow` instead of SVG filters — no feTurbulence overhead on the body text at all.
+- `MutationObserver` on `#content` catches dynamically loaded markdown (entry.html fetches entries async) and refreshes the block list.
+- shadow strings are diff-checked before writing — DOM updates only happen when the value actually changes.
 - passive mousemove listener so scroll performance doesn't degrade.
 - `will-change: filter` on filtered elements for GPU compositing hints.
-- h1/h2 headings get their filter applied via inline style *only* during hover or active drip, and removed when returning to idle. no perpetual filter overhead on text you're not looking at.
+- h1/h2 headings get their SVG filter applied via inline style *only* during hover or active drip, and removed when returning to idle. no perpetual filter overhead on text you're not looking at.
 
 ### the feeling
 
