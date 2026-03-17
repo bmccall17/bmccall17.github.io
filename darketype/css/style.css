@@ -154,7 +154,7 @@ h2:hover,
   cursor: crosshair;
 }
 
-/* content headings inherit content filter — no double filter */
+/* content headings — no SVG filter, proximity chromatic via JS */
 #content h1,
 #content h2,
 #content h3 {
