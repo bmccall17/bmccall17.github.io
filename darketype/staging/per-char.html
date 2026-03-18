@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>per-char chromatic displacement — staging</title>
+<style>
+  :root {
+    --bg-color: #0a0a0a;
+    --text-color: #00ff41;
+    --dim-color: #008f11;
+    --alert-color: #ff3333;
+    --font-main: 'Courier New', Courier, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-size: 15px;
+    line-height: 1.4;
+    min-height: 100vh;
+    cursor: crosshair;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  h1, h2, h3 {
+    font-weight: normal;
+    text-transform: lowercase;
+    border-bottom: 1px dashed var(--dim-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h1 { font-size: 1.6rem; margin-top: 2rem; }
+  h2 { font-size: 1.3rem; margin-top: 1.8rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.4rem; }
+
+  p { margin-bottom: 1rem; }
+
+  ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  li { margin-bottom: 0.4rem; }
+
+  pre {
+    background: #111;
+    border: 1px solid var(--dim-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    font-size: 0.9em;
+  }
+
+  code {
+    font-family: var(--font-main);
+    color: var(--dim-color);
+  }
+
+  a {
+    color: var(--text-color);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  blockquote {
+    border-left: 2px solid var(--dim-color);
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    color: var(--dim-color);
+  }
+
+  .prox-char {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  #staging-label {
+    position: fixed;
+    top: 8px;
+    right: 12px;
+    font-size: 0.7rem;
+    color: var(--dim-color);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 999;
+  }
+</style>
+</head>
+<body>
+
+<div id="staging-label">staging / per-char</div>
+
+<div class="container">
+  <div id="content">
+
+    <h1>per-character chromatic displacement</h1>
+
+    <p>The membrane responds to pressure. Each letter exists independently within the substrate, held in place by surface tension until an external force disturbs the equilibrium. When proximity increases, characters displace outward along the pressure vector, trailing chromatic fringe behind them like light through a defective prism.</p>
+
+    <p>This is not animation in the decorative sense. It is physics applied to typography — the same force model that governs fluid displacement, scaled down to the glyph level. Every character carries its own inertia, its own resistance to being moved, its own chromatic signature when forced out of alignment.</p>
+
+    <h2>the displacement model</h2>
+
+    <p>Characters within the proximity radius experience a radial push proportional to their distance from the cursor. The closest glyphs displace the most, up to six pixels of translation. Each displaced character tilts slightly — a micro-rotation that suggests physical torque rather than digital transform. The chromatic fringe splits along the push vector: red forward, blue backward, green ghosting at peak intensity.</p>
+
+    <p>The effect dissolves when pressure releases. Activity decay ensures that the membrane relaxes back to equilibrium over roughly one and a half seconds. There is no snap-back, no bounce — just viscous return, each character finding its way home through damped motion.</p>
+
+    <h2>wavefront propagation</h2>
+
+    <p>Click events generate expanding wavefronts that interact with individual characters rather than blocks. The ring passes through text at a controlled velocity, displacing each letter as the leading edge crosses its position. Behind the front, a dissolving wake leaves characters temporarily displaced before they settle. Gravity acts on the wavefront over time — the initially radial displacement rotates downward, creating a drip effect that increases with the ripple's age.</p>
+
+    <ul>
+      <li>Wavefront band width: sixty pixels at character resolution</li>
+      <li>Peak displacement at the front: eight pixels outward</li>
+      <li>Wake displacement behind: three pixels, fading with distance</li>
+      <li>Gravity rotation blends radial to vertical over the ripple lifetime</li>
+      <li>Ripple displacement stacks additively with proximity displacement</li>
+    </ul>
+
+    <h3>spatial culling</h3>
+
+    <p>Performance requires that we do not compute transforms for every character on every frame. A two-tier system gates the work: first, block-level bounding rectangles reject entire paragraphs that fall outside the proximity radius. Then, within active blocks, individual character distances are checked against cached positions. The result is that only two to six hundred characters are evaluated per frame, even when the page contains thousands.</p>
+
+    <blockquote>The right amount of complexity is the minimum needed for the current task — three similar lines of code is better than a premature abstraction.</blockquote>
+
+    <pre><code>// position cache strategy
+cacheCharPositions() → charPositions[i] = { x, y }
+scroll listener → adjust all Y by delta (no reflow)
+resize listener → charPositionsDirty = true</code></pre>
+
+    <p>What matters is not the sophistication of the algorithm but the fidelity of the result. Each character should feel like a physical object responding to real force. The math is simple — distance, angle, intensity curve — but the accumulated effect of hundreds of independently displaced glyphs creates something that reads as material rather than digital.</p>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ─── Constants ───────────────────────────────────────────────────────
+  const PROX_RADIUS       = 250;
+  const MAX_DISPLACEMENT  = 6;
+  const MAX_ROTATION      = 8;        // degrees
+  const CHROMA_SPREAD     = 4;
+  const CHROMA_ALPHA      = 0.5;
+  const GREEN_THRESHOLD   = 0.5;
+  const ACTIVITY_RAMP     = 0.08;
+  const ACTIVITY_DECAY    = 0.02;
+  const VELOCITY_SMOOTH   = 0.15;
+  const WRITE_INTERVAL    = 33.33;    // ~30fps DOM writes
+  const RECACHE_INTERVAL  = 2000;     // full recache every 2s
+  const BLOCK_GATE_PAD    = 50;       // extra px around block rect
+
+  // Ripple constants
+  const RIPPLE_BAND         = 60;
+  const RIPPLE_FRONT_DISP   = 8;
+  const RIPPLE_WAKE_DISP    = 3;
+  const RIPPLE_DURATION_MIN = 5000;
+  const RIPPLE_DURATION_MAX = 7000;
+  const RIPPLE_MAX_RAD_MIN  = 700;
+  const RIPPLE_MAX_RAD_MAX  = 900;
+
+  // Tags to exclude from wrapping
+  const EXCLUDE_TAGS = new Set([
+    'PRE', 'CODE', 'A', 'IMG', 'BUTTON', 'IFRAME', 'SVG', 'SCRIPT', 'STYLE'
+  ]);
+
+  // Block selectors for tier-1 culling
+  const BLOCK_SEL = 'p, h1, h2, h3, h4, h5, h6, li, blockquote, td, th';
+
+  // ─── State ───────────────────────────────────────────────────────────
+  const contentEl = document.getElementById('content');
+
+  let charSpans      = [];     // all .prox-char spans
+  let charPositions  = [];     // cached { x, y } centers
+  let charBlockIdx   = [];     // index into blocks[] for each char
+  let blocks         = [];     // { el, rect, charStart, charEnd }
+  let posDirty       = true;
+
+  let mouseX = -9999, mouseY = -9999;
+  let prevMouseX = -9999, prevMouseY = -9999;
+  let velocity = 0;
+  let contentActivity = 0;
+  let isHoveringContent = false;
+  let lastScrollY = window.scrollY;
+
+  let prevTransforms = [];
+  let prevShadows    = [];
+  const activeChars  = new Set();
+
+  let ripple = { active: false, x: 0, y: 0, radius: 0, startTime: 0, duration: 0, maxRadius: 0 };
+
+  let lastWriteTime  = 0;
+  let lastRecacheTime = 0;
+  let rafId = null;
+
+  // ─── Character Wrapping ──────────────────────────────────────────────
+
+  function shouldExclude(node) {
+    let n = node;
+    while (n && n !== contentEl) {
+      if (n.nodeType === 1 && EXCLUDE_TAGS.has(n.tagName)) return true;
+      n = n.parentNode;
+    }
+    return false;
+  }
+
+  function wrapContentChars() {
+    unwrapChars();
+    charSpans = [];
+    charBlockIdx = [];
+
+    const walker = document.createTreeWalker(contentEl, NodeFilter.SHOW_TEXT, null);
+    const textNodes = [];
+    let node;
+    while ((node = walker.nextNode())) {
+      if (!shouldExclude(node)) textNodes.push(node);
+    }
+
+    for (const tNode of textNodes) {
+      const text = tNode.textContent;
+      if (!text) continue;
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        const span = document.createElement('span');
+        span.className = 'prox-char';
+        span.textContent = ch;
+        if (/\s/.test(ch)) span.dataset.ws = '';
+        frag.appendChild(span);
+      }
+      tNode.parentNode.replaceChild(frag, tNode);
+    }
+
+    charSpans = Array.from(contentEl.querySelectorAll('.prox-char'));
+    prevTransforms = new Array(charSpans.length).fill('');
+    prevShadows = new Array(charSpans.length).fill('');
+
+    buildBlockMap();
+    cacheCharPositions();
+  }
+
+  function unwrapChars() {
+    activeChars.clear();
+    // Remove all prox-char spans, restore text nodes
+    const spans = contentEl.querySelectorAll('.prox-char');
+    for (const s of spans) {
+      const txt = document.createTextNode(s.textContent);
+      s.parentNode.replaceChild(txt, s);
+    }
+    contentEl.normalize();
+    charSpans = [];
+    charPositions = [];
+    charBlockIdx = [];
+    blocks = [];
+  }
+
+  // ─── Block Map ───────────────────────────────────────────────────────
+
+  function buildBlockMap() {
+    blocks = [];
+    const blockEls = contentEl.querySelectorAll(BLOCK_SEL);
+
+    for (const bEl of blockEls) {
+      // Skip excluded blocks (pre, code)
+      if (EXCLUDE_TAGS.has(bEl.tagName)) continue;
+      blocks.push({ el: bEl, rect: null, charStart: -1, charEnd: -1 });
+    }
+
+    // Map each charSpan to its parent block
+    charBlockIdx = new Array(charSpans.length).fill(-1);
+    for (let ci = 0; ci < charSpans.length; ci++) {
+      const span = charSpans[ci];
+      for (let bi = 0; bi < blocks.length; bi++) {
+        if (blocks[bi].el.contains(span)) {
+          charBlockIdx[ci] = bi;
+          if (blocks[bi].charStart === -1) blocks[bi].charStart = ci;
+          blocks[bi].charEnd = ci;
+          break;
+        }
+      }
+    }
+  }
+
+  // ─── Position Caching ────────────────────────────────────────────────
+
+  function cacheCharPositions() {
+    charPositions = new Array(charSpans.length);
+    for (let i = 0; i < charSpans.length; i++) {
+      const r = charSpans[i].getBoundingClientRect();
+      charPositions[i] = { x: r.left + r.width * 0.5, y: r.top + r.height * 0.5 };
+    }
+    // Cache block rects
+    for (const b of blocks) {
+      b.rect = b.el.getBoundingClientRect();
+    }
+    posDirty = false;
+    lastRecacheTime = performance.now();
+    lastScrollY = window.scrollY;
+  }
+
+  function adjustPositionsForScroll() {
+    const dy = lastScrollY - window.scrollY;
+    if (dy === 0) return;
+    for (let i = 0; i < charPositions.length; i++) {
+      charPositions[i].y += dy;
+    }
+    for (const b of blocks) {
+      if (b.rect) {
+        b.rect = {
+          top: b.rect.top + dy,
+          bottom: b.rect.bottom + dy,
+          left: b.rect.left,
+          right: b.rect.right,
+          width: b.rect.width,
+          height: b.rect.height
+        };
+      }
+    }
+    lastScrollY = window.scrollY;
+  }
+
+  // ─── Event Listeners ─────────────────────────────────────────────────
+
+  document.addEventListener('mousemove', function (e) {
+    prevMouseX = mouseX;
+    prevMouseY = mouseY;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  contentEl.addEventListener('mouseenter', function () { isHoveringContent = true; });
+  contentEl.addEventListener('mouseleave', function () { isHoveringContent = false; });
+
+  window.addEventListener('scroll', function () {
+    adjustPositionsForScroll();
+  }, { passive: true });
+
+  window.addEventListener('resize', function () {
+    posDirty = true;
+  });
+
+  document.addEventListener('click', function (e) {
+    // Don't trigger on links or interactive elements
+    if (e.target.closest('a, button, input, select, textarea')) return;
+
+    ripple.active = true;
+    ripple.x = e.clientX;
+    ripple.y = e.clientY;
+    ripple.radius = 0;
+    ripple.startTime = performance.now();
+    ripple.duration = RIPPLE_DURATION_MIN + Math.random() * (RIPPLE_DURATION_MAX - RIPPLE_DURATION_MIN);
+    ripple.maxRadius = RIPPLE_MAX_RAD_MIN + Math.random() * (RIPPLE_MAX_RAD_MAX - RIPPLE_MAX_RAD_MIN);
+  });
+
+  // ─── Main Loop ───────────────────────────────────────────────────────
+
+  function tick(now) {
+    rafId = requestAnimationFrame(tick);
+
+    // Velocity
+    const dx = mouseX - prevMouseX;
+    const dy = mouseY - prevMouseY;
+    const instantV = Math.sqrt(dx * dx + dy * dy);
+    velocity = velocity + (instantV - velocity) * VELOCITY_SMOOTH;
+
+    // Activity
+    if (isHoveringContent && velocity > 1) {
+      contentActivity = Math.min(1, contentActivity + ACTIVITY_RAMP);
+    } else {
+      contentActivity = Math.max(0, contentActivity - ACTIVITY_DECAY);
+    }
+
+    // Recache check
+    if (posDirty || (now - lastRecacheTime > RECACHE_INTERVAL)) {
+      cacheCharPositions();
+    }
+
+    // Throttle DOM writes
+    if (now - lastWriteTime < WRITE_INTERVAL) return;
+    lastWriteTime = now;
+
+    // Ripple progress
+    let rippleProgress = 0;
+    let rippleRadius = 0;
+    if (ripple.active) {
+      rippleProgress = (now - ripple.startTime) / ripple.duration;
+      if (rippleProgress >= 1) {
+        ripple.active = false;
+        rippleProgress = 0;
+      } else {
+        rippleRadius = rippleProgress * ripple.maxRadius;
+      }
+    }
+
+    const newActive = new Set();
+    const gateRadius = PROX_RADIUS + BLOCK_GATE_PAD;
+    const rippleGateRadius = ripple.active ? rippleRadius + RIPPLE_BAND + BLOCK_GATE_PAD : 0;
+
+    // ─── Per-block gate ──────────────────────────────────────────────
+    for (let bi = 0; bi < blocks.length; bi++) {
+      const b = blocks[bi];
+      if (!b.rect || b.charStart === -1) continue;
+
+      // Closest point on block rect to cursor
+      const clX = Math.max(b.rect.left, Math.min(mouseX, b.rect.right));
+      const clY = Math.max(b.rect.top, Math.min(mouseY, b.rect.bottom));
+      const bDx = mouseX - clX;
+      const bDy = mouseY - clY;
+      const blockDist = Math.sqrt(bDx * bDx + bDy * bDy);
+
+      // Check if block is within proximity OR ripple reach
+      let blockInProx = blockDist < gateRadius && contentActivity > 0.001;
+      let blockInRipple = false;
+      if (ripple.active) {
+        const bcx = b.rect.left + b.rect.width * 0.5;
+        const bcy = b.rect.top + b.rect.height * 0.5;
+        const rbd = Math.sqrt((bcx - ripple.x) ** 2 + (bcy - ripple.y) ** 2);
+        // Block is in ripple zone if any part could be in the band or wake
+        blockInRipple = rbd < rippleGateRadius;
+      }
+
+      if (!blockInProx && !blockInRipple) continue;
+
+      // ─── Per-character in this block ─────────────────────────────
+      for (let ci = b.charStart; ci <= b.charEnd; ci++) {
+        if (charBlockIdx[ci] !== bi) continue;
+        if (charSpans[ci].dataset.ws !== undefined) continue;
+
+        const pos = charPositions[ci];
+        let totalTx = 0, totalTy = 0, totalRot = 0;
+        let hasShadow = false;
+        let rShadowX = 0, rShadowY = 0, bShadowX = 0, bShadowY = 0;
+        let rAlpha = 0, bAlpha = 0;
+        let gShadowY = 0, gAlpha = 0;
+
+        // ── Proximity displacement ───────────────────────────────
+        if (blockInProx) {
+          const cdx = pos.x - mouseX;
+          const cdy = pos.y - mouseY;
+          const dist = Math.sqrt(cdx * cdx + cdy * cdy);
+
+          if (dist < PROX_RADIUS) {
+            let pIntensity = 1 - dist / PROX_RADIUS;
+            // Soft curve (quadratic toe)
+            pIntensity = pIntensity * (0.4 + pIntensity * 0.6);
+            pIntensity *= contentActivity;
+
+            if (pIntensity > 0.01) {
+              // Push direction
+              let angle;
+              if (dist < 5 && velocity > 0.5) {
+                // Cursor on top of char — use velocity vector
+                angle = Math.atan2(prevMouseY - mouseY, prevMouseX - mouseX);
+              } else {
+                angle = Math.atan2(cdy, cdx);
+              }
+
+              // Displacement
+              const disp = pIntensity * MAX_DISPLACEMENT;
+              totalTx += Math.cos(angle) * disp;
+              totalTy += Math.sin(angle) * disp;
+
+              // Micro-rotation (tilt away from pressure)
+              totalRot += pIntensity * MAX_ROTATION * (Math.cos(angle) > 0 ? 1 : -1);
+
+              // Chromatic shadow
+              const spread = pIntensity * CHROMA_SPREAD;
+              rShadowX = Math.cos(angle) * spread;
+              rShadowY = Math.sin(angle) * spread;
+              bShadowX = -rShadowX;
+              bShadowY = -rShadowY;
+              rAlpha = pIntensity * CHROMA_ALPHA;
+              bAlpha = pIntensity * CHROMA_ALPHA;
+
+              if (pIntensity > GREEN_THRESHOLD) {
+                gShadowY = pIntensity * 2;
+                gAlpha = (pIntensity - GREEN_THRESHOLD) * 0.3;
+              }
+
+              hasShadow = true;
+            }
+          }
+        }
+
+        // ── Ripple displacement ──────────────────────────────────
+        if (ripple.active) {
+          const rdx = pos.x - ripple.x;
+          const rdy = pos.y - ripple.y;
+          const rDist = Math.sqrt(rdx * rdx + rdy * rdy);
+          const rAngle = Math.atan2(rdy, rdx);
+
+          let frontIntensity = 0;
+          let wakeIntensity = 0;
+
+          // Front (sharp ring)
+          const distFromFront = Math.abs(rDist - rippleRadius);
+          if (distFromFront < RIPPLE_BAND) {
+            frontIntensity = (1 - distFromFront / RIPPLE_BAND);
+            frontIntensity *= frontIntensity; // squared for sharper peak
+          }
+
+          // Wake (dissolving trail behind front)
+          if (rDist < rippleRadius && rippleRadius > 10) {
+            const behindRatio = 1 - (rDist / rippleRadius);
+            wakeIntensity = (1 - behindRatio * 0.5) * (1 - rippleProgress);
+            wakeIntensity = Math.max(0, Math.min(1, wakeIntensity));
+          }
+
+          const totalRipple = Math.min(1, frontIntensity * 1.2 + wakeIntensity * 0.7);
+
+          if (totalRipple > 0.01) {
+            const rSpread = frontIntensity * RIPPLE_FRONT_DISP + wakeIntensity * RIPPLE_WAKE_DISP;
+
+            // Drip angle: blend radial → downward over time
+            const halfPi = Math.PI * 0.5;
+            const dripAngle = rAngle + (halfPi - rAngle) * rippleProgress * 0.6;
+
+            const rrOffX = Math.cos(dripAngle) * rSpread;
+            const rrOffY = Math.sin(dripAngle) * rSpread;
+            const dripDrift = totalRipple * rippleProgress * 6;
+
+            // Add to displacement
+            totalTx += rrOffX;
+            totalTy += rrOffY + dripDrift;
+            totalRot += totalRipple * 3 * (Math.cos(dripAngle) > 0 ? 1 : -1);
+
+            // Ripple chromatic shadow
+            const rr = totalRipple * 0.45;
+            const rg = totalRipple * 0.15;
+
+            if (hasShadow) {
+              // Blend with proximity shadow
+              rShadowX += rrOffX;
+              rShadowY += rrOffY + dripDrift;
+              bShadowX -= rrOffX;
+              bShadowY -= (rrOffY + dripDrift);
+              rAlpha = Math.min(1, rAlpha + rr);
+              bAlpha = Math.min(1, bAlpha + rr);
+              gShadowY += dripDrift * 1.5;
+              gAlpha = Math.min(1, gAlpha + rg);
+            } else {
+              rShadowX = rrOffX;
+              rShadowY = rrOffY + dripDrift;
+              bShadowX = -rrOffX;
+              bShadowY = -(rrOffY + dripDrift);
+              rAlpha = rr;
+              bAlpha = rr;
+              gShadowY = dripDrift * 1.5;
+              gAlpha = rg;
+            }
+
+            hasShadow = true;
+          }
+        }
+
+        // ── Build transform + shadow strings ─────────────────────
+        const hasEffect = Math.abs(totalTx) > 0.01 || Math.abs(totalTy) > 0.01 || Math.abs(totalRot) > 0.01;
+
+        if (hasEffect || hasShadow) {
+          newActive.add(ci);
+
+          const tx = totalTx.toFixed(2);
+          const ty = totalTy.toFixed(2);
+          const rot = totalRot.toFixed(2);
+          const transform = `translate(${tx}px,${ty}px) rotate(${rot}deg)`;
+
+          if (transform !== prevTransforms[ci]) {
+            charSpans[ci].style.transform = transform;
+            prevTransforms[ci] = transform;
+          }
+
+          if (hasShadow) {
+            let shadow = `${rShadowX.toFixed(1)}px ${rShadowY.toFixed(1)}px 0 rgba(255,20,20,${rAlpha.toFixed(3)}),` +
+                         `${bShadowX.toFixed(1)}px ${bShadowY.toFixed(1)}px 0 rgba(30,80,255,${bAlpha.toFixed(3)})`;
+            if (gAlpha > 0.001) {
+              shadow += `,0px ${gShadowY.toFixed(1)}px 0 rgba(0,255,65,${gAlpha.toFixed(3)})`;
+            }
+            if (shadow !== prevShadows[ci]) {
+              charSpans[ci].style.textShadow = shadow;
+              prevShadows[ci] = shadow;
+            }
+          }
+        }
+      }
+    }
+
+    // ── Clear chars that left active set ───────────────────────────
+    for (const ci of activeChars) {
+      if (!newActive.has(ci)) {
+        if (prevTransforms[ci] !== '') {
+          charSpans[ci].style.transform = '';
+          prevTransforms[ci] = '';
+        }
+        if (prevShadows[ci] !== '') {
+          charSpans[ci].style.textShadow = '';
+          prevShadows[ci] = '';
+        }
+      }
+    }
+
+    activeChars.clear();
+    for (const ci of newActive) activeChars.add(ci);
+  }
+
+  // ─── Init ────────────────────────────────────────────────────────────
+
+  wrapContentChars();
+  rafId = requestAnimationFrame(tick);
+
+})();
+</script>
+
+</body>
+</html>
