@@ -3,7 +3,7 @@ title: "pressing your finger into the screen"
 date: 2026-03-17T18:00:00
 state: "shipped"
 tags: [darketype, svg-filters, animation, lcd, chromatic-aberration, shipped]
-next_experiment: "point-specific displacement with feImage radial masks"
+next_experiment: "per-character displacement via inline span wrapping"
 ---
 
 # pressing your finger into the screen
@@ -66,6 +66,8 @@ the chromatic split direction follows the cursor-to-element vector. R pushes one
 
 elements outside the radius: untouched. no shadow, no processing, no overhead.
 
+and then there's the decay. the chromatic fringe doesn't persist when you stop moving — it *heals*. an `contentActivity` scalar ramps up with mouse velocity (`+0.08` per frame) and bleeds back toward zero when the cursor goes still (`-0.02` per frame, ~1.5s to fully dissolve). every proximity intensity gets multiplied by this value. stop your cursor mid-paragraph and the chromatic bruise slowly closes beneath it, like the liquid crystal realigning after you lift your finger. start moving again and it blooms instantly. the asymmetry is intentional — pressure is fast, healing is slow.
+
 ### the click ripple — wavefront + wake
 
 click empty space in the content and a chromatic shockwave expands outward from the click point. `e.target.closest('a, button, img')` guards interactive elements.
@@ -111,12 +113,22 @@ the 30fps throttle on DOM writes means the SVG filter attributes update at half 
 - `will-change: filter` on filtered elements for GPU compositing hints.
 - h1/h2 headings get their SVG filter applied via inline style *only* during hover or active drip, and removed when returning to idle. no perpetual filter overhead on text you're not looking at.
 
+### two systems, one metaphor
+
+the headings and the content use completely different rendering techniques to sell the same illusion. headings get a real SVG filter — per-channel displacement through turbulence noise, six filter primitives, dynamically controlled via `setAttribute` at 30fps. heavy, but headings are short text runs and the filter only activates on engagement.
+
+content gets per-element `text-shadow` — three shadow layers (R, B, G ghost) with coordinates computed from cursor proximity and velocity. no SVG overhead at all. the trade-off is that text-shadow can't do true displacement (pixels don't move, they just get colored halos), but at the scale we're working at — 5px spread, 0.4 alpha — it reads as chromatic aberration. your brain fills in the physics.
+
+the click ripple bridges both approaches: it's all text-shadow, but the expanding wavefront + dissolving wake + directional rotation sells a shockwave that feels heavier than it is.
+
 ### the feeling
 
-the best way i can describe it: the text used to feel like it was *printed*. now it feels like it's *suspended*. hover and it reacts. move fast and it struggles to keep up. stop and it drips. click and it bruises.
+the text used to feel like it was *printed*. now it feels like it's *suspended in fluid*. move your cursor and the nearby text bruises — color channels splitting apart along your path. stop and the bruise heals, slowly, like pressure releasing from glass. click and a chromatic shockwave ripples outward, its leading edge sharp, its wake dissolving downward into gravity.
 
-every timing interval in the system is randomized within a range. seed changes, drip durations, glitch cycles, streak-to-ripple transition points. nothing loops. nothing repeats. the chaos is *arrhythmic* — biological rather than mechanical.
+the headings are louder. hover and they distort through real per-channel displacement — viscous, heavy, arrhythmic. click and they drip. leave and the filter peels off entirely. no residue.
 
-six SVG filter primitives. one state machine. zero dependencies. the darketype headings finally feel like they're made of something.
+every timing interval is randomized within a range. seed changes, drip durations, glitch cycles, decay rates, ripple speeds. nothing loops. nothing repeats. the chaos is *arrhythmic* — biological rather than mechanical.
+
+zero dependencies. one SVG filter for headings. per-element text-shadow for content. two systems pretending to be the same physics.
 
 *ADR-0016. pressing your finger into the screen.*
