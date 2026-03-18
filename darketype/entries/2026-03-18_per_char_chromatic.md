@@ -108,6 +108,26 @@ if future-me needs to retune any of these values, that's where to go. the slider
 }
 ```
 
+### deployment bugs (2026-03-18)
+
+two bugs survived staging and broke production entries on deploy.
+
+**bug 1: MutationObserver infinite loop — entries won't load**
+
+viscous.js sets up a `MutationObserver` on `#content` to re-wrap characters when the DOM changes (e.g., `loadEntry()` injecting parsed markdown). but `wrapContentChars()` itself modifies the DOM heavily — unwrapping old spans, creating thousands of new ones. a `charWrapping` boolean flag was supposed to prevent re-entry, but `MutationObserver` callbacks are microtasks that fire *after* the current callback returns. by that point `charWrapping` is already `false`. the accumulated mutations trigger a new callback, which calls `wrapContentChars()` again. infinite loop. the page freezes at "loading... / accessing archive..." because the main thread never yields to render.
+
+**fix:** hoist `contentObserver` to module scope. call `contentObserver.disconnect()` at the top of `wrapContentChars()` and `contentObserver.observe(...)` at the bottom.
+
+**lesson:** boolean re-entrancy guards do not protect against microtask-scheduled callbacks. disconnect/reconnect is the correct pattern for observers that modify their own observed subtree.
+
+**bug 2: whitespace collapse — words strung together**
+
+every character including spaces is wrapped in `<span class="prox-char">` with `display: inline-block`. when a space character is the sole content of an `inline-block` box, it is simultaneously leading *and* trailing whitespace, and CSS normal whitespace rules collapse it to zero width. all words run together. this was invisible on the staging page (no one was trying to *read* the dummy content), but immediately obvious on real entries.
+
+**fix:** `.prox-char[data-ws] { white-space: pre; }` in `style.css`. the `[data-ws]` attribute is already set by the wrapping logic on whitespace characters. `white-space: pre` tells the browser to preserve the space.
+
+**alternative rejected:** replacing spaces with `\u00A0` (non-breaking space) in JS. changes text semantics, could break copy-paste, accessibility, and in-page search.
+
 ### the feeling
 
 move your cursor across a paragraph and the letters nearest to it push away — individually, independently, each one tilting and trailing its own chromatic ghost. stop moving and they drift back, each on its own schedule, the bruise dissolving character by character like liquid crystal realigning after you lift your thumb. click and a ring of displaced letters expands outward, each glyph getting knocked aside as the wavefront crosses its position, then slowly sagging downward in the wake.
