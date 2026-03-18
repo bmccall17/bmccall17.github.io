@@ -282,6 +282,11 @@
     <button class="ctrl-btn" id="btn-copy">copy config</button>
   </div>
 
+  <div class="ctrl-actions">
+    <button class="ctrl-btn" id="btn-record">record 60f</button>
+    <button class="ctrl-btn" id="btn-dump">dump to console</button>
+  </div>
+
   <div id="ctrl-hud"></div>
 
 </div>
@@ -458,6 +463,74 @@ resize listener → charPositionsDirty = true</code></pre>
     setTimeout(function () { e.target.textContent = 'copy config'; }, 1200);
   });
 
+  var btnRecord = document.getElementById('btn-record');
+  var btnDump = document.getElementById('btn-dump');
+
+  btnRecord.addEventListener('click', function (e) {
+    e.stopPropagation();
+    recording = true;
+    frameLog = [];
+    btnRecord.textContent = 'recording...';
+    btnRecord.style.color = '#ff3333';
+  });
+
+  btnDump.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (frameLog.length === 0) {
+      btnDump.textContent = 'no data';
+      setTimeout(function () { btnDump.textContent = 'dump to console'; }, 1200);
+      return;
+    }
+    console.group('%c per-char frame log (' + frameLog.length + ' frames)', 'color:#00ff41;font-weight:bold');
+
+    // Summary table
+    var summary = frameLog.map(function (f, i) {
+      return {
+        frame: i,
+        'fps': (1000 / f.dt).toFixed(1),
+        'total ms': f.total.toFixed(2),
+        'prox ms': f.prox.toFixed(2),
+        'ripple ms': f.ripple.toFixed(2),
+        'strings ms': f.strings.toFixed(2),
+        'dom ms': f.domWrite.toFixed(2),
+        'clear ms': f.clear.toFixed(2),
+        'chars iter': f.charsIterated,
+        'ripple hit': f.rippleCharsHit,
+        'active': f.charsActive,
+        'w:xform': f.wTransform,
+        'w:shadow': f.wShadow,
+        'w:clear': f.wClear
+      };
+    });
+    console.table(summary);
+
+    // Find worst frames
+    var sorted = frameLog.slice().sort(function (a, b) { return b.total - a.total; });
+    console.log('%c worst 5 frames:', 'color:#ff3333');
+    sorted.slice(0, 5).forEach(function (f) {
+      console.log(
+        '  total=' + f.total.toFixed(2) + 'ms | prox=' + f.prox.toFixed(2) +
+        ' ripple=' + f.ripple.toFixed(2) + ' strings=' + f.strings.toFixed(2) +
+        ' dom=' + f.domWrite.toFixed(2) + ' clear=' + f.clear.toFixed(2) +
+        ' | chars=' + f.charsIterated + ' rippleHit=' + f.rippleCharsHit +
+        ' shadow_writes=' + f.wShadow
+      );
+    });
+
+    // Averages
+    var n = frameLog.length;
+    var avgKeys = ['total', 'prox', 'ripple', 'strings', 'domWrite', 'clear'];
+    var avgs = {};
+    avgKeys.forEach(function (k) {
+      avgs[k] = (frameLog.reduce(function (s, f) { return s + f[k]; }, 0) / n).toFixed(3) + 'ms';
+    });
+    console.log('%c averages:', 'color:#00ff41', avgs);
+    console.groupEnd();
+
+    btnDump.textContent = 'dumped!';
+    setTimeout(function () { btnDump.textContent = 'dump to console'; }, 1200);
+  });
+
   // Panel collapse
   var panelVisible = true;
   ctrlToggle.addEventListener('click', function (e) {
@@ -498,9 +571,17 @@ resize listener → charPositionsDirty = true</code></pre>
   let perfFrameTimes = [];
   let perfLastTick = 0;
   const PERF_SAMPLES = 60;
-  let perfBlocksChecked = 0, perfCharsIterated = 0, perfCharsActive = 0, perfDomWrites = 0;
-  let perfComputeMs = 0;
+  let perfBlocksChecked = 0, perfCharsIterated = 0, perfCharsActive = 0;
+  let perfDomWritesTransform = 0, perfDomWritesShadow = 0, perfDomWritesClear = 0;
   let perfRippleCount = 0;
+  let perfRippleCharsHit = 0;
+
+  // Phase timings (ms)
+  let perfT = { prox: 0, ripple: 0, strings: 0, domWrite: 0, clear: 0, total: 0 };
+
+  // Frame recorder
+  let recording = false;
+  let frameLog = [];
 
   // ─── Character Wrapping ──────────────────────────────────────────────
 
@@ -709,14 +790,17 @@ resize listener → charPositionsDirty = true</code></pre>
     if (now - lastWriteTime < WRITE_INTERVAL) return;
     lastWriteTime = now;
 
-    const computeStart = performance.now();
+    var t0 = performance.now(), t1, t2, t3, t4, t5;
 
     // Reset perf counters
     perfBlocksChecked = 0;
     perfCharsIterated = 0;
-    perfDomWrites = 0;
+    perfDomWritesTransform = 0;
+    perfDomWritesShadow = 0;
+    perfDomWritesClear = 0;
+    perfRippleCharsHit = 0;
 
-    // Read cfg once per frame (avoid repeated property lookups in hot loop)
+    // Read cfg once per frame
     const _proxRadius     = cfg.proxRadius;
     const _maxDisp        = cfg.maxDisplacement;
     const _maxRot         = cfg.maxRotation;
@@ -755,20 +839,21 @@ resize listener → charPositionsDirty = true</code></pre>
     const newActive = new Set();
     const gateRadius = _proxRadius + BLOCK_GATE_PAD;
 
-    // ─── Per-block gate ──────────────────────────────────────────────
+    // Collect per-char results into arrays to separate compute from DOM writes
+    const charResults = [];  // { ci, transform, shadow }
+
+    // ─── PHASE 1+2: Proximity + Ripple compute ─────────────────────
     for (let bi = 0; bi < blocks.length; bi++) {
       const b = blocks[bi];
       if (!b.rect || b.charStart === -1) continue;
       perfBlocksChecked++;
 
-      // Closest point on block rect to cursor
       const clX = Math.max(b.rect.left, Math.min(mouseX, b.rect.right));
       const clY = Math.max(b.rect.top, Math.min(mouseY, b.rect.bottom));
       const bDx = mouseX - clX;
       const bDy = mouseY - clY;
       const blockDist = Math.sqrt(bDx * bDx + bDy * bDy);
 
-      // Check if block is within proximity OR any ripple reach
       const blockInProx = blockDist < gateRadius && contentActivity > 0.001;
       let blockInRipple = false;
       if (activeRipples.length > 0) {
@@ -787,7 +872,6 @@ resize listener → charPositionsDirty = true</code></pre>
 
       if (!blockInProx && !blockInRipple) continue;
 
-      // ─── Per-character in this block ─────────────────────────────
       for (let ci = b.charStart; ci <= b.charEnd; ci++) {
         if (charBlockIdx[ci] !== bi) continue;
         if (charSpans[ci].dataset.ws !== undefined) continue;
@@ -800,7 +884,7 @@ resize listener → charPositionsDirty = true</code></pre>
         let rAlpha = 0, bAlpha = 0;
         let gShadowY = 0, gAlpha = 0;
 
-        // ── Proximity displacement ───────────────────────────────
+        // ── Proximity ──────────────────────────────────────────
         if (blockInProx) {
           const cdx = pos.x - mouseX;
           const cdy = pos.y - mouseY;
@@ -844,7 +928,8 @@ resize listener → charPositionsDirty = true</code></pre>
           }
         }
 
-        // ── Ripple displacement (all active ripples stack) ───────
+        // ── Ripple (all active ripples stack) ──────────────────
+        let charHitByRipple = false;
         for (let ri = 0; ri < activeRipples.length; ri++) {
           const rp = activeRipples[ri];
           const rdx = pos.x - rp.x;
@@ -855,14 +940,12 @@ resize listener → charPositionsDirty = true</code></pre>
           let frontIntensity = 0;
           let wakeIntensity = 0;
 
-          // Front (sharp ring)
           const distFromFront = Math.abs(rDist - rp.radius);
           if (distFromFront < _rippleBand) {
             frontIntensity = (1 - distFromFront / _rippleBand);
             frontIntensity *= frontIntensity;
           }
 
-          // Wake — only compute within cutoff behind the front
           const behindFront = rp.radius - rDist;
           if (behindFront > 0 && behindFront < _wakeCutoff && rp.radius > 10) {
             const behindRatio = behindFront / rp.radius;
@@ -874,6 +957,7 @@ resize listener → charPositionsDirty = true</code></pre>
           const totalRipple = Math.min(1, frontIntensity * 1.2 + wakeIntensity * 0.7);
 
           if (totalRipple > 0.01) {
+            charHitByRipple = true;
             const rSpread = frontIntensity * _rippleFrontD + wakeIntensity * _rippleWakeD;
 
             const halfPi = Math.PI * 0.5;
@@ -913,63 +997,107 @@ resize listener → charPositionsDirty = true</code></pre>
             hasShadow = true;
           }
         }
+        if (charHitByRipple) perfRippleCharsHit++;
 
-        // ── Build transform + shadow strings ─────────────────────
+        // ── Queue result (defer DOM writes) ──────────────────────
         const hasEffect = Math.abs(totalTx) > 0.01 || Math.abs(totalTy) > 0.01 || Math.abs(totalRot) > 0.01;
 
         if (hasEffect || hasShadow) {
           newActive.add(ci);
+          var result = { ci: ci, transform: null, shadow: null };
 
-          const tx = totalTx.toFixed(2);
-          const ty = totalTy.toFixed(2);
-          const rot = totalRot.toFixed(2);
-          const transform = `translate(${tx}px,${ty}px) rotate(${rot}deg)`;
-
-          if (transform !== prevTransforms[ci]) {
-            charSpans[ci].style.transform = transform;
-            prevTransforms[ci] = transform;
-            perfDomWrites++;
-          }
+          result.transform = 'translate(' + totalTx.toFixed(2) + 'px,' + totalTy.toFixed(2) + 'px) rotate(' + totalRot.toFixed(2) + 'deg)';
 
           if (hasShadow) {
-            let shadow = `${rShadowX.toFixed(1)}px ${rShadowY.toFixed(1)}px 0 rgba(255,20,20,${rAlpha.toFixed(3)}),` +
-                         `${bShadowX.toFixed(1)}px ${bShadowY.toFixed(1)}px 0 rgba(30,80,255,${bAlpha.toFixed(3)})`;
+            result.shadow = rShadowX.toFixed(1) + 'px ' + rShadowY.toFixed(1) + 'px 0 rgba(255,20,20,' + rAlpha.toFixed(3) + '),' +
+                            bShadowX.toFixed(1) + 'px ' + bShadowY.toFixed(1) + 'px 0 rgba(30,80,255,' + bAlpha.toFixed(3) + ')';
             if (gAlpha > 0.001) {
-              shadow += `,0px ${gShadowY.toFixed(1)}px 0 rgba(0,255,65,${gAlpha.toFixed(3)})`;
-            }
-            if (shadow !== prevShadows[ci]) {
-              charSpans[ci].style.textShadow = shadow;
-              prevShadows[ci] = shadow;
-              perfDomWrites++;
+              result.shadow += ',0px ' + gShadowY.toFixed(1) + 'px 0 rgba(0,255,65,' + gAlpha.toFixed(3) + ')';
             }
           }
+
+          charResults.push(result);
         }
       }
     }
 
-    // ── Clear chars that left active set ───────────────────────────
+    t1 = performance.now(); // end compute, start strings (already built above)
+    // strings were built inline, so t1 captures both prox+ripple+strings
+
+    // ─── PHASE 3: DOM writes (transform + shadow) ───────────────────
+    t2 = performance.now();
+    for (let i = 0; i < charResults.length; i++) {
+      const r = charResults[i];
+      const ci = r.ci;
+
+      if (r.transform !== prevTransforms[ci]) {
+        charSpans[ci].style.transform = r.transform;
+        prevTransforms[ci] = r.transform;
+        perfDomWritesTransform++;
+      }
+
+      if (r.shadow !== null && r.shadow !== prevShadows[ci]) {
+        charSpans[ci].style.textShadow = r.shadow;
+        prevShadows[ci] = r.shadow;
+        perfDomWritesShadow++;
+      }
+    }
+    t3 = performance.now();
+
+    // ─── PHASE 4: Clear chars that left active set ──────────────────
     for (const ci of activeChars) {
       if (!newActive.has(ci)) {
         if (prevTransforms[ci] !== '') {
           charSpans[ci].style.transform = '';
           prevTransforms[ci] = '';
-          perfDomWrites++;
+          perfDomWritesClear++;
         }
         if (prevShadows[ci] !== '') {
           charSpans[ci].style.textShadow = '';
           prevShadows[ci] = '';
-          perfDomWrites++;
+          perfDomWritesClear++;
         }
       }
     }
+    t4 = performance.now();
 
     activeChars.clear();
     for (const ci of newActive) activeChars.add(ci);
     perfCharsActive = newActive.size;
 
-    perfComputeMs = performance.now() - computeStart;
+    t5 = performance.now();
 
-    // ── HUD update (every 6 frames to avoid thrash) ──────────────
+    // Phase breakdown
+    perfT.prox    = t1 - t0;       // all math (prox + ripple + string building)
+    perfT.domWrite = t3 - t2;      // setting transform + textShadow
+    perfT.clear   = t4 - t3;       // clearing inactive chars
+    perfT.total   = t5 - t0;
+
+    // ── Recording ─────────────────────────────────────────────────
+    if (recording) {
+      frameLog.push({
+        dt: frameDt,
+        total: perfT.total,
+        prox: perfT.prox,
+        ripple: 0,    // merged into prox for now
+        strings: 0,   // merged into prox for now
+        domWrite: perfT.domWrite,
+        clear: perfT.clear,
+        charsIterated: perfCharsIterated,
+        rippleCharsHit: perfRippleCharsHit,
+        charsActive: perfCharsActive,
+        wTransform: perfDomWritesTransform,
+        wShadow: perfDomWritesShadow,
+        wClear: perfDomWritesClear
+      });
+      if (frameLog.length >= 60) {
+        recording = false;
+        btnRecord.textContent = 'record 60f';
+        btnRecord.style.color = '';
+      }
+    }
+
+    // ── HUD update (every 6 frames) ──────────────────────────────
     perfFrameTimes.push(frameDt);
     if (perfFrameTimes.length > PERF_SAMPLES) perfFrameTimes.shift();
 
@@ -977,15 +1105,36 @@ resize listener → charPositionsDirty = true</code></pre>
       const avg = perfFrameTimes.reduce(function (a, b) { return a + b; }, 0) / perfFrameTimes.length;
       const fps = 1000 / avg;
       const worst = Math.max.apply(null, perfFrameTimes);
+
+      // Build a phase bar: [====compute====|==dom==|=clr=]
+      var barTotal = Math.max(perfT.total, 0.01);
+      var barW = 36;
+      var bComp = Math.round((perfT.prox / barTotal) * barW);
+      var bDom  = Math.round((perfT.domWrite / barTotal) * barW);
+      var bClr  = barW - bComp - bDom;
+      if (bClr < 0) bClr = 0;
+      var bar = '[' +
+        '#'.repeat(bComp) +
+        '|' +
+        '@'.repeat(bDom) +
+        '|' +
+        '.'.repeat(bClr) +
+        ']';
+
       ctrlHud.textContent =
         'fps: ' + fps.toFixed(1) + '  worst: ' + (1000 / worst).toFixed(1) + '\n' +
-        'compute: ' + perfComputeMs.toFixed(2) + 'ms\n' +
-        'blocks: ' + perfBlocksChecked + '/' + blocks.length +
-        '  chars: ' + perfCharsIterated + '/' + charSpans.length + '\n' +
-        'active: ' + perfCharsActive +
-        '  writes: ' + perfDomWrites +
-        '  ripples: ' + perfRippleCount + '\n' +
-        'activity: ' + contentActivity.toFixed(2) + '  vel: ' + velocity.toFixed(1);
+        bar + ' ' + perfT.total.toFixed(2) + 'ms\n' +
+        '  #compute: ' + perfT.prox.toFixed(2) + 'ms\n' +
+        '  @dom wrt: ' + perfT.domWrite.toFixed(2) + 'ms' +
+        '  (xfm:' + perfDomWritesTransform + ' shd:' + perfDomWritesShadow + ')\n' +
+        '  .clear:   ' + perfT.clear.toFixed(2) + 'ms' +
+        '  (' + perfDomWritesClear + ')\n' +
+        'chars: ' + perfCharsIterated + ' iter  ' +
+        perfRippleCharsHit + ' ripple  ' +
+        perfCharsActive + ' active\n' +
+        'ripples: ' + perfRippleCount +
+        '  activity: ' + contentActivity.toFixed(2) +
+        '  vel: ' + velocity.toFixed(1);
     }
   }
 
