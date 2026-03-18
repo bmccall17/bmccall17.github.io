@@ -95,27 +95,180 @@
     z-index: 999;
   }
 
-  #perf-hud {
+  #ctrl-panel {
     position: fixed;
     bottom: 12px;
     left: 12px;
+    z-index: 1000;
     font-family: var(--font-main);
     font-size: 0.65rem;
-    line-height: 1.5;
     color: var(--dim-color);
-    background: rgba(10,10,10,0.85);
+    background: rgba(10,10,10,0.92);
     border: 1px solid rgba(0,143,17,0.3);
+    padding: 0;
+    width: 260px;
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dim-color) transparent;
+  }
+
+  #ctrl-panel::-webkit-scrollbar { width: 4px; }
+  #ctrl-panel::-webkit-scrollbar-thumb { background: var(--dim-color); }
+
+  #ctrl-toggle {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    z-index: 1001;
+    font-family: var(--font-main);
+    font-size: 0.65rem;
+    color: var(--text-color);
+    background: rgba(10,10,10,0.92);
+    border: 1px solid rgba(0,143,17,0.3);
+    padding: 4px 10px;
+    cursor: pointer;
+    display: none;
+  }
+
+  .ctrl-section {
+    border-bottom: 1px solid rgba(0,143,17,0.15);
     padding: 6px 10px;
-    pointer-events: none;
-    z-index: 999;
+  }
+  .ctrl-section:last-child { border-bottom: none; }
+
+  .ctrl-section-title {
+    color: var(--text-color);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    opacity: 0.7;
+  }
+
+  .ctrl-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+    height: 18px;
+  }
+
+  .ctrl-label {
+    flex: 0 0 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ctrl-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: rgba(0,143,17,0.25);
+    outline: none;
+    border-radius: 1px;
+  }
+  .ctrl-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 12px;
+    background: var(--text-color);
+    cursor: pointer;
+    border-radius: 1px;
+  }
+  .ctrl-slider::-moz-range-thumb {
+    width: 8px;
+    height: 12px;
+    background: var(--text-color);
+    cursor: pointer;
+    border: none;
+    border-radius: 1px;
+  }
+
+  .ctrl-val {
+    flex: 0 0 38px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ctrl-actions {
+    display: flex;
+    gap: 6px;
+    padding: 6px 10px;
+    border-top: 1px solid rgba(0,143,17,0.15);
+  }
+
+  .ctrl-btn {
+    flex: 1;
+    font-family: var(--font-main);
+    font-size: 0.6rem;
+    color: var(--text-color);
+    background: rgba(0,143,17,0.1);
+    border: 1px solid rgba(0,143,17,0.3);
+    padding: 3px 0;
+    cursor: pointer;
+    text-align: center;
+  }
+  .ctrl-btn:hover { background: rgba(0,143,17,0.25); }
+
+  #ctrl-hud {
+    padding: 6px 10px;
     white-space: pre;
+    line-height: 1.5;
+    border-top: 1px solid rgba(0,143,17,0.15);
+    pointer-events: none;
   }
 </style>
 </head>
 <body>
 
 <div id="staging-label">staging / per-char</div>
-<div id="perf-hud"></div>
+<button id="ctrl-toggle">controls</button>
+
+<div id="ctrl-panel">
+
+  <div class="ctrl-section">
+    <div class="ctrl-section-title">hover / proximity</div>
+    <div class="ctrl-row"><span class="ctrl-label">radius</span><input class="ctrl-slider" data-key="proxRadius" type="range" min="50" max="600" step="10"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">displacement</span><input class="ctrl-slider" data-key="maxDisplacement" type="range" min="0" max="20" step="0.5"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">rotation</span><input class="ctrl-slider" data-key="maxRotation" type="range" min="0" max="30" step="1"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">chroma spread</span><input class="ctrl-slider" data-key="chromaSpread" type="range" min="0" max="12" step="0.5"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">chroma alpha</span><input class="ctrl-slider" data-key="chromaAlpha" type="range" min="0" max="1" step="0.05"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">green threshold</span><input class="ctrl-slider" data-key="greenThreshold" type="range" min="0" max="1" step="0.05"><span class="ctrl-val"></span></div>
+  </div>
+
+  <div class="ctrl-section">
+    <div class="ctrl-section-title">activity / decay</div>
+    <div class="ctrl-row"><span class="ctrl-label">ramp up</span><input class="ctrl-slider" data-key="activityRamp" type="range" min="0.01" max="0.3" step="0.01"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">decay rate</span><input class="ctrl-slider" data-key="activityDecay" type="range" min="0.005" max="0.1" step="0.005"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">vel smoothing</span><input class="ctrl-slider" data-key="velocitySmooth" type="range" min="0.05" max="0.5" step="0.01"><span class="ctrl-val"></span></div>
+  </div>
+
+  <div class="ctrl-section">
+    <div class="ctrl-section-title">ripple / click</div>
+    <div class="ctrl-row"><span class="ctrl-label">max radius</span><input class="ctrl-slider" data-key="rippleMaxRad" type="range" min="200" max="2000" step="50"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">duration</span><input class="ctrl-slider" data-key="rippleDuration" type="range" min="1000" max="12000" step="250"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">band width</span><input class="ctrl-slider" data-key="rippleBand" type="range" min="10" max="200" step="5"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">front disp</span><input class="ctrl-slider" data-key="rippleFrontDisp" type="range" min="0" max="25" step="0.5"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">wake disp</span><input class="ctrl-slider" data-key="rippleWakeDisp" type="range" min="0" max="15" step="0.5"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">wake cutoff</span><input class="ctrl-slider" data-key="wakeCutoff" type="range" min="50" max="800" step="25"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">drip blend</span><input class="ctrl-slider" data-key="dripBlend" type="range" min="0" max="1" step="0.05"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">gravity drift</span><input class="ctrl-slider" data-key="gravityDrift" type="range" min="0" max="20" step="0.5"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">ripple chroma</span><input class="ctrl-slider" data-key="rippleChroma" type="range" min="0" max="1" step="0.05"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">ripple rotate</span><input class="ctrl-slider" data-key="rippleRotation" type="range" min="0" max="15" step="0.5"><span class="ctrl-val"></span></div>
+  </div>
+
+  <div class="ctrl-actions">
+    <button class="ctrl-btn" id="btn-reset">reset defaults</button>
+    <button class="ctrl-btn" id="btn-copy">copy config</button>
+  </div>
+
+  <div id="ctrl-hud"></div>
+
+</div>
 
 <div class="container">
   <div id="content">
@@ -164,44 +317,106 @@ resize listener → charPositionsDirty = true</code></pre>
 (function () {
   'use strict';
 
-  // ─── Constants ───────────────────────────────────────────────────────
-  const PROX_RADIUS       = 250;
-  const MAX_DISPLACEMENT  = 6;
-  const MAX_ROTATION      = 8;        // degrees
-  const CHROMA_SPREAD     = 4;
-  const CHROMA_ALPHA      = 0.5;
-  const GREEN_THRESHOLD   = 0.5;
-  const ACTIVITY_RAMP     = 0.08;
-  const ACTIVITY_DECAY    = 0.02;
-  const VELOCITY_SMOOTH   = 0.15;
-  const WRITE_INTERVAL    = 33.33;    // ~30fps DOM writes
-  const RECACHE_INTERVAL  = 2000;     // full recache every 2s
-  const BLOCK_GATE_PAD    = 50;       // extra px around block rect
+  // ─── Tunable Config ─────────────────────────────────────────────────
+  const DEFAULTS = {
+    proxRadius:      250,
+    maxDisplacement: 6,
+    maxRotation:     8,
+    chromaSpread:    4,
+    chromaAlpha:     0.5,
+    greenThreshold:  0.5,
+    activityRamp:    0.08,
+    activityDecay:   0.02,
+    velocitySmooth:  0.15,
+    rippleMaxRad:    800,
+    rippleDuration:  6000,
+    rippleBand:      60,
+    rippleFrontDisp: 8,
+    rippleWakeDisp:  3,
+    wakeCutoff:      300,
+    dripBlend:       0.6,
+    gravityDrift:    6,
+    rippleChroma:    0.45,
+    rippleRotation:  3
+  };
 
-  // Ripple constants
-  const RIPPLE_BAND         = 60;
-  const RIPPLE_FRONT_DISP   = 8;
-  const RIPPLE_WAKE_DISP    = 3;
-  const RIPPLE_DURATION_MIN = 5000;
-  const RIPPLE_DURATION_MAX = 7000;
-  const RIPPLE_MAX_RAD_MIN  = 700;
-  const RIPPLE_MAX_RAD_MAX  = 900;
+  const cfg = Object.assign({}, DEFAULTS);
 
-  // Tags to exclude from wrapping
+  // Fixed constants (not tunable)
+  const WRITE_INTERVAL    = 33.33;
+  const RECACHE_INTERVAL  = 2000;
+  const BLOCK_GATE_PAD    = 50;
+
   const EXCLUDE_TAGS = new Set([
     'PRE', 'CODE', 'A', 'IMG', 'BUTTON', 'IFRAME', 'SVG', 'SCRIPT', 'STYLE'
   ]);
 
-  // Block selectors for tier-1 culling
   const BLOCK_SEL = 'p, h1, h2, h3, h4, h5, h6, li, blockquote, td, th';
+
+  // ─── Control Panel Wiring ──────────────────────────────────────────
+  const ctrlPanel = document.getElementById('ctrl-panel');
+  const ctrlToggle = document.getElementById('ctrl-toggle');
+  const ctrlHud = document.getElementById('ctrl-hud');
+  const sliders = ctrlPanel.querySelectorAll('.ctrl-slider');
+
+  function syncSliders() {
+    sliders.forEach(function (s) {
+      var key = s.dataset.key;
+      s.value = cfg[key];
+      s.nextElementSibling.textContent = fmtVal(cfg[key]);
+    });
+  }
+
+  function fmtVal(v) {
+    if (v >= 100) return Math.round(v);
+    if (v >= 10) return v.toFixed(1);
+    if (v >= 1) return v.toFixed(1);
+    return v.toFixed(3).replace(/0+$/, '').replace(/\.$/, '.0');
+  }
+
+  sliders.forEach(function (s) {
+    s.addEventListener('input', function () {
+      var key = s.dataset.key;
+      cfg[key] = parseFloat(s.value);
+      s.nextElementSibling.textContent = fmtVal(cfg[key]);
+    });
+  });
+
+  syncSliders();
+
+  document.getElementById('btn-reset').addEventListener('click', function (e) {
+    e.stopPropagation();
+    Object.assign(cfg, DEFAULTS);
+    syncSliders();
+  });
+
+  document.getElementById('btn-copy').addEventListener('click', function (e) {
+    e.stopPropagation();
+    var lines = Object.keys(cfg).map(function (k) {
+      return '  ' + k + ': ' + JSON.stringify(cfg[k]);
+    });
+    var text = '{\n' + lines.join(',\n') + '\n}';
+    navigator.clipboard.writeText(text);
+    e.target.textContent = 'copied!';
+    setTimeout(function () { e.target.textContent = 'copy config'; }, 1200);
+  });
+
+  // Panel collapse
+  var panelVisible = true;
+  ctrlToggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    panelVisible = !panelVisible;
+    ctrlPanel.style.display = panelVisible ? '' : 'none';
+    ctrlToggle.style.display = panelVisible ? 'none' : '';
+  });
 
   // ─── State ───────────────────────────────────────────────────────────
   const contentEl = document.getElementById('content');
 
-  let charSpans      = [];     // all .prox-char spans
-  let charPositions  = [];     // cached { x, y } centers
-  let charBlockIdx   = [];     // index into blocks[] for each char
-  let blocks         = [];     // { el, rect, charStart, charEnd }
+  let charSpans      = [];
+  let charPositions  = [];
+  let charBlockIdx   = [];
+  let blocks         = [];
   let posDirty       = true;
 
   let mouseX = -9999, mouseY = -9999;
@@ -215,7 +430,7 @@ resize listener → charPositionsDirty = true</code></pre>
   let prevShadows    = [];
   const activeChars  = new Set();
 
-  const ripples = [];   // array of { active, x, y, startTime, duration, maxRadius }
+  const ripples = [];
   const MAX_RIPPLES = 8;
 
   let lastWriteTime  = 0;
@@ -223,7 +438,6 @@ resize listener → charPositionsDirty = true</code></pre>
   let rafId = null;
 
   // Perf HUD state
-  const perfHud = document.getElementById('perf-hud');
   let perfFrameTimes = [];
   let perfLastTick = 0;
   const PERF_SAMPLES = 60;
@@ -379,7 +593,7 @@ resize listener → charPositionsDirty = true</code></pre>
 
   document.addEventListener('click', function (e) {
     // Don't trigger on links or interactive elements
-    if (e.target.closest('a, button, input, select, textarea')) return;
+    if (e.target.closest('a, button, input, select, textarea, #ctrl-panel, #ctrl-toggle')) return;
 
     // Recycle oldest inactive slot, or push new (capped at MAX_RIPPLES)
     let slot = ripples.find(function (r) { return !r.active; });
@@ -402,14 +616,12 @@ resize listener → charPositionsDirty = true</code></pre>
     slot.x = e.clientX;
     slot.y = e.clientY;
     slot.startTime = performance.now();
-    slot.duration = RIPPLE_DURATION_MIN + Math.random() * (RIPPLE_DURATION_MAX - RIPPLE_DURATION_MIN);
-    slot.maxRadius = RIPPLE_MAX_RAD_MIN + Math.random() * (RIPPLE_MAX_RAD_MAX - RIPPLE_MAX_RAD_MIN);
+    // Use cfg values with ±15% randomization
+    slot.duration = cfg.rippleDuration * (0.85 + Math.random() * 0.3);
+    slot.maxRadius = cfg.rippleMaxRad * (0.85 + Math.random() * 0.3);
   });
 
   // ─── Main Loop ───────────────────────────────────────────────────────
-
-  // Wake cutoff: don't compute wake for chars more than this far behind the front
-  const WAKE_MAX_BEHIND = 300;
 
   function tick(now) {
     rafId = requestAnimationFrame(tick);
@@ -422,13 +634,13 @@ resize listener → charPositionsDirty = true</code></pre>
     const dx = mouseX - prevMouseX;
     const dy = mouseY - prevMouseY;
     const instantV = Math.sqrt(dx * dx + dy * dy);
-    velocity = velocity + (instantV - velocity) * VELOCITY_SMOOTH;
+    velocity = velocity + (instantV - velocity) * cfg.velocitySmooth;
 
     // Activity
     if (isHoveringContent && velocity > 1) {
-      contentActivity = Math.min(1, contentActivity + ACTIVITY_RAMP);
+      contentActivity = Math.min(1, contentActivity + cfg.activityRamp);
     } else {
-      contentActivity = Math.max(0, contentActivity - ACTIVITY_DECAY);
+      contentActivity = Math.max(0, contentActivity - cfg.activityDecay);
     }
 
     // Recache check
@@ -446,6 +658,22 @@ resize listener → charPositionsDirty = true</code></pre>
     perfBlocksChecked = 0;
     perfCharsIterated = 0;
     perfDomWrites = 0;
+
+    // Read cfg once per frame (avoid repeated property lookups in hot loop)
+    const _proxRadius     = cfg.proxRadius;
+    const _maxDisp        = cfg.maxDisplacement;
+    const _maxRot         = cfg.maxRotation;
+    const _chromaSpread   = cfg.chromaSpread;
+    const _chromaAlpha    = cfg.chromaAlpha;
+    const _greenThresh    = cfg.greenThreshold;
+    const _rippleBand     = cfg.rippleBand;
+    const _rippleFrontD   = cfg.rippleFrontDisp;
+    const _rippleWakeD    = cfg.rippleWakeDisp;
+    const _wakeCutoff     = cfg.wakeCutoff;
+    const _dripBlend      = cfg.dripBlend;
+    const _gravDrift      = cfg.gravityDrift;
+    const _rippleChroma   = cfg.rippleChroma;
+    const _rippleRot      = cfg.rippleRotation;
 
     // Update all active ripples
     const activeRipples = [];
@@ -468,14 +696,7 @@ resize listener → charPositionsDirty = true</code></pre>
     perfRippleCount = activeRipples.length;
 
     const newActive = new Set();
-    const gateRadius = PROX_RADIUS + BLOCK_GATE_PAD;
-
-    // Compute max ripple gate radius across all active ripples
-    let maxRippleGate = 0;
-    for (let ri = 0; ri < activeRipples.length; ri++) {
-      const g = activeRipples[ri].radius + RIPPLE_BAND + BLOCK_GATE_PAD;
-      if (g > maxRippleGate) maxRippleGate = g;
-    }
+    const gateRadius = _proxRadius + BLOCK_GATE_PAD;
 
     // ─── Per-block gate ──────────────────────────────────────────────
     for (let bi = 0; bi < blocks.length; bi++) {
@@ -499,9 +720,8 @@ resize listener → charPositionsDirty = true</code></pre>
         for (let ri = 0; ri < activeRipples.length; ri++) {
           const rp = activeRipples[ri];
           const rbd = Math.sqrt((bcx - rp.x) ** 2 + (bcy - rp.y) ** 2);
-          const rpGate = rp.radius + RIPPLE_BAND + BLOCK_GATE_PAD;
-          // Only gate on the active zone: front band + limited wake behind
-          if (rbd < rpGate && rbd > rp.radius - WAKE_MAX_BEHIND - BLOCK_GATE_PAD) {
+          const rpGate = rp.radius + _rippleBand + BLOCK_GATE_PAD;
+          if (rbd < rpGate && rbd > rp.radius - _wakeCutoff - BLOCK_GATE_PAD) {
             blockInRipple = true;
             break;
           }
@@ -529,8 +749,8 @@ resize listener → charPositionsDirty = true</code></pre>
           const cdy = pos.y - mouseY;
           const dist = Math.sqrt(cdx * cdx + cdy * cdy);
 
-          if (dist < PROX_RADIUS) {
-            let pIntensity = 1 - dist / PROX_RADIUS;
+          if (dist < _proxRadius) {
+            let pIntensity = 1 - dist / _proxRadius;
             pIntensity = pIntensity * (0.4 + pIntensity * 0.6);
             pIntensity *= contentActivity;
 
@@ -542,22 +762,24 @@ resize listener → charPositionsDirty = true</code></pre>
                 angle = Math.atan2(cdy, cdx);
               }
 
-              const disp = pIntensity * MAX_DISPLACEMENT;
-              totalTx += Math.cos(angle) * disp;
-              totalTy += Math.sin(angle) * disp;
-              totalRot += pIntensity * MAX_ROTATION * (Math.cos(angle) > 0 ? 1 : -1);
+              const cosA = Math.cos(angle);
+              const sinA = Math.sin(angle);
 
-              const spread = pIntensity * CHROMA_SPREAD;
-              rShadowX = Math.cos(angle) * spread;
-              rShadowY = Math.sin(angle) * spread;
+              totalTx += cosA * pIntensity * _maxDisp;
+              totalTy += sinA * pIntensity * _maxDisp;
+              totalRot += pIntensity * _maxRot * (cosA > 0 ? 1 : -1);
+
+              const spread = pIntensity * _chromaSpread;
+              rShadowX = cosA * spread;
+              rShadowY = sinA * spread;
               bShadowX = -rShadowX;
               bShadowY = -rShadowY;
-              rAlpha = pIntensity * CHROMA_ALPHA;
-              bAlpha = pIntensity * CHROMA_ALPHA;
+              rAlpha = pIntensity * _chromaAlpha;
+              bAlpha = pIntensity * _chromaAlpha;
 
-              if (pIntensity > GREEN_THRESHOLD) {
+              if (pIntensity > _greenThresh) {
                 gShadowY = pIntensity * 2;
-                gAlpha = (pIntensity - GREEN_THRESHOLD) * 0.3;
+                gAlpha = (pIntensity - _greenThresh) * 0.3;
               }
 
               hasShadow = true;
@@ -578,14 +800,14 @@ resize listener → charPositionsDirty = true</code></pre>
 
           // Front (sharp ring)
           const distFromFront = Math.abs(rDist - rp.radius);
-          if (distFromFront < RIPPLE_BAND) {
-            frontIntensity = (1 - distFromFront / RIPPLE_BAND);
+          if (distFromFront < _rippleBand) {
+            frontIntensity = (1 - distFromFront / _rippleBand);
             frontIntensity *= frontIntensity;
           }
 
-          // Wake — only compute within WAKE_MAX_BEHIND of the front
+          // Wake — only compute within cutoff behind the front
           const behindFront = rp.radius - rDist;
-          if (behindFront > 0 && behindFront < WAKE_MAX_BEHIND && rp.radius > 10) {
+          if (behindFront > 0 && behindFront < _wakeCutoff && rp.radius > 10) {
             const behindRatio = behindFront / rp.radius;
             wakeIntensity = (1 - behindRatio * 0.5) * (1 - rp.progress);
             if (wakeIntensity < 0) wakeIntensity = 0;
@@ -595,21 +817,21 @@ resize listener → charPositionsDirty = true</code></pre>
           const totalRipple = Math.min(1, frontIntensity * 1.2 + wakeIntensity * 0.7);
 
           if (totalRipple > 0.01) {
-            const rSpread = frontIntensity * RIPPLE_FRONT_DISP + wakeIntensity * RIPPLE_WAKE_DISP;
+            const rSpread = frontIntensity * _rippleFrontD + wakeIntensity * _rippleWakeD;
 
             const halfPi = Math.PI * 0.5;
-            const dripAngle = rAngle + (halfPi - rAngle) * rp.progress * 0.6;
+            const dripAngle = rAngle + (halfPi - rAngle) * rp.progress * _dripBlend;
 
             const rrOffX = Math.cos(dripAngle) * rSpread;
             const rrOffY = Math.sin(dripAngle) * rSpread;
-            const dripDrift = totalRipple * rp.progress * 6;
+            const dripDrift = totalRipple * rp.progress * _gravDrift;
 
             totalTx += rrOffX;
             totalTy += rrOffY + dripDrift;
-            totalRot += totalRipple * 3 * (Math.cos(dripAngle) > 0 ? 1 : -1);
+            totalRot += totalRipple * _rippleRot * (Math.cos(dripAngle) > 0 ? 1 : -1);
 
-            const rr = totalRipple * 0.45;
-            const rg = totalRipple * 0.15;
+            const rr = totalRipple * _rippleChroma;
+            const rg = totalRipple * _rippleChroma * 0.33;
 
             if (hasShadow) {
               rShadowX += rrOffX;
@@ -698,15 +920,14 @@ resize listener → charPositionsDirty = true</code></pre>
       const avg = perfFrameTimes.reduce(function (a, b) { return a + b; }, 0) / perfFrameTimes.length;
       const fps = 1000 / avg;
       const worst = Math.max.apply(null, perfFrameTimes);
-      perfHud.textContent =
+      ctrlHud.textContent =
         'fps: ' + fps.toFixed(1) + '  worst: ' + (1000 / worst).toFixed(1) + '\n' +
         'compute: ' + perfComputeMs.toFixed(2) + 'ms\n' +
-        'blocks checked: ' + perfBlocksChecked + '/' + blocks.length + '\n' +
-        'chars iterated: ' + perfCharsIterated + '\n' +
-        'chars active: ' + perfCharsActive + '\n' +
-        'dom writes: ' + perfDomWrites + '\n' +
-        'ripples: ' + perfRippleCount + '\n' +
-        'total chars: ' + charSpans.length + '\n' +
+        'blocks: ' + perfBlocksChecked + '/' + blocks.length +
+        '  chars: ' + perfCharsIterated + '/' + charSpans.length + '\n' +
+        'active: ' + perfCharsActive +
+        '  writes: ' + perfDomWrites +
+        '  ripples: ' + perfRippleCount + '\n' +
         'activity: ' + contentActivity.toFixed(2) + '  vel: ' + velocity.toFixed(1);
     }
   }
