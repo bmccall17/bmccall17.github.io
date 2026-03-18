@@ -253,3 +253,9 @@ html {
 .darketype-viewer .viewer-toolbar > li:hover {
   background-color: var(--text-color) !important;
 }
+
+/* per-character chromatic displacement */
+.prox-char {
+  display: inline-block;
+  will-change: transform;
+}
