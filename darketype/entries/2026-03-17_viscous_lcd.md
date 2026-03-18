@@ -3,7 +3,7 @@ title: "pressing your finger into the screen"
 date: 2026-03-17T18:00:00
 state: "shipped"
 tags: [darketype, svg-filters, animation, lcd, chromatic-aberration, shipped]
-next_experiment: "per-character displacement via inline span wrapping"
+next_experiment: "per-character displacement via inline span wrapping → shipped as ADR-0017"
 ---
 
 # pressing your finger into the screen
