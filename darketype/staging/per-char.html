@@ -276,6 +276,7 @@
     <div class="ctrl-row"><span class="ctrl-label">ripple chroma</span><input class="ctrl-slider" data-key="rippleChroma" type="range" min="0" max="1" step="0.05"><span class="ctrl-val"></span></div>
     <div class="ctrl-row"><span class="ctrl-label">ripple rotate</span><input class="ctrl-slider" data-key="rippleRotation" type="range" min="0" max="15" step="0.5"><span class="ctrl-val"></span></div>
     <div class="ctrl-row"><span class="ctrl-label">wake floor</span><input class="ctrl-slider" data-key="wakeFloor" type="range" min="0" max="0.5" step="0.01"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">floor /ripple</span><input class="ctrl-slider" data-key="wakeFloorStep" type="range" min="0" max="0.2" step="0.005"><span class="ctrl-val"></span></div>
   </div>
 
   <div class="ctrl-actions">
@@ -360,7 +361,8 @@ resize listener → charPositionsDirty = true</code></pre>
     gravityDrift:    6,
     rippleChroma:    0.45,
     rippleRotation:  3,
-    wakeFloor:       0.08
+    wakeFloor:       0.21,
+    wakeFloorStep:   0.08
   };
 
   const cfg = Object.assign({}, DEFAULTS);
@@ -817,9 +819,7 @@ resize listener → charPositionsDirty = true</code></pre>
     const _gravDrift      = cfg.gravityDrift;
     const _rippleChroma   = cfg.rippleChroma;
     const _rippleRot      = cfg.rippleRotation;
-    const _wakeFloor      = cfg.wakeFloor;
-
-    // Update all active ripples
+    // Update all active ripples (need count before computing floor)
     const activeRipples = [];
     for (let ri = 0; ri < ripples.length; ri++) {
       const rp = ripples[ri];
@@ -838,6 +838,11 @@ resize listener → charPositionsDirty = true</code></pre>
       });
     }
     perfRippleCount = activeRipples.length;
+
+    // Dynamic wake floor: base + step per additional ripple
+    const _wakeFloor = Math.min(0.95,
+      cfg.wakeFloor + Math.max(0, perfRippleCount - 1) * cfg.wakeFloorStep
+    );
 
     const newActive = new Set();
     const gateRadius = _proxRadius + BLOCK_GATE_PAD;
@@ -1146,7 +1151,8 @@ resize listener → charPositionsDirty = true</code></pre>
         perfRippleCharsHit + ' ripple  ' +
         perfCharsActive + ' active\n' +
         'ripples: ' + perfRippleCount +
-        '  activity: ' + contentActivity.toFixed(2) +
+        '  floor: ' + _wakeFloor.toFixed(3) + '\n' +
+        'activity: ' + contentActivity.toFixed(2) +
         '  vel: ' + velocity.toFixed(1);
     }
   }
