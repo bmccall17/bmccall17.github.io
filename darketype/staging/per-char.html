@@ -94,11 +94,28 @@
     pointer-events: none;
     z-index: 999;
   }
+
+  #perf-hud {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    font-family: var(--font-main);
+    font-size: 0.65rem;
+    line-height: 1.5;
+    color: var(--dim-color);
+    background: rgba(10,10,10,0.85);
+    border: 1px solid rgba(0,143,17,0.3);
+    padding: 6px 10px;
+    pointer-events: none;
+    z-index: 999;
+    white-space: pre;
+  }
 </style>
 </head>
 <body>
 
 <div id="staging-label">staging / per-char</div>
+<div id="perf-hud"></div>
 
 <div class="container">
   <div id="content">
@@ -198,11 +215,21 @@ resize listener → charPositionsDirty = true</code></pre>
   let prevShadows    = [];
   const activeChars  = new Set();
 
-  let ripple = { active: false, x: 0, y: 0, radius: 0, startTime: 0, duration: 0, maxRadius: 0 };
+  const ripples = [];   // array of { active, x, y, startTime, duration, maxRadius }
+  const MAX_RIPPLES = 8;
 
   let lastWriteTime  = 0;
   let lastRecacheTime = 0;
   let rafId = null;
+
+  // Perf HUD state
+  const perfHud = document.getElementById('perf-hud');
+  let perfFrameTimes = [];
+  let perfLastTick = 0;
+  const PERF_SAMPLES = 60;
+  let perfBlocksChecked = 0, perfCharsIterated = 0, perfCharsActive = 0, perfDomWrites = 0;
+  let perfComputeMs = 0;
+  let perfRippleCount = 0;
 
   // ─── Character Wrapping ──────────────────────────────────────────────
 
@@ -354,19 +381,42 @@ resize listener → charPositionsDirty = true</code></pre>
     // Don't trigger on links or interactive elements
     if (e.target.closest('a, button, input, select, textarea')) return;
 
-    ripple.active = true;
-    ripple.x = e.clientX;
-    ripple.y = e.clientY;
-    ripple.radius = 0;
-    ripple.startTime = performance.now();
-    ripple.duration = RIPPLE_DURATION_MIN + Math.random() * (RIPPLE_DURATION_MAX - RIPPLE_DURATION_MIN);
-    ripple.maxRadius = RIPPLE_MAX_RAD_MIN + Math.random() * (RIPPLE_MAX_RAD_MAX - RIPPLE_MAX_RAD_MIN);
+    // Recycle oldest inactive slot, or push new (capped at MAX_RIPPLES)
+    let slot = ripples.find(function (r) { return !r.active; });
+    if (!slot) {
+      if (ripples.length < MAX_RIPPLES) {
+        slot = { active: false, x: 0, y: 0, startTime: 0, duration: 0, maxRadius: 0 };
+        ripples.push(slot);
+      } else {
+        // Steal the oldest active ripple
+        let oldest = ripples[0], oldestAge = 0;
+        for (let i = 0; i < ripples.length; i++) {
+          const age = performance.now() - ripples[i].startTime;
+          if (age > oldestAge) { oldestAge = age; oldest = ripples[i]; }
+        }
+        slot = oldest;
+      }
+    }
+
+    slot.active = true;
+    slot.x = e.clientX;
+    slot.y = e.clientY;
+    slot.startTime = performance.now();
+    slot.duration = RIPPLE_DURATION_MIN + Math.random() * (RIPPLE_DURATION_MAX - RIPPLE_DURATION_MIN);
+    slot.maxRadius = RIPPLE_MAX_RAD_MIN + Math.random() * (RIPPLE_MAX_RAD_MAX - RIPPLE_MAX_RAD_MIN);
   });
 
   // ─── Main Loop ───────────────────────────────────────────────────────
 
+  // Wake cutoff: don't compute wake for chars more than this far behind the front
+  const WAKE_MAX_BEHIND = 300;
+
   function tick(now) {
     rafId = requestAnimationFrame(tick);
+
+    // Frame timing for HUD
+    const frameDt = perfLastTick ? now - perfLastTick : 16.67;
+    perfLastTick = now;
 
     // Velocity
     const dx = mouseX - prevMouseX;
@@ -390,27 +440,48 @@ resize listener → charPositionsDirty = true</code></pre>
     if (now - lastWriteTime < WRITE_INTERVAL) return;
     lastWriteTime = now;
 
-    // Ripple progress
-    let rippleProgress = 0;
-    let rippleRadius = 0;
-    if (ripple.active) {
-      rippleProgress = (now - ripple.startTime) / ripple.duration;
-      if (rippleProgress >= 1) {
-        ripple.active = false;
-        rippleProgress = 0;
-      } else {
-        rippleRadius = rippleProgress * ripple.maxRadius;
+    const computeStart = performance.now();
+
+    // Reset perf counters
+    perfBlocksChecked = 0;
+    perfCharsIterated = 0;
+    perfDomWrites = 0;
+
+    // Update all active ripples
+    const activeRipples = [];
+    for (let ri = 0; ri < ripples.length; ri++) {
+      const rp = ripples[ri];
+      if (!rp.active) continue;
+      const progress = (now - rp.startTime) / rp.duration;
+      if (progress >= 1) {
+        rp.active = false;
+        continue;
       }
+      activeRipples.push({
+        x: rp.x,
+        y: rp.y,
+        progress: progress,
+        radius: progress * rp.maxRadius,
+        maxRadius: rp.maxRadius
+      });
     }
+    perfRippleCount = activeRipples.length;
 
     const newActive = new Set();
     const gateRadius = PROX_RADIUS + BLOCK_GATE_PAD;
-    const rippleGateRadius = ripple.active ? rippleRadius + RIPPLE_BAND + BLOCK_GATE_PAD : 0;
+
+    // Compute max ripple gate radius across all active ripples
+    let maxRippleGate = 0;
+    for (let ri = 0; ri < activeRipples.length; ri++) {
+      const g = activeRipples[ri].radius + RIPPLE_BAND + BLOCK_GATE_PAD;
+      if (g > maxRippleGate) maxRippleGate = g;
+    }
 
     // ─── Per-block gate ──────────────────────────────────────────────
     for (let bi = 0; bi < blocks.length; bi++) {
       const b = blocks[bi];
       if (!b.rect || b.charStart === -1) continue;
+      perfBlocksChecked++;
 
       // Closest point on block rect to cursor
       const clX = Math.max(b.rect.left, Math.min(mouseX, b.rect.right));
@@ -419,15 +490,22 @@ resize listener → charPositionsDirty = true</code></pre>
       const bDy = mouseY - clY;
       const blockDist = Math.sqrt(bDx * bDx + bDy * bDy);
 
-      // Check if block is within proximity OR ripple reach
-      let blockInProx = blockDist < gateRadius && contentActivity > 0.001;
+      // Check if block is within proximity OR any ripple reach
+      const blockInProx = blockDist < gateRadius && contentActivity > 0.001;
       let blockInRipple = false;
-      if (ripple.active) {
+      if (activeRipples.length > 0) {
         const bcx = b.rect.left + b.rect.width * 0.5;
         const bcy = b.rect.top + b.rect.height * 0.5;
-        const rbd = Math.sqrt((bcx - ripple.x) ** 2 + (bcy - ripple.y) ** 2);
-        // Block is in ripple zone if any part could be in the band or wake
-        blockInRipple = rbd < rippleGateRadius;
+        for (let ri = 0; ri < activeRipples.length; ri++) {
+          const rp = activeRipples[ri];
+          const rbd = Math.sqrt((bcx - rp.x) ** 2 + (bcy - rp.y) ** 2);
+          const rpGate = rp.radius + RIPPLE_BAND + BLOCK_GATE_PAD;
+          // Only gate on the active zone: front band + limited wake behind
+          if (rbd < rpGate && rbd > rp.radius - WAKE_MAX_BEHIND - BLOCK_GATE_PAD) {
+            blockInRipple = true;
+            break;
+          }
+        }
       }
 
       if (!blockInProx && !blockInRipple) continue;
@@ -436,6 +514,7 @@ resize listener → charPositionsDirty = true</code></pre>
       for (let ci = b.charStart; ci <= b.charEnd; ci++) {
         if (charBlockIdx[ci] !== bi) continue;
         if (charSpans[ci].dataset.ws !== undefined) continue;
+        perfCharsIterated++;
 
         const pos = charPositions[ci];
         let totalTx = 0, totalTy = 0, totalRot = 0;
@@ -452,29 +531,22 @@ resize listener → charPositionsDirty = true</code></pre>
 
           if (dist < PROX_RADIUS) {
             let pIntensity = 1 - dist / PROX_RADIUS;
-            // Soft curve (quadratic toe)
             pIntensity = pIntensity * (0.4 + pIntensity * 0.6);
             pIntensity *= contentActivity;
 
             if (pIntensity > 0.01) {
-              // Push direction
               let angle;
               if (dist < 5 && velocity > 0.5) {
-                // Cursor on top of char — use velocity vector
                 angle = Math.atan2(prevMouseY - mouseY, prevMouseX - mouseX);
               } else {
                 angle = Math.atan2(cdy, cdx);
               }
 
-              // Displacement
               const disp = pIntensity * MAX_DISPLACEMENT;
               totalTx += Math.cos(angle) * disp;
               totalTy += Math.sin(angle) * disp;
-
-              // Micro-rotation (tilt away from pressure)
               totalRot += pIntensity * MAX_ROTATION * (Math.cos(angle) > 0 ? 1 : -1);
 
-              // Chromatic shadow
               const spread = pIntensity * CHROMA_SPREAD;
               rShadowX = Math.cos(angle) * spread;
               rShadowY = Math.sin(angle) * spread;
@@ -493,10 +565,11 @@ resize listener → charPositionsDirty = true</code></pre>
           }
         }
 
-        // ── Ripple displacement ──────────────────────────────────
-        if (ripple.active) {
-          const rdx = pos.x - ripple.x;
-          const rdy = pos.y - ripple.y;
+        // ── Ripple displacement (all active ripples stack) ───────
+        for (let ri = 0; ri < activeRipples.length; ri++) {
+          const rp = activeRipples[ri];
+          const rdx = pos.x - rp.x;
+          const rdy = pos.y - rp.y;
           const rDist = Math.sqrt(rdx * rdx + rdy * rdy);
           const rAngle = Math.atan2(rdy, rdx);
 
@@ -504,17 +577,19 @@ resize listener → charPositionsDirty = true</code></pre>
           let wakeIntensity = 0;
 
           // Front (sharp ring)
-          const distFromFront = Math.abs(rDist - rippleRadius);
+          const distFromFront = Math.abs(rDist - rp.radius);
           if (distFromFront < RIPPLE_BAND) {
             frontIntensity = (1 - distFromFront / RIPPLE_BAND);
-            frontIntensity *= frontIntensity; // squared for sharper peak
+            frontIntensity *= frontIntensity;
           }
 
-          // Wake (dissolving trail behind front)
-          if (rDist < rippleRadius && rippleRadius > 10) {
-            const behindRatio = 1 - (rDist / rippleRadius);
-            wakeIntensity = (1 - behindRatio * 0.5) * (1 - rippleProgress);
-            wakeIntensity = Math.max(0, Math.min(1, wakeIntensity));
+          // Wake — only compute within WAKE_MAX_BEHIND of the front
+          const behindFront = rp.radius - rDist;
+          if (behindFront > 0 && behindFront < WAKE_MAX_BEHIND && rp.radius > 10) {
+            const behindRatio = behindFront / rp.radius;
+            wakeIntensity = (1 - behindRatio * 0.5) * (1 - rp.progress);
+            if (wakeIntensity < 0) wakeIntensity = 0;
+            if (wakeIntensity > 1) wakeIntensity = 1;
           }
 
           const totalRipple = Math.min(1, frontIntensity * 1.2 + wakeIntensity * 0.7);
@@ -522,25 +597,21 @@ resize listener → charPositionsDirty = true</code></pre>
           if (totalRipple > 0.01) {
             const rSpread = frontIntensity * RIPPLE_FRONT_DISP + wakeIntensity * RIPPLE_WAKE_DISP;
 
-            // Drip angle: blend radial → downward over time
             const halfPi = Math.PI * 0.5;
-            const dripAngle = rAngle + (halfPi - rAngle) * rippleProgress * 0.6;
+            const dripAngle = rAngle + (halfPi - rAngle) * rp.progress * 0.6;
 
             const rrOffX = Math.cos(dripAngle) * rSpread;
             const rrOffY = Math.sin(dripAngle) * rSpread;
-            const dripDrift = totalRipple * rippleProgress * 6;
+            const dripDrift = totalRipple * rp.progress * 6;
 
-            // Add to displacement
             totalTx += rrOffX;
             totalTy += rrOffY + dripDrift;
             totalRot += totalRipple * 3 * (Math.cos(dripAngle) > 0 ? 1 : -1);
 
-            // Ripple chromatic shadow
             const rr = totalRipple * 0.45;
             const rg = totalRipple * 0.15;
 
             if (hasShadow) {
-              // Blend with proximity shadow
               rShadowX += rrOffX;
               rShadowY += rrOffY + dripDrift;
               bShadowX -= rrOffX;
@@ -578,6 +649,7 @@ resize listener → charPositionsDirty = true</code></pre>
           if (transform !== prevTransforms[ci]) {
             charSpans[ci].style.transform = transform;
             prevTransforms[ci] = transform;
+            perfDomWrites++;
           }
 
           if (hasShadow) {
@@ -589,6 +661,7 @@ resize listener → charPositionsDirty = true</code></pre>
             if (shadow !== prevShadows[ci]) {
               charSpans[ci].style.textShadow = shadow;
               prevShadows[ci] = shadow;
+              perfDomWrites++;
             }
           }
         }
@@ -601,16 +674,41 @@ resize listener → charPositionsDirty = true</code></pre>
         if (prevTransforms[ci] !== '') {
           charSpans[ci].style.transform = '';
           prevTransforms[ci] = '';
+          perfDomWrites++;
         }
         if (prevShadows[ci] !== '') {
           charSpans[ci].style.textShadow = '';
           prevShadows[ci] = '';
+          perfDomWrites++;
         }
       }
     }
 
     activeChars.clear();
     for (const ci of newActive) activeChars.add(ci);
+    perfCharsActive = newActive.size;
+
+    perfComputeMs = performance.now() - computeStart;
+
+    // ── HUD update (every 6 frames to avoid thrash) ──────────────
+    perfFrameTimes.push(frameDt);
+    if (perfFrameTimes.length > PERF_SAMPLES) perfFrameTimes.shift();
+
+    if (perfFrameTimes.length % 6 === 0) {
+      const avg = perfFrameTimes.reduce(function (a, b) { return a + b; }, 0) / perfFrameTimes.length;
+      const fps = 1000 / avg;
+      const worst = Math.max.apply(null, perfFrameTimes);
+      perfHud.textContent =
+        'fps: ' + fps.toFixed(1) + '  worst: ' + (1000 / worst).toFixed(1) + '\n' +
+        'compute: ' + perfComputeMs.toFixed(2) + 'ms\n' +
+        'blocks checked: ' + perfBlocksChecked + '/' + blocks.length + '\n' +
+        'chars iterated: ' + perfCharsIterated + '\n' +
+        'chars active: ' + perfCharsActive + '\n' +
+        'dom writes: ' + perfDomWrites + '\n' +
+        'ripples: ' + perfRippleCount + '\n' +
+        'total chars: ' + charSpans.length + '\n' +
+        'activity: ' + contentActivity.toFixed(2) + '  vel: ' + velocity.toFixed(1);
+    }
   }
 
   // ─── Init ────────────────────────────────────────────────────────────
