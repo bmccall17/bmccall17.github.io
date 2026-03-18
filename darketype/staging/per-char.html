@@ -106,7 +106,7 @@
     background: rgba(10,10,10,0.92);
     border: 1px solid rgba(0,143,17,0.3);
     padding: 0;
-    width: 260px;
+    width: 320px;
     max-height: calc(100vh - 24px);
     overflow-y: auto;
     scrollbar-width: thin;
@@ -189,8 +189,24 @@
   }
 
   .ctrl-val {
-    flex: 0 0 38px;
+    flex: 0 0 52px;
     text-align: right;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+    user-select: none;
+  }
+  .ctrl-val:hover { color: var(--text-color); }
+
+  .ctrl-val-input {
+    width: 52px;
+    background: rgba(0,255,65,0.08);
+    border: 1px solid var(--dim-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-size: 0.65rem;
+    text-align: right;
+    padding: 0 2px;
+    outline: none;
     font-variant-numeric: tabular-nums;
   }
 
@@ -368,10 +384,10 @@ resize listener → charPositionsDirty = true</code></pre>
   }
 
   function fmtVal(v) {
-    if (v >= 100) return Math.round(v);
-    if (v >= 10) return v.toFixed(1);
-    if (v >= 1) return v.toFixed(1);
-    return v.toFixed(3).replace(/0+$/, '').replace(/\.$/, '.0');
+    if (v >= 100) return v.toFixed(1);
+    if (v >= 10) return v.toFixed(2);
+    if (v >= 1) return v.toFixed(3);
+    return v.toFixed(3);
   }
 
   sliders.forEach(function (s) {
@@ -379,6 +395,47 @@ resize listener → charPositionsDirty = true</code></pre>
       var key = s.dataset.key;
       cfg[key] = parseFloat(s.value);
       s.nextElementSibling.textContent = fmtVal(cfg[key]);
+    });
+  });
+
+  // Click-to-edit on value labels
+  ctrlPanel.addEventListener('click', function (e) {
+    var valSpan = e.target.closest('.ctrl-val');
+    if (!valSpan) return;
+    e.stopPropagation();
+
+    // Find the sibling slider
+    var row = valSpan.closest('.ctrl-row');
+    var slider = row.querySelector('.ctrl-slider');
+    var key = slider.dataset.key;
+
+    // Replace span content with an input
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'ctrl-val-input';
+    input.value = fmtVal(cfg[key]);
+    valSpan.textContent = '';
+    valSpan.appendChild(input);
+    input.focus();
+    input.select();
+
+    function commit() {
+      var raw = parseFloat(input.value);
+      if (!isNaN(raw)) {
+        // Clamp to slider min/max
+        var lo = parseFloat(slider.min);
+        var hi = parseFloat(slider.max);
+        raw = Math.max(lo, Math.min(hi, raw));
+        cfg[key] = raw;
+        slider.value = raw;
+      }
+      valSpan.textContent = fmtVal(cfg[key]);
+    }
+
+    input.addEventListener('blur', commit);
+    input.addEventListener('keydown', function (ke) {
+      if (ke.key === 'Enter') { ke.preventDefault(); input.blur(); }
+      if (ke.key === 'Escape') { valSpan.textContent = fmtVal(cfg[key]); }
     });
   });
 
