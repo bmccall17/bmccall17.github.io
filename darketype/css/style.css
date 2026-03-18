@@ -259,3 +259,7 @@ html {
   display: inline-block;
   will-change: transform;
 }
+
+.prox-char[data-ws] {
+  white-space: pre;
+}
