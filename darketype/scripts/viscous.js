@@ -158,6 +158,7 @@
   var MAX_RIPPLES = 8;
 
   var charWrapping = false;   // flag to suppress observer during wrap
+  var contentObserver = null; // hoisted so wrapContentChars can disconnect
 
   function charShouldExclude(node) {
     var n = node;
@@ -171,6 +172,7 @@
   function wrapContentChars() {
     if (!contentEl) return;
     charWrapping = true;
+    if (contentObserver) contentObserver.disconnect();
     unwrapChars();
 
     var walker = document.createTreeWalker(contentEl, NodeFilter.SHOW_TEXT, null);
@@ -205,6 +207,7 @@
     buildCharBlockMap();
     cacheCharPositions();
     charWrapping = false;
+    if (contentObserver) contentObserver.observe(contentEl, { childList: true, subtree: true });
   }
 
   function unwrapChars() {
@@ -269,7 +272,7 @@
   }
 
   if (contentEl) {
-    var contentObserver = new MutationObserver(function () {
+    contentObserver = new MutationObserver(function () {
       if (!charWrapping) wrapContentChars();
     });
     contentObserver.observe(contentEl, { childList: true, subtree: true });
