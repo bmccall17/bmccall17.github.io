@@ -275,6 +275,7 @@
     <div class="ctrl-row"><span class="ctrl-label">gravity drift</span><input class="ctrl-slider" data-key="gravityDrift" type="range" min="0" max="20" step="0.5"><span class="ctrl-val"></span></div>
     <div class="ctrl-row"><span class="ctrl-label">ripple chroma</span><input class="ctrl-slider" data-key="rippleChroma" type="range" min="0" max="1" step="0.05"><span class="ctrl-val"></span></div>
     <div class="ctrl-row"><span class="ctrl-label">ripple rotate</span><input class="ctrl-slider" data-key="rippleRotation" type="range" min="0" max="15" step="0.5"><span class="ctrl-val"></span></div>
+    <div class="ctrl-row"><span class="ctrl-label">wake floor</span><input class="ctrl-slider" data-key="wakeFloor" type="range" min="0" max="0.5" step="0.01"><span class="ctrl-val"></span></div>
   </div>
 
   <div class="ctrl-actions">
@@ -358,7 +359,8 @@ resize listener → charPositionsDirty = true</code></pre>
     dripBlend:       0.6,
     gravityDrift:    6,
     rippleChroma:    0.45,
-    rippleRotation:  3
+    rippleRotation:  3,
+    wakeFloor:       0.08
   };
 
   const cfg = Object.assign({}, DEFAULTS);
@@ -815,6 +817,7 @@ resize listener → charPositionsDirty = true</code></pre>
     const _gravDrift      = cfg.gravityDrift;
     const _rippleChroma   = cfg.rippleChroma;
     const _rippleRot      = cfg.rippleRotation;
+    const _wakeFloor      = cfg.wakeFloor;
 
     // Update all active ripples
     const activeRipples = [];
@@ -956,7 +959,7 @@ resize listener → charPositionsDirty = true</code></pre>
 
           const totalRipple = Math.min(1, frontIntensity * 1.2 + wakeIntensity * 0.7);
 
-          if (totalRipple > 0.01) {
+          if (totalRipple > _wakeFloor) {
             charHitByRipple = true;
             const rSpread = frontIntensity * _rippleFrontD + wakeIntensity * _rippleWakeD;
 
@@ -1009,10 +1012,20 @@ resize listener → charPositionsDirty = true</code></pre>
           result.transform = 'translate(' + totalTx.toFixed(2) + 'px,' + totalTy.toFixed(2) + 'px) rotate(' + totalRot.toFixed(2) + 'deg)';
 
           if (hasShadow) {
-            result.shadow = rShadowX.toFixed(1) + 'px ' + rShadowY.toFixed(1) + 'px 0 rgba(255,20,20,' + rAlpha.toFixed(3) + '),' +
-                            bShadowX.toFixed(1) + 'px ' + bShadowY.toFixed(1) + 'px 0 rgba(30,80,255,' + bAlpha.toFixed(3) + ')';
+            // Quantize to 0.5px / 0.05 alpha to reduce unique shadow strings
+            var qsx = (Math.round(rShadowX * 2) / 2);
+            var qsy = (Math.round(rShadowY * 2) / 2);
+            var qbx = (Math.round(bShadowX * 2) / 2);
+            var qby = (Math.round(bShadowY * 2) / 2);
+            var qra = (Math.round(rAlpha * 20) / 20);
+            var qba = (Math.round(bAlpha * 20) / 20);
+
+            result.shadow = qsx + 'px ' + qsy + 'px 0 rgba(255,20,20,' + qra + '),' +
+                            qbx + 'px ' + qby + 'px 0 rgba(30,80,255,' + qba + ')';
             if (gAlpha > 0.001) {
-              result.shadow += ',0px ' + gShadowY.toFixed(1) + 'px 0 rgba(0,255,65,' + gAlpha.toFixed(3) + ')';
+              var qgy = (Math.round(gShadowY * 2) / 2);
+              var qga = (Math.round(gAlpha * 20) / 20);
+              result.shadow += ',0px ' + qgy + 'px 0 rgba(0,255,65,' + qga + ')';
             }
           }
 
