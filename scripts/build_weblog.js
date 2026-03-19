@@ -3,6 +3,8 @@ const path = require('path');
 
 const ENTRIES_DIR = path.join(__dirname, '../darketype/entries');
 const INDEX_FILE = path.join(__dirname, '../darketype/weblog/index.html');
+const ENTRY_TEMPLATE = path.join(__dirname, '../darketype/entry.html');
+const WEBLOG_DIR = path.join(__dirname, '../darketype/weblog');
 
 function parseFrontmatter(content) {
     const match = content.match(/^---([\s\S]*?)---/);
@@ -14,6 +16,72 @@ function parseFrontmatter(content) {
         if (key && val) meta[key.trim()] = val.join(':').trim().replace(/['"]/g, '');
     });
     return meta;
+}
+
+function extractDescription(content) {
+    // strip frontmatter
+    let body = content.replace(/^---[\s\S]*?---/, '').trim();
+    // strip markdown syntax: headers, bold, italic, links, images, code blocks
+    body = body.replace(/```[\s\S]*?```/g, '');
+    body = body.replace(/`[^`]+`/g, '');
+    body = body.replace(/!\[[^\]]*\]\([^)]*\)/g, '');
+    body = body.replace(/\[[^\]]*\]\([^)]*\)/g, (m) => m.replace(/\[([^\]]*)\]\([^)]*\)/, '$1'));
+    body = body.replace(/^#{1,6}\s+/gm, '');
+    body = body.replace(/[*_~]+/g, '');
+    body = body.replace(/\n+/g, ' ').trim();
+    return body.slice(0, 160).trim();
+}
+
+function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function generateEntryPage(post, entryHtml) {
+    let html = entryHtml;
+    const escapedTitle = escapeHtml(post.title);
+    const escapedDesc = escapeHtml(post.description);
+    const ogImage = `https://bmccall17.github.io/assets/social/og/${post.slug}.png`;
+    const ogUrl = `https://bmccall17.github.io/darketype/weblog/${post.slug}.html`;
+
+    // update <title>
+    html = html.replace(/<title>.*?<\/title>/, `<title>darketype // ${escapedTitle}</title>`);
+
+    // update OG tags
+    html = html.replace(/property="og:title" content="[^"]*"/, `property="og:title" content="${escapedTitle}"`);
+    html = html.replace(/property="og:description"[\s\n]*content="[^"]*"/,
+        `property="og:description" content="${escapedDesc}"`);
+    html = html.replace(/property="og:image" content="[^"]*"/, `property="og:image" content="${ogImage}"`);
+    html = html.replace(/property="og:image:width" content="[^"]*"/, `property="og:image:width" content="1200"`);
+    html = html.replace(/property="og:image:height" content="[^"]*"/, `property="og:image:height" content="630"`);
+    html = html.replace(/property="og:url" content="[^"]*"/, `property="og:url" content="${ogUrl}"`);
+
+    // update Twitter tags
+    html = html.replace(/name="twitter:title" content="[^"]*"/, `name="twitter:title" content="${escapedTitle}"`);
+    html = html.replace(/name="twitter:description"[\s\n]*content="[^"]*"/,
+        `name="twitter:description" content="${escapedDesc}"`);
+    html = html.replace(/name="twitter:image" content="[^"]*"/, `name="twitter:image" content="${ogImage}"`);
+
+    // fix paths (entry.html is at darketype/, generated pages at darketype/weblog/)
+    html = html.replace('href="../assets/favicons/weblog.svg"', 'href="../../assets/favicons/weblog.svg"');
+    html = html.replace('href="css/style.css"', 'href="../css/style.css"');
+    html = html.replace('src="scripts/viscous.js"', 'src="../scripts/viscous.js"');
+
+    // fix nav link: from weblog/ perspective, index is in same dir
+    html = html.replace('href="weblog/index.html"', 'href="index.html"');
+
+    // replace query-param entry loading with hardcoded path
+    html = html.replace(
+        "const entry = params.get('log'); // e.g., 'entries/2026...md'",
+        `const entry = '../entries/${post.file}';`
+    );
+
+    // remove the no-entry error check since entry is always set
+    html = html.replace(
+        /if \(!entry\) \{[\s\S]*?return;\s*\}/,
+        '// entry path is hardcoded by build'
+    );
+
+    return html;
 }
 
 function build() {
@@ -34,14 +102,18 @@ function build() {
             created = stats.birthtimeMs ? stats.birthtime : stats.mtime;
         }
 
+        const slug = file.replace(/\.md$/, '');
+
         return {
             file,
+            slug,
             title: meta.title || file, // Fallback title
+            description: extractDescription(content),
             date: meta.date || created.toISOString().split('T')[0], // Frontmatter date
             timestampIso: created.toISOString(),
             epoch: created.getTime(),
             state: meta.state || 'void',
-            path: `../entry.html?log=entries/${file}`
+            path: `${slug}.html`
         };
     });
 
@@ -89,6 +161,17 @@ function build() {
     }));
     fs.writeFileSync(path.join(__dirname, '../heatmap.json'), JSON.stringify(heatmapData, null, 2));
     console.log('✅ generated heatmap.json');
+
+    // 6. Generate per-entry static HTML pages
+    const entryHtml = fs.readFileSync(ENTRY_TEMPLATE, 'utf-8');
+    let generated = 0;
+    for (const post of posts) {
+        const pageHtml = generateEntryPage(post, entryHtml);
+        const outPath = path.join(WEBLOG_DIR, `${post.slug}.html`);
+        fs.writeFileSync(outPath, pageHtml);
+        generated++;
+    }
+    console.log(`✅ generated ${generated} static entry pages in weblog/`);
 }
 
 build();

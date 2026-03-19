@@ -1,182 +1,233 @@
 [
   {
-    "file": "2026-03-18_per_char_chromatic.md",
-    "title": "every letter has its own bruise",
-    "date": "2026-03-18T07:00:00",
-    "timestampIso": "2026-03-18T07:00:00.000Z",
-    "epoch": 1773817200000,
+    "file": "2026-03-19_the_context_lake.md",
+    "slug": "2026-03-19_the_context_lake",
+    "title": "the context lake",
+    "description": "the context lake the problem i'm interviewing for a technical success manager role at a company whose product i genuinely love. port.io — an agentic internal de",
+    "date": "2026-03-19T08:00:00",
+    "timestampIso": "2026-03-19T12:00:00.000Z",
+    "epoch": 1773921600000,
     "state": "shipped",
-    "path": "../entry.html?log=entries/2026-03-18_per_char_chromatic.md"
+    "path": "2026-03-19_the_context_lake.html"
+  },
+  {
+    "file": "2026-03-18_per_char_chromatic.md",
+    "slug": "2026-03-18_per_char_chromatic",
+    "title": "every letter has its own bruise",
+    "description": "every letter has its own bruise the LCD effect from ADR-0016 worked at the paragraph level. you'd move your cursor near a block of text and the entire thing wou",
+    "date": "2026-03-18T07:00:00",
+    "timestampIso": "2026-03-18T11:00:00.000Z",
+    "epoch": 1773831600000,
+    "state": "shipped",
+    "path": "2026-03-18_per_char_chromatic.html"
   },
   {
     "file": "2026-03-17_viscous_lcd.md",
+    "slug": "2026-03-17_viscous_lcd",
     "title": "pressing your finger into the screen",
+    "description": "pressing your finger into the screen you know that thing you did as a kid — pressing your thumb into an old LCD monitor and watching the colors bloom outward in",
     "date": "2026-03-17T18:00:00",
-    "timestampIso": "2026-03-17T18:00:00.000Z",
-    "epoch": 1773770400000,
+    "timestampIso": "2026-03-17T22:00:00.000Z",
+    "epoch": 1773784800000,
     "state": "shipped",
-    "path": "../entry.html?log=entries/2026-03-17_viscous_lcd.md"
+    "path": "2026-03-17_viscous_lcd.html"
   },
   {
     "file": "2026-03-17_widget_woke_up.md",
+    "slug": "2026-03-17_widget_woke_up",
     "title": "the widget that finally learned where it was",
+    "description": "the widget that finally learned where it was repOptics has had a Port.io floating widget for a while. little violet button, bottom-right corner. click it and yo",
     "date": "2026-03-17",
     "timestampIso": "2026-03-17T00:00:00.000Z",
     "epoch": 1773705600000,
     "state": "shipped",
-    "path": "../entry.html?log=entries/2026-03-17_widget_woke_up.md"
+    "path": "2026-03-17_widget_woke_up.html"
   },
   {
     "file": "2026-03-09_repoptics_meets_vertex.md",
+    "slug": "2026-03-09_repoptics_meets_vertex",
     "title": "when the port.io pattern meets vertex ai",
+    "description": "when the port.io pattern meets vertex ai a friend suggested, \"get repOptics into Vertex AI.\" what followed was exactly the kind of deep dive we engineered the",
     "date": "2026-03-09",
     "timestampIso": "2026-03-09T00:00:00.000Z",
     "epoch": 1773014400000,
     "state": "optimistic",
-    "path": "../entry.html?log=entries/2026-03-09_repoptics_meets_vertex.md"
+    "path": "2026-03-09_repoptics_meets_vertex.html"
   },
   {
     "file": "2026-03-06_daemon_summons.md",
+    "slug": "2026-03-06_daemon_summons",
     "title": "daemon summons",
+    "description": "the feeling imagine you step into a world where the laws are different. not just the physics — the social physics. in this place, your curiosity has a shape. yo",
     "date": "2026-03-06T20:00:00",
-    "timestampIso": "2026-03-06T20:00:00.000Z",
-    "epoch": 1772827200000,
+    "timestampIso": "2026-03-07T01:00:00.000Z",
+    "epoch": 1772845200000,
     "state": "mess",
-    "path": "../entry.html?log=entries/2026-03-06_daemon_summons.md"
+    "path": "2026-03-06_daemon_summons.html"
   },
   {
     "file": "2026-03-06_antigravity_takes_the_wheel_v0.1.5.md",
+    "slug": "2026-03-06_antigravity_takes_the_wheel_v0.1.5",
     "title": "antigravity takes the wheel",
+    "description": "the problem we ran into major git hang-ups today. Github Desktop was throwing sync fits, and running manual commits from the terminal got locked up because  fro",
     "date": "2026-03-06T15:00:00",
-    "timestampIso": "2026-03-06T15:00:00.000Z",
-    "epoch": 1772809200000,
+    "timestampIso": "2026-03-06T20:00:00.000Z",
+    "epoch": 1772827200000,
     "state": "learning",
-    "path": "../entry.html?log=entries/2026-03-06_antigravity_takes_the_wheel_v0.1.5.md"
+    "path": "2026-03-06_antigravity_takes_the_wheel_v0.1.5.html"
   },
   {
     "file": "2026-03-06_port_pushes_back.md",
+    "slug": "2026-03-06_port_pushes_back",
     "title": "port pushes back (and then it doesnt)",
+    "description": "the sequel yesterday was about pain — fighting the ocean integration, the grayed-out button, the docker image wall. today was about pushing past that and seeing",
     "date": "2026-03-06T09:00:00",
-    "timestampIso": "2026-03-06T09:00:00.000Z",
-    "epoch": 1772787600000,
+    "timestampIso": "2026-03-06T14:00:00.000Z",
+    "epoch": 1772805600000,
     "state": "learning",
-    "path": "../entry.html?log=entries/2026-03-06_port_pushes_back.md"
+    "path": "2026-03-06_port_pushes_back.html"
   },
   {
     "file": "2026-03-05_port_ocean_pain.md",
+    "slug": "2026-03-05_port_ocean_pain",
     "title": "the port.io ocean integration disaster",
+    "description": "the setup i'm building a comparison page inside repOptics that shows how my repo-level scoring tool stacks up against Port.io's org-scale software catalog. the",
     "date": "2026-03-05",
     "timestampIso": "2026-03-05T00:00:00.000Z",
     "epoch": 1772668800000,
     "state": "broken",
-    "path": "../entry.html?log=entries/2026-03-05_port_ocean_pain.md"
+    "path": "2026-03-05_port_ocean_pain.html"
   },
   {
     "file": "2026-03-05_runbooks_tarottalks.md",
+    "slug": "2026-03-05_runbooks_tarottalks",
     "title": "runbooks and the power of diagnostic tools",
+    "description": "the admin portal lag yesterday, during a long sprint on the TarotTALKS project, my admin portal started lagging hard. 11 of 12 API routes were silently timing o",
     "date": "2026-03-05",
     "timestampIso": "2026-03-05T00:00:00.000Z",
     "epoch": 1772668800000,
     "state": "debugging",
-    "path": "../entry.html?log=entries/2026-03-05_runbooks_tarottalks.md"
+    "path": "2026-03-05_runbooks_tarottalks.html"
   },
   {
     "file": "2026-03-03_kahn_ktane_mazes.md",
+    "slug": "2026-03-03_kahn_ktane_mazes",
     "title": "data points for what not to do (Kahn and KTANE)",
+    "description": "the Kahn moment exactly 25 years ago today, legendary Bayern Munich goalkeeper Oliver Kahn, trailing Hansa Rostock in the final minutes, sprinted up for a corne",
     "date": "2026-03-03",
     "timestampIso": "2026-03-03T00:00:00.000Z",
     "epoch": 1772496000000,
     "state": "learning",
-    "path": "../entry.html?log=entries/2026-03-03_kahn_ktane_mazes.md"
+    "path": "2026-03-03_kahn_ktane_mazes.html"
   },
   {
     "file": "2026-02-25_logo_factory.md",
+    "slug": "2026-02-25_logo_factory",
     "title": "the logo factory: when ai iteration fails, build your own tool",
+    "description": "the problem TEDxAsheville asked for a logo. not just any logo — our logo. the one that represents the BAM identity on the team page. recently dissolved my old c",
     "date": "2026-02-25",
     "timestampIso": "2026-02-25T00:00:00.000Z",
     "epoch": 1771977600000,
     "state": "shipped",
-    "path": "../entry.html?log=entries/2026-02-25_logo_factory.md"
+    "path": "2026-02-25_logo_factory.html"
   },
   {
     "file": "2026-02-13_dynamic_chaos.md",
+    "slug": "2026-02-13_dynamic_chaos",
     "title": "dynamic chaos: v0.1.4",
+    "description": "the problem the weblog was static. adding an entry required manual HTML rebuilds or waiting on potential CI. felt slow. felt rigid. the shift refactored the eng",
     "date": "2026-02-13",
     "timestampIso": "2026-02-13T00:00:00.000Z",
     "epoch": 1770940800000,
     "state": "mess",
-    "path": "../entry.html?log=entries/2026-02-13_dynamic_chaos.md"
+    "path": "2026-02-13_dynamic_chaos.html"
   },
   {
     "file": "2026-02-11_the_autopsy.md",
+    "slug": "2026-02-11_the_autopsy",
     "title": "the autopsy: auditing my own game engine",
+    "description": "the problem i built a game engine for a forbidden desert xr port. it works. you can play it. people have played it. but i sat down and did a real audit of the c",
     "date": "2026-02-11",
     "timestampIso": "2026-02-11T00:00:00.000Z",
     "epoch": 1770768000000,
     "state": "learning",
-    "path": "../entry.html?log=entries/2026-02-11_the_autopsy.md"
+    "path": "2026-02-11_the_autopsy.html"
   },
   {
     "file": "2026-02-10_optimism_and_ted.md",
+    "slug": "2026-02-10_optimism_and_ted",
     "title": "optimism and the ted stage",
+    "description": "the mission i had two interviews recently and i'm hopeful for offers. so lots to be optimistic about. the main goal now? getting my butt on the TED stage. the f",
     "date": "2026-02-10",
     "timestampIso": "2026-02-10T00:00:00.000Z",
     "epoch": 1770681600000,
     "state": "optimistic",
-    "path": "../entry.html?log=entries/2026-02-10_optimism_and_ted.md"
+    "path": "2026-02-10_optimism_and_ted.html"
   },
   {
     "file": "2026-02-07_leaking_pixels.md",
+    "slug": "2026-02-07_leaking_pixels",
     "title": "leaking pixels: cross-site data vapor",
+    "description": "the problem my portfolio needs to be professional, but my soul is chaotic. how do i bridge the gap without scaring off recruiters? the solution CSLP (Cross-Site",
     "date": "2026-02-07",
     "timestampIso": "2026-02-07T00:00:00.000Z",
     "epoch": 1770422400000,
     "state": "shipped",
-    "path": "../entry.html?log=entries/2026-02-07_leaking_pixels.md"
+    "path": "2026-02-07_leaking_pixels.html"
   },
   {
     "file": "2026-02-06_cslp_infection.md",
+    "slug": "2026-02-06_cslp_infection",
     "title": "cross-site leakage protocol (cslp)",
+    "description": "the problem i have two distinct identities: the polished professional () and the messy experimenter (). keeping them completely separate feels dishonest. hiding",
     "date": "2026-02-06T16:00:00",
-    "timestampIso": "2026-02-06T16:00:00.000Z",
-    "epoch": 1770393600000,
+    "timestampIso": "2026-02-06T21:00:00.000Z",
+    "epoch": 1770411600000,
     "state": "shipped",
-    "path": "../entry.html?log=entries/2026-02-06_cslp_infection.md"
+    "path": "2026-02-06_cslp_infection.html"
   },
   {
     "file": "2026-02-06_singularity.md",
+    "slug": "2026-02-06_singularity",
     "title": "event horizon (singularity v0.1.2)",
+    "description": "we finally cracked the physics of the leak. static masking was too clean. too digital. we needed gravity. the new engine doesn't just erase the noise; it consum",
     "date": "2026-02-06T14:00:00",
-    "timestampIso": "2026-02-06T14:00:00.000Z",
-    "epoch": 1770386400000,
+    "timestampIso": "2026-02-06T19:00:00.000Z",
+    "epoch": 1770404400000,
     "state": "void",
-    "path": "../entry.html?log=entries/2026-02-06_singularity.md"
+    "path": "2026-02-06_singularity.html"
   },
   {
     "file": "2026-02-06_the_loop_engaged.md",
+    "slug": "2026-02-06_the_loop_engaged",
     "title": "the loop engaged: v0.1.1",
+    "description": "the problem the portfolio was static HTML soup. the darketype was a ghost town. we needed to connect them. the learning building a \"universal reader\" () that fe",
     "date": "2026-02-06T12:00:00",
-    "timestampIso": "2026-02-06T12:00:00.000Z",
-    "epoch": 1770379200000,
+    "timestampIso": "2026-02-06T17:00:00.000Z",
+    "epoch": 1770397200000,
     "state": "shipped",
-    "path": "../entry.html?log=entries/2026-02-06_the_loop_engaged.md"
+    "path": "2026-02-06_the_loop_engaged.html"
   },
   {
     "file": "2026-02-06_phase_zero_rebellion.md",
+    "slug": "2026-02-06_phase_zero_rebellion",
     "title": "phase zero: the gentle rebellion",
+    "description": "the problem we needed a place to break things without breaking the \"professional\" us. the learning binary code (0 and 1) is a perfect metaphor for \"planning vs",
     "date": "2026-02-06T10:00:00",
-    "timestampIso": "2026-02-06T10:00:00.000Z",
-    "epoch": 1770372000000,
+    "timestampIso": "2026-02-06T15:00:00.000Z",
+    "epoch": 1770390000000,
     "state": "mess",
-    "path": "../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md"
+    "path": "2026-02-06_phase_zero_rebellion.html"
   },
   {
     "file": "2026-02-06_the_origin_story.md",
+    "slug": "2026-02-06_the_origin_story",
     "title": "the origin story: portfolio + darketype",
+    "description": "the problem waking up with alot on my mind... mainly my portfolio and developing the accompanying site that is a bit of the darketype site where im practicing t",
     "date": "2026-02-06",
     "timestampIso": "2026-02-06T00:00:00.000Z",
     "epoch": 1770336000000,
     "state": "seed",
-    "path": "../entry.html?log=entries/2026-02-06_the_origin_story.md"
+    "path": "2026-02-06_the_origin_story.html"
   }
 ]

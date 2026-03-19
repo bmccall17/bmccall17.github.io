@@ -1,122 +1,128 @@
 [
   {
+    "date": "2026-03-19",
+    "state": "shipped",
+    "title": "the context lake",
+    "path": "2026-03-19_the_context_lake.html"
+  },
+  {
     "date": "2026-03-18",
     "state": "shipped",
     "title": "every letter has its own bruise",
-    "path": "../entry.html?log=entries/2026-03-18_per_char_chromatic.md"
+    "path": "2026-03-18_per_char_chromatic.html"
   },
   {
     "date": "2026-03-17",
     "state": "shipped",
     "title": "pressing your finger into the screen",
-    "path": "../entry.html?log=entries/2026-03-17_viscous_lcd.md"
+    "path": "2026-03-17_viscous_lcd.html"
   },
   {
     "date": "2026-03-17",
     "state": "shipped",
     "title": "the widget that finally learned where it was",
-    "path": "../entry.html?log=entries/2026-03-17_widget_woke_up.md"
+    "path": "2026-03-17_widget_woke_up.html"
   },
   {
     "date": "2026-03-09",
     "state": "optimistic",
     "title": "when the port.io pattern meets vertex ai",
-    "path": "../entry.html?log=entries/2026-03-09_repoptics_meets_vertex.md"
+    "path": "2026-03-09_repoptics_meets_vertex.html"
   },
   {
     "date": "2026-03-06",
     "state": "mess",
     "title": "daemon summons",
-    "path": "../entry.html?log=entries/2026-03-06_daemon_summons.md"
+    "path": "2026-03-06_daemon_summons.html"
   },
   {
     "date": "2026-03-06",
     "state": "learning",
     "title": "antigravity takes the wheel",
-    "path": "../entry.html?log=entries/2026-03-06_antigravity_takes_the_wheel_v0.1.5.md"
+    "path": "2026-03-06_antigravity_takes_the_wheel_v0.1.5.html"
   },
   {
     "date": "2026-03-06",
     "state": "learning",
     "title": "port pushes back (and then it doesnt)",
-    "path": "../entry.html?log=entries/2026-03-06_port_pushes_back.md"
+    "path": "2026-03-06_port_pushes_back.html"
   },
   {
     "date": "2026-03-05",
     "state": "broken",
     "title": "the port.io ocean integration disaster",
-    "path": "../entry.html?log=entries/2026-03-05_port_ocean_pain.md"
+    "path": "2026-03-05_port_ocean_pain.html"
   },
   {
     "date": "2026-03-05",
     "state": "debugging",
     "title": "runbooks and the power of diagnostic tools",
-    "path": "../entry.html?log=entries/2026-03-05_runbooks_tarottalks.md"
+    "path": "2026-03-05_runbooks_tarottalks.html"
   },
   {
     "date": "2026-03-03",
     "state": "learning",
     "title": "data points for what not to do (Kahn and KTANE)",
-    "path": "../entry.html?log=entries/2026-03-03_kahn_ktane_mazes.md"
+    "path": "2026-03-03_kahn_ktane_mazes.html"
   },
   {
     "date": "2026-02-25",
     "state": "shipped",
     "title": "the logo factory: when ai iteration fails, build your own tool",
-    "path": "../entry.html?log=entries/2026-02-25_logo_factory.md"
+    "path": "2026-02-25_logo_factory.html"
   },
   {
     "date": "2026-02-13",
     "state": "mess",
     "title": "dynamic chaos: v0.1.4",
-    "path": "../entry.html?log=entries/2026-02-13_dynamic_chaos.md"
+    "path": "2026-02-13_dynamic_chaos.html"
   },
   {
     "date": "2026-02-11",
     "state": "learning",
     "title": "the autopsy: auditing my own game engine",
-    "path": "../entry.html?log=entries/2026-02-11_the_autopsy.md"
+    "path": "2026-02-11_the_autopsy.html"
   },
   {
     "date": "2026-02-10",
     "state": "optimistic",
     "title": "optimism and the ted stage",
-    "path": "../entry.html?log=entries/2026-02-10_optimism_and_ted.md"
+    "path": "2026-02-10_optimism_and_ted.html"
   },
   {
     "date": "2026-02-07",
     "state": "shipped",
     "title": "leaking pixels: cross-site data vapor",
-    "path": "../entry.html?log=entries/2026-02-07_leaking_pixels.md"
+    "path": "2026-02-07_leaking_pixels.html"
   },
   {
     "date": "2026-02-06",
     "state": "shipped",
     "title": "cross-site leakage protocol (cslp)",
-    "path": "../entry.html?log=entries/2026-02-06_cslp_infection.md"
+    "path": "2026-02-06_cslp_infection.html"
   },
   {
     "date": "2026-02-06",
     "state": "void",
     "title": "event horizon (singularity v0.1.2)",
-    "path": "../entry.html?log=entries/2026-02-06_singularity.md"
+    "path": "2026-02-06_singularity.html"
   },
   {
     "date": "2026-02-06",
     "state": "shipped",
     "title": "the loop engaged: v0.1.1",
-    "path": "../entry.html?log=entries/2026-02-06_the_loop_engaged.md"
+    "path": "2026-02-06_the_loop_engaged.html"
   },
   {
     "date": "2026-02-06",
     "state": "mess",
     "title": "phase zero: the gentle rebellion",
-    "path": "../entry.html?log=entries/2026-02-06_phase_zero_rebellion.md"
+    "path": "2026-02-06_phase_zero_rebellion.html"
   },
   {
     "date": "2026-02-06",
     "state": "seed",
     "title": "the origin story: portfolio + darketype",
-    "path": "../entry.html?log=entries/2026-02-06_the_origin_story.md"
+    "path": "2026-02-06_the_origin_story.html"
   }
 ]

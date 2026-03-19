@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>darketype // event horizon (singularity v0.1.2)</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicons/weblog.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- minimal markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- dompurify for sanitization -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js"></script>
+    <!-- viewerjs for image popup and zoom -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
+
+    <!-- Open Graph / Social Share -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="darketype">
+    <meta property="og:title" content="event horizon (singularity v0.1.2)">
+    <meta property="og:description" content="we finally cracked the physics of the leak. static masking was too clean. too digital. we needed gravity. the new engine doesn't just erase the noise; it consum">
+    <meta property="og:image" content="https://bmccall17.github.io/assets/social/og/2026-02-06_singularity.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://bmccall17.github.io/darketype/weblog/2026-02-06_singularity.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="event horizon (singularity v0.1.2)">
+    <meta name="twitter:description" content="we finally cracked the physics of the leak. static masking was too clean. too digital. we needed gravity. the new engine doesn't just erase the noise; it consum">
+    <meta name="twitter:image" content="https://bmccall17.github.io/assets/social/og/2026-02-06_singularity.png">
+
+    <!-- Twitter Widgets (for embedded tweets) -->
+    <script>
+        window.twttr = (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function (f) {
+                t._e.push(f);
+            };
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
+
+    <style>
+        .metadata-block {
+            border-bottom: 1px dashed var(--dim-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <nav>
+                <a href="index.html" class="dim">&lt; return to log</a>
+                <span class="dim"> // </span>
+                <span class="glitch-text" id="header-title">loading...</span>
+            </nav>
+        </header>
+
+        <main id="content" style="margin-top: 2rem; min-height: 50vh;">
+            <!-- content injected here -->
+            <p class="dim">accessing archive...</p>
+        </main>
+
+        <footer>
+            <hr class="dim">
+            <p class="dim" style="font-size: 0.8rem;">
+                <span id="meta-date"></span><br>
+                <span id="meta-state"></span>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // the "leak" reader logic
+        async function loadEntry() {
+            const params = new URLSearchParams(window.location.search);
+            const entry = '../entries/2026-02-06_singularity.md';
+
+            // entry path is hardcoded by build
+
+            try {
+                const response = await fetch(entry);
+                if (!response.ok) throw new Error('entry not found');
+                const text = await response.text();
+
+                // separate frontmatter from body (rudimentary check)
+                let body = text;
+                let meta = {};
+
+                if (text.startsWith('---')) {
+                    const parts = text.split('---');
+                    if (parts.length >= 3) {
+                        const frontmatter = parts[1];
+                        body = parts.slice(2).join('---');
+
+                        // parse basic yaml-like lines
+                        frontmatter.split('\n').forEach(line => {
+                            const [key, ...val] = line.split(':');
+                            if (key && val) meta[key.trim()] = val.join(':').trim().replace(/['"]/g, '');
+                        });
+                    }
+                }
+
+                // render
+                document.getElementById('header-title').innerText = meta.title || 'untitled mess';
+                document.getElementById('content').innerHTML = DOMPurify.sanitize(marked.parse(body), { ADD_ATTR: ['data-media-max-width'] });
+                document.title = `darketype // ${meta.title || 'entry'}`;
+
+                // metadata
+                if (meta.date) document.getElementById('meta-date').innerText = `logged: ${meta.date}`;
+                if (meta.state) document.getElementById('meta-state').innerText = `state: ${meta.state}`;
+
+                // Prism/Highlighter could go here if we were fancy
+
+                // Render any embedded tweets dynamically inside the content
+                if (window.twttr && window.twttr.ready) {
+                    window.twttr.ready(function (twttr) {
+                        twttr.widgets.load(document.getElementById('content'));
+                    });
+                }
+
+                // initialize viewer.js for images
+                const contentDiv = document.getElementById('content');
+                if (contentDiv.querySelector('img')) {
+                    new Viewer(contentDiv, {
+                        url: 'src',
+                        navbar: false,
+                        title: false,
+                        toolbar: {
+                            zoomIn: 1,
+                            zoomOut: 1,
+                            oneToOne: 1,
+                            reset: 1,
+                            prev: 0,
+                            play: 0,
+                            next: 0,
+                            rotateLeft: 0,
+                            rotateRight: 0,
+                            flipHorizontal: 0,
+                            flipVertical: 0,
+                        },
+                        className: 'darketype-viewer',
+                        backdrop: true
+                    });
+                }
+
+
+            } catch (err) {
+                document.getElementById('content').innerHTML = DOMPurify.sanitize(`<p class="alert">fatal error: ${err.message}</p>`);
+            }
+        }
+
+        loadEntry();
+    </script>
+    <script src="../scripts/viscous.js"></script>
+</body>
+
+</html>

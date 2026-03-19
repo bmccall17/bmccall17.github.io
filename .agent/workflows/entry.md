@@ -23,21 +23,23 @@ if a new mess entry is provided in the prompt, or you are executing this, ensure
 - ensure `tags` are relevant and exist as an active array in the frontmatter.
 
 ### step 2: build architecture
-- run the weblog generation script from the project root:
+- run the full build from the project root:
 // turbo
 ```bash
-node scripts/build_weblog.js
+npm run build
 ```
-- this script will automatically update:
+- this will automatically update:
   - `darketype/entries.json` (the dynamic list)
   - `darketype/weblog/index.html` (the static fallback and UI)
+  - `darketype/weblog/{slug}.html` (per-entry static pages with OG tags)
   - `heatmap.json` (the visual activity log)
+  - `assets/social/og/{slug}.png` (per-entry OG images)
 
 ### step 3: source control & publish
 - stage the new entry and the newly generated architecture files.
 // turbo
 ```bash
-git add darketype/entries/<the_new_file>.md darketype/entries.json darketype/weblog/index.html heatmap.json
+git add darketype/entries/<the_new_file>.md darketype/entries.json darketype/weblog/ heatmap.json assets/social/og/
 ```
 - commit the changes:
 // turbo

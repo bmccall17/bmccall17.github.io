@@ -1,8 +1,9 @@
 ---
 title: "the art of making a mess"
 date: 2026-02-06
-state: "mess" # options: mess, learning, shipped, broken
+state: "mess" # options: mess, learning, shipped, broken, void, seed, debugging, optimistic
 tags: [meta, darketype, chaos]
+og_image: # optional: path to custom OG image (auto-generated if blank)
 next_experiment: "building the index"
 ---
 

@@ -4,7 +4,10 @@
   "description": "curious if this landing page on Github actually works...",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:weblog": "node scripts/build_weblog.js",
+    "build:og": "node scripts/generate_og_images.js",
+    "build": "node scripts/build_weblog.js && node scripts/generate_og_images.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +23,8 @@
   "homepage": "https://github.com/bmccall17/bmccall17.github.io#readme",
   "devDependencies": {
     "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "canvas": "^3.2.1"
   }
 }
