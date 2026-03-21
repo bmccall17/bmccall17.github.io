@@ -10,7 +10,7 @@ next_experiment: "hidden paths and singularity secrets"
 
 TEDxAsheville asked for a logo. not just any logo — *our* logo. the one that represents the BAM identity on the team page. recently dissolved my old company Better Than Unicorns, so the spot on the team page where that logo used to live was empty. needed something fresh.
 
-![TEDxAsheville team page — Brett McCall, License Holder, with the old BTU logo below](entries/media/2026-02-25_logo_factory/tedx_team_page.png)
+![TEDxAsheville team page — Brett McCall, License Holder, with the old BTU logo below](../entries/media/2026-02-25_logo_factory/tedx_team_page.png)
 
 the obvious move: ask the AI agent to iterate on the SVG. i'm running Antigravity with Opus 4.6 right now, and it's incredible at code — but iterating on visual design through text prompts is... painful. "make the glow slightly brighter." "no, too bright." "shift the chromatic aberration 2px left." "that's too far." back and forth, forever.
 
@@ -20,7 +20,7 @@ instead of asking the machine to iterate endlessly on pixel values, i asked it t
 
 the result: the BAM Logo Factory.
 
-![the logo factory — every parameter exposed, live SVG preview, export to SVG/PNG](entries/media/2026-02-25_logo_factory/logo_factory.png)
+![the logo factory — every parameter exposed, live SVG preview, export to SVG/PNG](../entries/media/2026-02-25_logo_factory/logo_factory.png)
 
 # the mess
 
