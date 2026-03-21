@@ -33,7 +33,7 @@ npm run build
   - `darketype/weblog/index.html` (the static fallback and UI)
   - `darketype/weblog/{slug}.html` (per-entry static pages with OG tags)
   - `heatmap.json` (the visual activity log)
-  - `assets/social/og/{slug}.png` (per-entry OG images)
+  - `assets/social/og/{slug}.png` (per-entry OG images with content-specific pictograms)
 
 ### step 3: source control & publish
 - stage the new entry and the newly generated architecture files.

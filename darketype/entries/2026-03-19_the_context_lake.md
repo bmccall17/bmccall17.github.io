@@ -2,76 +2,68 @@
 title: "the context lake"
 date: 2026-03-19T08:00:00
 state: "shipped"
-tags: [port-io, context-lake, interview-prep, ai-iteration, agentic, claude-code, shipped]
+tags: [agent828, context-lake, ai-iteration, agentic, claude-code, shipped]
+next_experiment: "per-entry OG images with content-specific pictograms → shipped as ADR-0018"
 ---
 
 # the context lake
 
 ## the problem
 
-i'm interviewing for a technical success manager role at a company whose product i genuinely love. port.io — an agentic internal developer portal. the kind of tool i would have killed for at BTU when i was stitching together usage dashboards from six different systems with duct tape and optimism.
+i've been building agent828 — a tactical AI services site for mercenary bot development. the core mechanic is an autonomous marketing agent. it scrapes RSS feeds, checks weather, looks at trends, and generates social posts spanning bluesky and x (twitter), routing them through a discord approval queue before publishing.
 
-but there's a gap. my background is VR, not devops. i know what kubernetes *is*. i've never deployed a cluster. i understand terraform conceptually. i've never written an HCL file. the job description says "strong technical background in DevOps, platform engineering, cloud-native" and i felt that line in my chest the first time i read it.
+but there's a gap. LLMs are inherently stateless amnesiacs. you can give them a massive system prompt about "tone" and "brand", but if you want the agent to actually feel *alive*, it needs to remember what it's talked about recently. it needs to know what topics have momentum, what entities it just mentioned yesterday, what post templates are performing best, and what words i told it never to use again.
 
-so the question became: how do you close a knowledge gap fast enough to be credible in a high-stakes interview process — without faking it?
+so the question became: how do you give an autonomous agent an evolving memory without bloating the context window or hallucinating?
 
 ## what i built
 
-a **context lake**. three layers:
+a **context lake**. backed by a local SQLite database (`agent.db`) and a typescript ingestion engine. it has five distinct currents:
 
-- **knowledge/** — factual reference docs about port, organized by domain (product, business, customers, people, technical). facts only. no framing.
-- **playbook/** — interview prep, SOAR stories, objection handling, tactical coaching. the framing layer. how to talk about the facts.
-- **sources/** — raw transcripts from every call, PDFs, data files. the receipts.
+- **entities** — proper nouns, people, tools, concepts. things extracted from scrapers. they get upserted and track how many times they've been mentioned.
+- **topic clusters** — grouped themes. they have *momentum*. a topic that gets hit multiple times rises in relevance. if it isn't touched for days, a decay function drops it. stale topics get actively archived.
+- **preferences** — the operator override. *boosts* (things to lean into), *blocks* (words to never say), and *style notes*. a living style guide.
+- **performance** — the feedback loop. the lake tracks every post generated, approved, or rejected. it calculates approval rates per template type.
+- **identity** — point-in-time snapshots of the agent's current dual persona ("Grey" civilian vs "Green" tactical).
 
-twelve knowledge documents. eight playbook documents. seven call transcripts. a manifest tracking freshness. a changelog tracking what was learned and when.
-
-then i built an operating system on top of it — four slash commands in claude code:
-
-- `/ingest` — drop a transcript or paste notes, it extracts facts into the right knowledge docs, updates the manifest, appends the changelog, flags playbook impacts
-- `/briefme` — status report. what's fresh, what's stale, what to focus on next
-- `/query` — ask a question, get a cited answer from the knowledge layer. inline citations, cross-references, honest about gaps
-- `/review` — deep health check. staleness, inconsistencies, duplication, missing coverage
-
-the whole thing lives in a project directory with a `.claude/CLAUDE.md` that teaches claude how to navigate it. maintenance protocols baked in: auto-cite sources, flag stale data, suggest `/ingest` when new intel appears, keep the manifest current, respect the layer boundaries.
+then i built an internal `context-builder.ts` that acts as the query layer. before the LLM generates a post, the builder queries the lake: give me 8 relevant entities, 10 high-momentum topics, the active boosts/blocks, and the performance hints for this specific template.
 
 ## the mess
 
-it started as a google doc. then three google docs. then a sprawl of notes across notion, obsidian, and my desktop. the problem with interview prep is that it's accretive — every call adds context, every research session adds facts, and if you don't have a system, the most recent thing you learned overwrites everything that came before it.
+it started as hardcoded prompts. a massive string of instructions. the problem with hardcoded prompts is that they are brittle and static. if a post does well, the prompt doesn't know. if the agent overuses the word "synergy," the only way to stop it is to manually edit code.
 
-i was also doing something unusual: i had an internal champion. sam, a current TSM at port, took three calls with me over three weeks. each call was dense — product deep dives, interview coaching, competitive intel, role details. without extraction, those transcripts were just walls of text. with extraction, they became the foundation of everything i knew.
+i was also doing something unusual: trying to run this entirely within a "red-green-refactor loop" using claude code, pushing directly to `main` to trigger cloud build deployments to cloud run. the context for the *codebase* was handled by `.claude/CLAUDE.md`, but the context for the *data* was nowhere.
 
-the first version of the knowledge layer was just me copying and pasting. then i realized: this is exactly what port's context lake does for engineering organizations. aggregate data from multiple sources into a single governed layer so that AI agents (in this case, claude) can make grounded decisions instead of hallucinating.
+the first version of the agent was just reading raw RSS feeds and blasting them to gemini. it was generating repetitive, soulless content. then i realized: an agent without a governed data layer isn't an agent. it's just a text spinner. it needed an aggregation layer where data from multiple sources is distilled into grounded context.
 
-so i built mine the same way.
+so i built the lake.
 
 ## glimmers
 
-the moment it clicked: i ran `/briefme` for the first time and it told me three playbook docs were stale, that i had no profiles for the panelists i'd be meeting, and that my preparation plan still referenced the hiring manager round as "NEXT" even though i'd already completed it. it caught things i would have missed.
+the moment it clicked: i looked at the generation logs after seeding the lake. the builder pulled in a high-momentum topic, matched it against a fresh scraped item, avoided two blocked terms, and appended a performance hint telling the LLM that its current template had a 40% rejection rate so it needed to try a different angle.
 
-then this morning — an email from zoë. i'm advancing. but the format changed. it's not a panel chat anymore. it's a take-home assignment with a demo environment and a 45-60 minute presentation to two TSMs and a solutions architect. i pasted the email, ran `/ingest`, and within seconds it had updated the interview status, captured the demo credentials, flagged the missing assignment PDF, and noted that my panel game-day reminders needed supplementing for a presentation format.
+it generated a post that didn't just summarize an article — it synthesized it with what the agent had "been thinking about" lately.
 
-the system is doing what i designed it to do: keeping the lake alive so i can focus on the work instead of the bookkeeping.
+the system is doing what i designed it to do: keeping the lake alive so the agent can focus on generation instead of relying on me to update its worldview.
 
-## the al interview
+## the decay mechanism
 
-al sharma. head of technical success, americas. snyk, harness, hashicorp background. direct. the kind of person who tells you exactly where you stand.
+the most important part of a lake isn't what flows in; it's what flows out.
 
-i asked him about my gap — the devops tools i haven't touched. his answer surprised me:
+i asked claude to implement a `decayEntityRelevance` function. the answer was beautiful in its simplicity:
 
-> "knowing the platform itself is the key, everything else i don't bother too much about. terraform is a legacy SDLC tool that was relevant for devops ten years ago. we don't know if it's going to be relevant two years from now."
+> a cron job that runs every 24 hours. it touches every entity and topic, multiplying its relevance or momentum score by a decay factor (e.g., 0.9). if a score drops below a threshold, it gets archived.
 
-he called my take on agentic engineering "the best, most base take i've heard in a while." he valued the founder story, the product instinct, the fact that i was already using port and writing about it. his one concern: enterprise ambiguity at scale — managing federated customers, politics, personas. i addressed it with founder experience. he moved me forward.
-
-the thing he said that stuck: "you check a lot of those boxes. as a person 101, i have no concern."
+without decay, a context lake becomes a context swamp. filled with everything you've ever mentioned, competing equally for the LLM's attention. with decay, only the most relevant, recent, and highly-reinforced concepts survive to be passed into the context window.
 
 ## distillation
 
-what i'm learning is that interview prep is an information management problem. the same one port solves for engineering orgs. the same one every CSM faces when onboarding a new enterprise customer: how do you take a firehose of context from multiple sources and turn it into something you can actually act on?
+what i'm learning is that autonomous agents are fundamentally an information management problem.
 
-the answer, it turns out, is layers. facts in one place. framing in another. raw materials preserved. a system that tells you when things go stale. and an AI that can navigate the whole thing because you taught it the structure.
+the answer, it turns out, is layers. raw scraped facts in one place. momentum tracking in another. manual operator boundaries overriding them both. a system that automatically ages out stale data. and a dynamic context builder that pulls just what is needed for the prompt.
 
-the gap isn't closed yet. kubernetes is still conceptual for me. but the context lake means i know exactly what i know, exactly what i don't, and exactly where to look when i need to close the distance.
+the agent isn't perfect yet. tuning the decay rates is still an art. but the context lake means the agent knows exactly what it knows, exactly what it shouldn't say, and exactly what's working.
 
-next up: the assignment PDF. a demo environment to build in. a presentation to design. and maybe a prep call with al before i start.
+next up: migrating the agent from local docker compose to google cloud run so the lake can flow 24/7.
 
 the lake is ready for it.
