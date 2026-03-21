@@ -185,7 +185,11 @@
     for (var ti = 0; ti < textNodes.length; ti++) {
       var tNode = textNodes[ti];
       var text = tNode.textContent;
-      if (!text) continue;
+      if (!text || text.trim() === '') continue;
+      
+      // Collapse newlines/tabs/multiple spaces into single spaces like standard HTML rendering
+      text = text.replace(/\s+/g, ' ');
+      
       var frag = document.createDocumentFragment();
       for (var ci = 0; ci < text.length; ci++) {
         var span = document.createElement('span');
