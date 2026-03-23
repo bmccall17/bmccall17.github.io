@@ -1,5 +1,17 @@
 [
   {
+    "date": "2026-03-22",
+    "state": "shipped",
+    "title": "the export test",
+    "path": "2026-03-22_the_export_test.html"
+  },
+  {
+    "date": "2026-03-22",
+    "state": "frustrated",
+    "title": "the scorecard gate: enforcing deployment readiness",
+    "path": "2026-03-22_the_scorecard_gate.html"
+  },
+  {
     "date": "2026-03-19",
     "state": "shipped",
     "title": "every entry gets a face",
