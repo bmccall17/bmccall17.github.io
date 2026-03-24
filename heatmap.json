@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-03-23",
+    "state": "learning",
+    "title": "brett hud v1: stealing the cockpit from claude-hud",
+    "path": "2026-03-23_brett_hud_v1.html"
+  },
+  {
     "date": "2026-03-22",
     "state": "shipped",
     "title": "the export test",
