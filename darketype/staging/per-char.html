@@ -118,8 +118,8 @@
 
   #sidebar-toggle {
     position: fixed;
-    top: 12px;
-    left: 10px;
+    bottom: 12px;
+    right: 10px;
     z-index: 1000;
     display: flex;
     flex-direction: column;
@@ -688,6 +688,15 @@ resize listener → charPositionsDirty = true</code></pre>
       if (!text || text.trim() === '') continue;
       // Collapse whitespace like HTML rendering
       text = text.replace(/\s+/g, ' ');
+
+      // Strip leading/trailing whitespace at block boundaries
+      if (!tNode.previousSibling && text.charAt(0) === ' ') {
+        text = text.substring(1);
+      }
+      if (!tNode.nextSibling && text.length > 0 && text.charAt(text.length - 1) === ' ') {
+        text = text.substring(0, text.length - 1);
+      }
+      if (!text) continue;
 
       const frag = document.createDocumentFragment();
       // Split into tokens: alternating words and whitespace
@@ -1325,9 +1334,8 @@ resize listener → charPositionsDirty = true</code></pre>
     btn.title = ''; // no tooltip — discovery only
   });
 
-  // Auto-start a random active mode (not 'off')
-  const activeModes = shuffledModes.filter(m => m !== 'off');
-  const startMode = activeModes[Math.floor(Math.random() * activeModes.length)];
+  // Default to scroll spine mode
+  const startMode = 'spine';
   currentMode = startMode;
   // Highlight the correct button
   btns.forEach(b => {

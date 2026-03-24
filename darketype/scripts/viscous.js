@@ -190,6 +190,16 @@
       // Collapse newlines/tabs/multiple spaces into single spaces like standard HTML rendering
       text = text.replace(/\s+/g, ' ');
       
+      // Strip leading/trailing whitespace at block boundaries
+      // (matches browser whitespace collapsing rules)
+      if (!tNode.previousSibling && text.charAt(0) === ' ') {
+        text = text.substring(1);
+      }
+      if (!tNode.nextSibling && text.length > 0 && text.charAt(text.length - 1) === ' ') {
+        text = text.substring(0, text.length - 1);
+      }
+      if (!text) continue;
+      
       var frag = document.createDocumentFragment();
       // Split into tokens: alternating words and whitespace
       var tokens = text.match(/\S+|\s+/g) || [];

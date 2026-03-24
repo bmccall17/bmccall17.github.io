@@ -70,12 +70,8 @@
     initMode(currentMode);
   });
 
-  // Auto-start random active mode (not 'off')
-  var activeModes = [];
-  for (var mi = 0; mi < shuffledModes.length; mi++) {
-    if (shuffledModes[mi] !== 'off') activeModes.push(shuffledModes[mi]);
-  }
-  var startMode = activeModes[Math.floor(Math.random() * activeModes.length)];
+  // Default to scroll spine mode
+  var startMode = 'spine';
   currentMode = startMode;
   for (var i = 0; i < btns.length; i++) {
     if (btns[i].getAttribute('data-mode') === startMode) {
