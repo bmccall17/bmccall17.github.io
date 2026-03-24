@@ -65,6 +65,7 @@ function generateEntryPage(post, entryHtml) {
     html = html.replace('href="../assets/favicons/weblog.svg"', 'href="../../assets/favicons/weblog.svg"');
     html = html.replace('href="css/style.css"', 'href="../css/style.css"');
     html = html.replace('src="scripts/viscous.js"', 'src="../scripts/viscous.js"');
+    html = html.replace('src="scripts/sidebar.js"', 'src="../scripts/sidebar.js"');
 
     // fix nav link: from weblog/ perspective, index is in same dir
     html = html.replace('href="weblog/index.html"', 'href="index.html"');

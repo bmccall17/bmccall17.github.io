@@ -191,12 +191,32 @@
       text = text.replace(/\s+/g, ' ');
       
       var frag = document.createDocumentFragment();
-      for (var ci = 0; ci < text.length; ci++) {
-        var span = document.createElement('span');
-        span.className = 'prox-char';
-        span.textContent = text[ci];
-        if (/\s/.test(text[ci])) span.setAttribute('data-ws', '');
-        frag.appendChild(span);
+      // Split into tokens: alternating words and whitespace
+      var tokens = text.match(/\S+|\s+/g) || [];
+
+      for (var tokI = 0; tokI < tokens.length; tokI++) {
+        var token = tokens[tokI];
+        if (/^\s+$/.test(token)) {
+          // Whitespace — bare spans, not inside a word wrapper
+          for (var ci = 0; ci < token.length; ci++) {
+            var ws = document.createElement('span');
+            ws.className = 'prox-char';
+            ws.textContent = token[ci];
+            ws.setAttribute('data-ws', '');
+            frag.appendChild(ws);
+          }
+        } else {
+          // Word — wrap in .prox-word, chars inside
+          var wordSpan = document.createElement('span');
+          wordSpan.className = 'prox-word';
+          for (var ci = 0; ci < token.length; ci++) {
+            var span = document.createElement('span');
+            span.className = 'prox-char';
+            span.textContent = token[ci];
+            wordSpan.appendChild(span);
+          }
+          frag.appendChild(wordSpan);
+        }
       }
       tNode.parentNode.replaceChild(frag, tNode);
     }
@@ -217,6 +237,13 @@
   function unwrapChars() {
     activeChars = {};
     activeCharCount = 0;
+    // Remove word wrappers first
+    var wordSpans = contentEl.querySelectorAll('.prox-word');
+    for (var wi = 0; wi < wordSpans.length; wi++) {
+      var ws = wordSpans[wi];
+      while (ws.firstChild) ws.parentNode.insertBefore(ws.firstChild, ws);
+      ws.parentNode.removeChild(ws);
+    }
     var spans = contentEl.querySelectorAll('.prox-char');
     for (var i = 0; i < spans.length; i++) {
       var txt = document.createTextNode(spans[i].textContent);
