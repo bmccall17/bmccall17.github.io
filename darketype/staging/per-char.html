@@ -118,31 +118,40 @@
 
   #sidebar-toggle {
     position: fixed;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 12px;
+    left: 10px;
     z-index: 1000;
     display: flex;
-    gap: 2px;
-    background: rgba(10,10,10,0.92);
-    border: 1px solid rgba(0,143,17,0.3);
-    padding: 3px;
+    flex-direction: column;
+    gap: 0;
+    background: transparent;
+    padding: 0;
   }
   .sb-btn {
     font-family: var(--font-main);
-    font-size: 0.6rem;
-    color: var(--dim-color);
+    font-size: 1.1rem;
+    color: rgba(0,143,17,0.12);
     background: transparent;
-    border: 1px solid transparent;
-    padding: 3px 8px;
-    cursor: pointer;
+    border: none;
+    padding: 2px 6px;
+    cursor: default;
     white-space: nowrap;
+    line-height: 1.3;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+    user-select: none;
+    letter-spacing: 2px;
   }
-  .sb-btn:hover { color: var(--text-color); }
+  .sb-btn:hover {
+    color: rgba(0,255,65,0.4);
+    cursor: crosshair;
+    text-shadow: 0 0 6px rgba(0,255,65,0.15);
+  }
   .sb-btn.active {
-    color: var(--text-color);
-    border-color: var(--dim-color);
-    background: rgba(0,143,17,0.1);
+    color: rgba(0,255,65,0.55);
+    text-shadow: 0 0 8px rgba(0,255,65,0.2), 0 0 20px rgba(0,255,65,0.05);
+  }
+  @media (max-width: 1024px) {
+    #sidebar-toggle { display: none; }
   }
 
   #ctrl-panel {
@@ -297,13 +306,13 @@
 <canvas class="sidebar-canvas left" id="sidebar-left"></canvas>
 <canvas class="sidebar-canvas right" id="sidebar-right"></canvas>
 
-<!-- Sidebar mode toggle -->
+<!-- Sidebar mode toggle — secret glyph HUD -->
 <div id="sidebar-toggle">
-  <button class="sb-btn active" data-mode="off">off</button>
-  <button class="sb-btn" data-mode="pictogram">A: pictogram</button>
-  <button class="sb-btn" data-mode="matrix">B: matrix</button>
-  <button class="sb-btn" data-mode="noise">C: noise field</button>
-  <button class="sb-btn" data-mode="spine">D: scroll spine</button>
+  <button class="sb-btn" data-mode="off"></button>
+  <button class="sb-btn" data-mode="pictogram"></button>
+  <button class="sb-btn" data-mode="matrix"></button>
+  <button class="sb-btn" data-mode="noise"></button>
+  <button class="sb-btn" data-mode="spine"></button>
 </div>
 
 <button id="ctrl-toggle">controls</button>
@@ -1288,6 +1297,44 @@ resize listener → charPositionsDirty = true</code></pre>
     currentMode = btn.dataset.mode;
     initMode(currentMode);
   });
+
+  // ── Secret Glyph Randomizer ──
+  // Pool of cryptic symbols — shuffled and assigned on each load
+  const glyphPool = [
+    '⌀','⎔','⏣','◬','⟁','⊞','⏏','⎈','⌬','◎',
+    '⟐','⏚','⌖','◇','⊡','⎊','⏃','⌭','◈','⟟',
+    '⊘','⏆','⎍','◉','⟠','⌗','⏍','⎋','⟡','⊜',
+    '⌾','⏛','⎆','◍','⟤','⊛','⏎','⎌','◬','⟣'
+  ];
+  const modeKeys = ['off','pictogram','matrix','noise','spine'];
+  // Shuffle glyph assignments
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  const shuffledGlyphs = shuffle(glyphPool).slice(0, 5);
+  const shuffledModes = shuffle(modeKeys);
+  const btns = toggleBar.querySelectorAll('.sb-btn');
+  btns.forEach((btn, i) => {
+    btn.textContent = shuffledGlyphs[i];
+    btn.dataset.mode = shuffledModes[i];
+    btn.title = ''; // no tooltip — discovery only
+  });
+
+  // Auto-start a random active mode (not 'off')
+  const activeModes = shuffledModes.filter(m => m !== 'off');
+  const startMode = activeModes[Math.floor(Math.random() * activeModes.length)];
+  currentMode = startMode;
+  // Highlight the correct button
+  btns.forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === startMode);
+  });
+  // Defer init slightly so canvases are sized
+  setTimeout(() => initMode(startMode), 100);
 
   // ── MODE A: Pictogram ──
   function drawPictogramShield(ctx, cx, cy, s) {
