@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sportradar Demo — Mission Control</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Hamburger (mobile) -->
+<button id="hamburger" aria-label="Toggle navigation">&#9776;</button>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="mission-nav">
+  <div class="nav-header">
+    <h2>Mission Control</h2>
+    <div class="timer-widget">
+      <span id="elapsed">00:00</span>
+      <button id="timer-toggle">START</button>
+    </div>
+  </div>
+
+  <ul class="nav-sections">
+    <li class="nav-act active" data-act="1">
+      <a href="#act-1">Act 1: Platform Eng <span class="nav-badge">5m</span></a>
+      <ul class="nav-sub">
+        <li><a href="#a1-opening">Opening</a></li>
+        <li><a href="#a1-what">What It Is</a></li>
+        <li><a href="#a1-adoption">Adoption Problem</a></li>
+        <li><a href="#a1-port">Where Port Fits</a></li>
+        <li><a href="#a1-bridge">Bridge to Sportradar</a></li>
+        <li><a href="#a1-notes">Speaker Notes</a></li>
+      </ul>
+    </li>
+    <li class="nav-act" data-act="2">
+      <a href="#act-2">Act 2: Sportradar <span class="nav-badge">15m</span></a>
+      <ul class="nav-sub">
+        <li><a href="#a2-why">Why Sportradar</a></li>
+        <li><a href="#a2-pain">The Pain Story</a></li>
+        <li><a href="#a2-solution">The Solution</a></li>
+        <li><a href="#a2-workflows">Workflow Diagrams</a></li>
+        <li><a href="#a2-value">Value Tracking</a></li>
+        <li><a href="#a2-outcomes">Business Outcomes</a></li>
+      </ul>
+    </li>
+    <li class="nav-act" data-act="3">
+      <a href="#act-3">Act 3: Live Demo <span class="nav-badge">20m</span></a>
+      <ul class="nav-sub">
+        <li><a href="#a3-checklist">Pre-Demo Checklist</a></li>
+        <li><a href="#a3-stop1">Stop 1: Catalog</a></li>
+        <li><a href="#a3-stop2">Stop 2: GitHub</a></li>
+        <li><a href="#a3-stop3">Stop 3: Scorecard</a></li>
+        <li><a href="#a3-stop4">Stop 4: Gate</a></li>
+        <li><a href="#a3-stop5">Stop 5: Action</a></li>
+        <li><a href="#a3-stop6">Stop 6: Dashboard</a></li>
+        <li><a href="#a3-closing">Closing</a></li>
+        <li><a href="#a3-moments">Key Moments</a></li>
+      </ul>
+    </li>
+    <li class="nav-act" data-act="qa">
+      <a href="#qa">Q&amp;A <span class="nav-badge">~15m</span></a>
+      <ul class="nav-sub">
+        <li><a href="#qa-sportradar">Sportradar Choice</a></li>
+        <li><a href="#qa-extending">Extending</a></li>
+        <li><a href="#qa-value">Measuring Value</a></li>
+        <li><a href="#qa-technical">Technical Depth</a></li>
+        <li><a href="#qa-tsm">TSM Role</a></li>
+        <li><a href="#qa-brett">Brett-Specific</a></li>
+        <li><a href="#qa-reverse">Reverse Questions</a></li>
+      </ul>
+    </li>
+    <li class="nav-act" data-act="intel">
+      <a href="#intel">Intel Drawers</a>
+      <ul class="nav-sub">
+        <li><a href="#intel-news">Q1 2026 News</a></li>
+        <li><a href="#intel-people">Leadership</a></li>
+        <li><a href="#intel-financials">Financials</a></li>
+        <li><a href="#intel-fifa">FIFA Task Force</a></li>
+        <li><a href="#intel-cortex">Cortex Intel</a></li>
+        <li><a href="#intel-stack">Tech Stack</a></li>
+        <li><a href="#intel-soar">SOAR Stories</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="nav-footer">
+    <kbd>t</kbd> timer &nbsp; <kbd>1</kbd>-<kbd>5</kbd> jump &nbsp; <kbd>Esc</kbd> close &nbsp; <kbd>a</kbd> open all
+  </div>
+</nav>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main id="content">
+
+<!-- ======================================================
+     ACT 1: PLATFORM ENGINEERING & WHY PORT (5 min)
+     Source: playbook/challenge/PLATFORM_ENG_EXPLAINER.md
+     ====================================================== -->
+<section id="act-1" class="act act-blue">
+  <header class="act-header">
+    <h1>Act 1: Platform Engineering &amp; Why Port</h1>
+    <span class="timing-badge">5 min</span>
+  </header>
+
+  <!-- Opening -->
+  <div class="drawer" id="a1-opening">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Opening</span>
+      <span class="drawer-timing">0:30</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="talk-track">
+          <p>"Before I get into the specific use case, I want to share how I think about platform engineering &mdash; because it's not just something I've studied. It's something I've lived, even when I didn't call it that."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What Platform Eng Is -->
+  <div class="drawer" id="a1-what">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">What Platform Engineering Actually Is</span>
+      <span class="drawer-timing">1:30</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="talk-track">
+          <p>"Platform engineering is what happens when you stop asking developers to be infrastructure experts and start giving them <strong>guardrails instead of gates</strong>.</p>
+          <p>Here's what I mean. In most engineering organizations, developers don't just write code &mdash; they also have to figure out how to deploy it, how to monitor it, how to secure it, how to get it through compliance. They're context-switching between writing features and fighting infrastructure. That's not a productivity problem &mdash; it's a design problem.</p>
+          <p>Platform engineering solves this by building an internal platform &mdash; a curated set of tools, templates, and self-service workflows &mdash; that lets developers focus on what they're good at: building features. The platform team handles the 'how do I deploy this?' and 'how do I know it's healthy?' questions by building <strong>golden paths</strong>: opinionated, paved roads that encode best practices into the default workflow.</p>
+          <p>Think of it like a highway system. You can still take back roads, but the highway gets you there faster, safer, and with fewer decisions."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adoption Problem -->
+  <div class="drawer" id="a1-adoption">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Developer Experience Is the Adoption Problem</span>
+      <span class="drawer-timing">1:30</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="talk-track">
+          <p>"But here's the thing that gets missed: building the platform isn't the hard part. Getting developers to actually use it is.</p>
+          <p>This is where developer experience &mdash; DevEx &mdash; comes in. DevEx is the measure of how much friction a developer encounters in their daily work. Not just 'is the tool available?' but 'does it feel natural to use? Does it save me time? Does it give me confidence that I'm doing the right thing?'</p>
+          <p>I've spent my career on exactly this problem. At BTU, we built tools from scratch because they didn't exist &mdash; and then the real work was getting 6,000 enterprise users to actually adopt them. We didn't succeed by mandating usage. We succeeded by making the tools so useful that people chose them. Onboarding rituals that built confidence. Champions who led by example. Health dashboards that showed teams their own progress.</p>
+          <p>The lesson applies directly to platform engineering: the best internal developer portal in the world is worthless if developers don't trust it. And trust comes from experience &mdash; <strong>the first time a developer uses a self-service action and it just works, that's the moment adoption starts</strong>."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Where Port Fits -->
+  <div class="drawer" id="a1-port">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Where Port Fits</span>
+      <span class="drawer-timing">1:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="talk-track">
+          <p>"Port is the layer that makes platform engineering real for developers.</p>
+          <p>The software catalog gives every team a shared map of what exists &mdash; who owns what, what's deployed where, what's healthy and what isn't. Self-service actions turn 'file a ticket and wait' into 'click a button and it's done.' Scorecards create a maturity framework that's transparent &mdash; teams can see where they stand and what they need to do to level up. And the AI layer means the platform can start answering questions and taking action autonomously.</p>
+          <p>But the key insight &mdash; and what I think Port gets right &mdash; is <strong>orchestration</strong>. Port doesn't replace your CI/CD, your monitoring, your security scanner. It connects them into a coherent experience. That's the difference between a tool and a platform."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bridge to Sportradar -->
+  <div class="drawer" id="a1-bridge">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Bridge to Sportradar</span>
+      <span class="drawer-timing">0:30</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="talk-track">
+          <p>"So with that framing, let me show you what this looks like for a real company. Sportradar has <strong>500 engineers in 17 autonomous tribes, processing data from 900,000 live sporting events a year</strong>. They're already doing platform engineering &mdash; paved roads, scorecards, centralized observability. But they have gaps that Port can fill. Let me walk you through the use case."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Speaker Notes -->
+  <div class="drawer" id="a1-notes">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Speaker Notes &amp; Key Phrases</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="key-phrases">
+          <span class="phrase-pill">guardrails not gates</span>
+          <span class="phrase-pill">paved roads / golden paths</span>
+          <span class="phrase-pill">adoption problem not technology problem</span>
+          <span class="phrase-pill">orchestrator not replacement</span>
+          <span class="phrase-pill">trust comes from experience</span>
+        </div>
+        <div class="speaker-notes">
+          <h4>Connect to Brett's experience</h4>
+          <ul>
+            <li>BTU: built tools from scratch &rarr; adoption was the real challenge</li>
+            <li>agent828: giving agents governed access to data (context lake = platform for AI)</li>
+            <li>repOptics: observability for developer workflows (DevEx measurement)</li>
+          </ul>
+          <h4>What NOT to do</h4>
+          <ul>
+            <li>Don't recite definitions &mdash; speak from experience</li>
+            <li>Don't use "IDP" without explaining it</li>
+            <li>Don't over-index on Port features &mdash; save that for the demo</li>
+            <li>Don't rush &mdash; this section sets the frame for everything</li>
+          </ul>
+          <h4>Timing</h4>
+          <ul>
+            <li>0:00 &mdash; Opening</li>
+            <li>0:30 &mdash; What platform engineering is</li>
+            <li>2:00 &mdash; Developer experience / adoption</li>
+            <li>3:30 &mdash; Where Port fits</li>
+            <li>4:30 &mdash; Bridge to Sportradar</li>
+            <li>5:00 &mdash; Transition</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======================================================
+     ACT 2: SPORTRADAR USE CASE (15 min)
+     Source: playbook/challenge/SPORTRADAR_USE_CASE.md
+     ====================================================== -->
+<section id="act-2" class="act act-green">
+  <header class="act-header">
+    <h1>Act 2: Sportradar Use Case</h1>
+    <span class="timing-badge">15 min</span>
+  </header>
+
+  <p class="section-desc"><strong>Port doesn't replace your tools &mdash; it connects them.</strong> And for a company like Sportradar, where 45 minutes of confusion during a live Premier League match means regulatory exposure and lost contracts, that connection is worth everything.</p>
+
+  <!-- Why Sportradar -->
+  <div class="drawer" id="a2-why">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Why Sportradar (Not the Provided Profiles)</span>
+      <span class="drawer-timing">2:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="talk-track">
+          <p>"I didn't use the provided customer profiles. I researched Sportradar independently because I wanted to demonstrate how I'd actually approach a prospect as a TSM."</p>
+        </div>
+        <ul>
+          <li><strong>4,600 employees, 500+ engineers in 17 autonomous tribes</strong> &mdash; enterprise scale</li>
+          <li>Already doing platform engineering (paved roads, scorecards, centralized observability)</li>
+          <li>Public evidence: New Relic blog post, job postings, open-source repos</li>
+          <li>Port has <strong>zero sports/media customers</strong> &mdash; untapped vertical</li>
+          <li>Connects to a genuine business pain that Port solves better than anyone</li>
+        </ul>
+        <div class="speaker-notes">
+          <h4>Why this is a TSM move</h4>
+          <ul>
+            <li>Independent prospecting is core to the role</li>
+            <li>Shows research methodology: public sources &rarr; pain hypothesis &rarr; solution design</li>
+            <li>Demonstrates ability to find and qualify prospects outside existing pipeline</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Pain Story -->
+  <div class="drawer" id="a2-pain">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">The Pain Story (Premier League Incident)</span>
+      <span class="drawer-timing">4:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="talk-track">
+          <p>"Sportradar processes data from 900,000 live sporting events annually. They serve 800 betting operators and 900 media partners across 80 countries.</p>
+          <p>But here's where it breaks down. Imagine it's a Saturday afternoon. Premier League matchday. Sportradar is feeding real-time data to betting operators powering millions of in-play bets per second. A data pipeline &mdash; the one processing live match events from Anfield &mdash; starts degrading.</p>
+          <p><strong>Today, here's what happens:</strong></p>
+          <ol>
+            <li>An alert fires in New Relic. But New Relic tells you <em>what's broken</em>, not <em>who owns it</em> or <em>what changed recently</em>.</li>
+            <li>Someone posts in Slack: 'Anyone know who owns the match-events-ingest service?'</li>
+            <li>Three tribes think it might be theirs. Two are wrong. Twenty minutes lost.</li>
+            <li>The actual owning team finds the issue: a config change deployed an hour ago by a different tribe's service.</li>
+            <li>They roll back. Manual coordination across two tribes, three dashboards, deployment logs in GitLab.</li>
+            <li><strong>Total time: 45 minutes. During a live Premier League match.</strong></li>
+          </ol>
+          <p><strong>The business impact:</strong></p>
+          <ul>
+            <li>Betting operators received stale data &mdash; regulatory exposure in licensed markets</li>
+            <li>Operators couldn't price in-play bets accurately &mdash; financial losses</li>
+            <li>The Premier League reviews Sportradar's reliability for contract renewal</li>
+            <li>Internal teams lose confidence &mdash; afraid to deploy on match days</li>
+          </ul>
+        </div>
+
+        <div class="talk-track">
+          <p><strong>The Root Cause:</strong> "This isn't a monitoring problem &mdash; they have New Relic. It isn't a deployment problem &mdash; they have CI/CD. It's a <strong>context problem</strong>. When the alert fires, nobody has a single view that connects: which service is affected, who owns it, what was deployed recently, what other services depend on it, whether it meets production readiness standards, who's on-call for that tribe. The information exists across 6 different tools. Stitching it together takes 20 minutes."</p>
+        </div>
+
+        <div class="key-phrases">
+          <span class="phrase-pill">context problem not monitoring problem</span>
+          <span class="phrase-pill">6 different tools</span>
+          <span class="phrase-pill">45 min MTTR during live event</span>
+          <span class="phrase-pill">regulatory exposure</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Solution -->
+  <div class="drawer" id="a2-solution">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">The Solution: Port as the Connective Layer</span>
+      <span class="drawer-timing">4:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="talk-track">
+          <p>"Now let me show you what this looks like with Port.</p>
+          <p><strong>Same scenario. Saturday. Premier League. Pipeline degrading at Anfield.</strong></p>
+          <ol>
+            <li>New Relic detects the anomaly. Port's automation triggers &mdash; the incident is already contextualized.</li>
+            <li>Port's software catalog answers instantly: this is <code>match-events-ingest</code>, owned by Tribe 7 (Live Data), on-call is Maria Chen.</li>
+            <li>The dashboard shows: a deployment was made 47 minutes ago by <code>feed-normalization</code> in Tribe 3. Scorecard shows it was at Silver tier &mdash; it hadn't met Gold-tier deployment gating.</li>
+            <li>Port's self-service action fires: 'Create Incident Channel' pulls in Maria, the Tribe 3 deployer, and the SRE lead. Context posted automatically.</li>
+            <li>Maria identifies the issue, rolls back via a self-service action in Port.</li>
+            <li><strong>Total time: 8 minutes. During a live Premier League match.</strong></li>
+          </ol>
+          <p><strong>What changed?</strong> The information was already connected. Port didn't replace New Relic, GitLab, or Slack. It <em>orchestrated</em> them into a coherent workflow."</p>
+        </div>
+        <div class="key-phrases">
+          <span class="phrase-pill">Port orchestrates &mdash; it doesn't replace</span>
+          <span class="phrase-pill">8 min MTTR</span>
+          <span class="phrase-pill">the catalog IS the context lake</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Workflow Diagrams -->
+  <div class="drawer" id="a2-workflows">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Workflow Diagrams (Today / With Port / Agentic)</span>
+      <span class="drawer-timing">2:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="workflow-diagram workflow-today">
+          <h4>Today &mdash; Fragmented, Manual, Tribal Knowledge</h4>
+<pre>
+ALERT FIRES (New Relic)
+        |
+        v
+"Who owns this?" -> Slack chaos across 17 tribes
+Manual search: GitLab -> New Relic -> Slack -> Wiki
+        |  20 min
+        v
+Owner found -> "What changed?" -> manual deployment log
+Cross-reference: GitLab pipelines -> config history
+        | 15 min
+        v
+Root cause identified -> manual rollback -> manual verify
+Post-incident: "How do we prevent this next time?"
+Answer: tribal knowledge, no systemic change
+        |
+        v
+  MTTR: 45+ minutes | During live event
+</pre>
+        </div>
+
+        <div class="workflow-diagram workflow-port">
+          <h4>With Port &mdash; Automated, Governed, Observable</h4>
+<pre>
+ALERT FIRES (New Relic)
+        |
+        v
+Port AUTOMATION triggers:
+-> Identify affected service from catalog
+-> Pull owner, on-call, recent deployments, SLO status
+-> Check scorecard: was this service Gold-tier?
+        | instant
+        v
+Port SELF-SERVICE ACTION: "Create Incident Channel"
+-> Slack channel with owner + deployer + SRE lead
+-> Catalog context posted automatically
+-> Dependency map shows upstream change
+        | 3 min
+        v
+Owner rolls back via Port SELF-SERVICE ACTION
+-> Catalog updates automatically
+-> Dashboard reflects current state
+-> Scorecard flags the deploying service for review
+        |
+        v
+  MTTR: 8 minutes | During live event
+</pre>
+        </div>
+
+        <div class="workflow-diagram workflow-agentic">
+          <h4>Aspirational &mdash; Agentic Future</h4>
+<pre>
+ANOMALY DETECTED (New Relic)
+        |
+        v
+Port AI AGENT activates:
+-> Queries Context Lake: service, owner, dependencies
+-> Correlates with recent deployments across all tribes
+-> Identifies probable root cause
+-> Proposes: rollback feed-normalization v2.3.1
+        | instant
+        v
+HUMAN-IN-THE-LOOP checkpoint:
+-> On-call receives: "Rollback recommended. Approve?"
+-> One-click approval in Slack
+        | 1 min
+        v
+Agent executes rollback -> verifies health -> closes loop
+-> Auto-generates post-incident report
+-> Updates scorecard for deploying service
+-> Recommends: "Gate Tribe 3 deploys during live events"
+        |
+        v
+  MTTR: 2 minutes | Self-healing
+</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Value Tracking -->
+  <div class="drawer" id="a2-value">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Value Tracking &mdash; 7 KPIs</span>
+      <span class="drawer-timing">2:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <table class="metric-table">
+          <thead>
+            <tr><th>Metric</th><th>How to Measure</th><th>Baseline &rarr; Target</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>MTTR</td><td>Alert to resolution (automation timestamps)</td><td>45 min &rarr; &lt;10 min</td></tr>
+            <tr><td>Deployment Frequency</td><td>Deploys per day per tribe (GitHub/GitLab)</td><td>Track trend, goal: +15%</td></tr>
+            <tr><td>Scorecard Progression</td><td>% of services at Gold tier</td><td>0% &rarr; 60% in 6 months</td></tr>
+            <tr><td>Live Event Incidents</td><td>Incidents during live sporting events</td><td>Reduce quarter-over-quarter</td></tr>
+            <tr><td>On-Call Coverage</td><td>% of services with assigned on-call</td><td>Baseline &rarr; 100%</td></tr>
+            <tr><td>Self-Service Adoption</td><td># of actions triggered per week</td><td>Track growth</td></tr>
+            <tr><td>Context Lookup Time</td><td>Time to answer "who owns this?"</td><td>20 min &rarr; instant</td></tr>
+          </tbody>
+        </table>
+        <div class="talk-track">
+          <p>"The scorecard tiers tell you where you are: if 30% of services are at Gold and 70% are at Silver, you know exactly what needs to improve. The progression over time is the ROI story you bring to the VP of Engineering. I think of this as a <strong>context lake problem</strong> &mdash; Port's catalog IS the context lake. The scorecard IS the scoring framework. The dashboard IS the trend surface."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Business Outcomes -->
+  <div class="drawer" id="a2-outcomes">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Business Outcomes by Persona</span>
+      <span class="drawer-timing">1:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="persona-grid">
+          <div class="persona-card">
+            <h4>VP of Engineering</h4>
+            <ul>
+              <li>Health across all 17 tribes in a single dashboard</li>
+              <li>Deployment confidence increased &mdash; engineers deploy on match days</li>
+              <li>New engineers onboard faster with catalog landscape</li>
+            </ul>
+          </div>
+          <div class="persona-card">
+            <h4>Tribe Leads</h4>
+            <ul>
+              <li>Know exactly which services are production-ready</li>
+              <li>Incident response: instant context, not "who owns this?"</li>
+              <li>Self-service actions reduced ticket burden 60%</li>
+            </ul>
+          </div>
+          <div class="persona-card">
+            <h4>SRE / DevOps</h4>
+            <ul>
+              <li>From 17 different views of health to one</li>
+              <li>Scorecard-gated deployments eliminated a class of incidents</li>
+              <li>Platform pays for itself in reduced MTTR</li>
+            </ul>
+          </div>
+          <div class="persona-card">
+            <h4>The Business</h4>
+            <ul>
+              <li>99.9% SLO compliance: aspirational &rarr; verifiable</li>
+              <li>Betting operator trust improved, easier renewals</li>
+              <li>Prove systemic reliability to Premier League, FIFA, NBA</li>
+            </ul>
+          </div>
+        </div>
+        <div class="key-phrases">
+          <span class="phrase-pill">scorecard tiers = transparency not bureaucracy</span>
+          <span class="phrase-pill">the ROI story writes itself</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======================================================
+     ACT 3: LIVE DEMO (20 min)
+     Source: playbook/challenge/DEMO_SCRIPT.md
+     ====================================================== -->
+<section id="act-3" class="act act-purple">
+  <header class="act-header">
+    <h1>Act 3: Live Demo</h1>
+    <span class="timing-badge">20 min</span>
+  </header>
+
+  <p class="section-desc">"Now let me show you what I actually built. Everything you're about to see is live in the demo environment &mdash; real GitHub repos, real Dependabot PRs, real scorecard evaluations. I built this the way I'd build a Phase 1 implementation for Sportradar."</p>
+
+  <!-- Pre-Demo Checklist -->
+  <div class="drawer" id="a3-checklist">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Pre-Demo Checklist</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="checklist">
+          <label><input type="checkbox" id="chk-1"><span>Logged into Port (zoed+brettm@getport.io)</span></label>
+          <label><input type="checkbox" id="chk-2"><span>Tab 1: Catalog &rarr; Services (sportradar_service)</span></label>
+          <label><input type="checkbox" id="chk-3"><span>Tab 2: Entity page &mdash; match-events-ingest (Gold)</span></label>
+          <label><input type="checkbox" id="chk-4"><span>Tab 3: Entity page &mdash; feed-normalization (Silver)</span></label>
+          <label><input type="checkbox" id="chk-5"><span>Tab 4: Scorecards page</span></label>
+          <label><input type="checkbox" id="chk-6"><span>Tab 5: Self-Service &rarr; Request Security Review</span></label>
+          <label><input type="checkbox" id="chk-7"><span>Tab 6: Self-Service &rarr; Deploy to Production (on match-events-ingest)</span></label>
+          <label><input type="checkbox" id="chk-8"><span>Tab 7: Dashboard &mdash; main</span></label>
+          <label><input type="checkbox" id="chk-9"><span>Tab 8: Dashboard &mdash; GitHub Repository Health</span></label>
+          <label><input type="checkbox" id="chk-10"><span>Fallback screenshots saved</span></label>
+          <label><input type="checkbox" id="chk-11"><span>Know: feed-normalization failing has_slo = false</span></label>
+          <label><input type="checkbox" id="chk-12"><span>Tested Request Security Review action</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 1: Software Catalog -->
+  <div class="drawer" id="a3-stop1">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Stop 1: The Software Catalog</span>
+      <span class="drawer-timing">3:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes">
+          <h4>What to show</h4>
+          <ul><li>Catalog &rarr; Services table. Click into match-events-ingest.</li></ul>
+        </div>
+        <div class="talk-track">
+          <p>"This is the software catalog &mdash; the single source of truth. For Sportradar, this replaces the spreadsheet that's out of date by Tuesday.</p>
+          <p>I modeled three of their data pipeline services across three tribes:</p>
+          <ul>
+            <li><strong>match-events-ingest</strong> &mdash; Tribe 7, Live Data. P1 Core Pipeline. Processing real-time match events from Anfield on a Saturday afternoon. Maria Chen is on-call.</li>
+            <li><strong>odds-calculation-engine</strong> &mdash; Tribe 12, Betting Services. P0 Revenue Critical. Powers 800+ betting operator feeds.</li>
+            <li><strong>feed-normalization</strong> &mdash; Tribe 3, Data Acquisition. P2 Supporting. Our villain in the demo story.</li>
+          </ul>
+          <p>Each service has an on-call contact, SLO target, language, and a direct link to its GitHub repository. The tribe relationship means when an incident fires, Port knows instantly which tribe lead to escalate to."</p>
+        </div>
+        <div class="speaker-notes">
+          <h4>Click into match-events-ingest &rarr; Details tab</h4>
+          <ul><li>"99.95% SLO target, CI passing, Dockerfile present, runbook exists, CODEOWNERS defined. Scorecard tier: Gold. This service is game-day ready."</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 2: GitHub Integration -->
+  <div class="drawer" id="a3-stop2">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Stop 2: GitHub Integration + Repo Health Dashboard</span>
+      <span class="drawer-timing">4:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes">
+          <h4>What to show</h4>
+          <ul><li>Navigate to GitHub Repository Health dashboard</li></ul>
+        </div>
+        <div class="talk-track">
+          <p>"I connected the GitHub integration to a sportradar-demo organization with three real repositories. Port automatically ingested repos, branches, and pull requests.</p>
+          <ul>
+            <li><strong>PR Activity Over Time</strong> &mdash; line chart showing when Dependabot detected vulnerabilities. 25 PRs opened in a single day across all three repos.</li>
+            <li><strong>Open Security PRs</strong> &mdash; pie chart by repository. odds-calculation-engine has the most (deeper Node.js dependency trees).</li>
+            <li><strong>Repository Sync Health</strong> &mdash; a meta-scorecard: the platform grading its own data quality.</li>
+          </ul>
+          <p>For Sportradar, imagine this across 500+ engineers and 17 tribes worth of repositories. The security posture isn't a quarterly audit anymore &mdash; it's a live dashboard."</p>
+        </div>
+        <div class="fallback-card">
+          <h4>If integration shows red status</h4>
+          <p>"The GitHub integration had a resync issue in the demo environment &mdash; the data you see was successfully ingested and is stable. In production, you'd have monitoring on integration health. Actually, that's exactly what the Repository Sync Health scorecard surfaces."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 3: Game-Day Readiness Scorecard -->
+  <div class="drawer" id="a3-stop3">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Stop 3: Game-Day Readiness Scorecard</span>
+      <span class="drawer-timing">4:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes">
+          <h4>What to show</h4>
+          <ul>
+            <li>Scorecards page &rarr; Game-Day Readiness</li>
+            <li>Then click into feed-normalization to show failing rules</li>
+          </ul>
+        </div>
+        <div class="talk-track">
+          <p>"This is the core of the Sportradar story. Can this service safely deploy during a live sporting event?</p>
+          <p>Four tiers, eight rules:</p>
+          <ul>
+            <li><strong>Bronze</strong>: Has a description, has a README. Basic hygiene.</li>
+            <li><strong>Silver</strong>: Dependency scanning enabled, CODEOWNERS defined, CI passing. Ready for non-critical environments.</li>
+            <li><strong>Gold</strong>: SLO documented, containerized with Dockerfile, operational runbook. Ready for production during live events.</li>
+          </ul>
+          <p>Right now: match-events-ingest is Gold. feed-normalization and odds-calculation-engine are Silver.</p>
+          <p>feed-normalization is at Silver because it's failing one Gold rule: <strong>SLO Documentation</strong>. Seven of eight rules passing &mdash; one rule is the difference between 'deploy anytime' and 'not during the Premier League match.'</p>
+          <p>That's the point. The scorecard makes the gap visible AND actionable."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 4: Scorecard-Gated Deployment -->
+  <div class="drawer" id="a3-stop4">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Stop 4: Scorecard-Gated Deployment</span>
+      <span class="drawer-timing">3:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes">
+          <h4>What to show</h4>
+          <ul>
+            <li>Self-Service on match-events-ingest &rarr; Deploy to Production VISIBLE</li>
+            <li>Self-Service on feed-normalization &rarr; Deploy to Production NOT VISIBLE</li>
+          </ul>
+        </div>
+        <div class="talk-track">
+          <p>"Here's where the scorecard becomes a guardrail, not just a report card.</p>
+          <p>match-events-ingest is Gold. I can see 'Deploy to Production' right here. Version tag, environment selection, deploy reason &mdash; one-click deployment. The service has earned this.</p>
+          <p>Now look at feed-normalization. Same blueprint, same action definition &mdash; but <strong>'Deploy to Production' doesn't appear</strong>. It's not grayed out. It's not showing a warning. The option simply doesn't exist for this service.</p>
+          <p>The action has a condition: only services at Gold on Game-Day Readiness can see the deploy button. Silver services can't even attempt it. <strong>That's the guardrail that would have prevented the incident in our pain story.</strong></p>
+          <p>Both services still have 'Request Security Review' &mdash; that action is open to all tiers. Not everything needs to be gated. You gate the dangerous things."</p>
+        </div>
+        <div class="highlight-cards">
+          <div class="highlight-card">
+            <h4>This is the "wow" moment</h4>
+            <p>Set it up with the pain story, deliver with the side-by-side comparison. Gold sees Deploy, Silver doesn't. The action simply doesn't exist.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 5: Self-Service Action -->
+  <div class="drawer" id="a3-stop5">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Stop 5: Self-Service Action (Live Trigger)</span>
+      <span class="drawer-timing">2:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes">
+          <h4>What to show</h4>
+          <ul><li>Trigger Request Security Review on feed-normalization</li></ul>
+        </div>
+        <div class="talk-track">
+          <p>"Let me trigger an action live.</p>
+          <p>Review Type = Dependency Audit, Priority = High, Notes = 'Pre-game-day review &mdash; 25 open Dependabot PRs need triage'</p>
+          <p>The form collects structured inputs. Port logs the request, tracks it, and in production this would trigger a webhook to create a Jira ticket or send a Slack notification to the AppSec team.</p>
+          <p>For Sportradar: a developer sees their service at Silver, knows they need Gold for the next match day. They click 'Request Security Review,' the AppSec team gets context-rich intake, and the path to Gold is a workflow, not a conversation."</p>
+        </div>
+        <div class="fallback-card">
+          <h4>If action fails to trigger</h4>
+          <p>"Let me show you the action configuration and walk through what the inputs and outputs look like." (Show action definition in Self-Service &rarr; Edit)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 6: Dashboards -->
+  <div class="drawer" id="a3-stop6">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Stop 6: The Dashboards</span>
+      <span class="drawer-timing">3:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes">
+          <h4>What to show</h4>
+          <ul><li>Main dashboard (services table, scorecard donut, criticality bar chart)</li></ul>
+        </div>
+        <div class="talk-track">
+          <p>"Port lets you build persona-targeted dashboards. This is the VP of Engineering view on game day.</p>
+          <ul>
+            <li><strong>All Services table</strong> &mdash; every service with tribe, criticality, language, on-call, scorecard level. At a glance: who's Gold, who's not.</li>
+            <li><strong>Game-Day Readiness donut</strong> &mdash; maturity distribution. One Gold, two Silver. 'How ready are we for Saturday?'</li>
+            <li><strong>Services by Criticality</strong> &mdash; how many revenue-critical vs supporting services.</li>
+          </ul>
+          <p>For Sportradar at scale, I'd build a second dashboard for the SRE team during live events &mdash; real-time, operational, showing active incidents and recent deployments."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="drawer" id="a3-closing">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Closing the Demo</span>
+      <span class="drawer-timing">0:30</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="talk-track">
+          <p>"To tie it together: what I've built is Phase 1 for Sportradar.</p>
+          <ul>
+            <li><strong>Catalog</strong>: unified visibility across three tribes and three services</li>
+            <li><strong>Integration</strong>: GitHub data flowing in &mdash; repos, PRs, Dependabot activity</li>
+            <li><strong>Scorecards</strong>: Game-Day Readiness with meaningful tier differentiation</li>
+            <li><strong>Governance</strong>: deployment gated on scorecard tier</li>
+            <li><strong>Self-service</strong>: structured intake for security reviews</li>
+            <li><strong>Dashboards</strong>: persona-targeted views for engineering leadership</li>
+          </ul>
+          <p>Phase 2 extends this: New Relic for observability, PagerDuty for incident management, automations for Slack channel creation, and the AI agent layer. The value compounds &mdash; MTTR drops, deployment frequency increases, scorecard tiers climb, and incidents during live events decrease."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Demo Moments -->
+  <div class="drawer" id="a3-moments">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Key Demo Moments (the 3 things they'll remember)</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="highlight-cards">
+          <div class="highlight-card">
+            <h4>1. The Scorecard Gate</h4>
+            <p>Deploy to Production visible on Gold, invisible on Silver. Set up with pain story, deliver with side-by-side comparison.</p>
+          </div>
+          <div class="highlight-card">
+            <h4>2. The Failing Rule</h4>
+            <p>feed-normalization at Silver because of one missing SLO doc. The gap is visible, specific, and actionable. Port working as designed.</p>
+          </div>
+          <div class="highlight-card">
+            <h4>3. The Dependabot Spike</h4>
+            <p>25 security PRs opened in one day, visible in the line chart, broken down by repo in the pie chart. Real data, real security posture, automatically surfaced.</p>
+          </div>
+        </div>
+
+        <div class="speaker-notes">
+          <h4>Timing guidance</h4>
+          <ul>
+            <li><strong>If running long:</strong> Compress Stop 2 (GitHub + Repo Health) to 2 min &mdash; show dashboard, name widgets, move on.</li>
+            <li><strong>If running short:</strong> Expand Stop 4 (scorecard gate) &mdash; let the panel explore entity pages themselves.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======================================================
+     Q&A SECTION
+     Source: playbook/challenge/QA_PREP.md
+     ====================================================== -->
+<section id="qa" class="act act-amber">
+  <header class="act-header">
+    <h1>Q&amp;A Preparation</h1>
+    <span class="timing-badge">~15 min</span>
+  </header>
+
+  <p class="section-desc">These are future peers. Be collaborative, honest, and specific.</p>
+
+  <!-- Category 1: Sportradar Choice -->
+  <div class="drawer" id="qa-sportradar">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Category 1: The Sportradar Choice</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "Why did you pick Sportradar instead of the provided profiles?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"Two reasons. First, I wanted to demonstrate the research process I'd actually use as a TSM. In the real job, I'll be prospecting companies that aren't in our pipeline yet &mdash; I wanted to show that muscle. Second, Sportradar is a genuinely strong fit: 500 engineers in 17 tribes, already doing platform engineering with paved roads and scorecards, and Port has zero sports or media customers."</p>
+            <p><strong>If they push further:</strong> "I studied all three provided profiles. Walmart is compelling at 12K developers, and the Citrix security angle maps well to my Snyk experience. But Sportradar let me demonstrate independent research AND a use case I'm genuinely passionate about. I follow the Premier League &mdash; I can talk about this company with real conviction."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "How did you research Sportradar? Walk us through your process."</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"I started with public sources. New Relic published a blog post about Sportradar's platform engineering &mdash; that's the gold source. It gave me their organizational structure (17 tribes), their 'paved roads' approach, and their observability strategy. Then I pulled job postings to extract the tech stack: Go, Python, Java, AWS, Kubernetes, GitLab, Terraform. I checked their GitHub for open-source projects. And I looked at financial filings and press releases for business context: 900K live events per year, 800 betting operators, &euro;2B in contractual commitments. From there, I built a hypothesis about where Port would create the most value."</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 2: Extending -->
+  <div class="drawer" id="qa-extending">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Category 2: Extending the Solution</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "How would you extend this for a company with 12,000 developers?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"The architecture scales &mdash; blueprints, scorecards, and actions don't care how many entities you have. But the rollout strategy changes completely. At 12,000 developers, you don't go org-wide on day one. Start with one business unit or one critical use case. Prove value there, measure it, build internal champions, expand. Same adoption pattern I used at BTU: start small, show results, let champions pull the org forward."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "What would Phase 2 look like?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"Three tracks: <strong>1) More integrations</strong> &mdash; New Relic, PagerDuty, Kafka for pipeline health. <strong>2) More automation</strong> &mdash; event-driven workflows: critical vuln &rarr; auto-create Jira, service drops below Silver &rarr; auto-notify tribe lead. <strong>3) AI layer</strong> &mdash; start read-only, progress to human-in-the-loop, then autonomous actions where trust is established."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "What if the customer was on GitLab instead of GitHub?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"Sportradar actually IS on GitLab. Port has a GitLab integration that works the same way: repositories, merge requests, pipelines, deployments. The blueprint model is identical. Main difference is configuration: GitLab uses groups and projects instead of orgs and repos. For the demo I used GitHub because that's what I had connected, but I'd walk through the GitLab mapping with a real customer."</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 3: Measuring Value -->
+  <div class="drawer" id="qa-value">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Category 3: Measuring Value</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "How would you measure ROI of this implementation?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"Four categories: <strong>1) Operational efficiency</strong> &mdash; MTTR, deployment frequency, change failure rate (DORA metrics Port surfaces from integration data). <strong>2) Standards adoption</strong> &mdash; scorecard progression, % at Gold/Silver/Bronze monthly. <strong>3) Developer experience</strong> &mdash; self-service action usage, onboarding time, context lookup time. <strong>4) Business impact</strong> &mdash; incidents during live events, SLO compliance, customer-reported data quality issues. The dashboard IS the ROI story."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "How would you handle a customer who doesn't see value after 90 days?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"Start with the data. Are they using the portal? Which actions have traction? Usually 'not seeing value' means: initial use case wasn't painful enough, adoption stalled because developers weren't trained, or the scorecard is too strict. At BTU, I inherited a product with poor retention &mdash; 40% of features had less than 5% adoption. I ran a usage audit, identified what created value, and rebuilt the roadmap around that. Same process here."</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 4: Technical Depth -->
+  <div class="drawer" id="qa-technical">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Category 4: Technical Depth</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "Walk me through how you'd set up the scorecard rules."</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"Each rule evaluates a property on the entity. Bronze: has team relation, non-empty README, description populated. Silver: CI/CD passing, critical vulns at zero, on-call set. Gold: SLO defined and above threshold, both critical and high vulns at zero, rollback automation configured. Entity must pass ALL rules at a tier before advancing. Critically, you can gate self-service actions on tiers using JQ conditions &mdash; 'Deploy to Production' requires Gold, but 'Request Security Review' is available at any level."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "How does Port handle integration data mapping?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"YAML-based mapping configuration. For each integration, you define resource types to ingest, how they map to blueprints, and extract properties using JQ expressions. A GitHub repo maps to a Service blueprint, the repo name becomes the title, the default branch becomes a property, the owning team becomes a relation. The power is in JQ transforms &mdash; extract, combine, transform. Port supports hosted integrations (they manage sync) and self-hosted (you run it with more control)."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "What if the customer's tools don't have Port integrations?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"86+ integrations cover most common tools. For custom/niche tools: Ocean framework for custom integrations, the API for programmatic push, or webhook ingestion from any tool that sends HTTP. For Sportradar's proprietary pipeline tools, I'd work with the FDE/SA to scope a custom integration using Ocean or direct API."</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 5: TSM Role -->
+  <div class="drawer" id="qa-tsm">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Category 5: The TSM Role</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "Tell us about a time you helped a customer through a similar adoption challenge."</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"At BTU, I was responsible for getting 6,000+ enterprise users to adopt a complex technical platform. Usage wasn't sticking. I built the full adoption operating system: onboarding rituals for behavioral activation, a Champions program where internal advocates ran sessions independently, and health dashboards with green/yellow/red thresholds. Result: <strong>43% retention lift, 65% recurring revenue growth, 77% time-on-platform increase</strong>. The psychology maps directly: reduce cognitive load, create an immediate quick win, and build a path they trust."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "How would you handle a customer who wants to customize everything?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"Validate the need first &mdash; sometimes 'I want to customize' means 'the default doesn't fit our model.' Port's flexibility is a strength, but I'd push back on customization for its own sake. Start with defaults, map the first 80%, then customize only where defaults create real friction. Document why. Review quarterly."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "What do you see as the biggest challenge in this role?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"Two things. First, the pace of Port's product evolution &mdash; features ship fast, and I need to stay current. I plan to handle that by using the product daily, not just reading release notes. Second, enterprise ambiguity &mdash; every customer's org is different. The TSM has to navigate that. That's where my founder experience helps &mdash; ambiguity is the default state when you're building from scratch."</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 6: Brett-Specific -->
+  <div class="drawer" id="qa-brett">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Category 6: Brett-Specific Questions</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "Your background is in VR, not DevOps. How does that translate?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"The technology was different but the work was identical. I built the full SDLC: hardware, software, networks, databases, applications. The customer success challenge is the same: enterprise teams changing their daily workflow. I've done that with 6,000+ users across skeptical organizations. And I've been closing the tool gap since starting this process &mdash; Snyk integration, GitHub Actions, Kubernetes documentation, using Port daily."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "You mentioned building observability tools. Tell us more."</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"I built repOptics &mdash; scores repositories on architecture, governance, and delivery maturity. Aggregates signals from code structure, CI/CD, documentation, dependency management. I wrote a public article comparing my scoring to Port's scorecards &mdash; and Port's sales team flagged it internally because some feedback validated features in development. More recently: building observability for agentic AI workflows &mdash; same pattern: aggregate context, apply scoring, surface insights. That's why I call it a 'context lake' problem."</p>
+          </div></div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> "What excites you most about Port?"</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p>"The agentic direction. Most IDPs are static dashboards. Port is becoming an orchestrator where AI agents can read the catalog, understand context, and take action with human approval. I'm already living this: deploying sub-agents for parallel security testing, building observability for what agents do. When Port customers start adopting AI-assisted incident resolution, I can speak from genuine experience about the trust-building progression &mdash; start read-only, move to human-in-the-loop, then autonomous where trust is established."</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reverse Questions -->
+  <div class="drawer" id="qa-reverse">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Questions to Ask the Panel</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes">
+          <h4>Pick 2-3 based on the conversation flow</h4>
+        </div>
+        <ol>
+          <li>"What does a typical week look like for you as a TSM?"</li>
+          <li>"What was the steepest learning curve when you started, and what helped most?"</li>
+          <li>"How do you handle the TSM/FDE handoff when a customer needs deep implementation support?"</li>
+          <li>"What's the most common pattern you see when a customer's portal adoption stalls?"</li>
+          <li>"How has the role changed as Port has leaned into agentic engineering?"</li>
+          <li>"What's the most creative use case a customer has built that surprised you?"</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======================================================
+     INTEL DRAWERS
+     Source: knowledge/challenge/SPORTRADAR_PROFILE.md + others
+     ====================================================== -->
+<section id="intel" class="act act-red">
+  <header class="act-header">
+    <h1>Intel Drawers</h1>
+  </header>
+
+  <p class="section-desc">Reference data for deep-dive questions. Not part of the presentation &mdash; pull from these if the conversation goes there.</p>
+
+  <!-- Q1 2026 News Timeline -->
+  <div class="drawer" id="intel-news">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Q1 2026 News Timeline</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <table class="metric-table">
+          <thead><tr><th>Date</th><th>Story</th><th>Demo Tie-In</th></tr></thead>
+          <tbody>
+            <tr><td>Feb 4</td><td>Betfred retail platform upgrade (1,300 UK shops)</td><td>Bad deploy = incorrect payouts across retail network</td></tr>
+            <tr><td>Feb 9</td><td>NBC Sports RSN partnership (GameFrame for NBA)</td><td>Pipeline stutter = frozen graphics on live TV</td></tr>
+            <tr><td>Feb 18</td><td>IMG Arena integration complete (30K new streams)</td><td>Platform complexity doubled overnight</td></tr>
+            <tr><td>Feb 27</td><td>Superbet expansion (full betting suite)</td><td>More operators = more pipeline consumers</td></tr>
+            <tr><td>Mar 2</td><td>FIFA integrity deal extended through 2031</td><td>FBI on World Cup Task Force. Bad deploy = integrity blind spot.</td></tr>
+            <tr><td>Mar 3</td><td>FY2025 earnings (&euro;1.29B, +17%)</td><td>Growth outpaces human tracking</td></tr>
+            <tr><td>Mar 3</td><td>Prediction markets push (Polymarket, Kalshi)</td><td>New surface area, same pipelines</td></tr>
+            <tr><td>Mar 13</td><td>PFL partnership</td><td>Another data pipeline to govern</td></tr>
+            <tr><td>Mar 24</td><td>Playradar iGaming brand launch</td><td>Yet another product on same data platform</td></tr>
+          </tbody>
+        </table>
+        <p><strong>The pattern:</strong> Every Q1 2026 story is Sportradar adding more data surfaces. Each adds pipelines, services, and deployment risk. A developer portal is how you keep up.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leadership & Key People -->
+  <div class="drawer" id="intel-people">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Leadership &amp; Key People</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes"><h4>C-Suite</h4></div>
+        <table class="metric-table">
+          <thead><tr><th>Name</th><th>Title</th><th>Background</th></tr></thead>
+          <tbody>
+            <tr><td>Carsten Koerl</td><td>Founder &amp; CEO</td><td>25 years. Engineer. EY Entrepreneur of the Year 2022.</td></tr>
+            <tr><td>Behshad Behzadi</td><td>CPTAO</td><td>20 years at Google. VP Eng, co-founded Google Assistant.</td></tr>
+            <tr><td>Craig Felenstein</td><td>CFO</td><td>Former CFO at Lindblad Expeditions.</td></tr>
+            <tr><td>Eduard Blonk</td><td>CCO</td><td>18+ years global sales. At Sportradar since 2015.</td></tr>
+            <tr><td>Jeff Stout</td><td>CTO, US</td><td>20+ years high-volume systems. Based in Minneapolis.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="speaker-notes"><h4>Engineering Leadership (most relevant)</h4></div>
+        <table class="metric-table">
+          <thead><tr><th>Name</th><th>Title</th><th>Why They Matter</th></tr></thead>
+          <tbody>
+            <tr><td>Scott Dunbar</td><td>SVP Eng Enablement</td><td>Architected "Sportify" model. Confirmed Cortex as IDP.</td></tr>
+            <tr><td>Rok Zlender</td><td>VP Platform Eng</td><td>Built Ljubljana office. Ex-Acquia.</td></tr>
+            <tr><td>Gavin Ramsey</td><td>SVP Architecture</td><td>Oversees 900+ dev community. API strategy.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financial Data -->
+  <div class="drawer" id="intel-financials">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Financial Data (FY2025)</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <table class="metric-table">
+          <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Revenue</td><td>&euro;1.29B (+17% YoY)</td></tr>
+            <tr><td>Adjusted EBITDA</td><td>&euro;297M (+33%, margin 23.0%)</td></tr>
+            <tr><td>Net Profit</td><td>&euro;100M</td></tr>
+            <tr><td>Free Cash Flow</td><td>&euro;167M (record)</td></tr>
+            <tr><td>US Revenue</td><td>&euro;324M (+23%)</td></tr>
+            <tr><td>2026 Guidance</td><td>Revenue &euro;1.56-1.58B (+23-25%)</td></tr>
+            <tr><td>Share Buyback</td><td>Expanded to $1B</td></tr>
+            <tr><td>Analyst Consensus</td><td>17 analysts, "Strong Buy," avg $31.65 (+78%)</td></tr>
+            <tr><td>Net Retention</td><td>122%</td></tr>
+            <tr><td>Contractual Commitments</td><td>&euro;2B over next 2 years</td></tr>
+          </tbody>
+        </table>
+        <p>Revenue split: ~80% Betting Technology &amp; Solutions, ~20% Marketing &amp; Media (+33% YoY, fastest growing).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIFA World Cup Task Force -->
+  <div class="drawer" id="intel-fifa">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">FIFA World Cup Task Force</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <ul>
+          <li>FIFA extended integrity deal 5 years through 2031 (announced March 2, 2026)</li>
+          <li>UFDS AI: 20+ years historical data, monitors 1M+ events/year across 70 sports</li>
+          <li>2025 results: 1,116 suspicious matches detected</li>
+          <li><strong>World Cup Task Force</strong> includes: Sportradar, U.S. Department of Justice, FBI, International Betting Integrity Association</li>
+          <li>Added <strong>Integrity Compliance 360 (IC360)</strong> as additional safeguard</li>
+          <li>Coverage: all 211 member associations, men's &amp; women's competitions, top-two domestic tiers</li>
+          <li>Also safeguarding: AFC Women's Asian Cup (Australia), Olympic Winter Games 2026 (Italy)</li>
+        </ul>
+        <div class="talk-track">
+          <p>"When Sportradar is monitoring a World Cup match for match-fixing &mdash; where the FBI is on the task force &mdash; a feed-normalization deploy that introduces 200ms of latency isn't a performance issue. It's an integrity blind spot in a system the Department of Justice is watching."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cortex Intel -->
+  <div class="drawer" id="intel-cortex">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Cortex Competitive Intel</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="warning-card">
+          <h4>Do NOT mention unless asked</h4>
+          <p>If the panel asks "have you looked at what tools they already use?" &mdash; this is a powerful answer. Otherwise, the demo should stand on its own.</p>
+        </div>
+        <ul>
+          <li>Scott Dunbar's public content reveals Sportradar uses <strong>Cortex</strong> as their internal developer portal</li>
+          <li>Evolved from service documentation into golden path and golden metrics</li>
+          <li>Cortex is a direct Port competitor</li>
+          <li><strong>Port's pitch against Cortex:</strong> Cortex is easier initial setup but more rigid &mdash; "you fit into Cortex's box." Port offers more flexibility to model actual infrastructure.</li>
+          <li><strong>Frame:</strong> "Sportradar has outgrown what Cortex can do" &mdash; 17 tribes with autonomous tooling need flexible modeling, not rigid templates.</li>
+          <li><strong>Port advantages:</strong> Blueprint system can model Sportradar's actual infra, scorecard-gated deployments, self-service actions with webhook backends, AI agent layer that Cortex doesn't have.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="drawer" id="intel-stack">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Sportradar Tech Stack</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes"><h4>Languages</h4></div>
+        <table class="metric-table">
+          <thead><tr><th>Language</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td>Go</td><td>Primary &mdash; microservices, backend</td></tr>
+            <tr><td>Python</td><td>Primary &mdash; microservices, data</td></tr>
+            <tr><td>Java</td><td>SDKs, backend services</td></tr>
+            <tr><td>C#/.NET</td><td>SDKs</td></tr>
+            <tr><td>Node.js</td><td>Various services</td></tr>
+          </tbody>
+        </table>
+        <div class="speaker-notes"><h4>Infrastructure</h4></div>
+        <table class="metric-table">
+          <thead><tr><th>Category</th><th>Tools</th></tr></thead>
+          <tbody>
+            <tr><td>Cloud</td><td>AWS (ECS, Fargate, CloudWatch, CloudFormation, OpenSearch)</td></tr>
+            <tr><td>Containers</td><td>Kubernetes + hybrid on-premise</td></tr>
+            <tr><td>IaC</td><td>Terraform, Ansible, CloudFormation</td></tr>
+            <tr><td>CI/CD</td><td>Git/GitLab, automated pipelines</td></tr>
+            <tr><td>Secrets</td><td>HashiCorp Vault</td></tr>
+            <tr><td>Observability</td><td>New Relic (primary), OpenTelemetry, Prometheus, CloudWatch</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOAR Stories -->
+  <div class="drawer" id="intel-soar">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">SOAR Stories Quick Reference</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <table class="metric-table">
+          <thead><tr><th>Story</th><th>When to Use</th><th>Key Numbers</th></tr></thead>
+          <tbody>
+            <tr><td><strong>A: Adoption Engine</strong> (BTU)</td><td>Adoption, retention, expansion</td><td>65% revenue growth, 77% time-on-platform, 43% retention lift</td></tr>
+            <tr><td><strong>B: Enterprise Change Mgmt</strong> (BTU+Goodway)</td><td>Large rollouts, escalations</td><td>240+ users, 38% innovation sentiment lift</td></tr>
+            <tr><td><strong>C: Implementation Rescue</strong> (Heurista)</td><td>Hard calls, stalled implementations</td><td>30% dev cycle cut, 49% feature adoption, 18pt NPS</td></tr>
+            <tr><td><strong>D: Onboarding Skeptics</strong> (Mural XR)</td><td>Onboarding, DevEx, skepticism</td><td>22% first-session retention lift</td></tr>
+          </tbody>
+        </table>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> Story A: The Adoption Engine (Full)</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p><strong>Situation:</strong> Enterprise customers excited after first experience but usage not sticking. Stuck in one-off delivery mode.</p>
+            <p><strong>Obstacle:</strong> No playbook, no health scoring, no champion network. Build the entire adoption operating system from scratch.</p>
+            <p><strong>Action:</strong> 1) Redesigned onboarding: technical readiness + behavioral activation. 2) Champions program: internal advocates run sessions independently. 3) Health monitoring dashboards: spot drop-off patterns early.</p>
+            <p><strong>Result:</strong> 65% recurring revenue growth, 77% time-on-platform increase, 43% higher retention.</p>
+          </div></div>
+        </div>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> Story B: Enterprise Change Management (Full)</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p><strong>Situation:</strong> 240+ employee enterprise summit. Post-pandemic fatigue, skepticism about new format.</p>
+            <p><strong>Obstacle:</strong> De-risk adoption at scale &mdash; unfamiliar tech, leadership watching, multiple teams to coordinate.</p>
+            <p><strong>Action:</strong> End-to-end customer journey: pre-event onboarding rituals, champion-like support in every breakout, real-time escalation triage.</p>
+            <p><strong>Result:</strong> 38% lift in innovation sentiment across 240+ participants. Model became reusable.</p>
+          </div></div>
+        </div>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> Story C: Implementation Rescue (Full)</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p><strong>Situation:</strong> SaaS pilot validated but progress stalled. CEO's trust eroding. Feature bloat masking the real problem.</p>
+            <p><strong>Obstacle:</strong> Dev partner resisted collaboration. Architecture couldn't scale. Stakeholder patience running out.</p>
+            <p><strong>Action:</strong> Stepped in as Product Owner. Candid retrospective. Asked dev team: "Do you want to scale this?" They said no. Led contract termination, sourced new partner, rebuilt roadmap from real client feedback.</p>
+            <p><strong>Result:</strong> 30% dev cycle reduction, 18pt NPS increase, 49% feature adoption, 25% drop-off reduction.</p>
+          </div></div>
+        </div>
+
+        <div class="qa-item">
+          <button class="qa-question" aria-expanded="false"><span class="drawer-chevron">+</span> Story D: Onboarding Skeptics (Full)</button>
+          <div class="qa-answer"><div class="qa-answer-inner">
+            <p><strong>Situation:</strong> Enterprise users disoriented by new platform. Tried once, didn't come back. Novelty creating cognitive load.</p>
+            <p><strong>Obstacle:</strong> Needed to make people feel confident enough to try, not just explain what to do.</p>
+            <p><strong>Action:</strong> Replaced tutorials with experiential onboarding rituals. Coached facilitators on spotting hesitation signals. Rewrote user stories around emotional states. Built champion pathway.</p>
+            <p><strong>Result:</strong> 22% first-session retention increase. VR skeptics consistently became champions.</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

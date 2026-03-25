@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game-Day Reliability — Sportradar</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="sr-header">
+    <div class="sr-header-inner">
+      <a href="index.html" class="sr-logo">
+        sp<span class="logo-o"></span>rtradar
+      </a>
+      <nav class="sr-nav">
+        <a href="scale.html">How We Help</a>
+        <a href="index.html">Content &amp; News</a>
+        <a href="engineering.html">About Us</a>
+        <a href="gameday.html" class="active">Integrity</a>
+        <a href="#">Careers</a>
+      </nav>
+      <button class="sr-hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ========== ARTICLE HERO ========== -->
+  <div class="article-hero article-hero--red">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Content Hub</a>
+        <span>/</span>
+        Reliability
+      </div>
+      <h1>When Every Second Counts:<br>Game-Day Reliability</h1>
+      <div class="article-meta">
+        <span class="tag"><span class="live-dot"></span> Featured</span>
+        <span>Incident Response · Operational Risk</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ARTICLE BODY ========== -->
+  <div class="article-body">
+
+    <p class="lead">Saturday afternoon. Premier League matchday. Sportradar is feeding real-time data to betting operators powering millions of in-play bets per second. A data pipeline starts degrading. What happens next defines whether Sportradar keeps a contract — or loses one.</p>
+
+    <h2>The Setup</h2>
+
+    <p>Sportradar processes data from <strong>900,000 live sporting events annually.</strong> They have 500 engineers organized into 17 autonomous tribes, each with the freedom to choose their own tooling. They serve <strong>800 betting operators</strong> and <strong>900+ media partners</strong> across 80 countries.</p>
+
+    <p>They're already doing platform engineering well — they call it <strong>"paved roads."</strong> They've standardized on New Relic for observability, they have an internal managed services catalog, and they measure every service against availability, reliability, and performance SLOs.</p>
+
+    <p>But here's where it breaks down.</p>
+
+    <h2>The Scenario</h2>
+
+    <p>Imagine the pipeline processing live match events from Anfield starts degrading. Data to betting operators slows. Odds become stale. In-play markets can't be priced accurately.</p>
+
+    <div class="callout callout--red">
+      <h4>This is not hypothetical.</h4>
+      <p>With 900,000+ live events per year, 17 tribes deploying independently, and betting operators requiring sub-second data delivery in regulated markets — pipeline degradation during a live event is a matter of <em>when</em>, not <em>if</em>.</p>
+    </div>
+
+    <h2>What Happens Today</h2>
+
+    <div class="timeline">
+      <div class="timeline-step timeline-step--alert">
+        <div class="step-time">T+0:00</div>
+        <h4>Alert fires in New Relic</h4>
+        <p>New Relic tells you <em>what's broken</em> — but not <em>who owns it</em> or <em>what changed recently.</em></p>
+      </div>
+
+      <div class="timeline-step timeline-step--search">
+        <div class="step-time">T+0:02</div>
+        <h4>"Anyone know who owns match-events-ingest?"</h4>
+        <p>Someone posts in Slack. Three tribes think it might be theirs. Two are wrong.</p>
+      </div>
+
+      <div class="timeline-step timeline-step--search">
+        <div class="step-time">T+0:20</div>
+        <h4>Owner found — but what changed?</h4>
+        <p>The actual owning team (Tribe 7) starts investigating. Manual cross-referencing: GitLab pipelines, config history, deployment logs. They discover a config change was deployed an hour ago by a <em>different tribe's service</em> that feeds into theirs.</p>
+      </div>
+
+      <div class="timeline-step timeline-step--search">
+        <div class="step-time">T+0:35</div>
+        <h4>Cross-tribe coordination begins</h4>
+        <p>Manual coordination between Tribe 7 and Tribe 3. Three different dashboards. Slack threads across multiple channels. Tribal knowledge is the only map.</p>
+      </div>
+
+      <div class="timeline-step timeline-step--resolve">
+        <div class="step-time">T+0:45</div>
+        <h4>Rollback completed. Service restored.</h4>
+        <p>45 minutes during a live Premier League match.</p>
+      </div>
+    </div>
+
+    <h2 id="impact">The Cost of 45 Minutes</h2>
+
+    <div class="impact-grid">
+      <div class="impact-card">
+        <h4>Regulatory Exposure</h4>
+        <p>Betting operators received stale data — a compliance violation in licensed markets. Regulators in the UK, EU, and US hold operators accountable for data accuracy.</p>
+      </div>
+      <div class="impact-card">
+        <h4>Financial Losses</h4>
+        <p>Operators couldn't price in-play bets accurately. Financial losses get passed to Sportradar as trust erosion. With 122% net retention, trust is the business model.</p>
+      </div>
+      <div class="impact-card">
+        <h4>Contract Risk</h4>
+        <p>The Premier League reviews Sportradar's reliability for their next contract renewal. Every major partnership — NBA through 2030, MLB through 2032 — depends on operational trust.</p>
+      </div>
+      <div class="impact-card">
+        <h4>Deployment Fear</h4>
+        <p>Internal teams lose confidence in the deployment process. Next time they'll be afraid to deploy on match days — slowing innovation when speed is a competitive advantage.</p>
+      </div>
+    </div>
+
+    <h2>The Root Cause</h2>
+
+    <p>This isn't a monitoring problem — they have New Relic. It isn't a deployment problem — they have CI/CD. It's a <strong>context problem.</strong></p>
+
+    <p>When the alert fires, nobody has a single view that connects:</p>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Where the Answer Lives</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Which service is affected?</td>
+          <td>New Relic + internal wiki</td>
+        </tr>
+        <tr>
+          <td>Who owns it?</td>
+          <td>GitLab CODEOWNERS + Slack tribal knowledge</td>
+        </tr>
+        <tr>
+          <td>What was deployed recently?</td>
+          <td>GitLab pipeline history</td>
+        </tr>
+        <tr>
+          <td>What other services depend on it?</td>
+          <td>Architecture diagrams (maybe outdated)</td>
+        </tr>
+        <tr>
+          <td>Does it meet production-readiness standards?</td>
+          <td>Internal scorecard system</td>
+        </tr>
+        <tr>
+          <td>Who's on-call for that tribe?</td>
+          <td>PagerDuty / team calendar</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>The information exists across 6 different tools.</strong> Stitching it together takes 20 minutes — which is 20 minutes too long during a live event.</p>
+
+    <h2 id="integrity">FIFA, the FBI, and the Stakes</h2>
+
+    <p>The reliability story gets even sharper when you consider Sportradar's integrity operations.</p>
+
+    <p>In March 2026, FIFA extended its integrity partnership with Sportradar <strong>through 2031</strong> — including safeguarding the <strong>2026 World Cup</strong> across the US, Canada, and Mexico. FIFA created a dedicated task force alongside the <strong>U.S. Department of Justice</strong>, the <strong>FBI</strong>, and the <strong>International Betting Integrity Association.</strong></p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">1M+</div>
+        <div class="stat-label">Events Monitored Annually</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1,116</div>
+        <div class="stat-label">Suspicious Matches (2025)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">211</div>
+        <div class="stat-label">Member Associations</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1,000+</div>
+        <div class="stat-label">All-Time Sanctions</div>
+      </div>
+    </div>
+
+    <p>Sportradar's <strong>UFDS AI</strong> (Universal Fraud Detection System) processes 20+ years of historical data in real-time. AI-flagged suspicious matches increased <strong>56% year-over-year</strong> — reflecting expanded detection capabilities, not more fraud.</p>
+
+    <div class="callout callout--red">
+      <h4>Why This Matters for Engineering</h4>
+      <p>A data pipeline failure during integrity monitoring isn't just a tech issue — it's <strong>regulatory and legal exposure.</strong> The FBI is on the World Cup Task Force. When Sportradar's systems are the line of defense against match-fixing at the world's most-watched sporting event, "we had a 45-minute outage" is not an acceptable answer.</p>
+    </div>
+
+    <h2>The Q1 2026 Pattern</h2>
+
+    <p>Every story from Q1 2026 is Sportradar adding more data surfaces — more leagues, more channels, more retail locations, more integrity obligations.</p>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Story</th>
+          <th>Engineering Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Feb 4</td>
+          <td>Betfred retail upgrade — 1,300 UK shops</td>
+          <td>Feed error = incorrect payouts across 1,300 locations</td>
+        </tr>
+        <tr>
+          <td>Feb 9</td>
+          <td>NBC Sports RSN — GameFrame on live TV</td>
+          <td>Pipeline stutter = frozen graphics on NBC mid-broadcast</td>
+        </tr>
+        <tr>
+          <td>Feb 18</td>
+          <td>IMG Arena integration — 30,000 new streams</td>
+          <td>Platform complexity doubled. Which migrated services have runbooks?</td>
+        </tr>
+        <tr>
+          <td>Feb 27</td>
+          <td>Superbet expansion — enhanced in-play</td>
+          <td>More operators consuming the same real-time pipelines</td>
+        </tr>
+        <tr>
+          <td>Mar 2</td>
+          <td>FIFA integrity through 2031</td>
+          <td>Bad deploy during World Cup = regulatory exposure</td>
+        </tr>
+        <tr>
+          <td>Mar 13</td>
+          <td>PFL partnership — live MMA betting</td>
+          <td>Another data pipeline to govern</td>
+        </tr>
+        <tr>
+          <td>Mar 24</td>
+          <td>Playradar iGaming brand launch</td>
+          <td>Yet another product surface on the same data platform</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Each new surface adds pipelines, services, and deployment risk.</strong> The monitoring is there. The CI/CD is there. What's missing is the connective layer that ties service ownership, deployment state, production readiness, and incident context into a single view.</p>
+
+    <div class="cta-banner">
+      <h3>What If Those 45 Minutes Were 8?</h3>
+      <p>The information exists. The tools exist. What's missing is the connection between them — a single catalog that answers "who owns this, what changed, and who do I call" the instant an alert fires.</p>
+      <a href="runofshow/" class="btn">See How →</a>
+    </div>
+
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="sr-footer">
+    <div class="sr-footer-inner">
+      <div>
+        <div class="footer-brand">sp<span class="logo-o"></span>rtradar</div>
+        <div class="footer-address">St. Gallen, Switzerland · Minneapolis, MN</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Content Hub</a>
+        <a href="scale.html">Company</a>
+        <a href="engineering.html">Engineering</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

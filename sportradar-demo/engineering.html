@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering at Scale — Sportradar</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="sr-header">
+    <div class="sr-header-inner">
+      <a href="index.html" class="sr-logo">
+        sp<span class="logo-o"></span>rtradar
+      </a>
+      <nav class="sr-nav">
+        <a href="scale.html">How We Help</a>
+        <a href="index.html">Content &amp; News</a>
+        <a href="engineering.html" class="active">About Us</a>
+        <a href="gameday.html">Integrity</a>
+        <a href="#">Careers</a>
+      </nav>
+      <button class="sr-hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ========== ARTICLE HERO ========== -->
+  <div class="article-hero article-hero--green">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Content Hub</a>
+        <span>/</span>
+        Engineering
+      </div>
+      <h1>17 Tribes, One Paved Road</h1>
+      <div class="article-meta">
+        <span class="tag">Platform Engineering</span>
+        <span>Engineering Organization &amp; Culture</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ARTICLE BODY ========== -->
+  <div class="article-body">
+
+    <p class="lead">With 500+ engineers across 17 autonomous tribes, Sportradar faces a challenge that most organizations never reach: how do you maintain speed, quality, and reliability when every team has the freedom to choose their own tooling?</p>
+
+    <h2>The Sportify Model</h2>
+
+    <p>Adopted in mid-2019 and fully actualized by 2022, Sportradar's engineering organization is modeled after Spotify's scaled agile methodology — internally called <strong>"Sportify."</strong></p>
+
+    <p>The structure follows the familiar hierarchy: <strong>Tribes → Squads → Chapters → Guilds.</strong> Each squad is cross-functional and self-sufficient. DevOps specialists are embedded within squads, not centralized. Platform teams serve as a central function, bridged to squads through an Engineering Enablement Group.</p>
+
+    <div class="callout callout--blue">
+      <h4>The Core Principle: Autonomy</h4>
+      <p>Squads and tribes are free to choose their own technology and tooling. This autonomy drives innovation and speed — but it also creates a coordination challenge when services from different tribes need to work together during a live sporting event.</p>
+    </div>
+
+    <!-- Tribe Visual Grid -->
+    <h3 id="scale">17 Tribes — Visualized</h3>
+
+    <div class="tribe-visual">
+      <div class="tribe-dot">T1</div>
+      <div class="tribe-dot">T2</div>
+      <div class="tribe-dot tribe-dot--highlight">T3</div>
+      <div class="tribe-dot">T4</div>
+      <div class="tribe-dot">T5</div>
+      <div class="tribe-dot">T6</div>
+      <div class="tribe-dot tribe-dot--highlight">T7</div>
+      <div class="tribe-dot">T8</div>
+      <div class="tribe-dot">T9</div>
+      <div class="tribe-dot">T10</div>
+      <div class="tribe-dot">T11</div>
+      <div class="tribe-dot tribe-dot--highlight">T12</div>
+      <div class="tribe-dot">T13</div>
+      <div class="tribe-dot">T14</div>
+      <div class="tribe-dot">T15</div>
+      <div class="tribe-dot">T16</div>
+      <div class="tribe-dot">T17</div>
+    </div>
+    <p style="font-size: 13px; color: var(--gray-400); text-align: center; margin-top: 8px;">Each tribe operates autonomously. Highlighted: Tribe 3 (Data Acquisition), Tribe 7 (Live Data), Tribe 12 (Betting Services)</p>
+
+    <h2>The "Paved Roads" Approach</h2>
+
+    <p>Sportradar's platform engineering philosophy rests on four pillars — and a principle borrowed from infrastructure design: <strong>build highways, not walls.</strong></p>
+
+    <h3>1. Team Restructuring for Self-Sufficiency</h3>
+    <p>Each squad has the expertise to build features end-to-end. No dependency on a central team for basic operations. The goal is autonomy without isolation.</p>
+
+    <h3>2. Paved Roads (Golden Paths)</h3>
+    <p>A shared common stack for observability, SDLC, CI/CD, and frameworks. Teams can deviate — but the paved road is always the fastest path.</p>
+
+    <blockquote>
+      <p>"If you divert off the paved road, you can still get to those outcomes, but it's going to take you a little bit more time."</p>
+      <cite>— Scott Dunbar, SVP Engineering Enablement</cite>
+    </blockquote>
+
+    <h3>3. Core Metrics</h3>
+    <p>Every squad measures against three axes: <strong>availability, reliability, and performance.</strong> All measured against SLOs. A <strong>99.9% availability target</strong> across 200+ business services.</p>
+
+    <h3>4. Managed Services Catalog</h3>
+    <p>An internal developer portal with project bootstrapping templates, opinionated service stacks, scorecards for all applications, and centralized hosting and networking.</p>
+
+    <blockquote>
+      <p>"An essential element of platform engineering is listening to what your customers and community needs and wants, and delivering on those."</p>
+      <cite>— Scott Dunbar, SVP Engineering Enablement</cite>
+    </blockquote>
+
+    <h2>The Tech Stack</h2>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Technologies</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Languages</td>
+          <td>Go (primary), Python (primary), Java, C#/.NET, Elixir, Swift, Node.js</td>
+        </tr>
+        <tr>
+          <td>Cloud</td>
+          <td>AWS (ECS, Fargate, CloudWatch, CloudFormation, OpenSearch)</td>
+        </tr>
+        <tr>
+          <td>Containers</td>
+          <td>Kubernetes + hybrid on-premise clusters</td>
+        </tr>
+        <tr>
+          <td>IaC</td>
+          <td>Terraform, Ansible, AWS CloudFormation</td>
+        </tr>
+        <tr>
+          <td>CI/CD</td>
+          <td>Git/GitLab, automated pipelines</td>
+        </tr>
+        <tr>
+          <td>Secrets</td>
+          <td>HashiCorp Vault</td>
+        </tr>
+        <tr>
+          <td>Observability</td>
+          <td>New Relic (primary), OpenTelemetry, Prometheus, CloudWatch</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Observability as a Quality Gate</h2>
+
+    <p>Sportradar uses New Relic as the standardized "pane of glass" across all teams. Technical SLIs bubble up into business services for comparison against SLOs. A custom observability app was built using synthetics data. The result: a <strong>15% increase in release frequency</strong> through observability practices.</p>
+
+    <blockquote>
+      <p>"The creation of a system where we can debug unknown unknowns."</p>
+      <cite>— Scott Dunbar, SVP Engineering Enablement</cite>
+    </blockquote>
+
+    <div class="callout callout--amber">
+      <h4>The Remaining Challenge</h4>
+      <p>Sportradar has solved observability. They've built paved roads. They have scorecards and SLOs. But when an alert fires during a live Premier League match, the <strong>context</strong> needed to resolve it — service ownership, recent deployments, dependency maps, on-call rotations — still lives across six different tools.</p>
+      <p>The monitoring tells you <em>what's broken</em>. It doesn't tell you <em>who owns it</em>, <em>what changed</em>, or <em>who to call</em>.</p>
+    </div>
+
+    <h2>Engineering Leadership</h2>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Leader</th>
+          <th>Role</th>
+          <th>Focus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Behshad Behzadi</td>
+          <td>CPTAO</td>
+          <td>AI/ML strategy. 20 years at Google. Co-founded Google Assistant.</td>
+        </tr>
+        <tr>
+          <td>Jeff Stout</td>
+          <td>CTO, US</td>
+          <td>High-volume/high-reliability systems. 20+ years experience.</td>
+        </tr>
+        <tr>
+          <td>Scott Dunbar</td>
+          <td>SVP Engineering Enablement</td>
+          <td>Architected Sportify model. Created paved roads approach.</td>
+        </tr>
+        <tr>
+          <td>Rok Zlender</td>
+          <td>VP Platform Engineering</td>
+          <td>Cloud infrastructure. Previously 9 years at Acquia.</td>
+        </tr>
+        <tr>
+          <td>Gavin Ramsey</td>
+          <td>SVP Architecture</td>
+          <td>Enterprise Knowledge Graph Forum co-chair. Architecture for 900+ devs.</td>
+        </tr>
+        <tr>
+          <td>Tomasz Dubikowski</td>
+          <td>SVP Engineering Content</td>
+          <td>Head of Wroclaw site. Previously Ocado Technology.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- NEXT -->
+    <a href="gameday.html" class="next-article">
+      <div>
+        <div class="next-label">Next</div>
+        <div class="next-title">When Every Second Counts: Game-Day Reliability</div>
+      </div>
+      <div class="next-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="sr-footer">
+    <div class="sr-footer-inner">
+      <div>
+        <div class="footer-brand">sp<span class="logo-o"></span>rtradar</div>
+        <div class="footer-address">St. Gallen, Switzerland · Minneapolis, MN</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Content Hub</a>
+        <a href="scale.html">Company</a>
+        <a href="gameday.html">Integrity</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
