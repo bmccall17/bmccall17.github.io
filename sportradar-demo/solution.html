@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution Architecture — Sportradar</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+  <div class="context-banner">
+    <strong>Internal Developer Platform</strong>
+    <span class="banner-dot"></span>
+    Demonstration Environment
+    <span class="banner-dot"></span>
+    Not affiliated with sportradar.com
+  </div>
+
+  <header class="sr-header">
+    <div class="sr-header-inner">
+      <a href="index.html" class="sr-logo">
+        sp<span class="logo-o"></span>rtradar
+      </a>
+      <nav class="sr-nav">
+        <a href="scale.html">The Company</a>
+        <a href="engineering.html">Engineering</a>
+        <a href="gameday.html">Game Day</a>
+        <a href="solution.html" class="active">Solution</a>
+        <a href="index.html">IDP Hub</a>
+      </nav>
+      <button class="sr-hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ========== ARTICLE HERO ========== -->
+  <div class="article-hero article-hero--purple">
+    <div class="article-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">IDP Hub</a>
+        <span>/</span>
+        Solution Architecture
+      </div>
+      <h1>From 45 Minutes to 2:<br>The Architecture of Speed</h1>
+      <div class="article-meta">
+        <span class="tag">Solution</span>
+        <span>Incident Response Workflow &middot; Process &middot; People &middot; Tools</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ARTICLE BODY ========== -->
+  <div class="article-body">
+
+    <p class="lead">The same incident. Three different architectures. The difference isn't the tools — it's how they're connected. Here's how Sportradar's incident response transforms from fragmented firefighting to autonomous resolution.</p>
+
+    <!-- ========== FLOW 1: TODAY ========== -->
+    <h2>Today: Fragmented Response</h2>
+    <p>Alert fires in New Relic. Nobody has a single view that connects the service, its owner, recent deployments, or who to call. Six tools. Twenty minutes just to find the right person.</p>
+
+    <div class="flow">
+
+      <div class="flow-step flow-step--pain">
+        <div class="step-time">T+0:00</div>
+        <div class="step-title">Alert Fires in New Relic</div>
+        <div class="step-detail">Pipeline degradation detected during live Premier League match. New Relic tells you <em>what's broken</em> — but not <em>who owns it</em>.</div>
+        <div class="flow-tools">
+          <span class="flow-tool">New Relic</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--pain"></div>
+
+      <div class="flow-step flow-step--pain">
+        <div class="step-time">T+0:02</div>
+        <div class="step-title">"Anyone know who owns match-events-ingest?"</div>
+        <div class="step-detail">Someone posts in Slack. Three tribes think it might be theirs. Two are wrong. Manual cross-referencing begins across six different tools.</div>
+        <div class="flow-tools">
+          <span class="flow-tool">Slack</span>
+          <span class="flow-tool">Internal Wiki</span>
+          <span class="flow-tool">GitLab CODEOWNERS</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--pain"></div>
+
+      <div class="flow-branch">
+        <div class="flow-step flow-step--pain">
+          <div class="step-title">Search GitLab Pipelines</div>
+          <div class="step-detail">What was deployed recently?</div>
+          <div class="flow-tools"><span class="flow-tool">GitLab</span></div>
+        </div>
+        <div class="flow-step flow-step--pain">
+          <div class="step-title">Check Architecture Diagrams</div>
+          <div class="step-detail">What depends on this? (Maybe outdated.)</div>
+          <div class="flow-tools"><span class="flow-tool">Confluence</span></div>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--pain"></div>
+
+      <div class="flow-step flow-step--pain">
+        <div class="step-time">T+0:20</div>
+        <div class="step-title">Owner Found — But What Changed?</div>
+        <div class="step-detail">Tribe 7 starts investigating. A config change was deployed an hour ago by a <em>different tribe's service</em> that feeds into theirs.</div>
+        <div class="flow-tools">
+          <span class="flow-tool">GitLab</span>
+          <span class="flow-tool">PagerDuty</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--pain"></div>
+
+      <div class="flow-step flow-step--pain">
+        <div class="step-time">T+0:35</div>
+        <div class="step-title">Cross-Tribe Coordination</div>
+        <div class="step-detail">Manual coordination between Tribe 7 and Tribe 3. Three dashboards, multiple Slack channels, tribal knowledge is the only map.</div>
+        <div class="flow-tools">
+          <span class="flow-tool">Slack</span>
+          <span class="flow-tool">New Relic</span>
+          <span class="flow-tool">GitLab</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--pain"></div>
+
+      <div class="flow-step flow-step--pain">
+        <div class="step-time">T+0:45</div>
+        <div class="step-title">Rollback Completed. Service Restored.</div>
+        <div class="step-detail">45 minutes during a live Premier League match. 800 betting operators received stale data.</div>
+      </div>
+
+      <div class="flow-connector flow-connector--pain"></div>
+
+      <div class="flow-result flow-result--pain">
+        <div class="result-num">45 min</div>
+        <div class="result-label">Mean Time to Resolution</div>
+      </div>
+
+    </div>
+
+    <!-- ========== FLOW 2: WITH PORT ========== -->
+    <h2>Phase 1 — With Port: Orchestrated Response</h2>
+    <p>Same alert. But now there's a single catalog that connects every service to its owner, its scorecard tier, its recent deployments, and its dependencies. The context is instant.</p>
+
+    <div class="flow">
+
+      <div class="flow-step flow-step--port">
+        <div class="step-time">T+0:00</div>
+        <div class="step-title">Alert Fires in New Relic</div>
+        <div class="step-detail">Same alert. But now Port automation triggers instantly.</div>
+        <div class="flow-tools">
+          <span class="flow-tool">New Relic</span>
+          <span class="flow-tool flow-tool--active">Port Automation</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--port"></div>
+
+      <div class="flow-step flow-step--port">
+        <div class="step-time">Instant</div>
+        <div class="step-title">Port Enriches the Alert with Context</div>
+        <div class="step-detail">Catalog lookup: service owner, on-call rotation, recent deployments, SLO status, scorecard tier, dependency map — all in one view.</div>
+        <div class="flow-tools">
+          <span class="flow-tool flow-tool--active">Software Catalog</span>
+          <span class="flow-tool flow-tool--active">Scorecard</span>
+          <span class="flow-tool flow-tool--active">Relations</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--port"></div>
+
+      <div class="flow-step flow-step--port">
+        <div class="step-time">T+0:01</div>
+        <div class="step-title">Scorecard Reveals: Service Was Not Gold-Tier</div>
+        <div class="step-detail">feed-normalization was at Silver — missing SLO documentation. The scorecard gate would have prevented this deploy during a live event. The gap was visible <em>before</em> the incident.</div>
+        <div class="flow-tools">
+          <span class="flow-tool flow-tool--active">Game-Day Readiness Scorecard</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--port"></div>
+
+      <div class="flow-step flow-step--port">
+        <div class="step-time">T+0:03</div>
+        <div class="step-title">Self-Service: Create Incident Channel</div>
+        <div class="step-detail">One click creates a Slack channel pre-populated with the service owner, the deployer, the SRE lead, and full catalog context. No manual coordination.</div>
+        <div class="flow-tools">
+          <span class="flow-tool flow-tool--active">Self-Service Action</span>
+          <span class="flow-tool">Slack</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--port"></div>
+
+      <div class="flow-step flow-step--port">
+        <div class="step-time">T+0:08</div>
+        <div class="step-title">Rollback via Self-Service Action</div>
+        <div class="step-detail">Owner triggers rollback through Port. Catalog updates automatically. Dashboard reflects current state. Scorecard flags the deploying service for review.</div>
+        <div class="flow-tools">
+          <span class="flow-tool flow-tool--active">Self-Service Action</span>
+          <span class="flow-tool flow-tool--active">Dashboard</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--port"></div>
+
+      <div class="flow-result flow-result--port">
+        <div class="result-num">8 min</div>
+        <div class="result-label">Mean Time to Resolution</div>
+      </div>
+
+    </div>
+
+    <!-- ========== FLOW 3: AGENTIC ========== -->
+    <h2>Phase 2 — Agentic Response</h2>
+    <p>Port AI agents monitor the Context Lake continuously. When an anomaly is detected, the agent already knows the service, the owner, the dependencies, and what changed. It proposes a fix. A human approves it.</p>
+
+    <div class="flow">
+
+      <div class="flow-step flow-step--agentic">
+        <div class="step-time">T+0:00</div>
+        <div class="step-title">Anomaly Detected</div>
+        <div class="step-detail">New Relic anomaly triggers Port AI agent. The agent activates with full Context Lake access.</div>
+        <div class="flow-tools">
+          <span class="flow-tool">New Relic</span>
+          <span class="flow-tool flow-tool--active">Port AI Agent</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--agentic"></div>
+
+      <div class="flow-step flow-step--agentic">
+        <div class="step-time">Instant</div>
+        <div class="step-title">Agent Queries Context Lake</div>
+        <div class="step-detail">Service, owner, dependencies, recent deployments across <em>all 17 tribes</em>. Correlates the anomaly with a config change in feed-normalization v2.3.1 deployed 47 minutes ago.</div>
+        <div class="flow-tools">
+          <span class="flow-tool flow-tool--active">Context Lake</span>
+          <span class="flow-tool flow-tool--active">Catalog Relations</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--agentic"></div>
+
+      <div class="flow-step flow-step--agentic">
+        <div class="step-time">T+0:00</div>
+        <div class="step-title">Agent Proposes: Rollback feed-normalization v2.3.1</div>
+        <div class="step-detail">Probable root cause identified. Agent drafts rollback plan with blast radius analysis. Sends approval request to on-call.</div>
+        <div class="flow-tools">
+          <span class="flow-tool flow-tool--active">AI Agent</span>
+          <span class="flow-tool">Slack</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--agentic"></div>
+
+      <div class="flow-step flow-step--agentic">
+        <div class="step-time">T+0:01</div>
+        <div class="step-title">Human-in-the-Loop Approval</div>
+        <div class="step-detail">On-call receives: "Rollback recommended. Approve?" One-click approval in Slack. The human validates — the agent executes.</div>
+        <div class="flow-tools">
+          <span class="flow-tool flow-tool--active">Human Approval</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--agentic"></div>
+
+      <div class="flow-step flow-step--agentic">
+        <div class="step-time">T+0:02</div>
+        <div class="step-title">Agent Executes, Verifies, Closes Loop</div>
+        <div class="step-detail">Rollback executed. Health check verified. Post-incident report auto-generated. Scorecard updated for deploying service. Agent recommends: "Gate Tribe 3 deploys during live events."</div>
+        <div class="flow-tools">
+          <span class="flow-tool flow-tool--active">Self-Healing</span>
+          <span class="flow-tool flow-tool--active">Auto-Report</span>
+          <span class="flow-tool flow-tool--active">Scorecard Update</span>
+        </div>
+      </div>
+
+      <div class="flow-connector flow-connector--agentic"></div>
+
+      <div class="flow-result flow-result--agentic">
+        <div class="result-num">2 min</div>
+        <div class="result-label">Mean Time to Resolution</div>
+      </div>
+
+    </div>
+
+    <!-- ========== COMPARISON TABLE ========== -->
+    <h2>What Changes at Each Phase</h2>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Today</th>
+          <th>Phase 1 (Port)</th>
+          <th>Phase 2 (Agentic)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>MTTR</td>
+          <td>45 min</td>
+          <td>8 min</td>
+          <td>2 min</td>
+        </tr>
+        <tr>
+          <td>Who finds the owner?</td>
+          <td>Slack + tribal knowledge</td>
+          <td>Catalog lookup (instant)</td>
+          <td>AI agent (automatic)</td>
+        </tr>
+        <tr>
+          <td>What-changed context</td>
+          <td>Manual GitLab search</td>
+          <td>Catalog + recent deploys</td>
+          <td>Agent correlation</td>
+        </tr>
+        <tr>
+          <td>Deployment governance</td>
+          <td>None during live events</td>
+          <td>Scorecard-gated actions</td>
+          <td>Agent-enforced gates</td>
+        </tr>
+        <tr>
+          <td>Rollback mechanism</td>
+          <td>Manual SSH / pipeline</td>
+          <td>Self-service action</td>
+          <td>Agent-proposed, human-approved</td>
+        </tr>
+        <tr>
+          <td>Post-incident</td>
+          <td>Manual write-up (days later)</td>
+          <td>Scorecard flags for review</td>
+          <td>Auto-generated report + recommendations</td>
+        </tr>
+        <tr>
+          <td>Tools involved</td>
+          <td>6 disconnected tools</td>
+          <td>Port as orchestrator</td>
+          <td>Port AI as autonomous responder</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ========== VALUE TRACKING ========== -->
+    <h2>Measuring the Transformation</h2>
+
+    <p>The bonus question: how do you prove this is working? Port's dashboards surface these metrics automatically. Here's the trajectory over a 6-month rollout.</p>
+
+    <div class="metric-trends">
+
+      <div class="trend-card">
+        <h4>MTTR Reduction</h4>
+        <div class="bar-chart">
+          <div class="bar-col">
+            <div class="bar" style="--h: 100%">
+              <span class="bar-val">45m</span>
+            </div>
+            <span class="bar-label">Baseline</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar bar--improving" style="--h: 67%">
+              <span class="bar-val">30m</span>
+            </div>
+            <span class="bar-label">Month 2</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar bar--improving" style="--h: 33%">
+              <span class="bar-val">15m</span>
+            </div>
+            <span class="bar-label">Month 4</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar bar--target" style="--h: 18%">
+              <span class="bar-val">8m</span>
+            </div>
+            <span class="bar-label">Month 6</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="trend-card">
+        <h4>Gold-Tier Services</h4>
+        <div class="bar-chart">
+          <div class="bar-col">
+            <div class="bar" style="--h: 5%">
+              <span class="bar-val">0%</span>
+            </div>
+            <span class="bar-label">Baseline</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar bar--improving" style="--h: 25%">
+              <span class="bar-val">20%</span>
+            </div>
+            <span class="bar-label">Month 2</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar bar--improving" style="--h: 50%">
+              <span class="bar-val">40%</span>
+            </div>
+            <span class="bar-label">Month 4</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar bar--target" style="--h: 75%">
+              <span class="bar-val">60%</span>
+            </div>
+            <span class="bar-label">Month 6</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="trend-card">
+        <h4>Self-Service Adoption</h4>
+        <div class="bar-chart">
+          <div class="bar-col">
+            <div class="bar" style="--h: 5%">
+              <span class="bar-val">0</span>
+            </div>
+            <span class="bar-label">Baseline</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar bar--improving" style="--h: 20%">
+              <span class="bar-val">15/wk</span>
+            </div>
+            <span class="bar-label">Month 2</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar bar--improving" style="--h: 45%">
+              <span class="bar-val">45/wk</span>
+            </div>
+            <span class="bar-label">Month 4</span>
+          </div>
+          <div class="bar-col">
+            <div class="bar bar--target" style="--h: 85%">
+              <span class="bar-val">120/wk</span>
+            </div>
+            <span class="bar-label">Month 6</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h3>Full KPI Framework</h3>
+
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Baseline</th>
+          <th>6-Month Target</th>
+          <th>How Measured</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>MTTR</td>
+          <td>45 min</td>
+          <td>&lt;10 min</td>
+          <td>Automation timestamps</td>
+        </tr>
+        <tr>
+          <td>Deployment Frequency</td>
+          <td>Current baseline</td>
+          <td>+15%</td>
+          <td>GitHub / GitLab data</td>
+        </tr>
+        <tr>
+          <td>Gold-Tier Services</td>
+          <td>0%</td>
+          <td>60%</td>
+          <td>Scorecard progression</td>
+        </tr>
+        <tr>
+          <td>Live Event Incidents</td>
+          <td>Current count</td>
+          <td>Reduce Q-o-Q</td>
+          <td>Automation history</td>
+        </tr>
+        <tr>
+          <td>On-Call Coverage</td>
+          <td>Partial</td>
+          <td>100%</td>
+          <td>Catalog relations</td>
+        </tr>
+        <tr>
+          <td>Self-Service Adoption</td>
+          <td>0</td>
+          <td>Growth trend</td>
+          <td>Action trigger count</td>
+        </tr>
+        <tr>
+          <td>Context Lookup Time</td>
+          <td>20 min</td>
+          <td>Instant</td>
+          <td>Catalog search</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ========== CTA ========== -->
+    <div class="cta-banner">
+      <h3>See It Live</h3>
+      <p>The flowcharts show the architecture. The demo shows it working. Three services, one scorecard, real GitHub data — and a deployment gate that prevents the next Premier League incident.</p>
+      <a href="runofshow/" class="btn">Launch the Demo &rarr;</a>
+    </div>
+
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="sr-footer">
+    <div class="sr-footer-inner">
+      <div>
+        <div class="footer-brand">sp<span class="logo-o"></span>rtradar</div>
+        <div class="footer-address">
+          This is a demonstration site. Not affiliated with Sportradar AG.<br>
+          Built for a Port.io TSM Challenge presentation.
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="scale.html">Company</a>
+        <a href="engineering.html">Engineering</a>
+        <a href="gameday.html">Game Day</a>
+        <a href="runofshow/">Run of Show</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

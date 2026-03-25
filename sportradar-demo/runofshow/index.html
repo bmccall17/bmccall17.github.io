@@ -52,6 +52,7 @@
         <li><a href="#a3-checklist">Pre-Demo Checklist</a></li>
         <li><a href="#a3-stop1">Stop 1: Catalog</a></li>
         <li><a href="#a3-stop2">Stop 2: GitHub</a></li>
+        <li><a href="#a3-trivy">Bridge: Trivy</a></li>
         <li><a href="#a3-stop3">Stop 3: Scorecard</a></li>
         <li><a href="#a3-stop4">Stop 4: Gate</a></li>
         <li><a href="#a3-stop5">Stop 5: Action</a></li>
@@ -623,6 +624,37 @@ Agent executes rollback -> verifies health -> closes loop
         <div class="fallback-card">
           <h4>If integration shows red status</h4>
           <p>"The GitHub integration had a resync issue in the demo environment &mdash; the data you see was successfully ingested and is stable. In production, you'd have monitoring on integration health. Actually, that's exactly what the Repository Sync Health scorecard surfaces."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bridge: Trivy Supply Chain Story -->
+  <div class="drawer" id="a3-trivy">
+    <button class="drawer-trigger" aria-expanded="false">
+      <span class="drawer-title">Bridge: Trivy Supply Chain Compromise (Talk Track)</span>
+      <span class="drawer-timing">1:00</span>
+      <span class="drawer-chevron">+</span>
+    </button>
+    <div class="drawer-content">
+      <div class="drawer-inner">
+        <div class="speaker-notes">
+          <h4>When to use</h4>
+          <ul><li>After showing the Dependabot PR spike in Stop 2</li><li>Bridge into Stop 3 (why scorecards matter)</li></ul>
+        </div>
+        <div class="talk-track">
+          <p>"See that Dependabot PR spike? That's real data. And here's why it matters beyond just open PRs.</p>
+          <p>In March 2026 &mdash; this month &mdash; attackers compromised the <strong>trivy-action</strong> GitHub Action. The security scanning tool itself became the attack vector. They force-pushed malicious code to 75 of 76 version tags. Every repo using tag-based references pulled the compromised version.</p>
+          <p>The malware dumped CI/CD runner memory to steal secrets. Then those stolen credentials were used to publish backdoored versions of <strong>litellm</strong> on PyPI &mdash; with a Kubernetes lateral movement toolkit baked in.</p>
+          <p>12,000+ repos affected. Detection? StepSecurity's runtime network monitor caught outbound C2 connections. The fix? Pin to immutable commit SHAs, not mutable tags.</p>
+          <p>Now &mdash; that SHA pinning? That's exactly the kind of rule a scorecard enforces. Let me show you."</p>
+        </div>
+        <div class="key-phrases">
+          <span class="phrase-pill">Security scanner = attack vector</span>
+          <span class="phrase-pill">75/76 tags compromised</span>
+          <span class="phrase-pill">12,000+ repos affected</span>
+          <span class="phrase-pill">SHA pinning prevents this</span>
+          <span class="phrase-pill">Scorecard enforces it</span>
         </div>
       </div>
     </div>

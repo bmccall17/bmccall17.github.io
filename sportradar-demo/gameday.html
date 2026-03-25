@@ -27,6 +27,7 @@
         <a href="scale.html">The Company</a>
         <a href="engineering.html">Engineering</a>
         <a href="gameday.html" class="active">Game Day</a>
+        <a href="solution.html">Solution</a>
         <a href="index.html">IDP Hub</a>
       </nav>
       <button class="sr-hamburger" aria-label="Menu">&#9776;</button>
@@ -278,10 +279,53 @@
 
     <p><strong>Each new surface adds pipelines, services, and deployment risk.</strong> The monitoring is there. The CI/CD is there. What's missing is the connective layer that ties service ownership, deployment state, production readiness, and incident context into a single view.</p>
 
+    <h2 id="supply-chain">When Your Security Scanner IS the Vulnerability</h2>
+
+    <p>In March 2026 — while Sportradar was preparing for the World Cup — attackers compromised <strong>Trivy</strong>, one of the most widely-used security scanning tools in the industry. The tool designed to <em>protect</em> CI/CD pipelines became the attack vector.</p>
+
+    <div class="timeline">
+      <div class="timeline-step timeline-step--alert">
+        <div class="step-time">Step 1</div>
+        <h4>Attackers Force-Push to 75 of 76 Version Tags</h4>
+        <p>Malicious code injected into the <code>aquasecurity/trivy-action</code> GitHub Action. Tags are mutable — SHAs are not. Every repo using tag-based references pulled the compromised version.</p>
+      </div>
+
+      <div class="timeline-step timeline-step--search">
+        <div class="step-time">Step 2</div>
+        <h4>12,000+ Repos Execute Compromised Action</h4>
+        <p>CI/CD runners across thousands of organizations ran the malicious code. On GitHub-hosted runners, it dumped memory to steal decrypted secrets. On self-hosted runners, it scanned filesystems for SSH keys, cloud credentials, and Kubernetes tokens.</p>
+      </div>
+
+      <div class="timeline-step timeline-step--search">
+        <div class="step-time">Step 3</div>
+        <h4>Attack Extends to litellm PyPI Package</h4>
+        <p>Stolen credentials were used to publish backdoored versions of <strong>litellm</strong> (1.82.7, 1.82.8) to PyPI — a popular LLM proxy. The payload included a K8s lateral movement toolkit, credential harvester, and persistent backdoor.</p>
+      </div>
+
+      <div class="timeline-step timeline-step--resolve">
+        <div class="step-time">Step 4</div>
+        <h4>StepSecurity Harden-Runner Detects C2 Connections</h4>
+        <p>Runtime network monitoring flagged outbound connections to command-and-control servers. Detection clues: unsigned commits (originals were GPG-signed) and impossible timestamps.</p>
+      </div>
+    </div>
+
+    <div class="callout callout--red">
+      <h4>Why This Matters for Sportradar</h4>
+      <p>Sportradar's 17 tribes deploy independently using GitLab CI/CD. A compromised GitHub Action or PyPI dependency could silently exfiltrate Kubernetes credentials from their hybrid clusters — giving attackers access to live match data pipelines, integrity monitoring systems, and betting operator feeds.</p>
+      <p>With 500+ engineers and autonomous tooling choices, <strong>manual response to 12,000+ affected repos is impossible.</strong> The question isn't whether your supply chain will be targeted — it's whether your governance catches it before production.</p>
+    </div>
+
+    <div class="callout callout--green">
+      <h4>With Port: Automated Supply Chain Governance</h4>
+      <p><strong>Scorecard enforcement:</strong> A "Supply Chain Security" scorecard rule requires all CI actions pinned to immutable commit SHAs — not mutable tags. Services using tag references are flagged and gated from production deployment.</p>
+      <p><strong>Self-service response:</strong> When a compromised dependency is detected, a Port action triggers credential rotation, creates an incident entity, and surfaces which services are affected — in the catalog, not in Slack.</p>
+      <p><strong>Dashboard visibility:</strong> The Dependabot PR spike visible in the demo? That's real. It's exactly the kind of signal that surfaces automatically when your catalog tracks repository health.</p>
+    </div>
+
     <div class="cta-banner">
       <h3>June 11 Is Coming. What If Those 45 Minutes Were 8?</h3>
       <p>The information exists. The tools exist. What's missing is the connection between them — a single catalog that answers "who owns this, what changed, and who do I call" the instant an alert fires. Before the World Cup, not during it.</p>
-      <a href="runofshow/" class="btn">See the Solution →</a>
+      <a href="solution.html" class="btn">See the Solution Architecture →</a>
     </div>
 
   </div>
