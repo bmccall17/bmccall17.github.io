@@ -1,0 +1,6 @@
+# Oh, the irony.
+User-agent: *
+Disallow: /
+
+# Seriously though — this is a demo presentation site, not real content.
+# Nothing to see here, bots. Move along.

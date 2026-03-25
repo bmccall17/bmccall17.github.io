@@ -3,34 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Content Hub — Sportradar</title>
+  <title>Internal Developer Platform — Sportradar Demo</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
+
+  <!-- ========== CONTEXT BANNER ========== -->
+  <div class="context-banner">
+    <strong>Internal Developer Platform</strong>
+    <span class="banner-dot"></span>
+    Demonstration Environment
+    <span class="banner-dot"></span>
+    Not affiliated with sportradar.com
+  </div>
 
   <!-- ========== HEADER ========== -->
   <header class="sr-header">
     <div class="sr-header-inner">
       <a href="index.html" class="sr-logo">
-        sp<span class="logo-o"></span>rtradar
+        <span class="logo-s">s</span><span class="logo-port">p<span class="logo-o"></span>rt</span><span class="logo-radar">radar</span>
       </a>
       <nav class="sr-nav">
-        <a href="scale.html">How We Help</a>
-        <a href="index.html" class="active">Content &amp; News</a>
-        <a href="engineering.html">About Us</a>
-        <a href="gameday.html">Integrity</a>
-        <a href="#">Careers</a>
+        <a href="scale.html">The Company</a>
+        <a href="engineering.html">Engineering</a>
+        <a href="gameday.html">Game Day</a>
+        <a href="index.html" class="active">IDP Hub</a>
       </nav>
       <button class="sr-hamburger" aria-label="Menu">&#9776;</button>
     </div>
   </header>
 
-  <!-- ========== HERO ========== -->
-  <section class="hero">
-    <div class="hero-label">Content Hub</div>
-    <h1>Powering the World's<br>Most Trusted Sports Data</h1>
-    <p class="subtitle">Insights, technology, and stories from inside the platform that connects sports, media, and betting worldwide.</p>
+  <!-- ========== HERO SPLIT ========== -->
+  <section class="hero-split">
+    <div class="hero-text">
+      <div class="hero-label">IDP Demonstration</div>
+      <h1>What if Sportradar had an Internal Developer Platform?</h1>
+      <p class="subtitle">This site explores how Port.io's IDP would solve the context fragmentation problem at a $1.3B sports data company with 500+ engineers across 17 autonomous tribes — ahead of the 2026 FIFA World Cup.</p>
+      <div class="hero-context">
+        <strong>This is not a replica of sportradar.com.</strong> It's a demonstration of the Internal Developer Platform we'd build for them — the research, the pain story, and the live Port.io demo environment that brings it to life.
+      </div>
+    </div>
+    <div class="hero-screenshot">
+      <div class="browser-frame">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="browser-url">sportradar.com/content-and-news</div>
+        </div>
+        <img src="sportradar-com.png" alt="sportradar.com content hub — the real site">
+      </div>
+      <div class="frame-caption">sportradar.com — the company behind the demo scenario</div>
+    </div>
   </section>
+
+  <!-- ========== SECTION DIVIDER ========== -->
+  <div class="section-divider">
+    <h2>Explore the Use Case</h2>
+  </div>
 
   <!-- ========== HUB LAYOUT ========== -->
   <div class="hub-layout">
@@ -42,7 +74,7 @@
       <a href="gameday.html" class="hub-card hub-card--featured hub-card--red">
         <span class="card-tag"><span class="live-dot"></span> Featured</span>
         <h3>When Every Second Counts: Game-Day Reliability at Sportradar</h3>
-        <p>What happens when a data pipeline degrades during a live Premier League match — and 800 betting operators are counting on you.</p>
+        <p>What happens when a data pipeline degrades during a live Premier League match — and 800 betting operators are counting on you. With the 2026 FIFA World Cup months away, this isn't hypothetical.</p>
         <span class="card-cta">Read the story</span>
       </a>
 
@@ -62,8 +94,8 @@
 
       <a href="gameday.html#integrity" class="hub-card hub-card--purple">
         <span class="card-tag">Integrity</span>
-        <h3>FIFA, the FBI, and the World Cup Task Force</h3>
-        <p>How Sportradar monitors 1M+ events annually for match-fixing — and what that means for engineering.</p>
+        <h3>FIFA, the FBI, and the 2026 World Cup Task Force</h3>
+        <p>How Sportradar monitors 1M+ events annually for match-fixing — and why the World Cup raises the stakes to existential.</p>
         <span class="card-cta">Learn more</span>
       </a>
 
@@ -151,20 +183,18 @@
     <div class="sr-footer-inner">
       <div>
         <div class="footer-brand">
-          sp<span class="logo-o"></span>rtradar
+          <span class="logo-s">s</span><span class="logo-port">p<span class="logo-o"></span>rt</span><span class="logo-radar">radar</span>
         </div>
         <div class="footer-address">
-          St. Gallen, Switzerland<br>
-          Minneapolis, MN (US HQ)<br>
-          28 offices · 22 countries · 5 continents
+          This is a demonstration site. Not affiliated with Sportradar AG.<br>
+          Built for a Port.io TSM Challenge presentation.
         </div>
       </div>
       <div class="footer-links">
-        <a href="scale.html">About</a>
+        <a href="scale.html">Company</a>
         <a href="engineering.html">Engineering</a>
-        <a href="gameday.html">Integrity</a>
-        <a href="#">Careers</a>
-        <a href="#">Contact</a>
+        <a href="gameday.html">Game Day</a>
+        <a href="runofshow/">Run of Show</a>
       </div>
     </div>
   </footer>

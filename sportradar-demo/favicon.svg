@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#ffffff"/>
+  <!-- P shape -->
+  <path d="M8 6h8c4.5 0 7 2.5 7 6.2 0 3.7-2.5 6.2-7 6.2h-3.5V26H8V6z" fill="#0a0a1a"/>
+  <!-- Crosshair O cutout in the P's bowl -->
+  <circle cx="17" cy="12.2" r="4" fill="#ffffff"/>
+  <circle cx="17" cy="12.2" r="3.2" fill="none" stroke="#EA3323" stroke-width="1.6"/>
+  <circle cx="17" cy="12.2" r="1" fill="#EA3323"/>
+</svg>
