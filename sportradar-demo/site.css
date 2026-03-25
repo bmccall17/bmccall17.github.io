@@ -63,67 +63,35 @@ img { max-width: 100%; display: block; }
   gap: 48px;
 }
 
-/* Logo — s[PORT]radar with Port.io styling */
+/* Logo */
 .sr-logo {
   font-size: 22px;
+  font-weight: 900;
   letter-spacing: -0.5px;
   color: var(--white);
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  font-weight: 400;
-}
-
-.sr-logo .logo-s {
-  font-weight: 400;
-  color: var(--gray-200);
-}
-
-.sr-logo .logo-port {
-  display: inline-flex;
-  align-items: center;
-  background: var(--white);
-  color: #0a0a1a;
-  padding: 2px 6px 2px 7px;
-  border-radius: 4px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  margin: 0 0 0 1px;
-  font-size: 21px;
-  line-height: 1;
-  position: relative;
-  top: 0px;
 }
 
 .sr-logo .logo-o {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
-  border: 2.5px solid var(--red);
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--red);
   border-radius: 50%;
-  margin: 0 0.5px;
+  margin: 0 1px;
   position: relative;
-  background: transparent;
 }
 
 .sr-logo .logo-o::after {
   content: '';
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   background: var(--red);
   border-radius: 50%;
-}
-
-/* Inside the white pill, the crosshair ring needs dark fallback */
-.sr-logo .logo-port .logo-o {
-  border-color: var(--red);
-}
-
-.sr-logo .logo-radar {
-  font-weight: 900;
-  letter-spacing: -0.5px;
 }
 
 /* Nav links */
@@ -951,46 +919,31 @@ img { max-width: 100%; display: block; }
 
 .sr-footer .footer-brand {
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 900;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
 }
 
-/* Footer logo inherits same structure as header logo */
-.sr-footer .footer-brand .logo-s { font-weight: 400; color: var(--gray-400); }
-.sr-footer .footer-brand .logo-port {
-  display: inline-flex;
-  align-items: center;
-  background: var(--white);
-  color: #0a0a1a;
-  padding: 1px 5px 1px 6px;
-  border-radius: 3px;
-  font-weight: 800;
-  font-size: 17px;
-  line-height: 1;
-  margin: 0 0 0 1px;
-}
 .sr-footer .footer-brand .logo-o {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   border: 2px solid var(--red);
   border-radius: 50%;
-  margin: 0 0.5px;
+  margin: 0 1px;
   position: relative;
-  background: transparent;
 }
+
 .sr-footer .footer-brand .logo-o::after {
   content: '';
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   background: var(--red);
   border-radius: 50%;
 }
-.sr-footer .footer-brand .logo-radar { font-weight: 900; }
 
 .footer-address {
   font-size: 13px;
@@ -1066,6 +1019,54 @@ img { max-width: 100%; display: block; }
   }
 
   .footer-links { flex-wrap: wrap; }
+}
+
+/* ========== ROTATING HEADLINE ========== */
+.hero-headline-rotate {
+  display: block;
+  position: relative;
+  min-height: 1.2em;
+}
+
+.rotate-word {
+  display: inline-block;
+  position: relative;
+  color: var(--red);
+  font-style: italic;
+}
+
+.rotate-word span {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: rotate-in 24s infinite;
+}
+
+/* 6 phrases, each visible for 4s out of 24s cycle */
+.rotate-word span:nth-child(1) { animation-delay: 0s; }
+.rotate-word span:nth-child(2) { animation-delay: 4s; }
+.rotate-word span:nth-child(3) { animation-delay: 8s; }
+.rotate-word span:nth-child(4) { animation-delay: 12s; }
+.rotate-word span:nth-child(5) { animation-delay: 16s; }
+.rotate-word span:nth-child(6) { animation-delay: 20s; }
+
+/* First word visible on load before animation kicks in */
+.rotate-word span:first-child {
+  position: relative;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes rotate-in {
+  0%        { opacity: 0; transform: translateY(20px); }
+  2%        { opacity: 1; transform: translateY(0); }
+  14.667%   { opacity: 1; transform: translateY(0); }
+  16.667%   { opacity: 0; transform: translateY(-20px); }
+  100%      { opacity: 0; transform: translateY(-20px); }
 }
 
 /* ========== ANIMATED DECORATION ========== */
