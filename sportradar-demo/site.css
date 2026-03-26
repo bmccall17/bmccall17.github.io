@@ -1350,11 +1350,11 @@ img { max-width: 100%; display: block; }
   line-height: 1.2;
 }
 
-/* ========== PHASE COLUMNS (side-by-side on solution page) ========== */
+/* ========== PHASE COLUMNS (three-up on solution page) ========== */
 .phase-columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
   margin: 48px 0;
   /* Break out of article-body max-width */
   width: calc(100vw - 80px);
@@ -1364,17 +1364,17 @@ img { max-width: 100%; display: block; }
 }
 
 .phase-col h2 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 900;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   letter-spacing: -0.5px;
 }
 
 .phase-col > p {
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--gray-200);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .phase-col .flow {
@@ -1382,9 +1382,12 @@ img { max-width: 100%; display: block; }
   margin: 0;
 }
 
-.phase-col .flow-step .step-title { font-size: 15px; }
-.phase-col .flow-step .step-detail { font-size: 13px; }
-.phase-col .flow-result .result-num { font-size: 40px; }
+.phase-col .flow-step { padding: 16px 18px; }
+.phase-col .flow-step .step-title { font-size: 14px; }
+.phase-col .flow-step .step-detail { font-size: 12px; }
+.phase-col .flow-connector { height: 24px; }
+.phase-col .flow-result .result-num { font-size: 36px; }
+.phase-col .flow-result { padding: 20px; }
 
 @media (max-width: 768px) {
   .metric-trends {
@@ -1403,7 +1406,10 @@ img { max-width: 100%; display: block; }
   }
 
   .phase-col h2 { font-size: 28px; }
+  .phase-col .flow-step { padding: 20px 24px; }
   .phase-col .flow-step .step-title { font-size: 17px; }
   .phase-col .flow-step .step-detail { font-size: 14px; }
+  .phase-col .flow-connector { height: 32px; }
   .phase-col .flow-result .result-num { font-size: 48px; }
+  .phase-col .flow-result { padding: 28px; }
 }

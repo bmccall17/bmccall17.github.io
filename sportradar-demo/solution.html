@@ -59,101 +59,80 @@
       connected. Here's how Sportradar's incident response transforms from fragmented firefighting to autonomous
       resolution.</p>
 
-    <!-- ========== FLOW 1: TODAY ========== -->
-    <h2>Today: Fragmented Response</h2>
-    <p>Alert fires in New Relic. Nobody has a single view that connects the service, its owner, recent deployments, or
-      who to call. Six tools. Twenty minutes just to find the right person.</p>
-
-    <div class="flow">
-
-      <div class="flow-step flow-step--pain">
-        <div class="step-time">T+0:00</div>
-        <div class="step-title">Alert Fires in New Relic</div>
-        <div class="step-detail">Pipeline degradation detected during live Premier League match. New Relic tells you
-          <em>what's broken</em> — but not <em>who owns it</em>.
-        </div>
-        <div class="flow-tools">
-          <span class="flow-tool">New Relic</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--pain"></div>
-
-      <div class="flow-step flow-step--pain">
-        <div class="step-time">T+0:02</div>
-        <div class="step-title">"Anyone know who owns match-events-ingest?"</div>
-        <div class="step-detail">Someone posts in Slack. Three tribes think it might be theirs. Two are wrong. Manual
-          cross-referencing begins across six different tools.</div>
-        <div class="flow-tools">
-          <span class="flow-tool">Slack</span>
-          <span class="flow-tool">Internal Wiki</span>
-          <span class="flow-tool">GitLab CODEOWNERS</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--pain"></div>
-
-      <div class="flow-branch">
-        <div class="flow-step flow-step--pain">
-          <div class="step-title">Search GitLab Pipelines</div>
-          <div class="step-detail">What was deployed recently?</div>
-          <div class="flow-tools"><span class="flow-tool">GitLab</span></div>
-        </div>
-        <div class="flow-step flow-step--pain">
-          <div class="step-title">Check Architecture Diagrams</div>
-          <div class="step-detail">What depends on this? (Maybe outdated.)</div>
-          <div class="flow-tools"><span class="flow-tool">Confluence</span></div>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--pain"></div>
-
-      <div class="flow-step flow-step--pain">
-        <div class="step-time">T+0:20</div>
-        <div class="step-title">Owner Found — But What Changed?</div>
-        <div class="step-detail">Tribe 7 starts investigating. A config change was deployed an hour ago by a
-          <em>different tribe's service</em> that feeds into theirs.
-        </div>
-        <div class="flow-tools">
-          <span class="flow-tool">GitLab</span>
-          <span class="flow-tool">PagerDuty</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--pain"></div>
-
-      <div class="flow-step flow-step--pain">
-        <div class="step-time">T+0:35</div>
-        <div class="step-title">Cross-Tribe Coordination</div>
-        <div class="step-detail">Manual coordination between Tribe 7 and Tribe 3. Three dashboards, multiple Slack
-          channels, tribal knowledge is the only map.</div>
-        <div class="flow-tools">
-          <span class="flow-tool">Slack</span>
-          <span class="flow-tool">New Relic</span>
-          <span class="flow-tool">GitLab</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--pain"></div>
-
-      <div class="flow-step flow-step--pain">
-        <div class="step-time">T+0:45</div>
-        <div class="step-title">Rollback Completed. Service Restored.</div>
-        <div class="step-detail">45 minutes during a live Premier League match. 800 betting operators received stale
-          data.</div>
-      </div>
-
-      <div class="flow-connector flow-connector--pain"></div>
-
-      <div class="flow-result flow-result--pain">
-        <div class="result-num">45 min</div>
-        <div class="result-label">Mean Time to Resolution</div>
-      </div>
-
-    </div>
-
-    <!-- ========== PHASE 1 & PHASE 2 SIDE-BY-SIDE ========== -->
+    <!-- ========== ALL THREE PHASES SIDE-BY-SIDE ========== -->
     <div class="phase-columns">
+
+      <!-- TODAY: FRAGMENTED -->
+      <div class="phase-col">
+        <h2>Today: Fragmented Response</h2>
+        <p>Alert fires in New Relic. Nobody has a single view that connects the service, its owner, recent deployments, or who to call. Six tools. Twenty minutes just to find the right person.</p>
+
+        <div class="flow">
+
+          <div class="flow-step flow-step--pain">
+            <div class="step-time">T+0:00</div>
+            <div class="step-title">Alert Fires in New Relic</div>
+            <div class="step-detail">Pipeline degradation detected during live Premier League match. New Relic tells you <em>what's broken</em> — but not <em>who owns it</em>.</div>
+            <div class="flow-tools">
+              <span class="flow-tool">New Relic</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--pain"></div>
+
+          <div class="flow-step flow-step--pain">
+            <div class="step-time">T+0:02</div>
+            <div class="step-title">"Anyone know who owns match-events-ingest?"</div>
+            <div class="step-detail">Someone posts in Slack. Three tribes think it might be theirs. Two are wrong.</div>
+            <div class="flow-tools">
+              <span class="flow-tool">Slack</span>
+              <span class="flow-tool">Internal Wiki</span>
+              <span class="flow-tool">GitLab CODEOWNERS</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--pain"></div>
+
+          <div class="flow-step flow-step--pain">
+            <div class="step-time">T+0:20</div>
+            <div class="step-title">Owner Found — But What Changed?</div>
+            <div class="step-detail">Tribe 7 starts investigating. A config change was deployed by a <em>different tribe's service</em> that feeds into theirs.</div>
+            <div class="flow-tools">
+              <span class="flow-tool">GitLab</span>
+              <span class="flow-tool">PagerDuty</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--pain"></div>
+
+          <div class="flow-step flow-step--pain">
+            <div class="step-time">T+0:35</div>
+            <div class="step-title">Cross-Tribe Coordination</div>
+            <div class="step-detail">Manual coordination between Tribe 7 and Tribe 3. Three dashboards, multiple Slack channels, tribal knowledge is the only map.</div>
+            <div class="flow-tools">
+              <span class="flow-tool">Slack</span>
+              <span class="flow-tool">New Relic</span>
+              <span class="flow-tool">GitLab</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--pain"></div>
+
+          <div class="flow-step flow-step--pain">
+            <div class="step-time">T+0:45</div>
+            <div class="step-title">Rollback Completed. Service Restored.</div>
+            <div class="step-detail">45 minutes during a live Premier League match. 800 betting operators received stale data.</div>
+          </div>
+
+          <div class="flow-connector flow-connector--pain"></div>
+
+          <div class="flow-result flow-result--pain">
+            <div class="result-num">45 min</div>
+            <div class="result-label">Mean Time to Resolution</div>
+          </div>
+
+        </div>
+      </div>
 
       <!-- PHASE 1: WITH PORT -->
       <div class="phase-col">
