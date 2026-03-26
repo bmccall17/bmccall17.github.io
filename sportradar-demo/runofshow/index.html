@@ -55,7 +55,7 @@
         <li><a href="#a3-trivy">Bridge: Trivy</a></li>
         <li><a href="#a3-stop3">Stop 3: Scorecard</a></li>
         <li><a href="#a3-stop4">Stop 4: Gate</a></li>
-        <li><a href="#a3-stop5">Stop 5: Action</a></li>
+        <li><a href="#a3-stop5">Stop 5: Self-Service</a></li>
         <li><a href="#a3-stop6">Stop 6: Dashboard</a></li>
         <li><a href="#a3-closing">Closing</a></li>
         <li><a href="#a3-moments">Key Moments</a></li>
@@ -560,9 +560,13 @@ Agent executes rollback -> verifies health -> closes loop
           <label><input type="checkbox" id="chk-7"><span>Tab 6: Self-Service &rarr; Deploy to Production (on match-events-ingest)</span></label>
           <label><input type="checkbox" id="chk-8"><span>Tab 7: Dashboard &mdash; main</span></label>
           <label><input type="checkbox" id="chk-9"><span>Tab 8: Dashboard &mdash; GitHub Repository Health</span></label>
-          <label><input type="checkbox" id="chk-10"><span>Fallback screenshots saved</span></label>
-          <label><input type="checkbox" id="chk-11"><span>Know: feed-normalization failing has_slo = false</span></label>
-          <label><input type="checkbox" id="chk-12"><span>Tested Request Security Review action</span></label>
+          <label><input type="checkbox" id="chk-10"><span>Tab 9: Catalog &rarr; incident table</span></label>
+          <label><input type="checkbox" id="chk-11"><span>Fallback screenshots saved (all stops + incident flow)</span></label>
+          <label><input type="checkbox" id="chk-12"><span>Know: feed-normalization failing has_slo = false</span></label>
+          <label><input type="checkbox" id="chk-13"><span>Tested Request Security Review action</span></label>
+          <label><input type="checkbox" id="chk-14"><span>Tested Create Incident action &mdash; verified entity + relation &mdash; deleted test</span></label>
+          <label><input type="checkbox" id="chk-15"><span>Verified: Deploy visible on Gold (match-events-ingest), hidden on Silver (feed-normalization)</span></label>
+          <label><input type="checkbox" id="chk-16"><span>2 pre-staged incidents visible in incident catalog</span></label>
         </div>
       </div>
     </div>
@@ -728,25 +732,49 @@ Agent executes rollback -> verifies health -> closes loop
   <!-- Stop 5: Self-Service Action -->
   <div class="drawer" id="a3-stop5">
     <button class="drawer-trigger" aria-expanded="false">
-      <span class="drawer-title">Stop 5: Self-Service Action (Live Trigger)</span>
-      <span class="drawer-timing">2:00</span>
+      <span class="drawer-title">Stop 5: Self-Service Showcase (Two Live Triggers)</span>
+      <span class="drawer-timing">3:00</span>
       <span class="drawer-chevron">+</span>
     </button>
     <div class="drawer-content">
       <div class="drawer-inner">
         <div class="speaker-notes">
-          <h4>What to show</h4>
-          <ul><li>Trigger Request Security Review on feed-normalization</li></ul>
+          <h4>What to show &mdash; two actions back-to-back</h4>
+          <ul>
+            <li><strong>Action A (30 sec):</strong> Trigger Request Security Review on feed-normalization</li>
+            <li><strong>Action B (1.5 min):</strong> Trigger Create Incident (new entity creation)</li>
+          </ul>
         </div>
+
+        <h4 style="color: #3fb950; margin-top: 16px;">Action A: Request Security Review</h4>
         <div class="talk-track">
-          <p>"Let me trigger an action live.</p>
-          <p>Review Type = Dependency Audit, Priority = High, Notes = 'Pre-game-day review &mdash; 25 open Dependabot PRs need triage'</p>
-          <p>The form collects structured inputs. Port logs the request, tracks it, and in production this would trigger a webhook to create a Jira ticket or send a Slack notification to the AppSec team.</p>
-          <p>For Sportradar: a developer sees their service at Silver, knows they need Gold for the next match day. They click 'Request Security Review,' the AppSec team gets context-rich intake, and the path to Gold is a workflow, not a conversation."</p>
+          <p>"Let me trigger an action live. On feed-normalization &rarr; Self-Service &rarr; Request Security Review.</p>
+          <p>Review Type = <strong>Dependency Audit</strong>, Priority = <strong>High</strong>, Notes = <strong>'Pre-game-day review &mdash; 25 open Dependabot PRs need triage'</strong></p>
+          <p>Structured intake. In production this fires a webhook &mdash; Jira ticket, Slack notification, AppSec team gets context-rich data automatically."</p>
+        </div>
+
+        <h4 style="color: #bc8cff; margin-top: 24px;">Action B: Create Incident</h4>
+        <div class="talk-track">
+          <p>"Now let me show something more powerful. I'm going to create a live incident in the catalog.</p>
+          <p>Title = <strong>'odds-calculation-engine latency spike'</strong><br>
+          Severity = <strong>P2</strong><br>
+          Affected Service = <strong>odds-calculation-engine</strong> (entity picker)<br>
+          Description = <strong>'Intermittent latency spikes &mdash; operators reporting stale pricing on secondary markets'</strong><br>
+          Detected By = <strong>New Relic Alert</strong></p>
+          <p><em>[Execute]</em></p>
+          <p>Now watch &mdash; navigate to the incident catalog. Three incidents. The one I just created is there, linked to odds-calculation-engine. Click it &mdash; the incident knows the service, the owner (James O'Brien), the tribe (Tribe 12), the SLO target.</p>
+          <p>Remember the Premier League scenario? Someone posted 'Anyone know who owns this?' in Slack. Here &mdash; the incident already knows. The 20-minute search just became instant."</p>
+        </div>
+        <div class="key-phrases">
+          <span class="phrase-pill">Structured intake</span>
+          <span class="phrase-pill">Entity creation live</span>
+          <span class="phrase-pill">Instant context</span>
+          <span class="phrase-pill">20 min &rarr; instant</span>
         </div>
         <div class="fallback-card">
-          <h4>If action fails to trigger</h4>
-          <p>"Let me show you the action configuration and walk through what the inputs and outputs look like." (Show action definition in Self-Service &rarr; Edit)</p>
+          <h4>If action fails</h4>
+          <p><strong>Security Review:</strong> "Let me show you the action configuration." (Self-Service &rarr; Builder &rarr; request_security_review)</p>
+          <p><strong>Create Incident:</strong> "These two pre-staged incidents were created the same way." Navigate to incident catalog, show the Premier League and Trivy incidents with their relations.</p>
         </div>
       </div>
     </div>
@@ -771,6 +799,7 @@ Agent executes rollback -> verifies health -> closes loop
             <li><strong>All Services table</strong> &mdash; every service with tribe, criticality, language, on-call, scorecard level. At a glance: who's Gold, who's not.</li>
             <li><strong>Game-Day Readiness donut</strong> &mdash; maturity distribution. One Gold, two Silver. 'How ready are we for Saturday?'</li>
             <li><strong>Services by Criticality</strong> &mdash; how many revenue-critical vs supporting services.</li>
+            <li><strong>Active Incidents</strong> &mdash; the incident I just created shows up here. Three incidents total &mdash; one resolved, one investigating, one just detected. Real-time operational awareness.</li>
           </ul>
           <p>For Sportradar at scale, I'd build a second dashboard for the SRE team during live events &mdash; real-time, operational, showing active incidents and recent deployments."</p>
         </div>
