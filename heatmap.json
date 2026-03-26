@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-03-26",
+    "state": "shipped",
+    "title": "repoptics in the wild: building the tools to build the tools",
+    "path": "2026-03-26_repoptics_in_the_wild.html"
+  },
+  {
     "date": "2026-03-23",
     "state": "learning",
     "title": "brett hud v1: stealing the cockpit from claude-hud",
