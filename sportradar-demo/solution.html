@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="site.css">
 </head>
+
 <body>
 
   <div class="context-banner">
@@ -53,18 +55,22 @@
   <!-- ========== ARTICLE BODY ========== -->
   <div class="article-body">
 
-    <p class="lead">The same incident. Three different architectures. The difference isn't the tools — it's how they're connected. Here's how Sportradar's incident response transforms from fragmented firefighting to autonomous resolution.</p>
+    <p class="lead">The same incident. Three different architectures. The difference isn't the tools — it's how they're
+      connected. Here's how Sportradar's incident response transforms from fragmented firefighting to autonomous
+      resolution.</p>
 
     <!-- ========== FLOW 1: TODAY ========== -->
     <h2>Today: Fragmented Response</h2>
-    <p>Alert fires in New Relic. Nobody has a single view that connects the service, its owner, recent deployments, or who to call. Six tools. Twenty minutes just to find the right person.</p>
+    <p>Alert fires in New Relic. Nobody has a single view that connects the service, its owner, recent deployments, or
+      who to call. Six tools. Twenty minutes just to find the right person.</p>
 
     <div class="flow">
 
       <div class="flow-step flow-step--pain">
         <div class="step-time">T+0:00</div>
         <div class="step-title">Alert Fires in New Relic</div>
-        <div class="step-detail">Pipeline degradation detected during live Premier League match. New Relic tells you <em>what's broken</em> — but not <em>who owns it</em>.</div>
+        <div class="step-detail">Pipeline degradation detected during live Premier League match. New Relic tells you
+          <em>what's broken</em> — but not <em>who owns it</em>.</div>
         <div class="flow-tools">
           <span class="flow-tool">New Relic</span>
         </div>
@@ -75,7 +81,8 @@
       <div class="flow-step flow-step--pain">
         <div class="step-time">T+0:02</div>
         <div class="step-title">"Anyone know who owns match-events-ingest?"</div>
-        <div class="step-detail">Someone posts in Slack. Three tribes think it might be theirs. Two are wrong. Manual cross-referencing begins across six different tools.</div>
+        <div class="step-detail">Someone posts in Slack. Three tribes think it might be theirs. Two are wrong. Manual
+          cross-referencing begins across six different tools.</div>
         <div class="flow-tools">
           <span class="flow-tool">Slack</span>
           <span class="flow-tool">Internal Wiki</span>
@@ -103,7 +110,8 @@
       <div class="flow-step flow-step--pain">
         <div class="step-time">T+0:20</div>
         <div class="step-title">Owner Found — But What Changed?</div>
-        <div class="step-detail">Tribe 7 starts investigating. A config change was deployed an hour ago by a <em>different tribe's service</em> that feeds into theirs.</div>
+        <div class="step-detail">Tribe 7 starts investigating. A config change was deployed an hour ago by a
+          <em>different tribe's service</em> that feeds into theirs.</div>
         <div class="flow-tools">
           <span class="flow-tool">GitLab</span>
           <span class="flow-tool">PagerDuty</span>
@@ -115,7 +123,8 @@
       <div class="flow-step flow-step--pain">
         <div class="step-time">T+0:35</div>
         <div class="step-title">Cross-Tribe Coordination</div>
-        <div class="step-detail">Manual coordination between Tribe 7 and Tribe 3. Three dashboards, multiple Slack channels, tribal knowledge is the only map.</div>
+        <div class="step-detail">Manual coordination between Tribe 7 and Tribe 3. Three dashboards, multiple Slack
+          channels, tribal knowledge is the only map.</div>
         <div class="flow-tools">
           <span class="flow-tool">Slack</span>
           <span class="flow-tool">New Relic</span>
@@ -128,7 +137,8 @@
       <div class="flow-step flow-step--pain">
         <div class="step-time">T+0:45</div>
         <div class="step-title">Rollback Completed. Service Restored.</div>
-        <div class="step-detail">45 minutes during a live Premier League match. 800 betting operators received stale data.</div>
+        <div class="step-detail">45 minutes during a live Premier League match. 800 betting operators received stale
+          data.</div>
       </div>
 
       <div class="flow-connector flow-connector--pain"></div>
@@ -146,7 +156,8 @@
       <!-- PHASE 1: WITH PORT -->
       <div class="phase-col">
         <h2>Phase 1 — With Port: Orchestrated Response</h2>
-        <p>Same alert. But now there's a single catalog that connects every service to its owner, its scorecard tier, its recent deployments, and its dependencies. The context is instant.</p>
+        <p>Same alert. But now there's a single catalog that connects every service to its owner, its scorecard tier,
+          its recent deployments, and its dependencies. The context is instant.</p>
 
         <div class="flow">
 
@@ -165,7 +176,8 @@
           <div class="flow-step flow-step--port">
             <div class="step-time">Instant</div>
             <div class="step-title">Port Enriches the Alert with Context</div>
-            <div class="step-detail">Catalog lookup: service owner, on-call rotation, recent deployments, SLO status, scorecard tier, dependency map — all in one view.</div>
+            <div class="step-detail">Catalog lookup: service owner, on-call rotation, recent deployments, SLO status,
+              scorecard tier, dependency map — all in one view.</div>
             <div class="flow-tools">
               <span class="flow-tool flow-tool--active">Software Catalog</span>
               <span class="flow-tool flow-tool--active">Scorecard</span>
@@ -178,7 +190,9 @@
           <div class="flow-step flow-step--port">
             <div class="step-time">T+0:01</div>
             <div class="step-title">Scorecard Reveals: Service Was Not Gold-Tier</div>
-            <div class="step-detail">feed-normalization was at Silver — missing SLO documentation. The scorecard gate would have prevented this deploy during a live event. The gap was visible <em>before</em> the incident.</div>
+            <div class="step-detail">feed-normalization was at Silver — missing SLO documentation. The scorecard gate
+              would have prevented this deploy during a live event. The gap was visible <em>before</em> the incident.
+            </div>
             <div class="flow-tools">
               <span class="flow-tool flow-tool--active">Game-Day Readiness Scorecard</span>
             </div>
@@ -189,7 +203,8 @@
           <div class="flow-step flow-step--port">
             <div class="step-time">T+0:03</div>
             <div class="step-title">Self-Service: Create Incident Channel</div>
-            <div class="step-detail">One click creates a Slack channel pre-populated with the service owner, the deployer, the SRE lead, and full catalog context. No manual coordination.</div>
+            <div class="step-detail">One click creates a Slack channel pre-populated with the service owner, the
+              deployer, the SRE lead, and full catalog context. No manual coordination.</div>
             <div class="flow-tools">
               <span class="flow-tool flow-tool--active">Self-Service Action</span>
               <span class="flow-tool">Slack</span>
@@ -201,7 +216,8 @@
           <div class="flow-step flow-step--port">
             <div class="step-time">T+0:08</div>
             <div class="step-title">Rollback via Self-Service Action</div>
-            <div class="step-detail">Owner triggers rollback through Port. Catalog updates automatically. Dashboard reflects current state. Scorecard flags the deploying service for review.</div>
+            <div class="step-detail">Owner triggers rollback through Port. Catalog updates automatically. Dashboard
+              reflects current state. Scorecard flags the deploying service for review.</div>
             <div class="flow-tools">
               <span class="flow-tool flow-tool--active">Self-Service Action</span>
               <span class="flow-tool flow-tool--active">Dashboard</span>
@@ -221,14 +237,16 @@
       <!-- PHASE 2: AGENTIC -->
       <div class="phase-col">
         <h2>Phase 2 — Agentic Response</h2>
-        <p>Port AI agents monitor the Context Lake continuously. When an anomaly is detected, the agent already knows the service, the owner, the dependencies, and what changed. It proposes a fix. A human approves it.</p>
+        <p>Port AI agents monitor the Context Lake continuously. When an anomaly is detected, the agent already knows
+          the service, the owner, the dependencies, and what changed. It proposes a fix. A human approves it.</p>
 
         <div class="flow">
 
           <div class="flow-step flow-step--agentic">
             <div class="step-time">T+0:00</div>
             <div class="step-title">Anomaly Detected</div>
-            <div class="step-detail">New Relic anomaly triggers Port AI agent. The agent activates with full Context Lake access.</div>
+            <div class="step-detail">New Relic anomaly triggers Port AI agent. The agent activates with full Context
+              Lake access.</div>
             <div class="flow-tools">
               <span class="flow-tool">New Relic</span>
               <span class="flow-tool flow-tool--active">Port AI Agent</span>
@@ -240,7 +258,8 @@
           <div class="flow-step flow-step--agentic">
             <div class="step-time">Instant</div>
             <div class="step-title">Agent Queries Context Lake</div>
-            <div class="step-detail">Service, owner, dependencies, recent deployments across <em>all 17 tribes</em>. Correlates the anomaly with a config change in feed-normalization v2.3.1 deployed 47 minutes ago.</div>
+            <div class="step-detail">Service, owner, dependencies, recent deployments across <em>all 17 tribes</em>.
+              Correlates the anomaly with a config change in feed-normalization v2.3.1 deployed 47 minutes ago.</div>
             <div class="flow-tools">
               <span class="flow-tool flow-tool--active">Context Lake</span>
               <span class="flow-tool flow-tool--active">Catalog Relations</span>
@@ -252,7 +271,8 @@
           <div class="flow-step flow-step--agentic">
             <div class="step-time">T+0:00</div>
             <div class="step-title">Agent Proposes: Rollback feed-normalization v2.3.1</div>
-            <div class="step-detail">Probable root cause identified. Agent drafts rollback plan with blast radius analysis. Sends approval request to on-call.</div>
+            <div class="step-detail">Probable root cause identified. Agent drafts rollback plan with blast radius
+              analysis. Sends approval request to on-call.</div>
             <div class="flow-tools">
               <span class="flow-tool flow-tool--active">AI Agent</span>
               <span class="flow-tool">Slack</span>
@@ -264,7 +284,8 @@
           <div class="flow-step flow-step--agentic">
             <div class="step-time">T+0:01</div>
             <div class="step-title">Human-in-the-Loop Approval</div>
-            <div class="step-detail">On-call receives: "Rollback recommended. Approve?" One-click approval in Slack. The human validates — the agent executes.</div>
+            <div class="step-detail">On-call receives: "Rollback recommended. Approve?" One-click approval in Slack. The
+              human validates — the agent executes.</div>
             <div class="flow-tools">
               <span class="flow-tool flow-tool--active">Human Approval</span>
             </div>
@@ -275,7 +296,9 @@
           <div class="flow-step flow-step--agentic">
             <div class="step-time">T+0:02</div>
             <div class="step-title">Agent Executes, Verifies, Closes Loop</div>
-            <div class="step-detail">Rollback executed. Health check verified. Post-incident report auto-generated. Scorecard updated for deploying service. Agent recommends: "Gate Tribe 3 deploys during live events."</div>
+            <div class="step-detail">Rollback executed. Health check verified. Post-incident report auto-generated.
+              Scorecard updated for deploying service. Agent recommends: "Gate Tribe 3 deploys during live events."
+            </div>
             <div class="flow-tools">
               <span class="flow-tool flow-tool--active">Self-Healing</span>
               <span class="flow-tool flow-tool--active">Auto-Report</span>
@@ -356,7 +379,8 @@
     <!-- ========== VALUE TRACKING ========== -->
     <h2>Measuring the Transformation</h2>
 
-    <p>The bonus question: how do you prove this is working? Port's dashboards surface these metrics automatically. Here's the trajectory over a 6-month rollout.</p>
+    <p>The bonus question: how do you prove this is working? Port's dashboards surface these metrics automatically.
+      Here's the trajectory over a 6-month rollout.</p>
 
     <div class="metric-trends">
 
@@ -512,11 +536,14 @@
     <!-- ========== CTA ========== -->
     <div class="cta-banner">
       <h3>See It Live</h3>
-      <p>The flowcharts show the architecture. The demo shows it working. Three services, one scorecard, real GitHub data — and a deployment gate that prevents the next Premier League incident.</p>
-      <div style="max-width:640px;margin:0 auto 24px;border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
-        <img src="sportradar-demo-port.png" alt="Port.io demo environment showing Sportradar service catalog" style="width:100%;display:block;">
+      <p>The flowcharts show the architecture. The demo shows it working. Three services, one scorecard, real GitHub
+        data — and a deployment gate that prevents the next Premier League incident.</p>
+      <div
+        style="max-width:640px;margin:0 auto 24px;border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+        <img src="sportradar-demo-port.png" alt="Port.io demo environment showing Sportradar service catalog"
+          style="width:100%;display:block;">
       </div>
-      <a href="runofshow/" class="btn">Launch the Demo &rarr;</a>
+      <!-- <a href="runofshow/" class="btn">Launch the Demo &rarr;</a>-->
     </div>
 
   </div>
@@ -541,4 +568,5 @@
   </footer>
 
 </body>
+
 </html>
