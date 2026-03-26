@@ -140,148 +140,157 @@
 
     </div>
 
-    <!-- ========== FLOW 2: WITH PORT ========== -->
-    <h2>Phase 1 — With Port: Orchestrated Response</h2>
-    <p>Same alert. But now there's a single catalog that connects every service to its owner, its scorecard tier, its recent deployments, and its dependencies. The context is instant.</p>
+    <!-- ========== PHASE 1 & PHASE 2 SIDE-BY-SIDE ========== -->
+    <div class="phase-columns">
 
-    <div class="flow">
+      <!-- PHASE 1: WITH PORT -->
+      <div class="phase-col">
+        <h2>Phase 1 — With Port: Orchestrated Response</h2>
+        <p>Same alert. But now there's a single catalog that connects every service to its owner, its scorecard tier, its recent deployments, and its dependencies. The context is instant.</p>
 
-      <div class="flow-step flow-step--port">
-        <div class="step-time">T+0:00</div>
-        <div class="step-title">Alert Fires in New Relic</div>
-        <div class="step-detail">Same alert. But now Port automation triggers instantly.</div>
-        <div class="flow-tools">
-          <span class="flow-tool">New Relic</span>
-          <span class="flow-tool flow-tool--active">Port Automation</span>
+        <div class="flow">
+
+          <div class="flow-step flow-step--port">
+            <div class="step-time">T+0:00</div>
+            <div class="step-title">Alert Fires in New Relic</div>
+            <div class="step-detail">Same alert. But now Port automation triggers instantly.</div>
+            <div class="flow-tools">
+              <span class="flow-tool">New Relic</span>
+              <span class="flow-tool flow-tool--active">Port Automation</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--port"></div>
+
+          <div class="flow-step flow-step--port">
+            <div class="step-time">Instant</div>
+            <div class="step-title">Port Enriches the Alert with Context</div>
+            <div class="step-detail">Catalog lookup: service owner, on-call rotation, recent deployments, SLO status, scorecard tier, dependency map — all in one view.</div>
+            <div class="flow-tools">
+              <span class="flow-tool flow-tool--active">Software Catalog</span>
+              <span class="flow-tool flow-tool--active">Scorecard</span>
+              <span class="flow-tool flow-tool--active">Relations</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--port"></div>
+
+          <div class="flow-step flow-step--port">
+            <div class="step-time">T+0:01</div>
+            <div class="step-title">Scorecard Reveals: Service Was Not Gold-Tier</div>
+            <div class="step-detail">feed-normalization was at Silver — missing SLO documentation. The scorecard gate would have prevented this deploy during a live event. The gap was visible <em>before</em> the incident.</div>
+            <div class="flow-tools">
+              <span class="flow-tool flow-tool--active">Game-Day Readiness Scorecard</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--port"></div>
+
+          <div class="flow-step flow-step--port">
+            <div class="step-time">T+0:03</div>
+            <div class="step-title">Self-Service: Create Incident Channel</div>
+            <div class="step-detail">One click creates a Slack channel pre-populated with the service owner, the deployer, the SRE lead, and full catalog context. No manual coordination.</div>
+            <div class="flow-tools">
+              <span class="flow-tool flow-tool--active">Self-Service Action</span>
+              <span class="flow-tool">Slack</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--port"></div>
+
+          <div class="flow-step flow-step--port">
+            <div class="step-time">T+0:08</div>
+            <div class="step-title">Rollback via Self-Service Action</div>
+            <div class="step-detail">Owner triggers rollback through Port. Catalog updates automatically. Dashboard reflects current state. Scorecard flags the deploying service for review.</div>
+            <div class="flow-tools">
+              <span class="flow-tool flow-tool--active">Self-Service Action</span>
+              <span class="flow-tool flow-tool--active">Dashboard</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--port"></div>
+
+          <div class="flow-result flow-result--port">
+            <div class="result-num">8 min</div>
+            <div class="result-label">Mean Time to Resolution</div>
+          </div>
+
         </div>
       </div>
 
-      <div class="flow-connector flow-connector--port"></div>
+      <!-- PHASE 2: AGENTIC -->
+      <div class="phase-col">
+        <h2>Phase 2 — Agentic Response</h2>
+        <p>Port AI agents monitor the Context Lake continuously. When an anomaly is detected, the agent already knows the service, the owner, the dependencies, and what changed. It proposes a fix. A human approves it.</p>
 
-      <div class="flow-step flow-step--port">
-        <div class="step-time">Instant</div>
-        <div class="step-title">Port Enriches the Alert with Context</div>
-        <div class="step-detail">Catalog lookup: service owner, on-call rotation, recent deployments, SLO status, scorecard tier, dependency map — all in one view.</div>
-        <div class="flow-tools">
-          <span class="flow-tool flow-tool--active">Software Catalog</span>
-          <span class="flow-tool flow-tool--active">Scorecard</span>
-          <span class="flow-tool flow-tool--active">Relations</span>
+        <div class="flow">
+
+          <div class="flow-step flow-step--agentic">
+            <div class="step-time">T+0:00</div>
+            <div class="step-title">Anomaly Detected</div>
+            <div class="step-detail">New Relic anomaly triggers Port AI agent. The agent activates with full Context Lake access.</div>
+            <div class="flow-tools">
+              <span class="flow-tool">New Relic</span>
+              <span class="flow-tool flow-tool--active">Port AI Agent</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--agentic"></div>
+
+          <div class="flow-step flow-step--agentic">
+            <div class="step-time">Instant</div>
+            <div class="step-title">Agent Queries Context Lake</div>
+            <div class="step-detail">Service, owner, dependencies, recent deployments across <em>all 17 tribes</em>. Correlates the anomaly with a config change in feed-normalization v2.3.1 deployed 47 minutes ago.</div>
+            <div class="flow-tools">
+              <span class="flow-tool flow-tool--active">Context Lake</span>
+              <span class="flow-tool flow-tool--active">Catalog Relations</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--agentic"></div>
+
+          <div class="flow-step flow-step--agentic">
+            <div class="step-time">T+0:00</div>
+            <div class="step-title">Agent Proposes: Rollback feed-normalization v2.3.1</div>
+            <div class="step-detail">Probable root cause identified. Agent drafts rollback plan with blast radius analysis. Sends approval request to on-call.</div>
+            <div class="flow-tools">
+              <span class="flow-tool flow-tool--active">AI Agent</span>
+              <span class="flow-tool">Slack</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--agentic"></div>
+
+          <div class="flow-step flow-step--agentic">
+            <div class="step-time">T+0:01</div>
+            <div class="step-title">Human-in-the-Loop Approval</div>
+            <div class="step-detail">On-call receives: "Rollback recommended. Approve?" One-click approval in Slack. The human validates — the agent executes.</div>
+            <div class="flow-tools">
+              <span class="flow-tool flow-tool--active">Human Approval</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--agentic"></div>
+
+          <div class="flow-step flow-step--agentic">
+            <div class="step-time">T+0:02</div>
+            <div class="step-title">Agent Executes, Verifies, Closes Loop</div>
+            <div class="step-detail">Rollback executed. Health check verified. Post-incident report auto-generated. Scorecard updated for deploying service. Agent recommends: "Gate Tribe 3 deploys during live events."</div>
+            <div class="flow-tools">
+              <span class="flow-tool flow-tool--active">Self-Healing</span>
+              <span class="flow-tool flow-tool--active">Auto-Report</span>
+              <span class="flow-tool flow-tool--active">Scorecard Update</span>
+            </div>
+          </div>
+
+          <div class="flow-connector flow-connector--agentic"></div>
+
+          <div class="flow-result flow-result--agentic">
+            <div class="result-num">2 min</div>
+            <div class="result-label">Mean Time to Resolution</div>
+          </div>
+
         </div>
-      </div>
-
-      <div class="flow-connector flow-connector--port"></div>
-
-      <div class="flow-step flow-step--port">
-        <div class="step-time">T+0:01</div>
-        <div class="step-title">Scorecard Reveals: Service Was Not Gold-Tier</div>
-        <div class="step-detail">feed-normalization was at Silver — missing SLO documentation. The scorecard gate would have prevented this deploy during a live event. The gap was visible <em>before</em> the incident.</div>
-        <div class="flow-tools">
-          <span class="flow-tool flow-tool--active">Game-Day Readiness Scorecard</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--port"></div>
-
-      <div class="flow-step flow-step--port">
-        <div class="step-time">T+0:03</div>
-        <div class="step-title">Self-Service: Create Incident Channel</div>
-        <div class="step-detail">One click creates a Slack channel pre-populated with the service owner, the deployer, the SRE lead, and full catalog context. No manual coordination.</div>
-        <div class="flow-tools">
-          <span class="flow-tool flow-tool--active">Self-Service Action</span>
-          <span class="flow-tool">Slack</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--port"></div>
-
-      <div class="flow-step flow-step--port">
-        <div class="step-time">T+0:08</div>
-        <div class="step-title">Rollback via Self-Service Action</div>
-        <div class="step-detail">Owner triggers rollback through Port. Catalog updates automatically. Dashboard reflects current state. Scorecard flags the deploying service for review.</div>
-        <div class="flow-tools">
-          <span class="flow-tool flow-tool--active">Self-Service Action</span>
-          <span class="flow-tool flow-tool--active">Dashboard</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--port"></div>
-
-      <div class="flow-result flow-result--port">
-        <div class="result-num">8 min</div>
-        <div class="result-label">Mean Time to Resolution</div>
-      </div>
-
-    </div>
-
-    <!-- ========== FLOW 3: AGENTIC ========== -->
-    <h2>Phase 2 — Agentic Response</h2>
-    <p>Port AI agents monitor the Context Lake continuously. When an anomaly is detected, the agent already knows the service, the owner, the dependencies, and what changed. It proposes a fix. A human approves it.</p>
-
-    <div class="flow">
-
-      <div class="flow-step flow-step--agentic">
-        <div class="step-time">T+0:00</div>
-        <div class="step-title">Anomaly Detected</div>
-        <div class="step-detail">New Relic anomaly triggers Port AI agent. The agent activates with full Context Lake access.</div>
-        <div class="flow-tools">
-          <span class="flow-tool">New Relic</span>
-          <span class="flow-tool flow-tool--active">Port AI Agent</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--agentic"></div>
-
-      <div class="flow-step flow-step--agentic">
-        <div class="step-time">Instant</div>
-        <div class="step-title">Agent Queries Context Lake</div>
-        <div class="step-detail">Service, owner, dependencies, recent deployments across <em>all 17 tribes</em>. Correlates the anomaly with a config change in feed-normalization v2.3.1 deployed 47 minutes ago.</div>
-        <div class="flow-tools">
-          <span class="flow-tool flow-tool--active">Context Lake</span>
-          <span class="flow-tool flow-tool--active">Catalog Relations</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--agentic"></div>
-
-      <div class="flow-step flow-step--agentic">
-        <div class="step-time">T+0:00</div>
-        <div class="step-title">Agent Proposes: Rollback feed-normalization v2.3.1</div>
-        <div class="step-detail">Probable root cause identified. Agent drafts rollback plan with blast radius analysis. Sends approval request to on-call.</div>
-        <div class="flow-tools">
-          <span class="flow-tool flow-tool--active">AI Agent</span>
-          <span class="flow-tool">Slack</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--agentic"></div>
-
-      <div class="flow-step flow-step--agentic">
-        <div class="step-time">T+0:01</div>
-        <div class="step-title">Human-in-the-Loop Approval</div>
-        <div class="step-detail">On-call receives: "Rollback recommended. Approve?" One-click approval in Slack. The human validates — the agent executes.</div>
-        <div class="flow-tools">
-          <span class="flow-tool flow-tool--active">Human Approval</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--agentic"></div>
-
-      <div class="flow-step flow-step--agentic">
-        <div class="step-time">T+0:02</div>
-        <div class="step-title">Agent Executes, Verifies, Closes Loop</div>
-        <div class="step-detail">Rollback executed. Health check verified. Post-incident report auto-generated. Scorecard updated for deploying service. Agent recommends: "Gate Tribe 3 deploys during live events."</div>
-        <div class="flow-tools">
-          <span class="flow-tool flow-tool--active">Self-Healing</span>
-          <span class="flow-tool flow-tool--active">Auto-Report</span>
-          <span class="flow-tool flow-tool--active">Scorecard Update</span>
-        </div>
-      </div>
-
-      <div class="flow-connector flow-connector--agentic"></div>
-
-      <div class="flow-result flow-result--agentic">
-        <div class="result-num">2 min</div>
-        <div class="result-label">Mean Time to Resolution</div>
       </div>
 
     </div>
@@ -504,6 +513,9 @@
     <div class="cta-banner">
       <h3>See It Live</h3>
       <p>The flowcharts show the architecture. The demo shows it working. Three services, one scorecard, real GitHub data — and a deployment gate that prevents the next Premier League incident.</p>
+      <div style="max-width:640px;margin:0 auto 24px;border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+        <img src="sportradar-demo-port.png" alt="Port.io demo environment showing Sportradar service catalog" style="width:100%;display:block;">
+      </div>
       <a href="runofshow/" class="btn">Launch the Demo &rarr;</a>
     </div>
 
