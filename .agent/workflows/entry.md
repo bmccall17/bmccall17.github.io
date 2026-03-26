@@ -30,16 +30,18 @@ npm run build
 ```
 - this will automatically update:
   - `darketype/entries.json` (the dynamic list)
-  - `darketype/weblog/index.html` (the static fallback and UI)
+  - `darketype/weblog/index.html` (the static fallback, UI, STATE_COLORS legend, and footer counters)
   - `darketype/weblog/{slug}.html` (per-entry static pages with OG tags)
+  - `darketype/index.html` (footer entry count)
   - `heatmap.json` (the visual activity log)
   - `assets/social/og/{slug}.png` (per-entry OG images with content-specific pictograms)
+- footer counters (entry count, state count) and tag legend colors are **auto-synced** — no manual updates needed.
 
 ### step 3: source control & publish
 - stage the new entry and the newly generated architecture files.
 // turbo
 ```bash
-git add darketype/entries/<the_new_file>.md darketype/entries.json darketype/weblog/ heatmap.json assets/social/og/
+git add darketype/entries/<the_new_file>.md darketype/entries.json darketype/index.html darketype/weblog/ heatmap.json assets/social/og/
 ```
 - commit the changes:
 // turbo

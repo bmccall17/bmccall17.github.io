@@ -173,6 +173,51 @@ function build() {
         generated++;
     }
     console.log(`✅ generated ${generated} static entry pages in weblog/`);
+
+    // 7. Sync STATE_COLORS in weblog/index.html with all states from entries
+    const allStates = [...new Set(posts.map(p => p.state))].sort();
+    const STATE_COLOR_DEFAULTS = {
+        'shipped': '#39d353', 'learning': '#f0a500', 'mess': '#cf222e',
+        'debugging': '#ff6b35', 'optimistic': '#58a6ff', 'seed': '#7c3aed',
+        'void': '#444', 'broken': '#da3633', 'frustrated': '#d29922'
+    };
+    // Fallback palette for any truly new states
+    const FALLBACK_COLORS = ['#e06c75', '#98c379', '#e5c07b', '#61afef', '#c678dd', '#56b6c2', '#be5046'];
+    let fallbackIdx = 0;
+
+    const stateEntries = allStates.map(s => {
+        const color = STATE_COLOR_DEFAULTS[s] || FALLBACK_COLORS[fallbackIdx++ % FALLBACK_COLORS.length];
+        return `                    '${s}': { color: '${color}', label: '_${s}' }`;
+    });
+    const newStateBlock = `const STATE_COLORS = {\n${stateEntries.join(',\n')},\n                };`;
+
+    let weblogHtml = fs.readFileSync(INDEX_FILE, 'utf-8');
+    weblogHtml = weblogHtml.replace(
+        /const STATE_COLORS = \{[\s\S]*?\};/,
+        newStateBlock
+    );
+
+    // 8. Update footer counters in weblog/index.html
+    const stateCount = allStates.length;
+    const entryCount = posts.length;
+    weblogHtml = weblogHtml.replace(
+        /darketype weblog — \d+ entries across \d+ emotional states\./,
+        `darketype weblog — ${entryCount} entries across ${stateCount} emotional states.`
+    );
+    fs.writeFileSync(INDEX_FILE, weblogHtml);
+    console.log(`✅ synced STATE_COLORS (${stateCount} states) and weblog footer (${entryCount} entries)`);
+
+    // 9. Update footer counter in darketype/index.html (the manifesto landing page)
+    const DARKETYPE_INDEX = path.join(__dirname, '../darketype/index.html');
+    if (fs.existsSync(DARKETYPE_INDEX)) {
+        let darketypeHtml = fs.readFileSync(DARKETYPE_INDEX, 'utf-8');
+        darketypeHtml = darketypeHtml.replace(
+            /darketype v0\.2 — \d+ mess entries and counting\./,
+            `darketype v0.2 — ${entryCount} mess entries and counting.`
+        );
+        fs.writeFileSync(DARKETYPE_INDEX, darketypeHtml);
+        console.log(`✅ updated darketype/index.html footer (${entryCount} entries)`);
+    }
 }
 
 build();
