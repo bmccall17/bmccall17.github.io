@@ -4,6 +4,7 @@ Tracking the evolution of the Darketype project.
 
 ## Ship Log
 
+| [v0.1.7](devnotes/releases/v0.1.7.md) | 🧊 melting reality & recruitment workflows | mar 27, 2026 | overhauling contact/recruitment flows, repoptics write-up, and 230k particle rot experiment |
 | [v0.1.6](devnotes/releases/v0.1.6.md) | 🎯 port-aligned success site | mar 07, 2026 | success site rewritten to align with Port.io TSM application — platform engineering, agentic workflows, strongest metrics |
 | [v0.1.5](devnotes/releases/v0.1.5.md) | 🛸 the antigravity takeover | mar 06, 2026 | fixed static date generation logic, established agent-managed git deploys |
 | [v0.1.4](devnotes/releases/v0.1.4.md) | 🔄 dynamic chaos | feb 13, 2026 | weblog engine upgrade: dynamic loading & binary inversion |
