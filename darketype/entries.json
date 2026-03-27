@@ -1,5 +1,16 @@
 [
   {
+    "file": "2026-03-27_messy_release_v0.1.7.md",
+    "slug": "2026-03-27_messy_release_v0.1.7",
+    "title": "v0.1.7: shipping forms, particles, and reps",
+    "description": "the problem a lot of scattered work across different workflows: building forms to talk to humans, building particles to break the screen, and writing up past la",
+    "date": "2026-03-27",
+    "timestampIso": "2026-03-27T00:00:00.000Z",
+    "epoch": 1774569600000,
+    "state": "shipped",
+    "path": "2026-03-27_messy_release_v0.1.7.html"
+  },
+  {
     "file": "2026-03-27_the_melt.md",
     "slug": "2026-03-27_the_melt",
     "title": "the melt: what 230,000 particles taught me about letting go",
