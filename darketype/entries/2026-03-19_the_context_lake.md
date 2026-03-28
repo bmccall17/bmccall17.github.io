@@ -10,7 +10,7 @@ next_experiment: "per-entry OG images with content-specific pictograms → shipp
 
 ## the problem
 
-i've been building agent828 — a tactical AI services site for mercenary bot development. the core mechanic is an autonomous marketing agent. it scrapes RSS feeds, checks weather, looks at trends, and generates social posts spanning bluesky and x (twitter), routing them through a discord approval queue before publishing.
+i've been building the context lake for the team at agent828 — a tactical AI services team of devloper mercenaries who are building agents and tools for better development. the core application of this context lake is an autonomous marketing agent that scrapes RSS feeds, checks weather, looks at trends, and generates social posts spanning bluesky and x (twitter), routing them through a discord approval queue before publishing.
 
 but there's a gap. LLMs are inherently stateless amnesiacs. you can give them a massive system prompt about "tone" and "brand", but if you want the agent to actually feel *alive*, it needs to remember what it's talked about recently. it needs to know what topics have momentum, what entities it just mentioned yesterday, what post templates are performing best, and what words i told it never to use again.
 
