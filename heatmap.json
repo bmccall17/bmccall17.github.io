@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-04-01",
+    "state": "shipped",
+    "title": "the melt",
+    "path": "2026-04-01_the_melt.html"
+  },
+  {
     "date": "2026-03-31",
     "state": "learning",
     "title": "understanding the lake",
