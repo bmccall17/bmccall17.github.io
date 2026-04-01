@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-03-31",
+    "state": "learning",
+    "title": "understanding the lake",
+    "path": "2026-03-31_understanding_the_lake.html"
+  },
+  {
     "date": "2026-03-27",
     "state": "shipped",
     "title": "v0.1.7: shipping forms, particles, and reps",
