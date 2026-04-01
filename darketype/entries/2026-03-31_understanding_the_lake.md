@@ -15,7 +15,7 @@ at the core of agent828 is a context lake. this acts as a living intelligence la
 
 my lake stores organizations, people, venues, neighborhoods, events, topics, scraped media, prospects, leads, engagement signals, preferences, performance metrics, and the relationships connecting them. the bot and admin panel read from it, while my research flows directly into it. my content comes out of it, and my operations run entirely through it.
 
-![agent dashboard overview](media/2026-03-31_understanding_the_lake/agent_dashboard.png)
+![agent dashboard overview](entries/media/2026-03-31_understanding_the_lake/agent_dashboard.png)
 
 this is the key idea. i built memory first. structure first. context first. only then did the interfaces follow. the website, admin panel, Discord, and publishing system act purely as interfaces. the real system lives underneath those surfaces. the real system is the lake itself.
 
@@ -31,15 +31,15 @@ in Port's world, the software catalog models the engineering environment. in my 
 
 their context lake supports engineering workflows. mine supports research, enrichment, content generation, approvals, publishing, tracking, and local intelligence gathering. their interfaces might be dashboards, APIs, and MCP. mine are a website, an admin terminal, Discord workflows, and publishing channels. we operate in different domains with the exact same architectural truth, which feels incredibly exciting.
 
-![agent lake metrics](media/2026-03-31_understanding_the_lake/lake_metrics.png)
+![agent lake metrics](entries/media/2026-03-31_understanding_the_lake/lake_metrics.png)
 
-i actually built a domain-specific operating layer for agents. this is a system where context is upstream and outputs deliberately fall downstream. it prioritizes memory from the very beginning. agents and humans can both act securely from the same underlying source of truth. the data participates actively in a cycle of scrape, enrich, organize, generate, approve, publish, measure, learn, and repeat. it feels like a much more modern idea than simply automating a feed.
+i actually built a domain-specific operating layer for agents. this is a system where context is upstream and outputs deliberately fall downstream. it prioritizes memory from the very beginning. agents and humans can both act securely from the same underlying source of truth. with several lines natively feeding it, the data participates actively in a formal workflow: **research > enrichment > organize > generate > approve > publish > measure > learn > repeat**. it feels like a much more modern idea than simply automating a feed.
 
 i also want to be honest about our differences and gaps. Port's model is more mature, formal, and explicit in a few key ways. their framework includes stronger notions of governance, scorecards, standards, permissions, and specialized agent-facing interfaces. because they build for engineering organizations, their language is very precise around systems, services, risk, ownership, and operational quality. their lake connects deeply to modern IDP concepts and a future where agents act inside complex engineering environments.
 
-my system is charting its own path. the lake remains more lightweight in its governance right now. i have active approvals, auditability, protected routes, and workflow checkpoints. it is steadily moving toward the full formal policy layer that Port describes.
+my system is charting its own path. the lake remains more lightweight in its governance right now. i have active approvals, auditability, protected routes, and workflow checkpoints. it is steadily moving toward the full formal policy layer that [Port.io](https://port.io/) describes.
 
-we currently use actions existing as commands, scripts, workflows, and interfaces rather than a polished action library. the system has robust relationships, leaving plenty of room to make the graph itself more explicit, queryable, and operationally intelligent over time.
+we currently use actions existing as commands, scripts, workflows, and interfaces rather than a polished action library. however, once the agents join the party, they link all the entities together in meaningful, relational ways that increase efficiency and accuracy at the same time. the system has robust relationships right now, leaving plenty of room to make the graph itself more explicit, queryable, and operationally intelligent over time.
 
 i avoid forcing the analogy too far since i am building something closer to a local market intelligence platform, a GTM ops system, and an agentic operating layer for a region and service business. those unique differences actually make the comparison more meaningful.
 
