@@ -1,5 +1,16 @@
 [
   {
+    "file": "2026-04-03_leuchtturm_came_from_my_own_mess.md",
+    "slug": "2026-04-03_leuchtturm_came_from_my_own_mess",
+    "title": "leuchtturm came from my own mess",
+    "description": "i did not arrive at this idea from a whiteboard. i arrived here from a pile of half-working flows, weird little wins, broken deploys, analytics tabs, emulator s",
+    "date": "2026-04-03",
+    "timestampIso": "2026-04-03T00:00:00.000Z",
+    "epoch": 1775174400000,
+    "state": "seed",
+    "path": "2026-04-03_leuchtturm_came_from_my_own_mess.html"
+  },
+  {
     "file": "2026-04-01_the_melt.md",
     "slug": "2026-04-01_the_melt",
     "title": "the melt",
