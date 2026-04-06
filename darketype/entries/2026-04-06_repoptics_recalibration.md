@@ -7,7 +7,7 @@ tags: [repoptics, recalibration, scoring, leuchtturm, community-feedback]
 
 # repoptics recalibration: from community pain to calibrated scoring
 
-when we first launched repoptics, the scoring engine was incredibly fast, but honestly, it was painfully tone-deaf. we were judging every single github repo against one universal rubric. it didn't matter if it was a quick prototype, a spec outline, or the biggest ui framework in the world — it all got punished by the same rules, generating "burn it down" or "technical debt factory" verdicts if it didn't check the boxes for a standard production web app.
+when we first launched repOptics, the scoring engine was incredibly fast, but honestly, it was painfully tone-deaf. we were judging every single github repo against one universal rubric. it didn't matter if it was a quick prototype, a spec outline, or the biggest ui framework in the world — it all got punished by the same rules, generating "burn it down" or "technical debt factory" verdicts if it didn't check the boxes for a standard production web app.
 
 inevitably, that led to early feedback from devs who found the tool "opinionated" in ways that felt completely disconnected from reality. they correctly pointed out that penalizing a markdown documentation repo for lacking a package.json made the initial scoring unhelpful rather than insightful. as one developer, `@arjie`, noted on hacker news, what they were really looking for was "high-quality, opinionated developer tooling that respects expert judgment." being opinionated is fine, but the opinions have to actually understand what they're looking at.
 
@@ -25,8 +25,8 @@ developers were also deeply frustrated by the lack of transparency in tooling co
 > "first they copy some popular features into their closed harness, then they lock out open source."
 > — peter steinberger
 
-these insights gave us our true north for the recalibration sprint. we realized that if repoptics was going to be an opinionated tool, it needed to be fully transparent, intent-aware, and actionable on the first touch.
+these insights gave us our true north for the recalibration sprint. we realized that if repOptics was going to be an opinionated tool, it needed to be fully transparent, intent-aware, and actionable on the first touch.
 
 we built a completely new confidence-damped scoring model with intent-relative weighting and expanded category checks. we replaced the blunt "fail" grades with five nuanced check states, and started relying heavily on readme-aware scoring to dynamically adapt our rubric to what the repo was legitimately trying to be. 
 
-now, the first use of repoptics is genuinely insightful and actionable. paste a repo url, and in 60 seconds you get specific headline scores (repo health, launch readiness, maintainer maturity) tailored to the type of project you're actually building.
+now, the first use of repOptics is genuinely insightful and actionable. paste a repo url, and in 60 seconds you get specific headline scores (repo health, launch readiness, maintainer maturity) tailored to the type of project you're actually building.
