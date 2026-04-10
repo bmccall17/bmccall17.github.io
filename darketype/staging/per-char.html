@@ -606,6 +606,7 @@ resize listener → charPositionsDirty = true</code></pre>
 
   function syncSliders() {
     sliders.forEach(function (s) {
+      if (!s.dataset.key) return;
       var key = s.dataset.key;
       s.value = cfg[key];
       s.nextElementSibling.textContent = fmtVal(cfg[key]);
@@ -635,7 +636,9 @@ resize listener → charPositionsDirty = true</code></pre>
 
     // Find the sibling slider
     var row = valSpan.closest('.ctrl-row');
+    if (!row) return;
     var slider = row.querySelector('.ctrl-slider');
+    if (!slider || !slider.dataset.key) return;
     var key = slider.dataset.key;
 
     // Replace span content with an input
