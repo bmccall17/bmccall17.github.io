@@ -321,3 +321,46 @@ html {
   color: rgba(0,255,65,0.55);
   text-shadow: 0 0 8px rgba(0,255,65,0.2), 0 0 20px rgba(0,255,65,0.05);
 }
+
+/* ── Semantic text layer ── */
+.semantic-wrap {
+  position: relative;
+}
+
+#semantic-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  user-select: text;
+  overflow: hidden;
+}
+
+/* Strategy B: opacity underlay (default) */
+#semantic-layer.strategy-underlay {
+  opacity: 0;
+}
+
+/* Strategy A: sr-only clip */
+#semantic-layer.strategy-sronly {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Effect layer stacking */
+#content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Effect layer user select applied in JS over CSS */

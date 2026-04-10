@@ -89,6 +89,105 @@
     will-change: transform;
   }
 
+  /* ── Semantic text layer ── */
+  .semantic-wrap {
+    position: relative;
+  }
+
+  #semantic-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    user-select: text;
+    overflow: hidden;
+  }
+
+  /* Strategy B: opacity underlay (default) */
+  #semantic-layer.strategy-underlay {
+    opacity: 0;
+  }
+
+  /* Strategy A: sr-only clip */
+  #semantic-layer.strategy-sronly {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  /* Effect layer stacking */
+  #content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Debug outline */
+  #semantic-layer.debug-outline {
+    outline: 1px dashed rgba(255,51,51,0.4);
+    outline-offset: 2px;
+  }
+
+  /* Control panel toggle styles */
+  .ctrl-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+    height: 18px;
+  }
+
+  .ctrl-toggle-btn {
+    font-family: var(--font-main);
+    font-size: 0.6rem;
+    color: var(--dim-color);
+    background: rgba(0,143,17,0.08);
+    border: 1px solid rgba(0,143,17,0.2);
+    padding: 1px 6px;
+    cursor: pointer;
+    min-width: 40px;
+    text-align: center;
+  }
+  .ctrl-toggle-btn:hover { background: rgba(0,143,17,0.2); }
+  .ctrl-toggle-btn.active {
+    color: var(--text-color);
+    background: rgba(0,255,65,0.12);
+    border-color: rgba(0,255,65,0.4);
+  }
+
+  .ctrl-strategy-group {
+    display: flex;
+    gap: 2px;
+  }
+
+  /* Copy preview toast */
+  #sem-toast {
+    position: fixed;
+    bottom: 60px;
+    left: 12px;
+    z-index: 1002;
+    font-family: var(--font-main);
+    font-size: 0.6rem;
+    color: var(--text-color);
+    background: rgba(10,10,10,0.95);
+    border: 1px solid rgba(0,255,65,0.3);
+    padding: 6px 10px;
+    max-width: 320px;
+    max-height: 100px;
+    overflow: hidden;
+    display: none;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
   #staging-label {
     position: fixed;
     top: 8px;
@@ -352,6 +451,49 @@
     <div class="ctrl-row"><span class="ctrl-label">floor /ripple</span><input class="ctrl-slider" data-key="wakeFloorStep" type="range" min="0" max="0.2" step="0.005"><span class="ctrl-val"></span></div>
   </div>
 
+  <div class="ctrl-section" id="sem-controls">
+    <div class="ctrl-section-title">semantic text</div>
+
+    <div class="ctrl-toggle-row">
+      <span class="ctrl-label">layer</span>
+      <button class="ctrl-toggle-btn active" id="sem-toggle">on</button>
+    </div>
+
+    <div class="ctrl-toggle-row">
+      <span class="ctrl-label">strategy</span>
+      <div class="ctrl-strategy-group">
+        <button class="ctrl-toggle-btn" id="sem-strat-sronly" data-strat="sronly">sr-only</button>
+        <button class="ctrl-toggle-btn active" id="sem-strat-underlay" data-strat="underlay">underlay</button>
+      </div>
+    </div>
+
+    <div class="ctrl-row">
+      <span class="ctrl-label">debug opacity</span>
+      <input class="ctrl-slider" id="sem-opacity" type="range" min="0" max="0.3" step="0.01" value="0">
+      <span class="ctrl-val" id="sem-opacity-val">0.000</span>
+    </div>
+
+    <div class="ctrl-toggle-row">
+      <span class="ctrl-label">aria-hidden</span>
+      <button class="ctrl-toggle-btn active" id="sem-aria">on</button>
+    </div>
+
+    <div class="ctrl-toggle-row">
+      <span class="ctrl-label">user-select</span>
+      <button class="ctrl-toggle-btn active" id="sem-uselect">on</button>
+    </div>
+
+    <div class="ctrl-toggle-row">
+      <span class="ctrl-label">show outline</span>
+      <button class="ctrl-toggle-btn" id="sem-outline">off</button>
+    </div>
+
+    <div class="ctrl-actions" style="border-top: none; padding-top: 2px;">
+      <button class="ctrl-btn" id="sem-test-copy">test: copy</button>
+      <button class="ctrl-btn" id="sem-test-flash">test: flash</button>
+    </div>
+  </div>
+
   <div class="ctrl-actions">
     <button class="ctrl-btn" id="btn-reset">reset defaults</button>
     <button class="ctrl-btn" id="btn-copy">copy config</button>
@@ -366,46 +508,51 @@
 
 </div>
 
+<div id="sem-toast"></div>
+
 <div class="container">
-  <div id="content">
+  <div class="semantic-wrap">
+    <div id="semantic-layer" class="strategy-underlay" aria-hidden="false" role="article"></div>
+    <div id="content" aria-hidden="true">
 
-    <h1>per-character chromatic displacement</h1>
+      <h1>per-character chromatic displacement</h1>
 
-    <p>The membrane responds to pressure. Each letter exists independently within the substrate, held in place by surface tension until an external force disturbs the equilibrium. When proximity increases, characters displace outward along the pressure vector, trailing chromatic fringe behind them like light through a defective prism.</p>
+      <p>The membrane responds to pressure. Each letter exists independently within the substrate, held in place by surface tension until an external force disturbs the equilibrium. When proximity increases, characters displace outward along the pressure vector, trailing chromatic fringe behind them like light through a defective prism.</p>
 
-    <p>This is not animation in the decorative sense. It is physics applied to typography — the same force model that governs fluid displacement, scaled down to the glyph level. Every character carries its own inertia, its own resistance to being moved, its own chromatic signature when forced out of alignment.</p>
+      <p>This is not animation in the decorative sense. It is physics applied to typography — the same force model that governs fluid displacement, scaled down to the glyph level. Every character carries its own inertia, its own resistance to being moved, its own chromatic signature when forced out of alignment.</p>
 
-    <h2>the displacement model</h2>
+      <h2>the displacement model</h2>
 
-    <p>Characters within the proximity radius experience a radial push proportional to their distance from the cursor. The closest glyphs displace the most, up to six pixels of translation. Each displaced character tilts slightly — a micro-rotation that suggests physical torque rather than digital transform. The chromatic fringe splits along the push vector: red forward, blue backward, green ghosting at peak intensity.</p>
+      <p>Characters within the proximity radius experience a radial push proportional to their distance from the cursor. The closest glyphs displace the most, up to six pixels of translation. Each displaced character tilts slightly — a micro-rotation that suggests physical torque rather than digital transform. The chromatic fringe splits along the push vector: red forward, blue backward, green ghosting at peak intensity.</p>
 
-    <p>The effect dissolves when pressure releases. Activity decay ensures that the membrane relaxes back to equilibrium over roughly one and a half seconds. There is no snap-back, no bounce — just viscous return, each character finding its way home through damped motion.</p>
+      <p>The effect dissolves when pressure releases. Activity decay ensures that the membrane relaxes back to equilibrium over roughly one and a half seconds. There is no snap-back, no bounce — just viscous return, each character finding its way home through damped motion.</p>
 
-    <h2>wavefront propagation</h2>
+      <h2>wavefront propagation</h2>
 
-    <p>Click events generate expanding wavefronts that interact with individual characters rather than blocks. The ring passes through text at a controlled velocity, displacing each letter as the leading edge crosses its position. Behind the front, a dissolving wake leaves characters temporarily displaced before they settle. Gravity acts on the wavefront over time — the initially radial displacement rotates downward, creating a drip effect that increases with the ripple's age.</p>
+      <p>Click events generate expanding wavefronts that interact with individual characters rather than blocks. The ring passes through text at a controlled velocity, displacing each letter as the leading edge crosses its position. Behind the front, a dissolving wake leaves characters temporarily displaced before they settle. Gravity acts on the wavefront over time — the initially radial displacement rotates downward, creating a drip effect that increases with the ripple's age.</p>
 
-    <ul>
-      <li>Wavefront band width: sixty pixels at character resolution</li>
-      <li>Peak displacement at the front: eight pixels outward</li>
-      <li>Wake displacement behind: three pixels, fading with distance</li>
-      <li>Gravity rotation blends radial to vertical over the ripple lifetime</li>
-      <li>Ripple displacement stacks additively with proximity displacement</li>
-    </ul>
+      <ul>
+        <li>Wavefront band width: sixty pixels at character resolution</li>
+        <li>Peak displacement at the front: eight pixels outward</li>
+        <li>Wake displacement behind: three pixels, fading with distance</li>
+        <li>Gravity rotation blends radial to vertical over the ripple lifetime</li>
+        <li>Ripple displacement stacks additively with proximity displacement</li>
+      </ul>
 
-    <h3>spatial culling</h3>
+      <h3>spatial culling</h3>
 
-    <p>Performance requires that we do not compute transforms for every character on every frame. A two-tier system gates the work: first, block-level bounding rectangles reject entire paragraphs that fall outside the proximity radius. Then, within active blocks, individual character distances are checked against cached positions. The result is that only two to six hundred characters are evaluated per frame, even when the page contains thousands.</p>
+      <p>Performance requires that we do not compute transforms for every character on every frame. A two-tier system gates the work: first, block-level bounding rectangles reject entire paragraphs that fall outside the proximity radius. Then, within active blocks, individual character distances are checked against cached positions. The result is that only two to six hundred characters are evaluated per frame, even when the page contains thousands.</p>
 
-    <blockquote>The right amount of complexity is the minimum needed for the current task — three similar lines of code is better than a premature abstraction.</blockquote>
+      <blockquote>The right amount of complexity is the minimum needed for the current task — three similar lines of code is better than a premature abstraction.</blockquote>
 
-    <pre><code>// position cache strategy
+      <pre><code>// position cache strategy
 cacheCharPositions() → charPositions[i] = { x, y }
 scroll listener → adjust all Y by delta (no reflow)
 resize listener → charPositionsDirty = true</code></pre>
 
-    <p>What matters is not the sophistication of the algorithm but the fidelity of the result. Each character should feel like a physical object responding to real force. The math is simple — distance, angle, intensity curve — but the accumulated effect of hundreds of independently displaced glyphs creates something that reads as material rather than digital.</p>
+      <p>What matters is not the sophistication of the algorithm but the fidelity of the result. Each character should feel like a physical object responding to real force. The math is simple — distance, angle, intensity curve — but the accumulated effect of hundreds of independently displaced glyphs creates something that reads as material rather than digital.</p>
 
+    </div>
   </div>
 </div>
 
@@ -1268,8 +1415,191 @@ resize listener → charPositionsDirty = true</code></pre>
 
   // ─── Init ────────────────────────────────────────────────────────────
 
+  // Snapshot raw content BEFORE wrapping for the semantic layer
+  const semanticLayer = document.getElementById('semantic-layer');
+  const rawContentHTML = contentEl.innerHTML;
+
+  function buildSemanticLayer() {
+    if (!semanticLayer) return;
+    semanticLayer.innerHTML = rawContentHTML;
+  }
+
+  function destroySemanticLayer() {
+    if (!semanticLayer) return;
+    semanticLayer.innerHTML = '';
+  }
+
+  // Build semantic layer, then wrap chars for effects
+  buildSemanticLayer();
   wrapContentChars();
   rafId = requestAnimationFrame(tick);
+
+  // ─── Semantic Text Controls ──────────────────────────────────────────
+  (function () {
+    if (!semanticLayer) return;
+
+    // State
+    let semEnabled = true;
+    let semStrategy = 'underlay';  // 'underlay' (B) or 'sronly' (A)
+    let semAriaHidden = true;
+    let semUserSelect = true;
+    let semOutline = false;
+
+    // DOM refs
+    const btnToggle   = document.getElementById('sem-toggle');
+    const btnSrOnly   = document.getElementById('sem-strat-sronly');
+    const btnUnderlay = document.getElementById('sem-strat-underlay');
+    const sliderOpac  = document.getElementById('sem-opacity');
+    const valOpac     = document.getElementById('sem-opacity-val');
+    const btnAria     = document.getElementById('sem-aria');
+    const btnUselect  = document.getElementById('sem-uselect');
+    const btnOutline  = document.getElementById('sem-outline');
+    const btnTestCopy = document.getElementById('sem-test-copy');
+    const btnTestFlash = document.getElementById('sem-test-flash');
+    const toast       = document.getElementById('sem-toast');
+
+    function applyState() {
+      // Layer visibility
+      if (semEnabled) {
+        semanticLayer.style.display = '';
+        if (semanticLayer.innerHTML === '') buildSemanticLayer();
+      } else {
+        semanticLayer.style.display = 'none';
+      }
+
+      // Strategy class
+      semanticLayer.classList.remove('strategy-underlay', 'strategy-sronly');
+      semanticLayer.classList.add('strategy-' + semStrategy);
+
+      // ARIA
+      contentEl.setAttribute('aria-hidden', semAriaHidden ? 'true' : 'false');
+      semanticLayer.setAttribute('aria-hidden', semAriaHidden ? 'false' : 'true');
+
+      // User-select
+      contentEl.style.userSelect = semUserSelect ? 'none' : '';
+      contentEl.style.webkitUserSelect = semUserSelect ? 'none' : '';
+
+      // Debug outline
+      semanticLayer.classList.toggle('debug-outline', semOutline);
+
+      // Debug opacity override (only applies in underlay mode)
+      var debugOp = parseFloat(sliderOpac.value);
+      if (semStrategy === 'underlay' && debugOp > 0) {
+        semanticLayer.style.opacity = debugOp;
+      } else if (semStrategy === 'underlay') {
+        semanticLayer.style.opacity = '0';
+      } else {
+        semanticLayer.style.opacity = '';
+      }
+
+      // Button states
+      btnToggle.textContent = semEnabled ? 'on' : 'off';
+      btnToggle.classList.toggle('active', semEnabled);
+
+      btnSrOnly.classList.toggle('active', semStrategy === 'sronly');
+      btnUnderlay.classList.toggle('active', semStrategy === 'underlay');
+
+      btnAria.textContent = semAriaHidden ? 'on' : 'off';
+      btnAria.classList.toggle('active', semAriaHidden);
+
+      btnUselect.textContent = semUserSelect ? 'on' : 'off';
+      btnUselect.classList.toggle('active', semUserSelect);
+
+      btnOutline.textContent = semOutline ? 'on' : 'off';
+      btnOutline.classList.toggle('active', semOutline);
+
+      valOpac.textContent = debugOp.toFixed(3);
+    }
+
+    // Toggle: layer on/off
+    btnToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      semEnabled = !semEnabled;
+      applyState();
+    });
+
+    // Strategy switching
+    btnSrOnly.addEventListener('click', function (e) {
+      e.stopPropagation();
+      semStrategy = 'sronly';
+      applyState();
+    });
+    btnUnderlay.addEventListener('click', function (e) {
+      e.stopPropagation();
+      semStrategy = 'underlay';
+      applyState();
+    });
+
+    // Debug opacity slider
+    sliderOpac.addEventListener('input', function () {
+      applyState();
+    });
+
+    // ARIA toggle
+    btnAria.addEventListener('click', function (e) {
+      e.stopPropagation();
+      semAriaHidden = !semAriaHidden;
+      applyState();
+    });
+
+    // User-select toggle
+    btnUselect.addEventListener('click', function (e) {
+      e.stopPropagation();
+      semUserSelect = !semUserSelect;
+      applyState();
+    });
+
+    // Outline toggle
+    btnOutline.addEventListener('click', function (e) {
+      e.stopPropagation();
+      semOutline = !semOutline;
+      applyState();
+    });
+
+    // Test: copy
+    btnTestCopy.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var text = semanticLayer.textContent || '';
+      // Collapse whitespace
+      text = text.replace(/\s+/g, ' ').trim();
+      navigator.clipboard.writeText(text).then(function () {
+        // Show preview toast
+        var preview = text.substring(0, 200);
+        if (text.length > 200) preview += '…';
+        toast.textContent = '✓ copied (' + text.length + ' chars)\n' + preview;
+        toast.style.display = 'block';
+        setTimeout(function () { toast.style.display = 'none'; }, 3000);
+        btnTestCopy.textContent = 'copied!';
+        setTimeout(function () { btnTestCopy.textContent = 'test: copy'; }, 1200);
+      });
+    });
+
+    // Test: flash (briefly make semantic layer visible)
+    btnTestFlash.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var origOp = semanticLayer.style.opacity;
+      var origClass = semanticLayer.className;
+      semanticLayer.classList.remove('strategy-sronly');
+      semanticLayer.classList.add('strategy-underlay');
+      semanticLayer.style.opacity = '0.25';
+      semanticLayer.style.color = '#ff3333';
+      semanticLayer.style.transition = 'opacity 0.3s ease';
+      btnTestFlash.textContent = 'flashing...';
+      setTimeout(function () {
+        semanticLayer.style.opacity = '0';
+        setTimeout(function () {
+          semanticLayer.className = origClass;
+          semanticLayer.style.opacity = origOp;
+          semanticLayer.style.color = '';
+          semanticLayer.style.transition = '';
+          btnTestFlash.textContent = 'test: flash';
+        }, 400);
+      }, 1500);
+    });
+
+    // Initial apply
+    applyState();
+  })();
 
 })();
 </script>

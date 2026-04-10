@@ -175,6 +175,15 @@
     if (contentObserver) contentObserver.disconnect();
     unwrapChars();
 
+    // ── Semantic layer snapshot ──
+    var semanticLayer = document.getElementById('semantic-layer');
+    if (semanticLayer) {
+        semanticLayer.innerHTML = contentEl.innerHTML;
+        contentEl.setAttribute('aria-hidden', 'true');
+        contentEl.style.userSelect = 'none';
+        contentEl.style.webkitUserSelect = 'none';
+    }
+
     var walker = document.createTreeWalker(contentEl, NodeFilter.SHOW_TEXT, null);
     var textNodes = [];
     var node;
@@ -247,6 +256,16 @@
   function unwrapChars() {
     activeChars = {};
     activeCharCount = 0;
+
+    // ── Clear semantic layer ──
+    var semanticLayer = document.getElementById('semantic-layer');
+    if (semanticLayer) {
+        semanticLayer.innerHTML = '';
+        contentEl.removeAttribute('aria-hidden');
+        contentEl.style.userSelect = '';
+        contentEl.style.webkitUserSelect = '';
+    }
+
     // Remove word wrappers first
     var wordSpans = contentEl.querySelectorAll('.prox-word');
     for (var wi = 0; wi < wordSpans.length; wi++) {
