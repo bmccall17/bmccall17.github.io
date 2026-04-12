@@ -2,8 +2,8 @@
   {
     "file": "2026-04-12_the_persistence_polarity.md",
     "slug": "2026-04-12_the_persistence_polarity",
-    "title": "the persistence polarity: bridging local sqlite and neon postgres",
-    "description": "the ephemeral reality of cloud run finally caught up to us. every deployment, every scale-to-zero wake, our sqlite database () was wiped clean. multi-instance r",
+    "title": "the persistence polarity: a 3-day sprint from dead-letters to dual databases",
+    "description": "it started with a ghost. inbound emails were silently dead-lettering. when i checked the admin panel, the  queue was completely empty. zero errors, zero warning",
     "date": "2026-04-12",
     "timestampIso": "2026-04-12T00:00:00.000Z",
     "epoch": 1775952000000,
