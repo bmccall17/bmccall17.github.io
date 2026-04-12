@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-04-12",
+    "state": "shipped",
+    "title": "the persistence polarity: bridging local sqlite and neon postgres",
+    "path": "2026-04-12_the_persistence_polarity.html"
+  },
+  {
     "date": "2026-04-10",
     "state": "shipped",
     "title": "the crm i built by being the customer",
