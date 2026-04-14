@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-04-14",
+    "state": "shipped",
+    "title": "weaving the universe into the code",
+    "path": "2026-04-14_fibonacci_magic.html"
+  },
+  {
     "date": "2026-04-12",
     "state": "shipped",
     "title": "the persistence polarity: a 3-day sprint from dead-letters to dual databases",
