@@ -1,7 +1,7 @@
 ---
 title: "weaving the universe into the code"
 date: 2026-04-14
-state: "shipped"
+state: "expanded"
 tags: [agent828, iris, fibonacci, philosophy, react, animation, bugs, alan-watts]
 og_image:
 next_experiment: "see if the fibonacci timing holds up at higher petal counts"
