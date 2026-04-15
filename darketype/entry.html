@@ -192,9 +192,17 @@
                 // wire up download button
                 const dlBtn = document.getElementById('dl-md');
                 if (dlBtn) {
-                    dlBtn.href = entry;
-                    dlBtn.download = entry.split('/').pop();
-                    dlBtn.classList.add('ready');
+                    if (meta.medium_link) {
+                        dlBtn.href = meta.medium_link;
+                        dlBtn.innerText = 'read on medium ↗';
+                        dlBtn.removeAttribute('download');
+                        dlBtn.classList.add('ready', 'medium-btn');
+                    } else {
+                        dlBtn.href = entry;
+                        dlBtn.download = entry.split('/').pop();
+                        dlBtn.innerText = '↓ .md';
+                        dlBtn.classList.add('ready');
+                    }
                 }
 
                 // Prism/Highlighter could go here if we were fancy
