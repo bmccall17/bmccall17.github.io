@@ -64,6 +64,39 @@
             margin-bottom: 2rem;
             padding-bottom: 1rem;
         }
+        .nav-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+        #dl-md {
+            font-family: var(--mono-font, monospace);
+            font-size: 0.75rem;
+            color: var(--dim-color, #555);
+            text-decoration: none;
+            border: 1px solid var(--dim-color, #555);
+            padding: 0.2rem 0.55rem;
+            border-radius: 3px;
+            white-space: nowrap;
+            transition: color 0.2s, border-color 0.2s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #dl-md.ready {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #dl-md:hover {
+            color: var(--text-color, #e0e0e0);
+            border-color: var(--text-color, #e0e0e0);
+        }
     </style>
 </head>
 
@@ -84,10 +117,13 @@
 
     <div class="container">
         <header>
-            <nav>
-                <a href="index.html" class="dim">&lt; return to log</a>
-                <span class="dim"> // </span>
-                <span class="glitch-text" id="header-title">loading...</span>
+            <nav class="nav-row">
+                <div class="nav-left">
+                    <a href="index.html" class="dim">&lt; return to log</a>
+                    <span class="dim"> // </span>
+                    <span class="glitch-text" id="header-title">loading...</span>
+                </div>
+                <a id="dl-md" href="#" download aria-label="download source markdown">↓ .md</a>
             </nav>
         </header>
 
@@ -147,6 +183,14 @@
                 // metadata
                 if (meta.date) document.getElementById('meta-date').innerText = `logged: ${meta.date}`;
                 if (meta.state) document.getElementById('meta-state').innerText = `state: ${meta.state}`;
+
+                // wire up download button
+                const dlBtn = document.getElementById('dl-md');
+                if (dlBtn) {
+                    dlBtn.href = entry;
+                    dlBtn.download = entry.split('/').pop();
+                    dlBtn.classList.add('ready');
+                }
 
                 // Prism/Highlighter could go here if we were fancy
 
