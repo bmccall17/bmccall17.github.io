@@ -191,6 +191,7 @@
                         dlBtn.href = meta.medium_link;
                         dlBtn.innerText = 'read on medium ↗';
                         dlBtn.removeAttribute('download');
+                        dlBtn.target = '_blank';
                         dlBtn.classList.add('ready', 'medium-btn');
                     } else {
                         dlBtn.href = entry;
