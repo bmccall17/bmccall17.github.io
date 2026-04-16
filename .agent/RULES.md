@@ -26,6 +26,10 @@ we are revolting against the grammar police.
 - **vibe**: "monochrome," "terminal," "raw."
 - **data**: starts as static files (markdown/html). prepared for future php/sqlite migration, but purely static for now.
 
+### data purity & platform proxies
+- **source of truth**: native authoring files (like `darketype/entries`) must remain pure to the author's intent (e.g. "grammar-police-dodging" styling, simple relative paths).
+- **proxy architecture**: never mutate source data simply to appease a third-party platform's formatting requirements. always use an automated adapter/proxy script to translate and export the data (e.g. `.hashnode/`) for external consumption.
+
 ### the "mess" loop
 - **entries**: must be quick to publish (5-12 mins).
 - **format**: raw thoughts first, distillation second.
