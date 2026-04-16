@@ -18,6 +18,7 @@ if a new mess entry is provided in the prompt, or you are executing this, ensure
 ### step 1: validate entry
 - ensure the markdown file exists in `darketype/entries/` and has valid frontmatter matching `darketype/entries/TEMPLATE.md`.
   - fields needed: `title`, `date` (YYYY-MM-DD), `state` (mess, learning, shipped, broken, etc.), `tags`.
+  - optional fields: `series` (for Hashnode series grouping), `hashnode` (true/false override).
   - if drafting a new entry, create the filename as `YYYY-MM-DD_title_slug.md`.
 - **grammar-police-dodging:** verify the entire entry strictly follows the "darketype" styling—all lowercase titles, headings, and body text. absolutely no capital letters unless deeply intentional for code or for proper names of people or brands or... proper names, you get it right?!
 - ensure `tags` are relevant and exist as an active array in the frontmatter.
@@ -35,6 +36,7 @@ npm run build
   - `darketype/index.html` (footer entry count)
   - `heatmap.json` (the visual activity log)
   - `assets/social/og/{slug}.png` (per-entry OG images with content-specific pictograms)
+  - `.hashnode/{slug}.md` (proxy sync files auto-capitalized and formatted for Hashnode)
 - footer counters (entry count, state count) and tag legend colors are **auto-synced** — no manual updates needed.
 
 ### step 3: source control & publish
