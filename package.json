@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:weblog": "node scripts/build_weblog.js",
     "build:og": "node scripts/generate_og_images.js",
-    "build": "node scripts/build_weblog.js && node scripts/generate_og_images.js"
+    "build:hashnode": "node scripts/build_hashnode.js",
+    "build": "node scripts/build_weblog.js && node scripts/generate_og_images.js && node scripts/build_hashnode.js"
   },
   "repository": {
     "type": "git",

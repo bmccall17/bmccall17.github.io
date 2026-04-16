@@ -3,6 +3,8 @@ title: "the art of making a mess"
 date: 2026-02-06
 state: "mess" # options: mess, learning, shipped, broken, void, seed, debugging, optimistic
 tags: [meta, darketype, chaos]
+series: # optional: maps to seriesSlug in Hashnode
+hashnode: # optional: true/false to force or disable Hashnode sync (overrides state defaults)
 og_image: # optional: path to custom OG image (auto-generated if blank)
 next_experiment: "building the index"
 ---

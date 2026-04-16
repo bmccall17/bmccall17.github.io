@@ -41,7 +41,7 @@ npm run build
 - stage the new entry and the newly generated architecture files.
 // turbo
 ```bash
-git add darketype/entries/<the_new_file>.md darketype/entries.json darketype/index.html darketype/weblog/ heatmap.json assets/social/og/
+git add darketype/entries/<the_new_file>.md darketype/entries.json darketype/index.html darketype/weblog/ heatmap.json assets/social/og/ .hashnode/
 ```
 - commit the changes:
 // turbo
