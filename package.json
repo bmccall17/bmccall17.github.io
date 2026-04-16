@@ -8,6 +8,7 @@
     "build:weblog": "node scripts/build_weblog.js",
     "build:og": "node scripts/generate_og_images.js",
     "build:hashnode": "node scripts/build_hashnode.js",
+    "hashnode:sync": "node scripts/hashnode_api_sync.js",
     "build": "node scripts/build_weblog.js && node scripts/generate_og_images.js && node scripts/build_hashnode.js"
   },
   "repository": {
