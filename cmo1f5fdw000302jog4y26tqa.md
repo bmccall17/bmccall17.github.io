@@ -46,3 +46,7 @@ Designing this felt like saying: *"we are the river who is always talking.... Wi
 Every time that iris expands — waiting 5 seconds, then 8, then 13 — it echoes the blooming of a flower. It's an unspoken, beautifully artistic expression of life, hiding quietly in the console logs of our application. All the time. Every beautiful day.
 
 [![Agent828 — the iris widget live in the wild](https://bmccall17.github.io/darketype/entries/media/2026-04-14_fibonacci_magic/fibonacci_iris_live.png)](https://agent828.com)
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-04-14_fibonacci_magic.html).*
