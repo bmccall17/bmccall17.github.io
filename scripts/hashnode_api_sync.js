@@ -22,6 +22,7 @@ if (!HASHNODE_PAT || !HASHNODE_PUB_ID) {
 }
 
 const HASHNODE_DIR = path.join(__dirname, '../.hashnode');
+const HASHNODE_HOST = 'darketype.hashnode.dev';
 
 function parseFrontmatter(content) {
     const match = content.match(/^---([\s\S]*?)---/);
@@ -74,6 +75,7 @@ function graphqlRequest(query, variables) {
     });
 }
 
+// ─── Fetch existing posts from publication ───────────────────────────────────
 async function fetchRemotePosts() {
     const query = `
         query GetPosts($host: String!) {
@@ -91,8 +93,7 @@ async function fetchRemotePosts() {
         }
     `;
     
-    // We use the connected domain or the internal domain. Let's use the known host.
-    const variables = { host: "darketype.hashnode.dev" };
+    const variables = { host: HASHNODE_HOST };
     try {
         const data = await graphqlRequest(query, variables);
         const posts = data.publication?.posts?.edges || [];
@@ -107,7 +108,53 @@ async function fetchRemotePosts() {
     }
 }
 
-async function publishPost(meta, body, slug) {
+// ─── Fetch existing series from publication ──────────────────────────────────
+async function fetchSeries() {
+    const query = `
+        query GetSeries($host: String!) {
+            publication(host: $host) {
+                seriesList(first: 20) {
+                    edges {
+                        node {
+                            id
+                            slug
+                            name
+                        }
+                    }
+                }
+            }
+        }
+    `;
+
+    const variables = { host: HASHNODE_HOST };
+    try {
+        const data = await graphqlRequest(query, variables);
+        const series = data.publication?.seriesList?.edges || [];
+        const map = {};
+        series.forEach(s => {
+            map[s.node.slug] = s.node.id;
+        });
+        return map;
+    } catch (err) {
+        console.error('Error fetching series:', err);
+        return {};
+    }
+}
+
+// ─── Build tags array from comma-separated string ────────────────────────────
+function buildTags(tagsString) {
+    if (!tagsString) return [];
+    return tagsString.split(',')
+        .map(t => t.trim())
+        .filter(t => t.length > 0)
+        .map(t => ({
+            slug: t.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-'),
+            name: t
+        }));
+}
+
+// ─── Publish a new post ──────────────────────────────────────────────────────
+async function publishPost(meta, body, slug, seriesMap) {
     const query = `
         mutation PublishPost($input: PublishPostInput!) {
             publishPost(input: $input) {
@@ -115,24 +162,32 @@ async function publishPost(meta, body, slug) {
             }
         }
     `;
-    const variables = {
-        input: {
-            title: meta.title || "Untitled",
-            contentMarkdown: body,
-            publicationId: HASHNODE_PUB_ID,
-            slug: slug,
-            originalArticleURL: meta.canonical || undefined
-        }
+
+    const input = {
+        title: meta.title || "Untitled",
+        contentMarkdown: body,
+        publicationId: HASHNODE_PUB_ID,
+        slug: slug,
+        originalArticleURL: meta.canonical || undefined,
+        coverImageOptions: {
+            coverImageURL: meta.cover || `https://bmccall17.github.io/assets/social/og/${slug}.png`
+        },
+        tags: buildTags(meta.tags)
     };
 
-    // Note: coverImageOptions seems to require an image ID uploaded to Hashnode first,
-    // so we omit cover image from the basic API publish to ensure it succeeds.
+    // Attach series if available
+    if (meta.seriesSlug && seriesMap[meta.seriesSlug]) {
+        input.seriesId = seriesMap[meta.seriesSlug];
+    } else if (meta.seriesSlug) {
+        console.warn(`  ⚠  series "${meta.seriesSlug}" not found on Hashnode — create it in the Dashboard first`);
+    }
 
-    const data = await graphqlRequest(query, variables);
+    const data = await graphqlRequest(query, { input });
     return data.publishPost.post.url;
 }
 
-async function updatePost(postId, meta, body, slug) {
+// ─── Update an existing post ─────────────────────────────────────────────────
+async function updatePost(postId, meta, body, slug, seriesMap) {
     const query = `
         mutation UpdatePost($input: UpdatePostInput!) {
             updatePost(input: $input) {
@@ -140,44 +195,70 @@ async function updatePost(postId, meta, body, slug) {
             }
         }
     `;
-    const variables = {
-        input: {
-            id: postId,
-            title: meta.title || "Untitled",
-            contentMarkdown: body,
-            originalArticleURL: meta.canonical || undefined
-        }
+
+    const input = {
+        id: postId,
+        title: meta.title || "Untitled",
+        contentMarkdown: body,
+        originalArticleURL: meta.canonical || undefined,
+        coverImageOptions: {
+            coverImageURL: meta.cover || `https://bmccall17.github.io/assets/social/og/${slug}.png`
+        },
+        tags: buildTags(meta.tags)
     };
 
-    const data = await graphqlRequest(query, variables);
+    // Attach series if available
+    if (meta.seriesSlug && seriesMap[meta.seriesSlug]) {
+        input.seriesId = seriesMap[meta.seriesSlug];
+    } else if (meta.seriesSlug) {
+        console.warn(`  ⚠  series "${meta.seriesSlug}" not found on Hashnode — create it in the Dashboard first`);
+    }
+
+    const data = await graphqlRequest(query, { input });
     return data.updatePost.post.url;
 }
 
+// ─── Main sync loop ──────────────────────────────────────────────────────────
 async function sync() {
     console.log('🔄 Fetching existing Hashnode posts...');
     const remotePosts = await fetchRemotePosts();
     console.log(`Found ${Object.keys(remotePosts).length} existing posts.`);
 
+    console.log('🔄 Fetching existing Hashnode series...');
+    const seriesMap = await fetchSeries();
+    console.log(`Found ${Object.keys(seriesMap).length} existing series.`);
+    if (Object.keys(seriesMap).length > 0) {
+        Object.entries(seriesMap).forEach(([slug, id]) => console.log(`  → ${slug} (${id})`));
+    }
+
     const files = fs.readdirSync(HASHNODE_DIR).filter(f => f.endsWith('.md'));
+
+    let published = 0, updated = 0, failed = 0;
 
     for (const file of files) {
         const content = fs.readFileSync(path.join(HASHNODE_DIR, file), 'utf-8');
         const { meta, body } = parseFrontmatter(content);
-        const slug = file.replace(/\.md$/, '');
+        const localSlug = file.replace(/\.md$/, '');
+        const safeSlug = localSlug.replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-');
 
         try {
-            if (remotePosts[slug]) {
-                console.log(`Updating existing post: ${slug}`);
-                await updatePost(remotePosts[slug], meta, body, slug);
+            if (remotePosts[safeSlug]) {
+                console.log(`⟳ Updating: ${safeSlug}`);
+                const url = await updatePost(remotePosts[safeSlug], meta, body, safeSlug, seriesMap);
+                console.log(`  ✓ ${url}`);
+                updated++;
             } else {
-                console.log(`Publishing NEW post: ${slug}`);
-                await publishPost(meta, body, slug);
+                console.log(`✦ Publishing NEW: ${safeSlug}`);
+                const url = await publishPost(meta, body, safeSlug, seriesMap);
+                console.log(`  ✓ ${url}`);
+                published++;
             }
         } catch (err) {
-            console.error(`❌ Failed to sync ${slug}:`, JSON.stringify(err, null, 2));
+            console.error(`❌ Failed to sync ${safeSlug}:`, JSON.stringify(err, null, 2));
+            failed++;
         }
     }
-    console.log('✅ Sync complete.');
+    console.log(`\n✅ Sync complete: ${published} published, ${updated} updated, ${failed} failed.`);
 }
 
 sync();

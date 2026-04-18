@@ -97,6 +97,28 @@
             color: var(--text-color, #e0e0e0);
             border-color: var(--text-color, #e0e0e0);
         }
+        .ext-links {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .ext-link {
+            font-family: var(--mono-font, monospace);
+            font-size: 0.75rem;
+            color: var(--dim-color, #555);
+            text-decoration: none;
+            border: 1px solid var(--dim-color, #555);
+            padding: 0.2rem 0.55rem;
+            border-radius: 3px;
+            white-space: nowrap;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .ext-link:hover {
+            color: var(--text-color, #e0e0e0);
+            border-color: var(--text-color, #e0e0e0);
+            border-bottom: 1px solid var(--text-color, #e0e0e0);
+            animation: none;
+        }
     </style>
 </head>
 
@@ -124,6 +146,7 @@
                     <span class="glitch-text" id="header-title">loading...</span>
                 </div>
                 <a id="dl-md" href="#" download aria-label="download source markdown">↓ .md</a>
+                <div class="ext-links" id="ext-links"></div>
             </nav>
         </header>
 
@@ -186,6 +209,7 @@
 
                 // wire up download button
                 const dlBtn = document.getElementById('dl-md');
+                const extLinks = document.getElementById('ext-links');
                 if (dlBtn) {
                     if (meta.medium_link) {
                         dlBtn.href = meta.medium_link;
@@ -200,6 +224,25 @@
                         dlBtn.classList.add('ready');
                     }
                 }
+
+                // check hashnode manifest for cross-link
+                try {
+                    const manifestRes = await fetch('../../.hashnode/manifest.json');
+                    if (manifestRes.ok) {
+                        const manifest = await manifestRes.json();
+                        // extract slug from entry path (e.g. 'entries/2026-04-14_fibonacci_magic.md' -> '2026-04-14_fibonacci_magic')
+                        const entrySlug = entry.split('/').pop().replace(/\.md$/, '');
+                        if (manifest.posts && manifest.posts[entrySlug]) {
+                            const hnLink = document.createElement('a');
+                            hnLink.href = manifest.posts[entrySlug];
+                            hnLink.innerText = 'hashnode ↗';
+                            hnLink.target = '_blank';
+                            hnLink.className = 'ext-link';
+                            hnLink.setAttribute('aria-label', 'read on hashnode');
+                            extLinks.appendChild(hnLink);
+                        }
+                    }
+                } catch (e) { /* manifest not available, no hashnode link */ }
 
                 // Prism/Highlighter could go here if we were fancy
 

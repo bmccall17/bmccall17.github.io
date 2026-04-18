@@ -66,6 +66,8 @@ function build() {
     const files = fs.readdirSync(ENTRIES_DIR).filter(f => f.endsWith('.md') && f !== 'TEMPLATE.md');
 
     let exportedCount = 0;
+    const manifest = {};       // slug → hashnode URL mapping
+    const seriesAudit = {};    // series slug → array of entry slugs
 
     for (const file of files) {
         const filePath = path.join(ENTRIES_DIR, file);
@@ -73,6 +75,7 @@ function build() {
         const { meta, body } = parseFrontmatter(content);
 
         const slug = file.replace(/\.md$/, '');
+        const safeSlug = slug.replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-');
         
         // Determine if publishable
         // Can be forced via hashnode: true/false in frontmatter
@@ -86,6 +89,13 @@ function build() {
         }
 
         if (!shouldPublish) continue;
+
+        // Track series membership
+        if (meta.series) {
+            const seriesKey = meta.series.trim();
+            if (!seriesAudit[seriesKey]) seriesAudit[seriesKey] = [];
+            seriesAudit[seriesKey].push({ slug: safeSlug, title: meta.title || file });
+        }
 
         // Format body
         let newBody = capitalizeMarkdown(body);
@@ -120,10 +130,31 @@ function build() {
         const finalContent = hashnodeFrontmatter.join('\n') + '\n' + newBody;
 
         fs.writeFileSync(path.join(HASHNODE_DIR, file), finalContent);
+
+        // Add to manifest
+        manifest[slug] = `https://darketype.hashnode.dev/${safeSlug}`;
         exportedCount++;
     }
 
+    // Write manifest.json
+    const manifestData = {
+        _generated: new Date().toISOString(),
+        posts: manifest,
+        series: seriesAudit
+    };
+    fs.writeFileSync(path.join(HASHNODE_DIR, 'manifest.json'), JSON.stringify(manifestData, null, 2));
     console.log(`✅ successfully exported ${exportedCount} entries to .hashnode/`);
+    console.log(`✅ generated manifest.json (${Object.keys(manifest).length} posts, ${Object.keys(seriesAudit).length} series)`);
+
+    // Series audit log
+    if (Object.keys(seriesAudit).length > 0) {
+        console.log('\n📚 series audit:');
+        for (const [series, entries] of Object.entries(seriesAudit)) {
+            console.log(`  → "${series}" (${entries.length} entries)`);
+            entries.forEach(e => console.log(`      - ${e.slug} — ${e.title}`));
+        }
+        console.log('  ⚠  ensure these series exist on Hashnode Dashboard before running hashnode:sync');
+    }
 }
 
 build();

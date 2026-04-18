@@ -70,6 +70,9 @@ function generateEntryPage(post, entryHtml) {
     // fix nav link: from weblog/ perspective, index is in same dir
     html = html.replace('href="weblog/index.html"', 'href="index.html"');
 
+    // fix hashnode manifest path: from weblog/ perspective it's at ../../.hashnode/
+    html = html.replace("fetch('../.hashnode/manifest.json')", "fetch('../../.hashnode/manifest.json')");
+
     // replace query-param entry loading with hardcoded path
     html = html.replace(
         "const entry = params.get('log'); // e.g., 'entries/2026...md'",
