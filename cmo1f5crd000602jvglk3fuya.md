@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:36 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5crd000602jvglk3fuya
 slug: 2026-03-22-the-export-test
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-22_the_export_test.html
+cover: https://bmccall17.github.io/assets/social/og/2026-03-22_the_export_test.png
+tags: ai, export, shipped, repoptics, report-quality
 
 ---
 
