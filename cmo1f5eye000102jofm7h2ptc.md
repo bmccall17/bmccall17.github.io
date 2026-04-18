@@ -117,3 +117,7 @@ Name the goal. Measure against the goal. Let the negative words live in the copy
 * * *
 
 Shipped: ADR-0027, label rename across nine files, polarity hint on the bloat panel, pitfall table caption, verdict-led message vocabulary. Internal `bloat` keys and the lake schema untouched — no migration needed. Existing scans still parse, the materialized views still refresh, the `/research` skill still queries. The only thing that changed is what the reader sees, and what the reader sees no longer fights itself.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-04-10_the_polarity_problem.html).*
