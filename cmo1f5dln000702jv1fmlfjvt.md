@@ -145,3 +145,7 @@ The whole project is 1,000 lines of vanilla javascript in a single HTML file. No
 What i actually learned: the hardest part of making something look organic isn't the physics — it's removing the systems you built that make it look artificial. The puddle zone, the linear wave, the uniform timing. Every time i removed a "system" and replaced it with randomness bounded by simple rules, the effect got better.
 
 Decay isn't a transition. It's the absence of structure. The best way to simulate it is to stop trying to control it.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-27_the_melt.html).*
