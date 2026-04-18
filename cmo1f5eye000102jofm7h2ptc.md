@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:39 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5eye000102jofm7h2ptc
 slug: 2026-04-10-the-polarity-problem
 canonical: https://bmccall17.github.io/darketype/weblog/2026-04-10_the_polarity_problem.html
+cover: https://bmccall17.github.io/assets/social/og/2026-04-10_the_polarity_problem.png
+tags: ux, naming, vocabulary, design-debt, scoring, repoptics
 
 ---
 
