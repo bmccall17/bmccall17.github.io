@@ -54,3 +54,7 @@ What i built with agent828 might look different from a traditional product categ
 This represents a leap i feel genuinely proud of. I built something ultra-modern by understanding the concept deeply enough to make it real in my own domain. Taking an idea that feels abstract to many, i turned it entirely into an operating system for my own work. I built the tool first, learned by doing, and found the architecture directly by making it.
 
 To me, this remains the true story. The focus successfully shifts from just making a bot into deeply understanding the lake.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-31_understanding_the_lake.html).*

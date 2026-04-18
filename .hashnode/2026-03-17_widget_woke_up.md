@@ -47,3 +47,7 @@ This is the third component using the `ReportContextBridge` event system (the br
 The drift indicator is read-only right now. The obvious next step is a "sync to Port" action — push the current score back to the entity. That turns the widget from a mirror into a control surface. But that's a different ADR.
 
 *ADR-0015. The widget woke up.*
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-17_widget_woke_up.html).*

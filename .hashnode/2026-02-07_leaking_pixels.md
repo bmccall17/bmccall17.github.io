@@ -20,3 +20,7 @@ When you move your mouse near these accumulated pixels, your cursor starts to di
 
 # Code note
 Doubled the proximity check to `300px` for a wider "danger zone" and slowed the jitter transition to `0.3s` to make it feel like the pixels are breathing rather than seizing.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-02-07_leaking_pixels.html).*

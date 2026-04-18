@@ -32,3 +32,7 @@ These insights gave us our true north for the recalibration sprint. We realized 
 We built a completely new confidence-damped scoring model with intent-relative weighting and expanded category checks. We replaced the blunt "fail" grades with five nuanced check states, and started relying heavily on readme-aware scoring to dynamically adapt our rubric to what the repo was legitimately trying to be. 
 
 Now, the first use of repOptics is genuinely insightful and actionable. Paste a repo url, and in 60 seconds you get specific headline scores (repo health, launch readiness, maintainer maturity) tailored to the type of project you're actually building.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-04-06_repoptics_recalibration.html).*

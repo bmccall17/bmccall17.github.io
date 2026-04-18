@@ -101,6 +101,10 @@ function build() {
         let newBody = capitalizeMarkdown(body);
         newBody = resolveMediaPaths(newBody);
 
+        // Add linkback to original post
+        const originalUrl = `https://bmccall17.github.io/darketype/weblog/${slug}.html`;
+        newBody += `\n\n---\n\n*View this post with the full interactive/glitchy experience on [darketype](${originalUrl}).*`;
+
         let title = meta.title || file;
         // Also ensure title is capitalized
         title = title.charAt(0).toUpperCase() + title.slice(1);

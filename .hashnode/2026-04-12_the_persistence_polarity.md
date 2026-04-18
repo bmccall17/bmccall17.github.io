@@ -53,3 +53,7 @@ The dual-path bridge was constructed in four tight moves:
 We spun up the local scheduler to hit the sync engine every 30 minutes, backed by resilient neon-down catching so that a network hitch won't derail the high-water marks. 
 
 The ghost is officially dead. The bridge is open.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-04-12_the_persistence_polarity.html).*

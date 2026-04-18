@@ -30,3 +30,7 @@ In the Maze module, you are navigating an invisible layout. Hitting a wall isn't
 Some failures are just bad ideas. Punching the ball in the opponent's box. Don't emulate them.
 Other failures are echolocation they can literally help us find our way. Bumping into the invisible walls of a maze to learn its shape.
 Know which one you are experiencing.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-03_kahn_ktane_mazes.html).*

@@ -42,3 +42,7 @@ A junior engineer could read that Markdown file top to bottom and know exactly w
 ## Distillation
 
 The browser is a demo. The export is the product. If the thing you ship to someone's inbox doesn't stand on its own, you haven't shipped anything — you've built a screenshot.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-22_the_export_test.html).*

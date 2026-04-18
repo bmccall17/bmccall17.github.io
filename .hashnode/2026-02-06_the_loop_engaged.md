@@ -28,3 +28,7 @@ async function loadEntry() {
     // ... magic happens
 }
 ```
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-02-06_the_loop_engaged.html).*

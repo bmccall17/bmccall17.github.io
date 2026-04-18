@@ -26,3 +26,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
 
 # Distillation
 Everything is wired up. The rot spreads perfectly. The port is ready for new recruits.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-27_messy_release_v0.1.7.html).*

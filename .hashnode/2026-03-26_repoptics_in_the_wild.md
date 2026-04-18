@@ -36,3 +36,7 @@ Repoptics is down to its essentials. Time to ship, and time to ask people to pus
 Here is the live link. Go break things: **[https://rep-optics.onrender.com/](https://rep-optics.onrender.com/)**
 
 *(Be patient when you click — it's hosted on a free render instance right now, so it might need 30 to 60 seconds to wake up and rub the sleep out of its eyes if it hasn't been hit recently. Don't refresh, just let the spinny wheel do its thing.)*
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-26_repoptics_in_the_wild.html).*
