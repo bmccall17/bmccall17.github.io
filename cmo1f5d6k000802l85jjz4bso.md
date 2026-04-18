@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:36 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5d6k000802l85jjz4bso
 slug: 2026-03-26-repoptics-in-the-wild
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-26_repoptics_in_the_wild.html
+cover: https://bmccall17.github.io/assets/social/og/2026-03-26_repoptics_in_the_wild.png
+tags: security, building, idp, agents, naval, repoptics
 
 ---
 
