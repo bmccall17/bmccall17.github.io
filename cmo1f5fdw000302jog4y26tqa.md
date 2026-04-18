@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:39 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5fdw000302jog4y26tqa
 slug: 2026-04-14-fibonacci-magic
 canonical: https://bmccall17.github.io/darketype/weblog/2026-04-14_fibonacci_magic.html
+cover: https://bmccall17.github.io/assets/social/og/2026-04-14_fibonacci_magic.png
+tags: react, animation, philosophy, bugs, fibonacci, iris, alan-watts, agent828
 
 ---
 
