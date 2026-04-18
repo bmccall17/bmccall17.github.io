@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:32 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f59pb000402jvcnd27tga
 slug: 2026-02-07-leaking-pixels
 canonical: https://bmccall17.github.io/darketype/weblog/2026-02-07_leaking_pixels.html
+cover: https://bmccall17.github.io/assets/social/og/2026-02-07_leaking_pixels.png
+tags: localstorage, glitch, cslp
 
 ---
 
