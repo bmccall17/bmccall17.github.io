@@ -50,6 +50,7 @@ function pickPictogram(entry) {
     const title = (entry.title || '').toLowerCase();
     const tags = (entry.tags || []).map(t => (typeof t === 'string' ? t : '').toLowerCase());
     const all = title + ' ' + tags.join(' ');
+    const slug = (entry.slug || entry.file || '').toLowerCase();
 
     // specific matches first
     if (all.includes('cslp') || all.includes('leakage') || all.includes('leaking'))
@@ -88,10 +89,35 @@ function pickPictogram(entry) {
         return 'eye';
     if (all.includes('per-char') || all.includes('chromatic') || all.includes('bruise'))
         return 'prism';
-    if (all.includes('context') && all.includes('lake'))
-        return 'lake';
     if (all.includes('rebellion') || all.includes('phase zero'))
         return 'flag';
+
+    // ─── new pictograms (2026-04-18) ───
+    if (all.includes('persistence') || all.includes('dual') || (all.includes('sqlite') && all.includes('neon')) || all.includes('bridging'))
+        return 'dualDatabase';
+    if (all.includes('polarity') && (all.includes('problem') || all.includes('metric') || all.includes('opposing')))
+        return 'polarityScale';
+    if (all.includes('crm') || (all.includes('customer') && all.includes('built')))
+        return 'crmPipeline';
+    // melt series: the 03-27 deep-dive has "230,000" or "particles" or "letting go"
+    if (all.includes('melt') && (all.includes('230') || all.includes('particle') || all.includes('letting')))
+        return 'particleMelt';
+    // melt series: the 04-01 april fools prank is shorter, has "chaos" or "question reality"
+    if (all.includes('melt') && (slug.includes('04-01') || all.includes('april') || all.includes('question reality')))
+        return 'particleMeltPrank';
+    if (all.includes('hud') || all.includes('cockpit') || all.includes('tmux') || all.includes('statusbar'))
+        return 'cockpitHUD';
+    if (all.includes('export') && all.includes('test'))
+        return 'exportDoc';
+    if (all.includes('leuchtturm') || all.includes('lighthouse') || all.includes('beacon'))
+        return 'lighthouse';
+    if (/v0\.\d/.test(all) || (all.includes('shipping') && all.includes('form')))
+        return 'releaseRocket';
+    if (all.includes('pictogram') || (all.includes('every') && all.includes('face')))
+        return 'selfPortrait';
+    // lake — broadened: any entry with "lake" in the title (covers "understanding the lake" + "the context lake")
+    if (all.includes('lake'))
+        return 'lake';
 
     return 'terminal'; // fallback
 }
@@ -930,6 +956,996 @@ const pictograms = {
         ctx.fillText('> _', tx + 10, ty + th * 0.38);
         ctx.fillText('>', tx + 10, ty + th * 0.58);
         ctx.fillText('>', tx + 10, ty + th * 0.78);
+    },
+
+    // ─── new pictograms (2026-04-18) ───────────────────────────────────
+
+    dualDatabase(ctx, cx, cy, s, color, rand) {
+        // two database cylinders connected by a sync bridge
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2;
+
+        // — left database (sqlite / local) —
+        const lx = cx - s * 0.28;
+        const ly = cy - s * 0.05;
+        const dbW = s * 0.18;
+        const dbH = s * 0.35;
+        const ellH = s * 0.06;
+
+        // cylinder body
+        ctx.beginPath();
+        ctx.moveTo(lx - dbW, ly);
+        ctx.lineTo(lx - dbW, ly + dbH);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(lx + dbW, ly);
+        ctx.lineTo(lx + dbW, ly + dbH);
+        ctx.stroke();
+
+        // top ellipse
+        ctx.beginPath();
+        ctx.ellipse(lx, ly, dbW, ellH, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // bottom ellipse
+        ctx.beginPath();
+        ctx.ellipse(lx, ly + dbH, dbW, ellH, 0, Math.PI, Math.PI * 2);
+        ctx.stroke();
+        // bottom arc (visible part)
+        ctx.beginPath();
+        ctx.ellipse(lx, ly + dbH, dbW, ellH, 0, 0, Math.PI);
+        ctx.stroke();
+
+        // internal shelf lines
+        for (let i = 1; i <= 2; i++) {
+            const shelfY = ly + (dbH / 3) * i;
+            ctx.globalAlpha = 0.4;
+            ctx.beginPath();
+            ctx.ellipse(lx, shelfY, dbW, ellH * 0.7, 0, 0, Math.PI);
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+
+        // label
+        ctx.font = '10px "Courier New", monospace';
+        ctx.globalAlpha = 0.5;
+        ctx.textAlign = 'center';
+        ctx.fillText('sqlite', lx, ly + dbH + ellH + 14);
+
+        // — right database (neon / cloud) —
+        const rx = cx + s * 0.28;
+        const ry = ly;
+
+        ctx.globalAlpha = 1;
+        ctx.beginPath();
+        ctx.moveTo(rx - dbW, ry);
+        ctx.lineTo(rx - dbW, ry + dbH);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(rx + dbW, ry);
+        ctx.lineTo(rx + dbW, ry + dbH);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.ellipse(rx, ry, dbW, ellH, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.ellipse(rx, ry + dbH, dbW, ellH, 0, Math.PI, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.ellipse(rx, ry + dbH, dbW, ellH, 0, 0, Math.PI);
+        ctx.stroke();
+
+        for (let i = 1; i <= 2; i++) {
+            const shelfY = ry + (dbH / 3) * i;
+            ctx.globalAlpha = 0.4;
+            ctx.beginPath();
+            ctx.ellipse(rx, shelfY, dbW, ellH * 0.7, 0, 0, Math.PI);
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+
+        // cloud icon above right db
+        ctx.globalAlpha = 0.6;
+        ctx.lineWidth = 1.5;
+        const cloudY = ry - s * 0.12;
+        ctx.beginPath();
+        ctx.arc(rx - s * 0.06, cloudY, s * 0.045, Math.PI * 0.5, Math.PI * 1.5);
+        ctx.arc(rx, cloudY - s * 0.04, s * 0.06, Math.PI, Math.PI * 1.85);
+        ctx.arc(rx + s * 0.06, cloudY, s * 0.045, Math.PI * 1.5, Math.PI * 0.5);
+        ctx.lineTo(rx - s * 0.06 - s * 0.001, cloudY + s * 0.045);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+
+        ctx.font = '10px "Courier New", monospace';
+        ctx.globalAlpha = 0.5;
+        ctx.fillText('neon', rx, ry + dbH + ellH + 14);
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+
+        // — sync bridge arrows (bidirectional) —
+        ctx.lineWidth = 2;
+        const bridgeY1 = cy - s * 0.06;
+        const bridgeY2 = cy + s * 0.06;
+        const bridgeL = lx + dbW + s * 0.04;
+        const bridgeR = rx - dbW - s * 0.04;
+        const arrowSz = 6;
+
+        // top arrow: left → right
+        ctx.beginPath();
+        ctx.moveTo(bridgeL, bridgeY1);
+        ctx.lineTo(bridgeR, bridgeY1);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(bridgeR, bridgeY1);
+        ctx.lineTo(bridgeR - arrowSz, bridgeY1 - arrowSz);
+        ctx.moveTo(bridgeR, bridgeY1);
+        ctx.lineTo(bridgeR - arrowSz, bridgeY1 + arrowSz);
+        ctx.stroke();
+
+        // bottom arrow: right → left
+        ctx.beginPath();
+        ctx.moveTo(bridgeR, bridgeY2);
+        ctx.lineTo(bridgeL, bridgeY2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(bridgeL, bridgeY2);
+        ctx.lineTo(bridgeL + arrowSz, bridgeY2 - arrowSz);
+        ctx.moveTo(bridgeL, bridgeY2);
+        ctx.lineTo(bridgeL + arrowSz, bridgeY2 + arrowSz);
+        ctx.stroke();
+
+        // sync label
+        ctx.font = '9px "Courier New", monospace';
+        ctx.globalAlpha = 0.4;
+        ctx.textAlign = 'center';
+        ctx.fillText('sync', (lx + rx) / 2, bridgeY1 - 8);
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+    },
+
+    polarityScale(ctx, cx, cy, s, color, rand) {
+        // a balance/seesaw with opposing +/- weights
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2;
+
+        // fulcrum triangle
+        const fulcrumH = s * 0.15;
+        const fulcrumW = s * 0.1;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy + s * 0.1);
+        ctx.lineTo(cx - fulcrumW, cy + s * 0.1 + fulcrumH);
+        ctx.lineTo(cx + fulcrumW, cy + s * 0.1 + fulcrumH);
+        ctx.closePath();
+        ctx.stroke();
+
+        // tilted beam (slightly favoring one side)
+        const tilt = -0.08;
+        const beamLen = s * 0.42;
+        ctx.lineWidth = 3;
+        ctx.save();
+        ctx.translate(cx, cy + s * 0.1);
+        ctx.rotate(tilt);
+
+        ctx.beginPath();
+        ctx.moveTo(-beamLen, 0);
+        ctx.lineTo(beamLen, 0);
+        ctx.stroke();
+
+        // left pan (the + side, slightly higher)
+        const panW = s * 0.12;
+        const panDrop = s * 0.08;
+        ctx.lineWidth = 1.5;
+
+        // left hanging strings
+        ctx.beginPath();
+        ctx.moveTo(-beamLen, 0);
+        ctx.lineTo(-beamLen - panW * 0.4, panDrop);
+        ctx.moveTo(-beamLen, 0);
+        ctx.lineTo(-beamLen + panW * 0.4, panDrop);
+        ctx.stroke();
+
+        // left pan plate
+        ctx.beginPath();
+        ctx.ellipse(-beamLen, panDrop + 4, panW, s * 0.025, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // "+" on left
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(-beamLen, panDrop - s * 0.08);
+        ctx.lineTo(-beamLen, panDrop - s * 0.16);
+        ctx.moveTo(-beamLen - s * 0.04, panDrop - s * 0.12);
+        ctx.lineTo(-beamLen + s * 0.04, panDrop - s * 0.12);
+        ctx.stroke();
+
+        // right hanging strings
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(beamLen, 0);
+        ctx.lineTo(beamLen - panW * 0.4, panDrop);
+        ctx.moveTo(beamLen, 0);
+        ctx.lineTo(beamLen + panW * 0.4, panDrop);
+        ctx.stroke();
+
+        // right pan plate
+        ctx.beginPath();
+        ctx.ellipse(beamLen, panDrop + 4, panW, s * 0.025, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // "−" on right
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(beamLen - s * 0.04, panDrop - s * 0.12);
+        ctx.lineTo(beamLen + s * 0.04, panDrop - s * 0.12);
+        ctx.stroke();
+
+        ctx.restore();
+
+        // value labels below
+        ctx.font = '11px "Courier New", monospace';
+        ctx.globalAlpha = 0.4;
+        ctx.textAlign = 'center';
+        ctx.fillText('score: 72', cx - beamLen, cy + s * 0.38);
+        ctx.fillText('weight: -14', cx + beamLen, cy + s * 0.38);
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+
+        // orbiting data points around the scale
+        ctx.globalAlpha = 0.3;
+        for (let i = 0; i < 8; i++) {
+            const angle = (i / 8) * Math.PI * 2 + 0.3;
+            const dist = s * 0.42 + rand() * s * 0.06;
+            const px = cx + Math.cos(angle) * dist;
+            const py = cy + Math.sin(angle) * dist * 0.5;
+            ctx.fillRect(px - 1, py - 1, 3, 3);
+        }
+        ctx.globalAlpha = 1;
+    },
+
+    crmPipeline(ctx, cx, cy, s, color, rand) {
+        // funnel with contact cards flowing through pipeline stages
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2;
+
+        // funnel shape
+        const funnelTop = cy - s * 0.32;
+        const funnelBot = cy + s * 0.05;
+        const topW = s * 0.38;
+        const botW = s * 0.08;
+
+        ctx.beginPath();
+        ctx.moveTo(cx - topW, funnelTop);
+        ctx.lineTo(cx - botW, funnelBot);
+        ctx.lineTo(cx - botW, funnelBot + s * 0.08);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(cx + topW, funnelTop);
+        ctx.lineTo(cx + botW, funnelBot);
+        ctx.lineTo(cx + botW, funnelBot + s * 0.08);
+        ctx.stroke();
+
+        // funnel mouth rim
+        ctx.beginPath();
+        ctx.ellipse(cx, funnelTop, topW, s * 0.035, 0, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // stage lines inside funnel
+        const stages = [0.25, 0.5, 0.75];
+        const stageLabels = ['leads', 'contacts', 'deals'];
+        for (let i = 0; i < stages.length; i++) {
+            const t = stages[i];
+            const sy = funnelTop + (funnelBot - funnelTop) * t;
+            const sw = topW + (botW - topW) * t;
+            ctx.globalAlpha = 0.3;
+            ctx.beginPath();
+            ctx.moveTo(cx - sw, sy);
+            ctx.lineTo(cx + sw, sy);
+            ctx.stroke();
+
+            // stage label
+            ctx.font = '8px "Courier New", monospace';
+            ctx.globalAlpha = 0.35;
+            ctx.textAlign = 'right';
+            ctx.fillText(stageLabels[i], cx - sw - 6, sy + 4);
+        }
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+
+        // contact cards dropping into funnel
+        const cards = [
+            { x: cx - s * 0.18, y: funnelTop - s * 0.15, w: s * 0.1, h: s * 0.07 },
+            { x: cx + s * 0.05, y: funnelTop - s * 0.2, w: s * 0.1, h: s * 0.07 },
+            { x: cx - s * 0.04, y: funnelTop - s * 0.08, w: s * 0.08, h: s * 0.055 },
+        ];
+
+        for (const c of cards) {
+            ctx.strokeRect(c.x, c.y, c.w, c.h);
+            // mini avatar circle
+            ctx.beginPath();
+            ctx.arc(c.x + c.w * 0.25, c.y + c.h * 0.45, c.h * 0.2, 0, Math.PI * 2);
+            ctx.stroke();
+            // text lines
+            ctx.globalAlpha = 0.4;
+            ctx.fillRect(c.x + c.w * 0.45, c.y + c.h * 0.25, c.w * 0.4, 2);
+            ctx.fillRect(c.x + c.w * 0.45, c.y + c.h * 0.55, c.w * 0.3, 2);
+            ctx.globalAlpha = 1;
+        }
+
+        // pipeline output — deal icon at bottom
+        const dealY = funnelBot + s * 0.15;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, funnelBot + s * 0.08);
+        ctx.lineTo(cx, dealY - 4);
+        ctx.stroke();
+
+        // dollar sign
+        ctx.font = `bold ${s * 0.1}px "Courier New", monospace`;
+        ctx.textAlign = 'center';
+        ctx.globalAlpha = 0.7;
+        ctx.fillText('$', cx, dealY + s * 0.08);
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+
+        // conversion numbers
+        ctx.font = '9px "Courier New", monospace';
+        ctx.globalAlpha = 0.3;
+        ctx.textAlign = 'right';
+        ctx.fillText('847', cx + topW + s * 0.08, funnelTop + 4);
+        ctx.fillText('234', cx + topW * 0.6 + s * 0.08, funnelTop + (funnelBot - funnelTop) * 0.5);
+        ctx.fillText('41', cx + botW + s * 0.08, funnelBot);
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+    },
+
+    particleMelt(ctx, cx, cy, s, color, rand) {
+        // grid dissolving downward into a puddle — the deep-dive version
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+
+        const gridTop = cy - s * 0.38;
+        const gridW = s * 0.55;
+        const cellSz = s * 0.045;
+        const cols = Math.floor(gridW / cellSz);
+        const rows = 8;
+
+        // pixel grid at top (some cells intact, dissolving toward bottom)
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const px = cx - gridW / 2 + c * cellSz;
+                const py = gridTop + r * cellSz;
+                const dissolveChance = r / rows; // more dissolved lower down
+
+                if (rand() > dissolveChance * 0.7) {
+                    // intact pixel
+                    const alpha = 0.15 + (1 - dissolveChance) * 0.35;
+                    ctx.globalAlpha = alpha;
+                    ctx.fillRect(px + 1, py + 1, cellSz - 2, cellSz - 2);
+                }
+            }
+        }
+        ctx.globalAlpha = 1;
+
+        // falling particle streams
+        ctx.lineWidth = 1;
+        const streamBase = gridTop + rows * cellSz;
+        for (let i = 0; i < 18; i++) {
+            const sx = cx - gridW / 2 + rand() * gridW;
+            const streamLen = s * 0.08 + rand() * s * 0.25;
+            const startY = streamBase + rand() * s * 0.05;
+
+            ctx.globalAlpha = 0.15 + rand() * 0.3;
+            ctx.beginPath();
+            ctx.moveTo(sx, startY);
+            ctx.lineTo(sx + (rand() - 0.5) * s * 0.04, startY + streamLen);
+            ctx.stroke();
+
+            // particle droplet at end
+            ctx.beginPath();
+            ctx.arc(sx + (rand() - 0.5) * s * 0.04, startY + streamLen, 1.5 + rand() * 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // puddle at bottom (accumulation)
+        const puddleY = cy + s * 0.3;
+        ctx.globalAlpha = 0.2;
+        ctx.lineWidth = 1.5;
+        for (let i = 0; i < 3; i++) {
+            ctx.beginPath();
+            ctx.ellipse(cx, puddleY + i * 4, s * 0.35 - i * s * 0.06, s * 0.02 + i * 2, 0, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        // scattered particles in the puddle
+        ctx.globalAlpha = 0.4;
+        for (let i = 0; i < 25; i++) {
+            const px = cx + (rand() - 0.5) * s * 0.6;
+            const py = puddleY - s * 0.02 + rand() * s * 0.06;
+            ctx.fillRect(px, py, 2, 2);
+        }
+        ctx.globalAlpha = 1;
+
+        // particle count label
+        ctx.font = '10px "Courier New", monospace';
+        ctx.globalAlpha = 0.3;
+        ctx.textAlign = 'center';
+        ctx.fillText('230,400 particles', cx, puddleY + s * 0.1);
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+    },
+
+    particleMeltPrank(ctx, cx, cy, s, color, rand) {
+        // INVERTED melt — pixels reforming FROM the puddle upward (april fools)
+        // same DNA as particleMelt but reversed direction + jester marker
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+
+        // puddle at bottom (source, not destination)
+        const puddleY = cy + s * 0.32;
+        ctx.globalAlpha = 0.25;
+        ctx.lineWidth = 1.5;
+        for (let i = 0; i < 3; i++) {
+            ctx.beginPath();
+            ctx.ellipse(cx, puddleY + i * 3, s * 0.38 - i * s * 0.07, s * 0.02 + i * 2, 0, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        // rising particle streams (going UP)
+        ctx.lineWidth = 1;
+        const gridW = s * 0.55;
+        for (let i = 0; i < 22; i++) {
+            const sx = cx - gridW / 2 + rand() * gridW;
+            const streamLen = s * 0.1 + rand() * s * 0.28;
+            const startY = puddleY - rand() * s * 0.03;
+
+            ctx.globalAlpha = 0.15 + rand() * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(sx, startY);
+            ctx.lineTo(sx + (rand() - 0.5) * s * 0.05, startY - streamLen);
+            ctx.stroke();
+
+            // particle at top of stream
+            ctx.beginPath();
+            ctx.arc(sx + (rand() - 0.5) * s * 0.05, startY - streamLen, 1.5 + rand() * 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // reforming grid at top (partial, building)
+        const gridTop = cy - s * 0.35;
+        const cellSz = s * 0.045;
+        const cols = Math.floor(gridW / cellSz);
+        const rows = 6;
+
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const px = cx - gridW / 2 + c * cellSz;
+                const py = gridTop + r * cellSz;
+                const formChance = (rows - r) / rows; // more formed at top
+
+                if (rand() > formChance * 0.6) {
+                    const alpha = 0.1 + formChance * 0.25;
+                    ctx.globalAlpha = alpha;
+                    ctx.fillRect(px + 1, py + 1, cellSz - 2, cellSz - 2);
+                }
+            }
+        }
+        ctx.globalAlpha = 1;
+
+        // jester/prank marker — ⚡ or upside-down exclamation
+        ctx.font = `bold ${s * 0.08}px "Courier New", monospace`;
+        ctx.globalAlpha = 0.5;
+        ctx.textAlign = 'center';
+        ctx.fillText('¡', cx + s * 0.3, cy - s * 0.15);
+        ctx.textAlign = 'left';
+
+        // "april 1" tag
+        ctx.font = '10px "Courier New", monospace';
+        ctx.globalAlpha = 0.3;
+        ctx.textAlign = 'center';
+        ctx.fillText('april 1st', cx, puddleY + s * 0.1);
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+    },
+
+    cockpitHUD(ctx, cx, cy, s, color, rand) {
+        // tmux-style split terminal HUD with metrics and gauges
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 1.5;
+
+        const hudW = s * 0.7;
+        const hudH = s * 0.6;
+        const hx = cx - hudW / 2;
+        const hy = cy - hudH / 2;
+
+        // main frame
+        ctx.strokeRect(hx, hy, hudW, hudH);
+
+        // vertical split (2 panes)
+        const splitX = hx + hudW * 0.55;
+        ctx.beginPath();
+        ctx.moveTo(splitX, hy);
+        ctx.lineTo(splitX, hy + hudH);
+        ctx.stroke();
+
+        // horizontal split in right pane
+        const splitY = hy + hudH * 0.5;
+        ctx.beginPath();
+        ctx.moveTo(splitX, splitY);
+        ctx.lineTo(hx + hudW, splitY);
+        ctx.stroke();
+
+        // — left pane: main terminal with scrolling output —
+        ctx.font = '9px "Courier New", monospace';
+        ctx.globalAlpha = 0.6;
+        const lines = [
+            '$ claude --hud',
+            '⟳ loading context...',
+            '  tokens: 42.1k / 200k',
+            '  tools: 14 active',
+            '  cost: $0.847',
+            '  mcp: 3 servers',
+            '',
+            '> analyzing repo...',
+            '  files: 847 scanned',
+            '  changes: 23 pending',
+        ];
+        for (let i = 0; i < lines.length; i++) {
+            ctx.fillText(lines[i], hx + 8, hy + 16 + i * 13);
+        }
+
+        // blinking cursor
+        ctx.globalAlpha = 0.9;
+        ctx.fillRect(hx + 8, hy + 16 + lines.length * 13 - 2, s * 0.035, 10);
+
+        // — top-right pane: gauges —
+        ctx.globalAlpha = 0.5;
+        ctx.font = '8px "Courier New", monospace';
+        const gauges = [
+            { label: 'CTX', pct: 0.21, y: hy + 14 },
+            { label: 'MEM', pct: 0.67, y: hy + 28 },
+            { label: 'API', pct: 0.34, y: hy + 42 },
+            { label: 'TOK', pct: 0.89, y: hy + 56 },
+        ];
+        const gaugeX = splitX + 8;
+        const gaugeW = hudW * 0.45 - 40;
+
+        for (const g of gauges) {
+            ctx.fillText(g.label, gaugeX, g.y);
+            ctx.globalAlpha = 0.2;
+            ctx.fillRect(gaugeX + 24, g.y - 7, gaugeW, 6);
+            ctx.globalAlpha = 0.6;
+            ctx.fillRect(gaugeX + 24, g.y - 7, gaugeW * g.pct, 6);
+            ctx.globalAlpha = 0.5;
+            ctx.textAlign = 'right';
+            ctx.fillText(`${Math.round(g.pct * 100)}%`, splitX + hudW * 0.45 - 6, g.y);
+            ctx.textAlign = 'left';
+        }
+
+        // — bottom-right pane: tool call history —
+        ctx.globalAlpha = 0.45;
+        ctx.font = '7px "Courier New", monospace';
+        const tools = ['read_file ✓', 'grep_search ✓', 'edit_file ⟳', 'run_cmd ✓'];
+        for (let i = 0; i < tools.length; i++) {
+            ctx.fillText(tools[i], splitX + 8, splitY + 14 + i * 11);
+        }
+
+        // — status bar at very bottom —
+        ctx.globalAlpha = 0.3;
+        ctx.fillRect(hx, hy + hudH - 14, hudW, 14);
+        ctx.globalAlpha = 0.8;
+        ctx.font = '8px "Courier New", monospace';
+        ctx.fillText(' brett-hud │ session: 47m │ opus-4 │ 3 MCP', hx + 4, hy + hudH - 4);
+
+        ctx.globalAlpha = 1;
+    },
+
+    exportDoc(ctx, cx, cy, s, color, rand) {
+        // document with JSON brackets and pass/fail check marks
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2;
+
+        // document outline with folded corner
+        const docW = s * 0.4;
+        const docH = s * 0.6;
+        const dx = cx - docW / 2;
+        const dy = cy - docH / 2;
+        const fold = s * 0.08;
+
+        ctx.beginPath();
+        ctx.moveTo(dx, dy);
+        ctx.lineTo(dx + docW - fold, dy);
+        ctx.lineTo(dx + docW, dy + fold);
+        ctx.lineTo(dx + docW, dy + docH);
+        ctx.lineTo(dx, dy + docH);
+        ctx.closePath();
+        ctx.stroke();
+
+        // fold crease
+        ctx.beginPath();
+        ctx.moveTo(dx + docW - fold, dy);
+        ctx.lineTo(dx + docW - fold, dy + fold);
+        ctx.lineTo(dx + docW, dy + fold);
+        ctx.stroke();
+
+        // JSON brackets at top
+        ctx.font = `bold ${s * 0.1}px "Courier New", monospace`;
+        ctx.globalAlpha = 0.6;
+        ctx.fillText('{', dx + s * 0.04, dy + s * 0.1);
+
+        // field lines with checkmarks/X marks
+        ctx.font = '10px "Courier New", monospace';
+        const fields = [
+            { name: '"score":', pass: true },
+            { name: '"ai_commentary":', pass: false },
+            { name: '"guardrails":', pass: false },
+            { name: '"recommendations":', pass: false },
+            { name: '"export_format":', pass: true },
+            { name: '"categories":', pass: true },
+        ];
+
+        for (let i = 0; i < fields.length; i++) {
+            const fy = dy + s * 0.14 + i * (s * 0.065);
+            ctx.globalAlpha = 0.5;
+            ctx.fillText('  ' + fields[i].name, dx + s * 0.04, fy);
+
+            // pass/fail indicator
+            ctx.globalAlpha = 0.7;
+            if (fields[i].pass) {
+                ctx.fillText(' ✓', dx + docW - s * 0.1, fy);
+            } else {
+                ctx.fillText(' ✗', dx + docW - s * 0.1, fy);
+            }
+        }
+
+        // closing bracket
+        ctx.font = `bold ${s * 0.1}px "Courier New", monospace`;
+        ctx.globalAlpha = 0.6;
+        ctx.fillText('}', dx + s * 0.04, dy + s * 0.14 + fields.length * (s * 0.065) + s * 0.02);
+
+        // quality score badge
+        ctx.lineWidth = 1.5;
+        ctx.globalAlpha = 0.4;
+        const badgeX = dx + docW * 0.6;
+        const badgeY = dy + docH - s * 0.08;
+        ctx.strokeRect(badgeX, badgeY, s * 0.12, s * 0.05);
+        ctx.font = '9px "Courier New", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('3/6', badgeX + s * 0.06, badgeY + s * 0.037);
+        ctx.textAlign = 'left';
+
+        ctx.globalAlpha = 1;
+    },
+
+    lighthouse(ctx, cx, cy, s, color, rand) {
+        // lighthouse tower with radiating beacon — leuchtturm
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2;
+
+        // tower body (tapered trapezoid)
+        const baseW = s * 0.14;
+        const topW = s * 0.08;
+        const towerH = s * 0.5;
+        const towerBot = cy + s * 0.25;
+        const towerTop = towerBot - towerH;
+
+        ctx.beginPath();
+        ctx.moveTo(cx - baseW, towerBot);
+        ctx.lineTo(cx - topW, towerTop);
+        ctx.lineTo(cx + topW, towerTop);
+        ctx.lineTo(cx + baseW, towerBot);
+        ctx.closePath();
+        ctx.stroke();
+
+        // horizontal stripe bands on tower
+        for (let i = 1; i <= 4; i++) {
+            const t = i / 5;
+            const sy = towerBot - towerH * t;
+            const sw = baseW + (topW - baseW) * t;
+            ctx.globalAlpha = 0.25;
+            ctx.beginPath();
+            ctx.moveTo(cx - sw, sy);
+            ctx.lineTo(cx + sw, sy);
+            ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+
+        // alternate fill bands
+        for (let i = 0; i < 5; i++) {
+            if (i % 2 === 0) continue;
+            const t1 = i / 5;
+            const t2 = (i + 1) / 5;
+            const sy1 = towerBot - towerH * t1;
+            const sy2 = towerBot - towerH * t2;
+            const sw1 = baseW + (topW - baseW) * t1;
+            const sw2 = baseW + (topW - baseW) * t2;
+            ctx.globalAlpha = 0.1;
+            ctx.beginPath();
+            ctx.moveTo(cx - sw1, sy1);
+            ctx.lineTo(cx - sw2, sy2);
+            ctx.lineTo(cx + sw2, sy2);
+            ctx.lineTo(cx + sw1, sy1);
+            ctx.closePath();
+            ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+
+        // lantern room (glass box at top)
+        const lanternH = s * 0.06;
+        const lanternW = topW * 1.4;
+        ctx.lineWidth = 2;
+        ctx.strokeRect(cx - lanternW, towerTop - lanternH, lanternW * 2, lanternH);
+
+        // lantern dome
+        ctx.beginPath();
+        ctx.arc(cx, towerTop - lanternH, lanternW, Math.PI, Math.PI * 2);
+        ctx.stroke();
+
+        // beacon light (radiating lines)
+        ctx.lineWidth = 1.5;
+        const beaconY = towerTop - lanternH;
+        const rayCount = 9;
+        for (let i = 0; i < rayCount; i++) {
+            const angle = Math.PI + (i / (rayCount - 1)) * Math.PI; // upper hemisphere only
+            const innerR = lanternW + s * 0.02;
+            const outerR = s * 0.2 + rand() * s * 0.12;
+
+            ctx.globalAlpha = 0.15 + (i === Math.floor(rayCount / 2) ? 0.2 : 0) + rand() * 0.1;
+            ctx.beginPath();
+            ctx.moveTo(cx + Math.cos(angle) * innerR, beaconY + Math.sin(angle) * innerR);
+            ctx.lineTo(cx + Math.cos(angle) * outerR, beaconY + Math.sin(angle) * outerR);
+            ctx.stroke();
+        }
+
+        // wide beacon sweep cone (strongest beam)
+        ctx.globalAlpha = 0.08;
+        ctx.beginPath();
+        ctx.moveTo(cx, beaconY);
+        ctx.lineTo(cx - s * 0.5, beaconY - s * 0.35);
+        ctx.lineTo(cx + s * 0.1, beaconY - s * 0.4);
+        ctx.closePath();
+        ctx.fill();
+
+        // base / rocks
+        ctx.globalAlpha = 0.3;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(cx - s * 0.25, towerBot);
+        ctx.quadraticCurveTo(cx - s * 0.15, towerBot + s * 0.04, cx, towerBot + s * 0.02);
+        ctx.quadraticCurveTo(cx + s * 0.15, towerBot + s * 0.05, cx + s * 0.25, towerBot);
+        ctx.stroke();
+
+        // waves at base
+        for (let i = 0; i < 3; i++) {
+            const wy = towerBot + s * 0.06 + i * s * 0.035;
+            ctx.globalAlpha = 0.15 - i * 0.04;
+            ctx.beginPath();
+            for (let x = cx - s * 0.3; x <= cx + s * 0.3; x += 4) {
+                ctx.lineTo(x, wy + Math.sin((x - cx) * 0.08 + i) * s * 0.015);
+            }
+            ctx.stroke();
+        }
+
+        ctx.globalAlpha = 1;
+    },
+
+    releaseRocket(ctx, cx, cy, s, color, rand) {
+        // rocket launching with version tag exhaust trail
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2;
+
+        // rocket body
+        const rocketH = s * 0.4;
+        const rocketW = s * 0.08;
+        const rocketTop = cy - s * 0.25;
+
+        // nose cone
+        ctx.beginPath();
+        ctx.moveTo(cx, rocketTop);
+        ctx.quadraticCurveTo(cx - rocketW * 0.3, rocketTop + rocketH * 0.15,
+            cx - rocketW, rocketTop + rocketH * 0.25);
+        ctx.quadraticCurveTo(cx + rocketW * 0.3, rocketTop + rocketH * 0.15,
+            cx, rocketTop);
+        ctx.stroke();
+
+        // right side of nose
+        ctx.beginPath();
+        ctx.moveTo(cx, rocketTop);
+        ctx.quadraticCurveTo(cx + rocketW * 0.3, rocketTop + rocketH * 0.15,
+            cx + rocketW, rocketTop + rocketH * 0.25);
+        ctx.stroke();
+
+        // body cylinder
+        ctx.beginPath();
+        ctx.moveTo(cx - rocketW, rocketTop + rocketH * 0.25);
+        ctx.lineTo(cx - rocketW, rocketTop + rocketH * 0.85);
+        ctx.moveTo(cx + rocketW, rocketTop + rocketH * 0.25);
+        ctx.lineTo(cx + rocketW, rocketTop + rocketH * 0.85);
+        ctx.stroke();
+
+        // body window (porthole)
+        ctx.beginPath();
+        ctx.arc(cx, rocketTop + rocketH * 0.4, rocketW * 0.45, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // fins
+        ctx.lineWidth = 1.5;
+        // left fin
+        ctx.beginPath();
+        ctx.moveTo(cx - rocketW, rocketTop + rocketH * 0.65);
+        ctx.lineTo(cx - rocketW * 2.2, rocketTop + rocketH * 0.95);
+        ctx.lineTo(cx - rocketW, rocketTop + rocketH * 0.85);
+        ctx.stroke();
+
+        // right fin
+        ctx.beginPath();
+        ctx.moveTo(cx + rocketW, rocketTop + rocketH * 0.65);
+        ctx.lineTo(cx + rocketW * 2.2, rocketTop + rocketH * 0.95);
+        ctx.lineTo(cx + rocketW, rocketTop + rocketH * 0.85);
+        ctx.stroke();
+
+        // nozzle
+        ctx.beginPath();
+        ctx.moveTo(cx - rocketW * 0.7, rocketTop + rocketH * 0.85);
+        ctx.lineTo(cx - rocketW * 0.9, rocketTop + rocketH);
+        ctx.lineTo(cx + rocketW * 0.9, rocketTop + rocketH);
+        ctx.lineTo(cx + rocketW * 0.7, rocketTop + rocketH * 0.85);
+        ctx.stroke();
+
+        // exhaust flames / trail
+        const exhaustTop = rocketTop + rocketH;
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 12; i++) {
+            const ex = cx + (rand() - 0.5) * rocketW * 1.8;
+            const ey = exhaustTop + rand() * s * 0.3;
+            const eLen = s * 0.03 + rand() * s * 0.06;
+            ctx.globalAlpha = 0.15 + rand() * 0.25;
+            ctx.beginPath();
+            ctx.moveTo(ex, ey);
+            ctx.lineTo(ex + (rand() - 0.5) * 4, ey + eLen);
+            ctx.stroke();
+        }
+
+        // version tag in the exhaust
+        ctx.globalAlpha = 0.35;
+        ctx.font = 'bold 11px "Courier New", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('v0.1.7', cx, exhaustTop + s * 0.3);
+
+        // scattered component labels around rocket
+        ctx.font = '8px "Courier New", monospace';
+        ctx.globalAlpha = 0.2;
+        const labels = ['forms', 'particles', 'reps', 'css', 'entries'];
+        for (let i = 0; i < labels.length; i++) {
+            const angle = (i / labels.length) * Math.PI * 2 + rand() * 0.3;
+            const dist = s * 0.3 + rand() * s * 0.1;
+            const lx = cx + Math.cos(angle) * dist;
+            const ly = cy + Math.sin(angle) * dist * 0.7;
+            ctx.fillText(labels[i], lx, ly);
+        }
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+    },
+
+    selfPortrait(ctx, cx, cy, s, color, rand) {
+        // a canvas frame with a smaller pictogram inside it — meta: pictogram of pictograms
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2.5;
+
+        // outer frame
+        const frameW = s * 0.55;
+        const frameH = s * 0.45;
+        const fx = cx - frameW / 2;
+        const fy = cy - frameH / 2;
+
+        // thick border frame (gallery style)
+        ctx.strokeRect(fx, fy, frameW, frameH);
+        ctx.lineWidth = 1;
+        const inset = s * 0.03;
+        ctx.strokeRect(fx + inset, fy + inset, frameW - inset * 2, frameH - inset * 2);
+
+        // inside: a grid of tiny pictogram thumbnails
+        const thumbCols = 4;
+        const thumbRows = 2;
+        const innerW = frameW - inset * 4;
+        const innerH = frameH - inset * 4;
+        const thumbW = innerW / thumbCols;
+        const thumbH = innerH / thumbRows;
+
+        for (let r = 0; r < thumbRows; r++) {
+            for (let c = 0; c < thumbCols; c++) {
+                const tx = fx + inset * 2 + c * thumbW;
+                const ty = fy + inset * 2 + r * thumbH;
+                const tcx = tx + thumbW / 2;
+                const tcy = ty + thumbH / 2;
+
+                ctx.globalAlpha = 0.25 + rand() * 0.2;
+                ctx.lineWidth = 1;
+
+                // each thumbnail is a simplified abstract shape
+                const shape = Math.floor(rand() * 6);
+                switch (shape) {
+                    case 0: // circle
+                        ctx.beginPath();
+                        ctx.arc(tcx, tcy, thumbW * 0.25, 0, Math.PI * 2);
+                        ctx.stroke();
+                        break;
+                    case 1: // triangle
+                        ctx.beginPath();
+                        ctx.moveTo(tcx, tcy - thumbH * 0.3);
+                        ctx.lineTo(tcx - thumbW * 0.3, tcy + thumbH * 0.2);
+                        ctx.lineTo(tcx + thumbW * 0.3, tcy + thumbH * 0.2);
+                        ctx.closePath();
+                        ctx.stroke();
+                        break;
+                    case 2: // square
+                        ctx.strokeRect(tcx - thumbW * 0.2, tcy - thumbH * 0.2, thumbW * 0.4, thumbH * 0.4);
+                        break;
+                    case 3: // eye (simplified)
+                        ctx.beginPath();
+                        ctx.moveTo(tcx - thumbW * 0.3, tcy);
+                        ctx.quadraticCurveTo(tcx, tcy - thumbH * 0.2, tcx + thumbW * 0.3, tcy);
+                        ctx.quadraticCurveTo(tcx, tcy + thumbH * 0.2, tcx - thumbW * 0.3, tcy);
+                        ctx.stroke();
+                        break;
+                    case 4: // star
+                        for (let p = 0; p < 5; p++) {
+                            const a = (p / 5) * Math.PI * 2 - Math.PI / 2;
+                            const r2 = thumbW * 0.28;
+                            ctx.beginPath();
+                            ctx.moveTo(tcx, tcy);
+                            ctx.lineTo(tcx + Math.cos(a) * r2, tcy + Math.sin(a) * r2);
+                            ctx.stroke();
+                        }
+                        break;
+                    case 5: // grid
+                        for (let gi = 0; gi < 2; gi++) {
+                            ctx.beginPath();
+                            ctx.moveTo(tcx - thumbW * 0.2 + gi * thumbW * 0.2, tcy - thumbH * 0.2);
+                            ctx.lineTo(tcx - thumbW * 0.2 + gi * thumbW * 0.2, tcy + thumbH * 0.2);
+                            ctx.stroke();
+                            ctx.beginPath();
+                            ctx.moveTo(tcx - thumbW * 0.2, tcy - thumbH * 0.2 + gi * thumbH * 0.2);
+                            ctx.lineTo(tcx + thumbW * 0.2, tcy - thumbH * 0.2 + gi * thumbH * 0.2);
+                            ctx.stroke();
+                        }
+                        break;
+                }
+            }
+        }
+
+        // "face" label below frame (the title is "every entry gets a face")
+        ctx.globalAlpha = 0.35;
+        ctx.font = '10px "Courier New", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('8 faces', cx, fy + frameH + s * 0.06);
+        ctx.textAlign = 'left';
+        ctx.globalAlpha = 1;
+
+        // hanging wire from frame top
+        ctx.globalAlpha = 0.3;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(cx - s * 0.08, fy);
+        ctx.quadraticCurveTo(cx, fy - s * 0.1, cx + s * 0.08, fy);
+        ctx.stroke();
+
+        // nail at top
+        ctx.globalAlpha = 0.5;
+        ctx.beginPath();
+        ctx.arc(cx, fy - s * 0.1, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
     },
 };
 
