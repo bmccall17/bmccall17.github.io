@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:39 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5f6k000202jo4mls2y0z
 slug: 2026-04-12-the-persistence-polarity
 canonical: https://bmccall17.github.io/darketype/weblog/2026-04-12_the_persistence_polarity.html
+cover: https://bmccall17.github.io/assets/social/og/2026-04-12_the_persistence_polarity.png
+tags: database, architecture, infrastructure, sqlite, neon, agent
 
 ---
 
