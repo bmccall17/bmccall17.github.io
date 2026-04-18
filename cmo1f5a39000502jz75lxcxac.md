@@ -52,3 +52,7 @@ const rowClueTile = state.board.tiles.find(t =>
 
 # Distillation
 Working code is not correct code. The fact that something plays fine for months doesnt mean it handles edge cases, doesnt mean the undo is real, doesnt mean the state is clean. Audit the uncomfortable parts. Read the functions that "just work." thats where the rot lives.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-02-11_the_autopsy.html).*
