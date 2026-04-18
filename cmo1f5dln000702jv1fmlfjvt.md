@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:37 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5dln000702jv1fmlfjvt
 slug: 2026-03-27-the-melt
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-27_the_melt.html
+cover: https://bmccall17.github.io/assets/social/og/2026-03-27_the_melt.png
+tags: performance, canvas, animation, physics, web-audio, particles, april-fools
 
 ---
 
