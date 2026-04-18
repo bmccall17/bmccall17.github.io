@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:35 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5bpw000502l8e5fmbmex
 slug: 2026-03-17-viscous-lcd
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-17_viscous_lcd.html
+cover: https://bmccall17.github.io/assets/social/og/2026-03-17_viscous_lcd.png
+tags: animation, lcd, shipped, darketype, svg-filters, chromatic-aberration
 
 ---
 
