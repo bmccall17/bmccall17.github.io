@@ -135,3 +135,7 @@ Every timing interval is randomized within a range. Seed changes, drip durations
 Zero dependencies. One SVG filter for headings. Per-element text-shadow for content. Two systems pretending to be the same physics.
 
 *ADR-0016. Pressing your finger into the screen.*
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-17_viscous_lcd.html).*
