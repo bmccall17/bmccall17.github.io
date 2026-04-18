@@ -101,3 +101,7 @@ The inspiration from yang z.'s claude-hud was the catalyst, but the implementati
 ## Distillation
 
 You don't need permission to instrument your own tools. If the vendor dashboard doesn't show you what you need, build the cockpit yourself. The best developer experience is the one you designed for exactly how you work.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-23_brett_hud_v1.html).*
