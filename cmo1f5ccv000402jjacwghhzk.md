@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:35 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5ccv000402jjacwghhzk
 slug: 2026-03-19-og-pictograms
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-19_og_pictograms.html
+cover: https://bmccall17.github.io/assets/social/og/2026-03-19_og_pictograms.png
+tags: social-share, og-images, shipped, build-system, node-canvas, darketype, pictograms
 
 ---
 
