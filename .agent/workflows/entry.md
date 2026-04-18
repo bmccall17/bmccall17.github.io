@@ -55,6 +55,11 @@ git commit -m "add [title] entry and rebuild weblog"
 ```bash
 git push origin main
 ```
+- **sync to hashnode:** push the prepared proxy files to the live publication.
+// turbo
+```bash
+npm run hashnode:sync
+```
 
 ### step 4: confirm
 - report to the user that the entry is "wired up" and live!
