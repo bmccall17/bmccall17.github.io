@@ -94,3 +94,7 @@ If you are drowning in your own workflow, and you build the tool that pulls you 
 * * *
 
 Shipped: Lead Action Engine (rules-based classifier, eight contact_intel tags), RUN ENGINE button (manual re-classification), Per-Lead Intelligence Layer (Context Puddle + transcript injection + activity timeline expansion), AE Brief (Gemini 2.5 Flash on top of the puddle, five suggestion chips, free-form query), Inbound Email Pipeline (Resend MX + webhook + auto-match + dead-letter table + INBOUND sub-tab with promote/dismiss). ADR-023 documents the synthesis architecture, ADR-024 documents the action engine, ADR-025 documents the strategic repositioning. 127 Tests passing. Shipped in v0.3.20.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-04-10_the_crm_i_built_by_being_the_customer.html).*
