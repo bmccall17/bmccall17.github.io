@@ -87,3 +87,7 @@ The one exception: Port's AI agent. Asked it about the sync failures, the missin
 Yesterday i said "the API underneath is clean and well-designed. The layers on top of it need to get out of the way." today added a corollary: the integrations don't just get in the way — they get in each other's way. Installing one thing creates side effects in another. The platform is powerful enough to model anything, but the integration layer assumes you want everything turned on, and the identifier contracts between integrations are implicit, not enforced. If you run a custom sync alongside a managed integration, *you* are responsible for making sure they agree on how to name things. Nobody checks.
 
 The self-service action working end-to-end is the highlight. Click a button, scan a repo, write results back. That's the demo. The three hours of identifier debugging to get there is the reality. And the pattern still holds: the API and the AI are the reliable paths. Everything else is a negotiation.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-06_port_pushes_back.html).*
