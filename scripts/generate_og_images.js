@@ -93,7 +93,7 @@ function pickPictogram(entry) {
         return 'flag';
 
     // ─── new pictograms (2026-04-18) ───
-    if (all.includes('persistence') || all.includes('dual') || (all.includes('sqlite') && all.includes('neon')) || all.includes('bridging'))
+    if (all.includes('persistence') || all.includes('dual') || (all.includes('sqlite') && all.includes('neon')) || all.includes('bridge') || all.includes('sync') || all.includes('mirror'))
         return 'dualDatabase';
     if (all.includes('polarity') && (all.includes('problem') || all.includes('metric') || all.includes('opposing')))
         return 'polarityScale';

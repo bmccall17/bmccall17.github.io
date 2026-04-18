@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>darketype // the hashnode bridge: mirroring the mess</title>
+    <!-- Analytics -->
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init rs ls yi ns us ts ss capture calculateEventProperties vs register register_once register_for_session unregister unregister_for_session gs getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags setGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty fs ds createPersonProfile setInternalOrTestUser ps Qr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing hs debug M cs getPageViewId captureTraceFeedback captureTraceMetric Kr".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_21ojMbvL2fR9lqHt84cFmuKCKLNWUqNHJTVJORXzmvn', {
+          api_host: 'https://us.i.posthog.com',
+          person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users
+      })
+    </script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicons/weblog.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- minimal markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- dompurify for sanitization -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js"></script>
+    <!-- viewerjs for image popup and zoom -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
+
+    <!-- Open Graph / Social Share -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="darketype">
+    <meta property="og:title" content="the hashnode bridge: mirroring the mess">
+    <meta property="og:description" content="the problem darketype.com is the high-fidelity source of truth—it's got the glitches, the scanlines, and the raw lowercase aesthetic that i love. but reach matt">
+    <meta property="og:image" content="https://bmccall17.github.io/assets/social/og/2026-04-18_the_hashnode_bridge.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://bmccall17.github.io/darketype/weblog/2026-04-18_the_hashnode_bridge.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="the hashnode bridge: mirroring the mess">
+    <meta name="twitter:description" content="the problem darketype.com is the high-fidelity source of truth—it's got the glitches, the scanlines, and the raw lowercase aesthetic that i love. but reach matt">
+    <meta name="twitter:image" content="https://bmccall17.github.io/assets/social/og/2026-04-18_the_hashnode_bridge.png">
+
+    <!-- Twitter Widgets (for embedded tweets) -->
+    <script>
+        window.twttr = (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function (f) {
+                t._e.push(f);
+            };
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
+
+    <style>
+        .metadata-block {
+            border-bottom: 1px dashed var(--dim-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+        .nav-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+        #dl-md {
+            font-family: var(--mono-font, monospace);
+            font-size: 0.75rem;
+            color: var(--dim-color, #555);
+            text-decoration: none;
+            border: 1px solid var(--dim-color, #555);
+            padding: 0.2rem 0.55rem;
+            border-radius: 3px;
+            white-space: nowrap;
+            transition: color 0.2s, border-color 0.2s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #dl-md.ready {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #dl-md:hover {
+            color: var(--text-color, #e0e0e0);
+            border-color: var(--text-color, #e0e0e0);
+        }
+        .ext-links {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .ext-link {
+            font-family: var(--mono-font, monospace);
+            font-size: 0.75rem;
+            color: var(--dim-color, #555);
+            text-decoration: none;
+            border: 1px solid var(--dim-color, #555);
+            padding: 0.2rem 0.55rem;
+            border-radius: 3px;
+            white-space: nowrap;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .ext-link:hover {
+            color: var(--text-color, #e0e0e0);
+            border-color: var(--text-color, #e0e0e0);
+            border-bottom: 1px solid var(--text-color, #e0e0e0);
+            animation: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- sidebar canvases -->
+    <canvas class="sidebar-canvas left" id="sidebar-left"></canvas>
+    <canvas class="sidebar-canvas right" id="sidebar-right"></canvas>
+
+    <!-- secret glyph HUD -->
+    <div id="glyph-hud">
+      <button class="gh-btn"></button>
+      <button class="gh-btn"></button>
+      <button class="gh-btn"></button>
+      <button class="gh-btn"></button>
+      <button class="gh-btn"></button>
+    </div>
+
+    <div class="container">
+        <header>
+            <nav class="nav-row">
+                <div class="nav-left">
+                    <a href="index.html" class="dim">&lt; return to log</a>
+                    <span class="dim"> // </span>
+                    <span class="glitch-text" id="header-title">loading...</span>
+                </div>
+                <a id="dl-md" href="#" download aria-label="download source markdown">↓ .md</a>
+                <div class="ext-links" id="ext-links"></div>
+            </nav>
+        </header>
+
+        <div class="semantic-wrap">
+            <div id="semantic-layer" class="strategy-underlay" aria-hidden="false" role="article"></div>
+            <main id="content" style="margin-top: 2rem; min-height: 50vh;" aria-hidden="true">
+                <!-- content injected here -->
+                <p class="dim">accessing archive...</p>
+            </main>
+        </div>
+
+        <footer>
+            <hr class="dim">
+            <p class="dim" style="font-size: 0.8rem;">
+                <span id="meta-date"></span><br>
+                <span id="meta-state"></span>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // the "leak" reader logic
+        async function loadEntry() {
+            const params = new URLSearchParams(window.location.search);
+            const entry = '../entries/2026-04-18_the_hashnode_bridge.md';
+
+            // entry path is hardcoded by build
+
+            try {
+                const response = await fetch(entry);
+                if (!response.ok) throw new Error('entry not found');
+                const text = await response.text();
+
+                // separate frontmatter from body (rudimentary check)
+                let body = text;
+                let meta = {};
+
+                if (text.startsWith('---')) {
+                    const parts = text.split('---');
+                    if (parts.length >= 3) {
+                        const frontmatter = parts[1];
+                        body = parts.slice(2).join('---');
+
+                        // parse basic yaml-like lines
+                        frontmatter.split('\n').forEach(line => {
+                            const [key, ...val] = line.split(':');
+                            if (key && val) meta[key.trim()] = val.join(':').trim().replace(/['"]/g, '');
+                        });
+                    }
+                }
+
+                // render
+                document.getElementById('header-title').innerText = meta.title || 'untitled mess';
+                document.getElementById('content').innerHTML = DOMPurify.sanitize(marked.parse(body), { ADD_ATTR: ['data-media-max-width'] });
+                document.title = `darketype // ${meta.title || 'entry'}`;
+
+                // metadata
+                if (meta.date) document.getElementById('meta-date').innerText = `logged: ${meta.date}`;
+                if (meta.state) document.getElementById('meta-state').innerText = `state: ${meta.state}`;
+
+                // wire up download button
+                const dlBtn = document.getElementById('dl-md');
+                const extLinks = document.getElementById('ext-links');
+                if (dlBtn) {
+                    if (meta.medium_link) {
+                        dlBtn.href = meta.medium_link;
+                        dlBtn.innerText = 'read on medium ↗';
+                        dlBtn.removeAttribute('download');
+                        dlBtn.target = '_blank';
+                        dlBtn.classList.add('ready', 'medium-btn');
+                    } else {
+                        dlBtn.href = entry;
+                        dlBtn.download = entry.split('/').pop();
+                        dlBtn.innerText = '↓ .md';
+                        dlBtn.classList.add('ready');
+                    }
+                }
+
+                // check hashnode manifest for cross-link
+                try {
+                    const manifestRes = await fetch('../../.hashnode/manifest.json');
+                    if (manifestRes.ok) {
+                        const manifest = await manifestRes.json();
+                        // extract slug from entry path (e.g. 'entries/2026-04-14_fibonacci_magic.md' -> '2026-04-14_fibonacci_magic')
+                        const entrySlug = entry.split('/').pop().replace(/\.md$/, '');
+                        if (manifest.posts && manifest.posts[entrySlug]) {
+                            const hnLink = document.createElement('a');
+                            hnLink.href = manifest.posts[entrySlug];
+                            hnLink.innerText = 'hashnode ↗';
+                            hnLink.target = '_blank';
+                            hnLink.className = 'ext-link';
+                            hnLink.setAttribute('aria-label', 'read on hashnode');
+                            extLinks.appendChild(hnLink);
+                        }
+                    }
+                } catch (e) { /* manifest not available, no hashnode link */ }
+
+                // Prism/Highlighter could go here if we were fancy
+
+                // Render any embedded tweets dynamically inside the content
+                if (window.twttr && window.twttr.ready) {
+                    window.twttr.ready(function (twttr) {
+                        twttr.widgets.load(document.getElementById('content'));
+                    });
+                }
+
+                // initialize viewer.js for images
+                const contentDiv = document.getElementById('content');
+                if (contentDiv.querySelector('img')) {
+                    new Viewer(contentDiv, {
+                        url: 'src',
+                        navbar: false,
+                        title: false,
+                        toolbar: {
+                            zoomIn: 1,
+                            zoomOut: 1,
+                            oneToOne: 1,
+                            reset: 1,
+                            prev: 0,
+                            play: 0,
+                            next: 0,
+                            rotateLeft: 0,
+                            rotateRight: 0,
+                            flipHorizontal: 0,
+                            flipVertical: 0,
+                        },
+                        className: 'darketype-viewer',
+                        backdrop: true
+                    });
+                }
+
+
+            } catch (err) {
+                document.getElementById('content').innerHTML = DOMPurify.sanitize(`<p class="alert">fatal error: ${err.message}</p>`);
+            }
+        }
+
+        loadEntry();
+    </script>
+    <script src="../scripts/viscous.js"></script>
+    <script src="../scripts/sidebar.js"></script>
+</body>
+
+</html>

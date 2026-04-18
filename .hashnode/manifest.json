@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-04-18T15:15:07.297Z",
+  "_generated": "2026-04-18T15:18:22.355Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_the_loop_engaged": "https://darketype.hashnode.dev/2026-02-06-the-loop-engaged",
@@ -25,7 +25,15 @@
     "2026-04-10_the_crm_i_built_by_being_the_customer": "https://darketype.hashnode.dev/2026-04-10-the-crm-i-built-by-being-the-customer",
     "2026-04-10_the_polarity_problem": "https://darketype.hashnode.dev/2026-04-10-the-polarity-problem",
     "2026-04-12_the_persistence_polarity": "https://darketype.hashnode.dev/2026-04-12-the-persistence-polarity",
-    "2026-04-14_fibonacci_magic": "https://darketype.hashnode.dev/2026-04-14-fibonacci-magic"
+    "2026-04-14_fibonacci_magic": "https://darketype.hashnode.dev/2026-04-14-fibonacci-magic",
+    "2026-04-18_the_hashnode_bridge": "https://darketype.hashnode.dev/2026-04-18-the-hashnode-bridge"
   },
-  "series": {}
+  "series": {
+    "darketype-devlog": [
+      {
+        "slug": "2026-04-18-the-hashnode-bridge",
+        "title": "the hashnode bridge: mirroring the mess"
+      }
+    ]
+  }
 }
