@@ -63,3 +63,7 @@ Also: every visitor to the logo factory sees a different version of your logo. T
 # Distillation
 
 Don't iterate *through* the agent. Iterate *with a tool the agent builds for you*.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-02-25_logo_factory.html).*
