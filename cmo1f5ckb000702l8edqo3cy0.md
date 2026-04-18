@@ -70,3 +70,7 @@ The agent isn't perfect yet. Tuning the decay rates is still an art. But the con
 Next up: migrating the agent from local docker compose to google cloud run so the lake can flow 24/7.
 
 The lake is ready for it.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-19_the_context_lake.html).*
