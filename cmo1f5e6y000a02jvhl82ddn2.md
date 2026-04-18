@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:38 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5e6y000a02jvhl82ddn2
 slug: 2026-04-06-repoptics-recalibration
 canonical: https://bmccall17.github.io/darketype/weblog/2026-04-06_repoptics_recalibration.html
+cover: https://bmccall17.github.io/assets/social/og/2026-04-06_repoptics_recalibration.png
+tags: scoring, community-feedback, repoptics, recalibration, leuchtturm
 
 ---
 
