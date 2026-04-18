@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:37 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5ddo000602jjdqs7ax3j
 slug: 2026-03-27-messy-release-v0-1-7
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-27_messy_release_v0.1.7.html
+cover: https://bmccall17.github.io/assets/social/og/2026-03-27_messy_release_v0.1.7.png
+tags: release, meta, darketype
 
 ---
 
