@@ -4,6 +4,8 @@ datePublished: Thu Apr 16 2026 11:51:36 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5cza000502jje6fdhajp
 slug: 2026-03-23-brett-hud-v1
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-23_brett_hud_v1.html
+cover: https://bmccall17.github.io/assets/social/og/2026-03-23_brett_hud_v1.png
+tags: terminal, tooling, wsl, tmux, hud, claude-code
 
 ---
 
