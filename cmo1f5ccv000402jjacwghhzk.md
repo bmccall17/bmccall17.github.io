@@ -88,3 +88,7 @@ The "daemon summons" entry gets concentric portal rings with a horned silhouette
 Each image is visually distinct at thumbnail size. You can tell which entry someone shared without reading the title.
 
 *ADR-0018. Every entry gets a face.*
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-03-19_og_pictograms.html).*
