@@ -22,6 +22,7 @@ if a new mess entry is provided in the prompt, or you are executing this, ensure
   - if drafting a new entry, create the filename as `YYYY-MM-DD_title_slug.md`.
 - **grammar-police-dodging:** verify the entire entry strictly follows the "darketype" styling—all lowercase titles, headings, and body text. absolutely no capital letters unless deeply intentional for code or for proper names of people or brands or... proper names, you get it right?!
 - ensure `tags` are relevant and exist as an active array in the frontmatter.
+- **series pre-condition:** if using the `series:` field, ensure that series slug already exists on the [Hashnode dashboard](https://hashnode.com) → Series → Create. if it doesn't exist yet, `hashnode:sync` will silently skip the series attachment without failing.
 
 ### step 2: build architecture
 - run the full build from the project root:
