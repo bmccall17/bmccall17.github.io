@@ -3,6 +3,7 @@ title: "v0.1.7: shipping forms, particles, and reps"
 date: 2026-03-27
 state: "shipped"
 tags: [meta, darketype, release]
+series: "darketype-devlog"
 og_image: 
 next_experiment: "unclear"
 ---

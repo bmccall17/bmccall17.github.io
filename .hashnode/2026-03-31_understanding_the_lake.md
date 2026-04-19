@@ -1,10 +1,11 @@
 ---
 title: "Understanding the lake"
-slug: 2026-03-31_understanding_the_lake
+slug: 2026-03-31-understanding-the-lake
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-31_understanding_the_lake.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-31_understanding_the_lake.png"
 tags: agent828, architecture, context-lake, port
+seriesSlug: darketype-devlog
 ---
 
 # Understanding the lake

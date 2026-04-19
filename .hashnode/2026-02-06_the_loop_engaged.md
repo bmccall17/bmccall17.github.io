@@ -1,10 +1,11 @@
 ---
 title: "The loop engaged: v0.1.1"
-slug: 2026-02-06_the_loop_engaged
+slug: 2026-02-06-the-loop-engaged
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-06_the_loop_engaged.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-06_the_loop_engaged.png"
 tags: release, loop, github
+seriesSlug: darketype-devlog
 ---
 
 # The problem

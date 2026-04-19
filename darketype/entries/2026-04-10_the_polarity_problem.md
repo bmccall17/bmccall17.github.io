@@ -3,6 +3,7 @@ title: "the polarity problem"
 date: 2026-04-10
 state: shipped
 tags: [repoptics, scoring, ux, naming, vocabulary, design-debt]
+series: "darketype-devlog"
 og_image:
 next_experiment: "carry the same labeling rule into leuchtturm before the first connector ships"
 ---

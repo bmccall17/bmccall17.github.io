@@ -1,10 +1,11 @@
 ---
 title: "The crm i built by being the customer"
-slug: 2026-04-10_the_crm_i_built_by_being_the_customer
+slug: 2026-04-10-the-crm-i-built-by-being-the-customer
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-10_the_crm_i_built_by_being_the_customer.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-10_the_crm_i_built_by_being_the_customer.png"
 tags: agent828, crm, dogfooding, sales-tooling, lead-pipeline, ae-brief, context-puddle
+seriesSlug: darketype-devlog
 ---
 
 # The crm i built by being the customer

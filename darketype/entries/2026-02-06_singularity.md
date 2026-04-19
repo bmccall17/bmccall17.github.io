@@ -2,6 +2,7 @@
 title: "event horizon (singularity v0.1.2)"
 date: "2026-02-06T14:00:00"
 tags: ["physics", "visuals", "chaos", "release"]
+series: "darketype-devlog"
 ---
 
 we finally cracked the physics of the leak. static masking was too clean. too digital.

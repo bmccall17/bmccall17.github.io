@@ -3,6 +3,7 @@ title: "weaving the universe into the code"
 date: 2026-04-14
 state: "expanded"
 tags: [agent828, iris, fibonacci, philosophy, react, animation, bugs, alan-watts]
+series: "darketype-devlog"
 og_image:
 next_experiment: "see if the fibonacci timing holds up at higher petal counts"
 medium_link: https://bmccall17.medium.com/weaving-the-universe-into-the-code-0fbf3ccff817?source=friends_link&sk=fd9f015ef92e8e2ea48a2412640ce69b

@@ -1,10 +1,11 @@
 ---
 title: "Repoptics recalibration"
-slug: 2026-04-06_repoptics_recalibration
+slug: 2026-04-06-repoptics-recalibration
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-06_repoptics_recalibration.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-06_repoptics_recalibration.png"
 tags: repoptics, recalibration, scoring, leuchtturm, community-feedback
+seriesSlug: darketype-devlog
 ---
 
 # Repoptics recalibration: from community pain to calibrated scoring

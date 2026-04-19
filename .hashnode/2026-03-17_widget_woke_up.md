@@ -1,10 +1,11 @@
 ---
 title: "The widget that finally learned where it was"
-slug: 2026-03-17_widget_woke_up
+slug: 2026-03-17-widget-woke-up
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-17_widget_woke_up.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-17_widget_woke_up.png"
 tags: repoptics, port-io, context-awareness, shipped, building
+seriesSlug: darketype-devlog
 ---
 
 # The widget that finally learned where it was

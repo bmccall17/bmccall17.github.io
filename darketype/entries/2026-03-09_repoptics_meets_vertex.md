@@ -3,6 +3,7 @@ title: "when the port.io pattern meets vertex ai"
 date: 2026-03-09
 state: "optimistic"
 tags: [repoptics, vertex-ai, gemini, learning, integration]
+series: "darketype-devlog"
 ---
 
 # when the port.io pattern meets vertex ai

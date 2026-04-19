@@ -1,10 +1,11 @@
 ---
 title: "Every letter has its own bruise"
-slug: 2026-03-18_per_char_chromatic
+slug: 2026-03-18-per-char-chromatic
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-18_per_char_chromatic.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-18_per_char_chromatic.png"
 tags: darketype, animation, per-character, chromatic-aberration, performance, shipped
+seriesSlug: darketype-devlog
 ---
 
 # Every letter has its own bruise

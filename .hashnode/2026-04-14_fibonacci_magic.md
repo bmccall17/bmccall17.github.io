@@ -1,10 +1,11 @@
 ---
 title: "Weaving the universe into the code"
-slug: 2026-04-14_fibonacci_magic
+slug: 2026-04-14-fibonacci-magic
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-14_fibonacci_magic.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-14_fibonacci_magic.png"
 tags: agent828, iris, fibonacci, philosophy, react, animation, bugs, alan-watts
+seriesSlug: darketype-devlog
 ---
 
 # Weaving the universe into the code

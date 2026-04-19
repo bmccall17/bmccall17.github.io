@@ -1,10 +1,11 @@
 ---
 title: "Pressing your finger into the screen"
-slug: 2026-03-17_viscous_lcd
+slug: 2026-03-17-viscous-lcd
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-17_viscous_lcd.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-17_viscous_lcd.png"
 tags: darketype, svg-filters, animation, lcd, chromatic-aberration, shipped
+seriesSlug: darketype-devlog
 ---
 
 # Pressing your finger into the screen

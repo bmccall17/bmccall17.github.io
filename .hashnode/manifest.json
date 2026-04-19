@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-04-18T15:18:22.355Z",
+  "_generated": "2026-04-19T12:19:12.269Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_the_loop_engaged": "https://darketype.hashnode.dev/2026-02-06-the-loop-engaged",
@@ -30,6 +30,106 @@
   },
   "series": {
     "darketype-devlog": [
+      {
+        "slug": "2026-02-06-cslp-infection",
+        "title": "cross-site leakage protocol (cslp)"
+      },
+      {
+        "slug": "2026-02-06-the-loop-engaged",
+        "title": "the loop engaged: v0.1.1"
+      },
+      {
+        "slug": "2026-02-07-leaking-pixels",
+        "title": "leaking pixels: cross-site data vapor"
+      },
+      {
+        "slug": "2026-02-11-the-autopsy",
+        "title": "the autopsy: auditing my own game engine"
+      },
+      {
+        "slug": "2026-02-25-logo-factory",
+        "title": "the logo factory: when ai iteration fails, build your own tool"
+      },
+      {
+        "slug": "2026-03-03-kahn-ktane-mazes",
+        "title": "data points for what not to do (Kahn and KTANE)"
+      },
+      {
+        "slug": "2026-03-06-antigravity-takes-the-wheel-v0-1-5",
+        "title": "antigravity takes the wheel"
+      },
+      {
+        "slug": "2026-03-06-port-pushes-back",
+        "title": "port pushes back (and then it doesn't)"
+      },
+      {
+        "slug": "2026-03-17-viscous-lcd",
+        "title": "pressing your finger into the screen"
+      },
+      {
+        "slug": "2026-03-17-widget-woke-up",
+        "title": "the widget that finally learned where it was"
+      },
+      {
+        "slug": "2026-03-18-per-char-chromatic",
+        "title": "every letter has its own bruise"
+      },
+      {
+        "slug": "2026-03-19-og-pictograms",
+        "title": "every entry gets a face"
+      },
+      {
+        "slug": "2026-03-19-the-context-lake",
+        "title": "the context lake"
+      },
+      {
+        "slug": "2026-03-22-the-export-test",
+        "title": "the export test"
+      },
+      {
+        "slug": "2026-03-23-brett-hud-v1",
+        "title": "brett hud v1: stealing the cockpit from claude-hud"
+      },
+      {
+        "slug": "2026-03-26-repoptics-in-the-wild",
+        "title": "repoptics in the wild: building the tools to build the tools"
+      },
+      {
+        "slug": "2026-03-27-messy-release-v0-1-7",
+        "title": "v0.1.7: shipping forms, particles, and reps"
+      },
+      {
+        "slug": "2026-03-27-the-melt",
+        "title": "the melt: what 230,000 particles taught me about letting go"
+      },
+      {
+        "slug": "2026-03-31-understanding-the-lake",
+        "title": "understanding the lake"
+      },
+      {
+        "slug": "2026-04-01-the-melt",
+        "title": "the melt"
+      },
+      {
+        "slug": "2026-04-06-repoptics-recalibration",
+        "title": "repoptics recalibration"
+      },
+      {
+        "slug": "2026-04-10-the-crm-i-built-by-being-the-customer",
+        "title": "the crm i built by being the customer"
+      },
+      {
+        "slug": "2026-04-10-the-polarity-problem",
+        "title": "the polarity problem"
+      },
+      {
+        "slug": "2026-04-12-the-persistence-polarity",
+        "title": "the persistence polarity: a 3-day sprint from dead-letters to dual databases"
+      },
+      {
+        "slug": "2026-04-14-fibonacci-magic",
+        "title": "weaving the universe into the code"
+      },
       {
         "slug": "2026-04-18-the-hashnode-bridge",
         "title": "the hashnode bridge: mirroring the mess"

@@ -1,10 +1,11 @@
 ---
 title: "The polarity problem"
-slug: 2026-04-10_the_polarity_problem
+slug: 2026-04-10-the-polarity-problem
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-10_the_polarity_problem.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-10_the_polarity_problem.png"
 tags: repoptics, scoring, ux, naming, vocabulary, design-debt
+seriesSlug: darketype-devlog
 ---
 
 # The polarity problem

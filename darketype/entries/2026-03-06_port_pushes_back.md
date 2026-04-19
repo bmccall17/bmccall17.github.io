@@ -3,6 +3,7 @@ title: "port pushes back (and then it doesn't)"
 date: 2026-03-06T09:00:00
 state: "learning"
 tags: [port, devops, integration, self-service, scorecards, services, github-actions, snyk]
+series: "darketype-devlog"
 next_experiment: "PR metrics dashboard, push everything to main"
 ---
 

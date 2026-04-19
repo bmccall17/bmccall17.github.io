@@ -1,10 +1,11 @@
 ---
 title: "The logo factory: when ai iteration fails, build your own tool"
-slug: 2026-02-25_logo_factory
+slug: 2026-02-25-logo-factory
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-25_logo_factory.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-25_logo_factory.png"
 tags: logo, tedx, tools, ai-iteration, easter-egg
+seriesSlug: darketype-devlog
 ---
 
 # The problem

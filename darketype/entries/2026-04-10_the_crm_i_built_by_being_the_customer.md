@@ -3,6 +3,7 @@ title: "the crm i built by being the customer"
 date: 2026-04-10
 state: shipped
 tags: [agent828, crm, dogfooding, sales-tooling, lead-pipeline, ae-brief, context-puddle]
+series: "darketype-devlog"
 og_image:
 next_experiment: "send the next inbound reply from ops@agent828.com instead of onboarding@resend.dev and close the email loop end to end"
 ---

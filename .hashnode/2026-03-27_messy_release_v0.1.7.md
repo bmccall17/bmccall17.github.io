@@ -1,10 +1,11 @@
 ---
 title: "V0.1.7: shipping forms, particles, and reps"
-slug: 2026-03-27_messy_release_v0.1.7
+slug: 2026-03-27-messy-release-v0-1-7
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-27_messy_release_v0.1.7.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-27_messy_release_v0.1.7.png"
 tags: meta, darketype, release
+seriesSlug: darketype-devlog
 ---
 
 # The problem

@@ -3,6 +3,7 @@ title: "every letter has its own bruise"
 date: 2026-03-18T07:00:00
 state: "shipped"
 tags: [darketype, animation, per-character, chromatic-aberration, performance, shipped]
+series: "darketype-devlog"
 ---
 
 # every letter has its own bruise

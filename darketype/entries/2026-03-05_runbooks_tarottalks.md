@@ -3,6 +3,7 @@ title: "runbooks and the power of diagnostic tools"
 date: 2026-03-05
 state: "debugging"
 tags: [runbooks, debugging, diagnostics, tarottalks, systems-thinking]
+series: "darketype-devlog"
 next_experiment: "where else do we need runbooks now"
 ---
 

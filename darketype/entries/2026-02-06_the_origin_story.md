@@ -3,6 +3,7 @@ title: "the origin story: portfolio + darketype"
 date: 2026-02-06
 state: "seed"
 tags: [meta, origin, manifesto]
+series: "darketype-devlog"
 next_experiment: "phase 1: the loop"
 ---
 

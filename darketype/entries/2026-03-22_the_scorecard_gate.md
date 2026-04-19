@@ -3,6 +3,7 @@ title: "the scorecard gate: enforcing deployment readiness"
 date: 2026-03-22
 state: "frustrated"
 tags: [devops, developer-experience, api, ai-tools, scorecards]
+series: "darketype-devlog"
 ---
 
 # the setup

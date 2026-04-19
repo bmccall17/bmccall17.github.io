@@ -1,10 +1,11 @@
 ---
 title: "The autopsy: auditing my own game engine"
-slug: 2026-02-11_the_autopsy
+slug: 2026-02-11-the-autopsy
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-11_the_autopsy.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-11_the_autopsy.png"
 tags: gamedev, audit, forbidden-desert, xr, state-management
+seriesSlug: darketype-devlog
 ---
 
 # The problem

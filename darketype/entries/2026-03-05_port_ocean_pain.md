@@ -3,6 +3,7 @@ title: "the port.io ocean integration disaster"
 date: 2026-03-05
 state: "broken"
 tags: [port, devops, integration, developer-experience, frustration, github-actions]
+series: "darketype-devlog"
 next_experiment: "scorecards and the comparison page"
 ---
 

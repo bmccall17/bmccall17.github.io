@@ -3,6 +3,7 @@ title: "optimism and the ted stage"
 date: 2026-02-10
 state: "optimistic"
 tags: [ted2026, shipping, portfolio]
+series: "darketype-devlog"
 next_experiment: "the ted stage"
 ---
 

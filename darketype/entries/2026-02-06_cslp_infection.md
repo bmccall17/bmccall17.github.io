@@ -3,6 +3,7 @@ title: "cross-site leakage protocol (cslp)"
 date: "2026-02-06T16:00:00"
 state: "shipped" 
 tags: [cslp, infection, glitch, localStorage]
+series: "darketype-devlog"
 next_experiment: "deep metrics (phase 3)"
 ---
 

@@ -1,10 +1,11 @@
 ---
 title: "Port pushes back (and then it doesn't)"
-slug: 2026-03-06_port_pushes_back
+slug: 2026-03-06-port-pushes-back
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-06_port_pushes_back.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-06_port_pushes_back.png"
 tags: port, devops, integration, self-service, scorecards, services, github-actions, snyk
+seriesSlug: darketype-devlog
 ---
 
 # The sequel

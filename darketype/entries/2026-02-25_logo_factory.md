@@ -3,6 +3,7 @@ title: "the logo factory: when ai iteration fails, build your own tool"
 date: 2026-02-25
 state: "shipped"
 tags: [logo, tedx, tools, ai-iteration, easter-egg]
+series: "darketype-devlog"
 next_experiment: "hidden paths and singularity secrets"
 ---
 

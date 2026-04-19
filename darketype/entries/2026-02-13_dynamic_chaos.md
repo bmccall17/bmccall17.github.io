@@ -3,6 +3,7 @@ title: "dynamic chaos: v0.1.4"
 date: 2026-02-13
 state: "mess"
 tags: [weblog, interaction, build-system]
+series: "darketype-devlog"
 next_experiment: "the next ship"
 ---
 

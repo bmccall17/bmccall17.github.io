@@ -1,10 +1,11 @@
 ---
 title: "The persistence polarity: a 3-day sprint from dead-letters to dual databases"
-slug: 2026-04-12_the_persistence_polarity
+slug: 2026-04-12-the-persistence-polarity
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-12_the_persistence_polarity.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-12_the_persistence_polarity.png"
 tags: infrastructure, database, sqlite, neon, agent, architecture
+seriesSlug: darketype-devlog
 ---
 
 It started with a ghost.

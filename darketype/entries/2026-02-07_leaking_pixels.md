@@ -3,6 +3,7 @@ title: "leaking pixels: cross-site data vapor"
 date: 2026-02-07
 state: "shipped"
 tags: [cslp, localStorage, glitch]
+series: "darketype-devlog"
 next_experiment: "deep metrics"
 ---
 

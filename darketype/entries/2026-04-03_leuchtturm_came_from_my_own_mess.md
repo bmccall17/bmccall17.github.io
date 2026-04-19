@@ -3,6 +3,7 @@ title: "leuchtturm came from my own mess"
 date: 2026-04-03
 state: "seed"
 tags: [leuchtturm, building, observability, idp, devtools, solo-builder, ai-native]
+series: "darketype-devlog"
 og_image:
 next_experiment: "design partner conversations and early alpha connectors"
 ---

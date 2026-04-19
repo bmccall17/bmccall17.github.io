@@ -1,10 +1,11 @@
 ---
 title: "Leaking pixels: cross-site data vapor"
-slug: 2026-02-07_leaking_pixels
+slug: 2026-02-07-leaking-pixels
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-07_leaking_pixels.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-07_leaking_pixels.png"
 tags: cslp, localStorage, glitch
+seriesSlug: darketype-devlog
 ---
 
 # The problem

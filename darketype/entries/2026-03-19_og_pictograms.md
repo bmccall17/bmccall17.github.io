@@ -3,6 +3,7 @@ title: "every entry gets a face"
 date: 2026-03-19T20:00:00
 state: "shipped"
 tags: [darketype, og-images, social-share, pictograms, build-system, node-canvas, shipped]
+series: "darketype-devlog"
 og_image:
 ---
 

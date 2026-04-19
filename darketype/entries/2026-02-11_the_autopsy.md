@@ -3,6 +3,7 @@ title: "the autopsy: auditing my own game engine"
 date: 2026-02-11
 state: "learning"
 tags: [gamedev, audit, forbidden-desert, xr, state-management]
+series: "darketype-devlog"
 next_experiment: "the fix sprint"
 ---
 

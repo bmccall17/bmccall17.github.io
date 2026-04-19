@@ -1,10 +1,11 @@
 ---
 title: "Repoptics in the wild: building the tools to build the tools"
-slug: 2026-03-26_repoptics_in_the_wild
+slug: 2026-03-26-repoptics-in-the-wild
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-26_repoptics_in_the_wild.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-26_repoptics_in_the_wild.png"
 tags: repoptics, security, idp, naval, building, agents
+seriesSlug: darketype-devlog
 ---
 
 # The problem

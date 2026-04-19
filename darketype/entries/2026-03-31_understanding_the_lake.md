@@ -3,6 +3,7 @@ title: "understanding the lake"
 date: 2026-03-31
 state: "learning"
 tags: [agent828, architecture, context-lake, port]
+series: "darketype-devlog"
 ---
 
 # understanding the lake

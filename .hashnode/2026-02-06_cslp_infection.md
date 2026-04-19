@@ -1,10 +1,11 @@
 ---
 title: "Cross-site leakage protocol (cslp)"
-slug: 2026-02-06_cslp_infection
+slug: 2026-02-06-cslp-infection
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-06_cslp_infection.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-06_cslp_infection.png"
 tags: cslp, infection, glitch, localStorage
+seriesSlug: darketype-devlog
 ---
 
 # The problem

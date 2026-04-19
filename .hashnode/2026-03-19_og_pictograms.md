@@ -1,10 +1,11 @@
 ---
 title: "Every entry gets a face"
-slug: 2026-03-19_og_pictograms
+slug: 2026-03-19-og-pictograms
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-19_og_pictograms.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-19_og_pictograms.png"
 tags: darketype, og-images, social-share, pictograms, build-system, node-canvas, shipped
+seriesSlug: darketype-devlog
 ---
 
 # Every entry gets a face

@@ -1,10 +1,11 @@
 ---
 title: "Data points for what not to do (Kahn and KTANE)"
-slug: 2026-03-03_kahn_ktane_mazes
+slug: 2026-03-03-kahn-ktane-mazes
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-03_kahn_ktane_mazes.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-03_kahn_ktane_mazes.png"
 tags: risk, learning, ktane, games, oliver-kahn, failure
+seriesSlug: darketype-devlog
 ---
 
 # The Kahn moment

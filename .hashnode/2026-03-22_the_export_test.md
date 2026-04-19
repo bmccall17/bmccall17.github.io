@@ -1,10 +1,11 @@
 ---
 title: "The export test"
-slug: 2026-03-22_the_export_test
+slug: 2026-03-22-the-export-test
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-22_the_export_test.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-22_the_export_test.png"
 tags: repoptics, ai, report-quality, export, shipped
+seriesSlug: darketype-devlog
 ---
 
 # The export test

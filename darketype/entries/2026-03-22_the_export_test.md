@@ -3,6 +3,7 @@ title: "the export test"
 date: 2026-03-22T08:00:00
 state: "shipped"
 tags: [repoptics, ai, report-quality, export, shipped]
+series: "darketype-devlog"
 next_experiment: "pentest phase 2 — dynamic agent selection and cross-agent correlation"
 ---
 

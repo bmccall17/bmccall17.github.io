@@ -1,10 +1,11 @@
 ---
 title: "Antigravity takes the wheel"
-slug: 2026-03-06_antigravity_takes_the_wheel_v0.1.5
+slug: 2026-03-06-antigravity-takes-the-wheel-v0-1-5
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-06_antigravity_takes_the_wheel_v0.1.5.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-06_antigravity_takes_the_wheel_v0.1.5.png"
 tags: git, automation, antigravity, workflows
+seriesSlug: darketype-devlog
 ---
 
 # The problem

@@ -3,6 +3,7 @@ title: repoptics recalibration
 date: 2026-04-06
 state: learning
 tags: [repoptics, recalibration, scoring, leuchtturm, community-feedback]
+series: "darketype-devlog"
 ---
 
 # repoptics recalibration: from community pain to calibrated scoring

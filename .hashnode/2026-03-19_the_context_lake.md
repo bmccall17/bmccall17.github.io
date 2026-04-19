@@ -1,10 +1,11 @@
 ---
 title: "The context lake"
-slug: 2026-03-19_the_context_lake
+slug: 2026-03-19-the-context-lake
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-19_the_context_lake.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-19_the_context_lake.png"
 tags: agent828, context-lake, ai-iteration, agentic, claude-code, shipped
+seriesSlug: darketype-devlog
 ---
 
 # The context lake

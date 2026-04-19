@@ -3,6 +3,7 @@ title: "daemon summons"
 date: 2026-03-06T20:00:00
 state: "mess"
 tags: [daemon, metaverse, hackathon, ai, spatial, pullman, social-signaling]
+series: "darketype-devlog"
 next_experiment: "build the mvp this weekend"
 ---
 

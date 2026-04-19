@@ -3,6 +3,7 @@ title: "the widget that finally learned where it was"
 date: 2026-03-17
 state: "shipped"
 tags: [repoptics, port-io, context-awareness, shipped, building]
+series: "darketype-devlog"
 ---
 
 # the widget that finally learned where it was

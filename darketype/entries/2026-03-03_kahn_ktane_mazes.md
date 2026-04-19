@@ -3,6 +3,7 @@ title: "data points for what not to do (Kahn and KTANE)"
 date: 2026-03-03
 state: "learning"
 tags: [risk, learning, ktane, games, oliver-kahn, failure]
+series: "darketype-devlog"
 next_experiment: "what not to blow up"
 ---
 
