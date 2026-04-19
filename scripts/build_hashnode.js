@@ -120,7 +120,7 @@ function build() {
         const hashnodeFrontmatter = [
             '---',
             `title: "${title}"`,
-            `slug: ${slug}`,
+            `slug: ${safeSlug}`,
             `domain: darketype.hashnode.dev`,
             `canonical: "https://bmccall17.github.io/darketype/weblog/${slug}.html"`,
             `cover: "https://bmccall17.github.io/assets/social/og/${slug}.png"`,
