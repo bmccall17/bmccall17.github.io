@@ -36,6 +36,8 @@ Pipeline nodes are auto-derived from `ARCH_SECTIONS` prose. `Arch-graph-derive.t
 
 This is the important design decision: the graph cannot get out of sync with the docs because the docs generate it.
 
+![Architecture knowledge graph showing 18 nodes across 4 clusters with live status dots — approve and inbound nodes amber](https://bmccall17.github.io/darketype/entries/media/2026-04-29_arch_graph/arch_graph_status.png)
+
 ## Phase 2: the expanded graph
 
 **V0.3.53** expanded to 14 nodes across 4 labeled clusters: Pipeline, Storage, Admin Panel, Observability. SQLite. Neon Postgres. `/Api/admin/*`. Admin UI. Logger. `Audit_log`. `Admin_audit`. Health Digest.
@@ -45,6 +47,8 @@ Edge taxonomy: `flows_to` (solid), `writes_to` (solid/dim), `reads_from` (dashed
 Cluster filter pills. SVG `<title>` hover tooltips with file paths. The Email Workflow cluster shipped in **v0.3.55**: DRAFT, OUTBOUND, INBOUND, EVENTS. Four nodes. Five new edges. One new cluster.
 
 The graph now shows which nodes touch Neon vs. SQLite. Which routes write to `email_events`. Which services depend on which. The spatial layout communicates what a routing table cannot.
+
+![Architecture reference accordion with email workflow section expanded showing degraded status and offline pill on admin panel header](https://bmccall17.github.io/darketype/entries/media/2026-04-29_arch_graph/arch_accordion_degraded.png)
 
 ## Live operational status
 
@@ -59,6 +63,8 @@ The frontend polls every 30 seconds. Nodes adopt status colors: tactical green f
 Initial render leaves all nodes as UNKNOWN so there's no flash of "all offline" while the fetch resolves. Then within 30 seconds the true state lands.
 
 37 Tests. Pure function over synthetic input. No DB needed. Every threshold boundary tested.
+
+![Admin overview attention banner showing 1 offline 2 degraded with node-level detail and view in graph link](https://bmccall17.github.io/darketype/entries/media/2026-04-29_arch_graph/attention_banner.png)
 
 ## The EVENTS bug
 

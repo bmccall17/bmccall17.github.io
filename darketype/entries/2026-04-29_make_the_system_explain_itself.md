@@ -36,6 +36,8 @@ pipeline nodes are auto-derived from `ARCH_SECTIONS` prose. `arch-graph-derive.t
 
 this is the important design decision: the graph cannot get out of sync with the docs because the docs generate it.
 
+![architecture knowledge graph showing 18 nodes across 4 clusters with live status dots — approve and inbound nodes amber](../entries/media/2026-04-29_arch_graph/arch_graph_status.png)
+
 ## phase 2: the expanded graph
 
 **v0.3.53** expanded to 14 nodes across 4 labeled clusters: Pipeline, Storage, Admin Panel, Observability. SQLite. Neon Postgres. `/api/admin/*`. Admin UI. Logger. `audit_log`. `admin_audit`. Health Digest.
@@ -45,6 +47,8 @@ edge taxonomy: `flows_to` (solid), `writes_to` (solid/dim), `reads_from` (dashed
 cluster filter pills. SVG `<title>` hover tooltips with file paths. the Email Workflow cluster shipped in **v0.3.55**: DRAFT, OUTBOUND, INBOUND, EVENTS. four nodes. five new edges. one new cluster.
 
 the graph now shows which nodes touch Neon vs. SQLite. which routes write to `email_events`. which services depend on which. the spatial layout communicates what a routing table cannot.
+
+![architecture reference accordion with email workflow section expanded showing degraded status and offline pill on admin panel header](../entries/media/2026-04-29_arch_graph/arch_accordion_degraded.png)
 
 ## live operational status
 
@@ -59,6 +63,8 @@ the frontend polls every 30 seconds. nodes adopt status colors: tactical green f
 initial render leaves all nodes as UNKNOWN so there's no flash of "all offline" while the fetch resolves. then within 30 seconds the true state lands.
 
 37 tests. pure function over synthetic input. no DB needed. every threshold boundary tested.
+
+![admin overview attention banner showing 1 offline 2 degraded with node-level detail and view in graph link](../entries/media/2026-04-29_arch_graph/attention_banner.png)
 
 ## the EVENTS bug
 

@@ -90,6 +90,8 @@ before a new sprint starts, `/orchestrator` does a structured sweep: reads the B
 
 the output is not a roadmap. it is a prioritized snapshot of what is most alive right now, derived from what has actually happened.
 
+![/orchestrator terminal output showing 3 fired triggers and 3 dormant entries with trigger conditions](../entries/media/2026-05-09_backlog_feature/orchestrator_output.png)
+
 as of today's session, `/orchestrator` surfaced: the AdminPanel chunk warning (not yet triggered), the dead-code admin routes (triggered, scheduled), the `follow_up_date` honesty fix (triggered, shipped). each one earned its way into the session.
 
 ## what this is not
