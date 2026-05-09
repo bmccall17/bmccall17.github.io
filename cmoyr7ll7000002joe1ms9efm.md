@@ -1,6 +1,6 @@
 ---
 title: "The honest column: making follow_up_date derive from facts"
-datePublished: Sat May 09 2026 19:45:40 GMT+0000 (Coordinated Universal Time)
+datePublished: 2026-05-09T19:45:40.363Z
 cuid: cmoyr7ll7000002joe1ms9efm
 slug: 2026-05-03-the-honest-column
 canonical: https://bmccall17.github.io/darketype/weblog/2026-05-03_the_honest_column.html
