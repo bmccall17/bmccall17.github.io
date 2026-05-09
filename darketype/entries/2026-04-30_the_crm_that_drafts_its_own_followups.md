@@ -34,7 +34,7 @@ ingesting a transcript is table stakes. the value is what you extract from it.
 
 that last part matters. the system proposes. the operator decides. nothing changes in the lead record without a human clicking ACCEPT.
 
-![meetings panel showing analyzed discovery call with recap, action items, scope proposal, and draft follow-up button](media/2026-04-30_crm_followups/meetings_panel.png)
+![meetings panel showing analyzed discovery call with recap, action items, scope proposal, and draft follow-up button](../entries/media/2026-04-30_crm_followups/meetings_panel.png)
 
 ## drafts that know what was said
 
@@ -50,7 +50,7 @@ five chips. one question. nine seconds.
 
 `SUMMARIZE` / `BLOCKERS` / `DRAFT REPLY` / `PREP FOR CALL` / `NEXT STEPS` — or type a free-form question. temperature 0.4. Gemini 2.5 Flash on top of the full context puddle. the brief knows about the meeting that just happened, the emails that were sent, the scope changes that were accepted, the timeline the client named.
 
-![ae brief panel with suggestion chips and pre-call briefing output for acme corp](media/2026-04-30_crm_followups/ae_brief_panel.png)
+![ae brief panel with suggestion chips and pre-call briefing output for acme corp](../entries/media/2026-04-30_crm_followups/ae_brief_panel.png)
 
 i can prep for a call in nine seconds. i type "what do i need to know before this call" and i get the brief. it is so much faster than re-reading the entire history that the first time it worked i sat there for a beat trying to figure out what i had broken.
 
@@ -62,7 +62,7 @@ AI-authored drafts — meeting follow-ups, draft replies, AE brief outputs — s
 
 the decision to build this now, before any fully autonomous AE goes live, was intentional. the gate costs almost nothing when it's just me clicking approve. it costs enormously if you skip it and then add autonomous agents later and have to retrofit it.
 
-![pending drafts amber banner on account detail showing draft awaiting approval with edit button](media/2026-04-30_crm_followups/pending_drafts_banner.png)
+![pending drafts amber banner on account detail showing draft awaiting approval with edit button](../entries/media/2026-04-30_crm_followups/pending_drafts_banner.png)
 
 the rule: the system writes. a human approves. we never auto-send.
 
@@ -80,7 +80,7 @@ the activity log was read-only. you could see what happened but you couldn't fix
 
 now every activity row is editable. every edit writes a revision, preserving the original. every save re-runs the Lead Action Engine and re-shapes account memory so future briefs and drafts reflect the corrected truth. the operator sees toast feedback: green when the AE context refresh succeeded, amber when it partially failed, explicit message when it didn't run.
 
-![activity timeline showing SENT, APPROVED, DRAFT badge stack with EDITED chip and revision history on draft row](media/2026-04-30_crm_followups/activity_timeline.png)
+![activity timeline showing SENT, APPROVED, DRAFT badge stack with EDITED chip and revision history on draft row](../entries/media/2026-04-30_crm_followups/activity_timeline.png)
 
 a broken CRM record is not a data quality problem. it's a downstream trust problem. every downstream output is only as honest as the record it reads.
 
