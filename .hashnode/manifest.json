@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-04-19T12:19:12.269Z",
+  "_generated": "2026-05-09T19:44:30.277Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_the_loop_engaged": "https://darketype.hashnode.dev/2026-02-06-the-loop-engaged",
@@ -26,7 +26,12 @@
     "2026-04-10_the_polarity_problem": "https://darketype.hashnode.dev/2026-04-10-the-polarity-problem",
     "2026-04-12_the_persistence_polarity": "https://darketype.hashnode.dev/2026-04-12-the-persistence-polarity",
     "2026-04-14_fibonacci_magic": "https://darketype.hashnode.dev/2026-04-14-fibonacci-magic",
-    "2026-04-18_the_hashnode_bridge": "https://darketype.hashnode.dev/2026-04-18-the-hashnode-bridge"
+    "2026-04-18_the_hashnode_bridge": "https://darketype.hashnode.dev/2026-04-18-the-hashnode-bridge",
+    "2026-04-29_make_the_system_explain_itself": "https://darketype.hashnode.dev/2026-04-29-make-the-system-explain-itself",
+    "2026-04-30_the_crm_that_drafts_its_own_followups": "https://darketype.hashnode.dev/2026-04-30-the-crm-that-drafts-its-own-followups",
+    "2026-05-03_the_honest_column": "https://darketype.hashnode.dev/2026-05-03-the-honest-column",
+    "2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself": "https://darketype.hashnode.dev/2026-05-08-how-we-stopped-our-content-engine-from-repeating-itself",
+    "2026-05-09_the_backlog_is_a_feature": "https://darketype.hashnode.dev/2026-05-09-the-backlog-is-a-feature"
   },
   "series": {
     "darketype-devlog": [
@@ -133,6 +138,28 @@
       {
         "slug": "2026-04-18-the-hashnode-bridge",
         "title": "the hashnode bridge: mirroring the mess"
+      }
+    ],
+    "agent828-build-arc": [
+      {
+        "slug": "2026-04-29-make-the-system-explain-itself",
+        "title": "make the system explain itself"
+      },
+      {
+        "slug": "2026-04-30-the-crm-that-drafts-its-own-followups",
+        "title": "the crm that drafts its own follow-ups"
+      },
+      {
+        "slug": "2026-05-03-the-honest-column",
+        "title": "the honest column: making follow_up_date derive from facts"
+      },
+      {
+        "slug": "2026-05-08-how-we-stopped-our-content-engine-from-repeating-itself",
+        "title": "how we stopped our content engine from repeating itself"
+      },
+      {
+        "slug": "2026-05-09-the-backlog-is-a-feature",
+        "title": "the backlog is a feature"
       }
     ]
   }
