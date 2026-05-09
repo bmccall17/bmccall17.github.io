@@ -29,6 +29,8 @@ The ordering is `COALESCE(published_at, created_at) DESC` so manual research ite
 
 Templates that should pull from the AI thought-leader corpus now can't accidentally pull a Mountain Xpress local letter to the editor. Templates that should root in the community can't get displaced by Anthropic blog posts.
 
+![Content queue showing alternating wisdom and regional entries across 8 posts — no entity repeats, cooldown active on 3 entities](https://bmccall17.github.io/darketype/entries/media/2026-05-08_content_engine/content_queue_diverse.png)
+
 ## Guardrail 2: recent-posts dampener
 
 This was the strongest single fix.
@@ -48,6 +50,8 @@ On the lake side, `getRelevantEntities` and `getTopEntities` now consult `getRec
 Backfill protection: if the cooldown filter would drop the result below 3 entities, it relaxes and backfills from the cooled-down set. The engine never gets stuck with zero context.
 
 The effect: an entity that just appeared in a published post is a weak candidate for the next one. It has to earn its way back into rotation.
+
+![Pipeline log showing entity cooldown filter in action — 4 entities suppressed, Yoshua Bengio selected as VIP clear candidate](https://bmccall17.github.io/darketype/entries/media/2026-05-08_content_engine/entity_cooldown_log.png)
 
 ## Guardrail 4: recency-weighted topic momentum
 
