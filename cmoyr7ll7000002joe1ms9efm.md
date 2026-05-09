@@ -25,9 +25,13 @@ The Accounts list derived "Next Touch" at read-time from the nearest future meet
 
 Brett caught it immediately after the accounts snapshot shipped. Lauren's account showed "2026-04-17 (5d overdue)" even though a meeting was scheduled for that day at 1pm and an email had gone out 9 hours earlier. The column had not been touched since the original classification.
 
+![Accounts list showing next touch column — acme corp has mtg today 1pm in green while bridgewater consulting shows apr 17 5d overdue in red with stale follow_up_date annotation](https://bmccall17.github.io/darketype/entries/media/2026-05-03_honest_column/accounts_next_touch.png)
+
 The BACKLOG entry captured it cleanly:
 
 > **`Leads.follow_up_date` stays honest on its own** -- it advances automatically when real activity happens (outbound email sent, meeting logged, status change), so the Accounts snapshot never shows a stale follow-up again. _Added: 2026-04-22. Revisit when: more than one account with no upcoming meeting drifts visibly stale in the Accounts list before anyone notices._
+
+![Docs/BACKLOG.md showing follow_up_date entry with fired trigger highlighted in amber and dead-code routes entry with green shipped annotation](https://bmccall17.github.io/darketype/entries/media/2026-05-03_honest_column/backlog_trigger.png)
 
 ## The philosophy of deferred versus computed
 
