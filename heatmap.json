@@ -1,9 +1,33 @@
 [
   {
+    "date": "2026-05-09",
+    "state": "shipped",
+    "title": "the backlog is a feature",
+    "path": "2026-05-09_the_backlog_is_a_feature.html"
+  },
+  {
+    "date": "2026-05-08",
+    "state": "shipped",
+    "title": "how we stopped our content engine from repeating itself",
+    "path": "2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself.html"
+  },
+  {
+    "date": "2026-05-03",
+    "state": "shipped",
+    "title": "the honest column: making follow_up_date derive from facts",
+    "path": "2026-05-03_the_honest_column.html"
+  },
+  {
     "date": "2026-04-30",
     "state": "shipped",
     "title": "the crm that drafts its own follow-ups",
     "path": "2026-04-30_the_crm_that_drafts_its_own_followups.html"
+  },
+  {
+    "date": "2026-04-29",
+    "state": "shipped",
+    "title": "make the system explain itself",
+    "path": "2026-04-29_make_the_system_explain_itself.html"
   },
   {
     "date": "2026-04-18",
