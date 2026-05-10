@@ -4,6 +4,9 @@ slug: 2026-05-09-the-backlog-is-a-feature
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-09_the_backlog_is_a_feature.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-05-09_the_backlog_is_a_feature.png"
+seo_title: "The backlog is a feature"
+seo_description: "i do not have a roadmap. i have a docs/BACKLOG.md file with a specific operating philosophy baked into its format, and it works better than any roadma"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-05-09_the_backlog_is_a_feature.png"
 tags: agent828, methodology, backlog, orchestrator, operating-system, workflow, outcomes-over-solutions
 seriesSlug: agent828-build-arc
 ---

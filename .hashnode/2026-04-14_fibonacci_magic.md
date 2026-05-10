@@ -4,6 +4,9 @@ slug: 2026-04-14-fibonacci-magic
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-14_fibonacci_magic.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-14_fibonacci_magic.png"
+seo_title: "Weaving the universe into the code"
+seo_description: "when we set out to build the iris aperture widget, the goal was straightforward: a high-fidelity, interactive focal point for the hero section. we bui"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-04-14_fibonacci_magic.png"
 tags: agent828, iris, fibonacci, philosophy, react, animation, bugs, alan-watts
 seriesSlug: darketype-devlog
 ---

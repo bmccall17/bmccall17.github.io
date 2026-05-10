@@ -4,6 +4,9 @@ slug: 2026-02-07-leaking-pixels
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-07_leaking_pixels.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-07_leaking_pixels.png"
+seo_title: "Leaking pixels: cross-site data vapor"
+seo_description: "my portfolio needs to be professional, but my soul is chaotic. how do i bridge the gap without scaring off recruiters? CSLP (Cross-Site Leakage Protoc"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-02-07_leaking_pixels.png"
 tags: cslp, localStorage, glitch
 seriesSlug: darketype-devlog
 ---

@@ -4,6 +4,9 @@ slug: 2026-04-06-repoptics-recalibration
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-06_repoptics_recalibration.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-06_repoptics_recalibration.png"
+seo_title: "Repoptics recalibration"
+seo_description: "when we first launched repOptics, the scoring engine was incredibly fast, but honestly, it was painfully tone-deaf. we were judging every single githu"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-04-06_repoptics_recalibration.png"
 tags: repoptics, recalibration, scoring, leuchtturm, community-feedback
 seriesSlug: darketype-devlog
 ---

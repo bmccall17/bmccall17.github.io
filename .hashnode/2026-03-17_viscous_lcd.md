@@ -4,6 +4,9 @@ slug: 2026-03-17-viscous-lcd
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-17_viscous_lcd.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-17_viscous_lcd.png"
+seo_title: "Pressing your finger into the screen"
+seo_description: "you know that thing you did as a kid — pressing your thumb into an old LCD monitor and watching the colors bloom outward in a prismatic bruise? the li"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-03-17_viscous_lcd.png"
 tags: darketype, svg-filters, animation, lcd, chromatic-aberration, shipped
 seriesSlug: darketype-devlog
 ---

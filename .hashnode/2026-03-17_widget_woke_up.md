@@ -4,6 +4,9 @@ slug: 2026-03-17-widget-woke-up
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-17_widget_woke_up.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-17_widget_woke_up.png"
+seo_title: "The widget that finally learned where it was"
+seo_description: "repOptics has had a Port.io floating widget for a while. little violet button, bottom-right corner. click it and you get the global view — repo count,"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-03-17_widget_woke_up.png"
 tags: repoptics, port-io, context-awareness, shipped, building
 seriesSlug: darketype-devlog
 ---

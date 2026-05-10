@@ -4,6 +4,9 @@ slug: 2026-04-12-the-persistence-polarity
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-12_the_persistence_polarity.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-12_the_persistence_polarity.png"
+seo_title: "The persistence polarity: a 3-day sprint from dead-letters t"
+seo_description: "it started with a ghost. inbound emails were silently dead-lettering. when i checked the admin panel, the inboundemails queue was completely empty. ze"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-04-12_the_persistence_polarity.png"
 tags: infrastructure, database, sqlite, neon, agent, architecture
 seriesSlug: crm-agent828
 ---

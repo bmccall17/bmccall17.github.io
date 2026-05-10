@@ -4,6 +4,9 @@ slug: 2026-04-18-the-hashnode-bridge
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-18_the_hashnode_bridge.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-18_the_hashnode_bridge.png"
+seo_title: "The hashnode bridge: mirroring the mess"
+seo_description: "darketype.com is the high-fidelity source of truth—it's got the glitches, the scanlines, and the raw lowercase aesthetic that i love. but reach matter"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-04-18_the_hashnode_bridge.png"
 tags: hashnode, automation, og-images, meta, darketype
 seriesSlug: darketype-devlog
 ---

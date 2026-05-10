@@ -56,6 +56,17 @@ function resolveMediaPaths(body) {
     return body.replace(/\.\.\/entries\/media\//g, 'https://bmccall17.github.io/darketype/entries/media/');
 }
 
+function extractSeoDescription(body) {
+    // Strip frontmatter, code blocks, images, links, headings, bold/italic — get first clean paragraph
+    let text = body.replace(/```[\s\S]*?```/g, '').trim();
+    text = text.replace(/!\[[^\]]*\]\([^)]*\)/g, '');
+    text = text.replace(/\[[^\]]*\]\([^)]*\)/g, (m) => m.replace(/\[([^\]]*)\]\([^)]*\)/, '$1'));
+    text = text.replace(/^#{1,6}\s+.*/gm, '');
+    text = text.replace(/[*_`~]+/g, '');
+    text = text.replace(/\n+/g, ' ').trim();
+    return text.slice(0, 150).trim();
+}
+
 function build() {
     console.log('🚧 exporting to Hashnode...');
 
@@ -117,13 +128,20 @@ function build() {
             tags = t;
         }
 
+        const ogImageUrl = `https://bmccall17.github.io/assets/social/og/${slug}.png`;
+        const seoTitle = title.slice(0, 60);
+        const seoDesc = extractSeoDescription(body);
+
         const hashnodeFrontmatter = [
             '---',
             `title: "${title}"`,
             `slug: ${safeSlug}`,
             `domain: darketype.hashnode.dev`,
             `canonical: "https://bmccall17.github.io/darketype/weblog/${slug}.html"`,
-            `cover: "https://bmccall17.github.io/assets/social/og/${slug}.png"`,
+            `cover: "${ogImageUrl}"`,
+            `seo_title: "${seoTitle}"`,
+            `seo_description: "${seoDesc}"`,
+            `og_image: "${ogImageUrl}"`,
         ];
 
         if (tags) hashnodeFrontmatter.push(`tags: ${tags}`);

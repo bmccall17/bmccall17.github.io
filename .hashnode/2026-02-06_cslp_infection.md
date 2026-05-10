@@ -4,6 +4,9 @@ slug: 2026-02-06-cslp-infection
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-06_cslp_infection.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-06_cslp_infection.png"
+seo_title: "Cross-site leakage protocol (cslp)"
+seo_description: "i have two distinct identities: the polished professional (brettamccall.com) and the messy experimenter (darketype). keeping them completely separate"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-02-06_cslp_infection.png"
 tags: cslp, infection, glitch, localStorage
 seriesSlug: darketype-devlog
 ---

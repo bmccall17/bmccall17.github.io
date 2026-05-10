@@ -4,6 +4,9 @@ slug: 2026-02-11-the-autopsy
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-11_the_autopsy.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-11_the_autopsy.png"
+seo_title: "The autopsy: auditing my own game engine"
+seo_description: "i built a game engine for a forbidden desert xr port. it works. you can play it. people have played it. but i sat down and did a real audit of the cod"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-02-11_the_autopsy.png"
 tags: gamedev, audit, forbidden-desert, xr, state-management
 seriesSlug: darketype-devlog
 ---

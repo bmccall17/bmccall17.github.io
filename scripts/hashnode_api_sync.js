@@ -172,7 +172,14 @@ async function publishPost(meta, body, slug, seriesMap) {
         coverImageOptions: {
             coverImageURL: meta.cover || `https://bmccall17.github.io/assets/social/og/${slug}.png`
         },
-        tags: buildTags(meta.tags)
+        tags: buildTags(meta.tags),
+        seo: {
+            title: meta.seo_title || meta.title || "Untitled",
+            description: meta.seo_description || ""
+        },
+        ogMetaData: {
+            image: meta.og_image || meta.cover || `https://bmccall17.github.io/assets/social/og/${slug}.png`
+        }
     };
 
     // Attach series if available
@@ -204,7 +211,14 @@ async function updatePost(postId, meta, body, slug, seriesMap) {
         coverImageOptions: {
             coverImageURL: meta.cover || `https://bmccall17.github.io/assets/social/og/${slug}.png`
         },
-        tags: buildTags(meta.tags)
+        tags: buildTags(meta.tags),
+        seo: {
+            title: meta.seo_title || meta.title || "Untitled",
+            description: meta.seo_description || ""
+        },
+        ogMetaData: {
+            image: meta.og_image || meta.cover || `https://bmccall17.github.io/assets/social/og/${slug}.png`
+        }
     };
 
     // Attach series if available

@@ -4,6 +4,9 @@ slug: 2026-03-22-the-export-test
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-22_the_export_test.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-22_the_export_test.png"
+seo_title: "The export test"
+seo_description: "i built repOptics to scan GitHub repos and score them across five categories. it generates reports, runs AI analysis, even has a pentest lab. all very"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-03-22_the_export_test.png"
 tags: repoptics, ai, report-quality, export, shipped
 seriesSlug: darketype-devlog
 ---

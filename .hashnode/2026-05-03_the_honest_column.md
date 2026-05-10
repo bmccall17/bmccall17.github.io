@@ -4,6 +4,9 @@ slug: 2026-05-03-the-honest-column
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-03_the_honest_column.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-05-03_the_honest_column.png"
+seo_title: "The honest column: making follow_up_date derive from facts"
+seo_description: "there is a class of CRM bug that is not a bug in the code. it is a bug in the design. the code works exactly as written. the data is wrong. and the wr"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-05-03_the_honest_column.png"
 tags: agent828, crm, data-integrity, lead-action-engine, follow-up-date, philosophy, revops
 seriesSlug: crm-agent828
 ---
