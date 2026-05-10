@@ -1,6 +1,6 @@
 ---
 title: "The crm that drafts its own follow-ups"
-datePublished: 2026-05-09T19:45:39.974Z
+datePublished: Sat May 09 2026 19:45:39 GMT+0000 (Coordinated Universal Time)
 cuid: cmoyr7lae000202js9gfye26y
 slug: 2026-04-30-the-crm-that-drafts-its-own-followups
 canonical: https://bmccall17.github.io/darketype/weblog/2026-04-30_the_crm_that_drafts_its_own_followups.html
