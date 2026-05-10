@@ -1,10 +1,13 @@
 ---
 title: "Leaking pixels: cross-site data vapor"
+seoTitle: "Leaking pixels: cross-site data vapor"
+seoDescription: "my portfolio needs to be professional, but my soul is chaotic. how do i bridge the gap without scaring off recruiters? CSLP (Cross-Site Leakage Protoc"
 datePublished: Thu Apr 16 2026 11:51:32 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f59pb000402jvcnd27tga
 slug: 2026-02-07-leaking-pixels
 canonical: https://bmccall17.github.io/darketype/weblog/2026-02-07_leaking_pixels.html
 cover: https://bmccall17.github.io/assets/social/og/2026-02-07_leaking_pixels.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-02-07_leaking_pixels.png
 tags: localstorage, glitch, cslp
 
 ---
