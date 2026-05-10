@@ -2,6 +2,12 @@
   {
     "date": "2026-05-09",
     "state": "shipped",
+    "title": "messy release v0.1.8: the system that publishes itself",
+    "path": "2026-05-09_messy_release_v0.1.8.html"
+  },
+  {
+    "date": "2026-05-09",
+    "state": "shipped",
     "title": "the backlog is a feature",
     "path": "2026-05-09_the_backlog_is_a_feature.html"
   },

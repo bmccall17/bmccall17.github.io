@@ -1,5 +1,17 @@
 [
   {
+    "file": "2026-05-09_messy_release_v0.1.8.md",
+    "slug": "2026-05-09_messy_release_v0.1.8",
+    "title": "messy release v0.1.8: the system that publishes itself",
+    "description": "messy release v0.1.8: the system that publishes itself there's a kind of recursive satisfaction that only happens when the tool you built is the tool that expla",
+    "date": "2026-05-09",
+    "timestampIso": "2026-05-09T00:00:00.000Z",
+    "epoch": 1778284800000,
+    "state": "shipped",
+    "series": "devlog",
+    "path": "2026-05-09_messy_release_v0.1.8.html"
+  },
+  {
     "file": "2026-05-09_the_backlog_is_a_feature.md",
     "slug": "2026-05-09_the_backlog_is_a_feature",
     "title": "the backlog is a feature",
