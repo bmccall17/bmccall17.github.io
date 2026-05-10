@@ -1,10 +1,13 @@
 ---
 title: "The logo factory: when ai iteration fails, build your own tool"
+seoTitle: "The logo factory: when ai iteration fails, build your own to"
+seoDescription: "TEDxAsheville asked for a logo. not just any logo — our logo. the one that represents the BAM identity on the team page. recently dissolved my old com"
 datePublished: Thu Apr 16 2026 11:51:33 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5ace000302l8h9yn2zmv
 slug: 2026-02-25-logo-factory
 canonical: https://bmccall17.github.io/darketype/weblog/2026-02-25_logo_factory.html
 cover: https://bmccall17.github.io/assets/social/og/2026-02-25_logo_factory.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-02-25_logo_factory.png
 tags: tools, logo, tedx, easter-egg, ai-iteration
 
 ---
