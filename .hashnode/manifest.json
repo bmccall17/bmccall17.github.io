@@ -1,26 +1,36 @@
 {
-  "_generated": "2026-05-10T01:23:03.934Z",
+  "_generated": "2026-05-10T01:33:36.839Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
+    "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
     "2026-02-06_the_loop_engaged": "https://darketype.hashnode.dev/2026-02-06-the-loop-engaged",
+    "2026-02-06_the_origin_story": "https://darketype.hashnode.dev/2026-02-06-the-origin-story",
     "2026-02-07_leaking_pixels": "https://darketype.hashnode.dev/2026-02-07-leaking-pixels",
+    "2026-02-10_optimism_and_ted": "https://darketype.hashnode.dev/2026-02-10-optimism-and-ted",
     "2026-02-11_the_autopsy": "https://darketype.hashnode.dev/2026-02-11-the-autopsy",
+    "2026-02-13_dynamic_chaos": "https://darketype.hashnode.dev/2026-02-13-dynamic-chaos",
     "2026-02-25_logo_factory": "https://darketype.hashnode.dev/2026-02-25-logo-factory",
     "2026-03-03_kahn_ktane_mazes": "https://darketype.hashnode.dev/2026-03-03-kahn-ktane-mazes",
+    "2026-03-05_port_ocean_pain": "https://darketype.hashnode.dev/2026-03-05-port-ocean-pain",
+    "2026-03-05_runbooks_tarottalks": "https://darketype.hashnode.dev/2026-03-05-runbooks-tarottalks",
     "2026-03-06_antigravity_takes_the_wheel_v0.1.5": "https://darketype.hashnode.dev/2026-03-06-antigravity-takes-the-wheel-v0-1-5",
+    "2026-03-06_daemon_summons": "https://darketype.hashnode.dev/2026-03-06-daemon-summons",
     "2026-03-06_port_pushes_back": "https://darketype.hashnode.dev/2026-03-06-port-pushes-back",
+    "2026-03-09_repoptics_meets_vertex": "https://darketype.hashnode.dev/2026-03-09-repoptics-meets-vertex",
     "2026-03-17_viscous_lcd": "https://darketype.hashnode.dev/2026-03-17-viscous-lcd",
     "2026-03-17_widget_woke_up": "https://darketype.hashnode.dev/2026-03-17-widget-woke-up",
     "2026-03-18_per_char_chromatic": "https://darketype.hashnode.dev/2026-03-18-per-char-chromatic",
     "2026-03-19_og_pictograms": "https://darketype.hashnode.dev/2026-03-19-og-pictograms",
     "2026-03-19_the_context_lake": "https://darketype.hashnode.dev/2026-03-19-the-context-lake",
     "2026-03-22_the_export_test": "https://darketype.hashnode.dev/2026-03-22-the-export-test",
+    "2026-03-22_the_scorecard_gate": "https://darketype.hashnode.dev/2026-03-22-the-scorecard-gate",
     "2026-03-23_brett_hud_v1": "https://darketype.hashnode.dev/2026-03-23-brett-hud-v1",
     "2026-03-26_repoptics_in_the_wild": "https://darketype.hashnode.dev/2026-03-26-repoptics-in-the-wild",
     "2026-03-27_messy_release_v0.1.7": "https://darketype.hashnode.dev/2026-03-27-messy-release-v0-1-7",
     "2026-03-27_the_melt": "https://darketype.hashnode.dev/2026-03-27-the-melt",
     "2026-03-31_understanding_the_lake": "https://darketype.hashnode.dev/2026-03-31-understanding-the-lake",
     "2026-04-01_the_melt": "https://darketype.hashnode.dev/2026-04-01-the-melt",
+    "2026-04-03_leuchtturm_came_from_my_own_mess": "https://darketype.hashnode.dev/2026-04-03-leuchtturm-came-from-my-own-mess",
     "2026-04-06_repoptics_recalibration": "https://darketype.hashnode.dev/2026-04-06-repoptics-recalibration",
     "2026-04-10_the_crm_i_built_by_being_the_customer": "https://darketype.hashnode.dev/2026-04-10-the-crm-i-built-by-being-the-customer",
     "2026-04-10_the_polarity_problem": "https://darketype.hashnode.dev/2026-04-10-the-polarity-problem",
@@ -40,16 +50,32 @@
         "title": "cross-site leakage protocol (cslp)"
       },
       {
+        "slug": "2026-02-06-phase-zero-rebellion",
+        "title": "phase zero: the gentle rebellion"
+      },
+      {
         "slug": "2026-02-06-the-loop-engaged",
         "title": "the loop engaged: v0.1.1"
+      },
+      {
+        "slug": "2026-02-06-the-origin-story",
+        "title": "the origin story: portfolio + darketype"
       },
       {
         "slug": "2026-02-07-leaking-pixels",
         "title": "leaking pixels: cross-site data vapor"
       },
       {
+        "slug": "2026-02-10-optimism-and-ted",
+        "title": "optimism and the ted stage"
+      },
+      {
         "slug": "2026-02-11-the-autopsy",
         "title": "the autopsy: auditing my own game engine"
+      },
+      {
+        "slug": "2026-02-13-dynamic-chaos",
+        "title": "dynamic chaos: v0.1.4"
       },
       {
         "slug": "2026-02-25-logo-factory",
@@ -60,12 +86,28 @@
         "title": "data points for what not to do (Kahn and KTANE)"
       },
       {
+        "slug": "2026-03-05-port-ocean-pain",
+        "title": "the port.io ocean integration disaster"
+      },
+      {
+        "slug": "2026-03-05-runbooks-tarottalks",
+        "title": "runbooks and the power of diagnostic tools"
+      },
+      {
         "slug": "2026-03-06-antigravity-takes-the-wheel-v0-1-5",
         "title": "antigravity takes the wheel"
       },
       {
+        "slug": "2026-03-06-daemon-summons",
+        "title": "daemon summons"
+      },
+      {
         "slug": "2026-03-06-port-pushes-back",
         "title": "port pushes back (and then it doesn't)"
+      },
+      {
+        "slug": "2026-03-09-repoptics-meets-vertex",
+        "title": "when the port.io pattern meets vertex ai"
       },
       {
         "slug": "2026-03-17-viscous-lcd",
@@ -88,6 +130,10 @@
         "title": "the export test"
       },
       {
+        "slug": "2026-03-22-the-scorecard-gate",
+        "title": "the scorecard gate: enforcing deployment readiness"
+      },
+      {
         "slug": "2026-03-23-brett-hud-v1",
         "title": "brett hud v1: stealing the cockpit from claude-hud"
       },
@@ -106,6 +152,10 @@
       {
         "slug": "2026-04-01-the-melt",
         "title": "the melt"
+      },
+      {
+        "slug": "2026-04-03-leuchtturm-came-from-my-own-mess",
+        "title": "leuchtturm came from my own mess"
       },
       {
         "slug": "2026-04-06-repoptics-recalibration",

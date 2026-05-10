@@ -241,6 +241,25 @@
                             hnLink.setAttribute('aria-label', 'read on hashnode');
                             extLinks.appendChild(hnLink);
                         }
+
+                        // series tag — links to hashnode series page
+                        if (meta.series) {
+                            const SERIES_LABELS = {
+                                'darketype-devlog': 'devlog',
+                                'crm-agent828': 'crm',
+                                'agent828-build-arc': 'agent828',
+                            };
+                            const label = SERIES_LABELS[meta.series] || meta.series;
+                            const seriesLink = document.createElement('a');
+                            seriesLink.href = `https://darketype.hashnode.dev/series/${meta.series}`;
+                            seriesLink.innerText = `[${label}]`;
+                            seriesLink.target = '_blank';
+                            seriesLink.className = 'ext-link';
+                            seriesLink.style.opacity = '0.55';
+                            seriesLink.style.fontSize = '0.72rem';
+                            seriesLink.setAttribute('aria-label', `view ${label} series on hashnode`);
+                            extLinks.appendChild(seriesLink);
+                        }
                     }
                 } catch (e) { /* manifest not available, no hashnode link */ }
 

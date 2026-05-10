@@ -5,7 +5,7 @@ const ENTRIES_DIR = path.join(__dirname, '../darketype/entries');
 const HASHNODE_DIR = path.join(__dirname, '../.hashnode');
 
 // States we automatically consider publishable
-const PUBLISHABLE_STATES = ['shipped', 'expanded', 'learning'];
+const PUBLISHABLE_STATES = ['shipped', 'expanded', 'learning', 'mess', 'frustrated', 'optimistic', 'seed', 'debugging', 'broken'];
 
 function parseFrontmatter(content) {
     const match = content.match(/^---([\s\S]*?)---/);
