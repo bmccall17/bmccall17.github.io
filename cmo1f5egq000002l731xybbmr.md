@@ -1,10 +1,13 @@
 ---
 title: "The crm i built by being the customer"
+seoTitle: "The crm i built by being the customer"
+seoDescription: "Emi asked agent828 to help her build sales and marketing tooling. she runs a thing, she has leads, the leads are slipping through cracks, the cracks a"
 datePublished: Thu Apr 16 2026 11:51:38 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5egq000002l731xybbmr
 slug: 2026-04-10-the-crm-i-built-by-being-the-customer
 canonical: https://bmccall17.github.io/darketype/weblog/2026-04-10_the_crm_i_built_by_being_the_customer.html
 cover: https://bmccall17.github.io/assets/social/og/2026-04-10_the_crm_i_built_by_being_the_customer.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-04-10_the_crm_i_built_by_being_the_customer.png
 tags: crm, dogfooding, agent828, sales-tooling, lead-pipeline, ae-brief, context-puddle
 
 ---
