@@ -1,6 +1,6 @@
 ---
 title: "The backlog is a feature"
-datePublished: 2026-05-09T19:45:41.132Z
+datePublished: Sat May 09 2026 19:45:41 GMT+0000 (Coordinated Universal Time)
 cuid: cmoyr7m6k000202jog1ax3qcr
 slug: 2026-05-09-the-backlog-is-a-feature
 canonical: https://bmccall17.github.io/darketype/weblog/2026-05-09_the_backlog_is_a_feature.html
