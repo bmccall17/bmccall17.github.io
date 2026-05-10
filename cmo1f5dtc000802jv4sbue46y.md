@@ -1,10 +1,13 @@
 ---
 title: "Understanding the lake"
+seoTitle: "Understanding the lake"
+seoDescription: "what if the most important part of the system i built is the context lake? perhaps the center of it all is exactly that. when people first look at age"
 datePublished: Thu Apr 16 2026 11:51:37 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5dtc000802jv4sbue46y
 slug: 2026-03-31-understanding-the-lake
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-31_understanding_the_lake.html
 cover: https://bmccall17.github.io/assets/social/og/2026-03-31_understanding_the_lake.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-03-31_understanding_the_lake.png
 tags: architecture, port, agent828, context-lake
 
 ---
