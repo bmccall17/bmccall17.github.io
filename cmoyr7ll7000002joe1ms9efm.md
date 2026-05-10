@@ -1,10 +1,13 @@
 ---
 title: "The honest column: making follow_up_date derive from facts"
+seoTitle: "The honest column: making follow_up_date derive from facts"
+seoDescription: "there is a class of CRM bug that is not a bug in the code. it is a bug in the design. the code works exactly as written. the data is wrong. and the wr"
 datePublished: Sat May 09 2026 19:45:40 GMT+0000 (Coordinated Universal Time)
 cuid: cmoyr7ll7000002joe1ms9efm
 slug: 2026-05-03-the-honest-column
 canonical: https://bmccall17.github.io/darketype/weblog/2026-05-03_the_honest_column.html
 cover: https://bmccall17.github.io/assets/social/og/2026-05-03_the_honest_column.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-05-03_the_honest_column.png
 tags: philosophy, crm, data-integrity, revops, agent828, lead-action-engine, follow-up-date
 
 ---
