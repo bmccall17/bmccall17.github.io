@@ -1,10 +1,13 @@
 ---
 title: "The context lake"
+seoTitle: "The context lake"
+seoDescription: "i've been building the context lake for the team at agent828 — a tactical AI services team of devloper mercenaries who are building agents and tools f"
 datePublished: Thu Apr 16 2026 11:51:36 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5ckb000702l8edqo3cy0
 slug: 2026-03-19-the-context-lake
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-19_the_context_lake.html
 cover: https://bmccall17.github.io/assets/social/og/2026-03-19_the_context_lake.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-03-19_the_context_lake.png
 tags: agentic, shipped, claude-code, ai-iteration, agent828, context-lake
 
 ---
