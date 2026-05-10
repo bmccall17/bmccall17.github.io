@@ -1,10 +1,13 @@
 ---
 title: "Make the system explain itself"
+seoTitle: "Make the system explain itself"
+seoDescription: "at some point, every agentic stack becomes a black box. you know it's working because posts are going out. you know it's broken when they stop. the ga"
 datePublished: Sat May 09 2026 19:45:39 GMT+0000 (Coordinated Universal Time)
 cuid: cmoyr7ky0000102js9hurehf5
 slug: 2026-04-29-make-the-system-explain-itself
 canonical: https://bmccall17.github.io/darketype/weblog/2026-04-29_make_the_system_explain_itself.html
 cover: https://bmccall17.github.io/assets/social/og/2026-04-29_make_the_system_explain_itself.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-04-29_make_the_system_explain_itself.png
 tags: architecture, observability, admin-panel, knowledge-graph, dashboards, agent828, status-rollup
 
 ---
