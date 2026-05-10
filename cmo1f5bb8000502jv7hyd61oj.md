@@ -1,10 +1,13 @@
 ---
 title: "Port pushes back (and then it doesn't)"
+seoTitle: "Port pushes back (and then it doesn't)"
+seoDescription: "yesterday was about pain — fighting the ocean integration, the grayed-out button, the docker image wall. today was about pushing past that and seeing"
 datePublished: Thu Apr 16 2026 11:51:34 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5bb8000502jv7hyd61oj
 slug: 2026-03-06-port-pushes-back
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-06_port_pushes_back.html
 cover: https://bmccall17.github.io/assets/social/og/2026-03-06_port_pushes_back.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-03-06_port_pushes_back.png
 tags: devops, services, integration, github-actions, port, snyk, self-service, scorecards
 
 ---
