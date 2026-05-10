@@ -1,10 +1,13 @@
 ---
 title: "How we stopped our content engine from repeating itself"
+seoTitle: "How we stopped our content engine from repeating itself"
+seoDescription: "there is a specific failure mode in AI content pipelines that nobody talks about enough. it is not hallucination. it is not tone. it is entity fixatio"
 datePublished: Sat May 09 2026 19:45:40 GMT+0000 (Coordinated Universal Time)
 cuid: cmoyr7lwg000102jo6rd51kwq
 slug: 2026-05-08-how-we-stopped-our-content-engine-from-repeating-itself
 canonical: https://bmccall17.github.io/darketype/weblog/2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself.html
 cover: https://bmccall17.github.io/assets/social/og/2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself.png
 tags: content-pipeline, agent828, anti-repetition, entity-cooldown, topic-momentum, vip-tier, domain-routing
 
 ---
