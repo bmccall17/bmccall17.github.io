@@ -108,6 +108,14 @@ function build() {
 
         const slug = file.replace(/\.md$/, '');
 
+        const SERIES_LABELS = {
+            'darketype-devlog': 'devlog',
+            'crm-agent828': 'crm',
+            'agent828-build-arc': 'agent828',
+        };
+        const seriesRaw = meta.series || '';
+        const seriesLabel = SERIES_LABELS[seriesRaw] || (seriesRaw ? seriesRaw : null);
+
         return {
             file,
             slug,
@@ -117,6 +125,7 @@ function build() {
             timestampIso: created.toISOString(),
             epoch: created.getTime(),
             state: meta.state || 'void',
+            series: seriesLabel,
             path: `${slug}.html`
         };
     });
@@ -134,7 +143,7 @@ function build() {
                 <li>
                     <span class="dim">[${post.timestampIso.split('T')[0]}]</span>
                     <a href="${post.path}" data-title="${post.title}" data-epoch="${post.epoch}">${post.title.toLowerCase()}</a>
-                    <span class="dim">_${post.state}</span>
+                    <span class="dim">_${post.state}</span>${post.series ? ` <span class="series-tag">[${post.series}]</span>` : ''}
                 </li>`).join('\n');
 
     let html = fs.readFileSync(INDEX_FILE, 'utf-8');
