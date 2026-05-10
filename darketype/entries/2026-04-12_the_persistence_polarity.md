@@ -3,7 +3,7 @@ title: "the persistence polarity: a 3-day sprint from dead-letters to dual datab
 date: "2026-04-12"
 state: "shipped"
 tags: ["infrastructure", "database", "sqlite", "neon", "agent", "architecture"]
-series: "darketype-devlog"
+series: "crm-agent828"
 ---
 
 it started with a ghost.

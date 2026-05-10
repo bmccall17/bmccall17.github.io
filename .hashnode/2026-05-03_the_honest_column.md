@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-03_the_honest_column.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-05-03_the_honest_column.png"
 tags: agent828, crm, data-integrity, lead-action-engine, follow-up-date, philosophy, revops
-seriesSlug: agent828-build-arc
+seriesSlug: crm-agent828
 ---
 
 # The honest column: making follow_up_date derive from facts

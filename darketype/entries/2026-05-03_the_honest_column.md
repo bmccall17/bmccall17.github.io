@@ -3,7 +3,7 @@ title: "the honest column: making follow_up_date derive from facts"
 date: 2026-05-03
 state: shipped
 tags: [agent828, crm, data-integrity, lead-action-engine, follow-up-date, philosophy, revops]
-series: "agent828-build-arc"
+series: "crm-agent828"
 og_image:
 next_experiment: "extend the recompute to fire on outbound email send and status change, not just meeting log"
 ---

@@ -3,7 +3,7 @@ title: "the context lake"
 date: 2026-03-19T08:00:00
 state: "shipped"
 tags: [agent828, context-lake, ai-iteration, agentic, claude-code, shipped]
-series: "darketype-devlog"
+series: "agent828-build-arc"
 next_experiment: "per-entry OG images with content-specific pictograms → shipped as ADR-0018"
 ---
 

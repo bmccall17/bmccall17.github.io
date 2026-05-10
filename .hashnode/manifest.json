@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-05-09T20:20:52.786Z",
+  "_generated": "2026-05-10T01:09:37.015Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_the_loop_engaged": "https://darketype.hashnode.dev/2026-02-06-the-loop-engaged",
@@ -84,10 +84,6 @@
         "title": "every entry gets a face"
       },
       {
-        "slug": "2026-03-19-the-context-lake",
-        "title": "the context lake"
-      },
-      {
         "slug": "2026-03-22-the-export-test",
         "title": "the export test"
       },
@@ -108,10 +104,6 @@
         "title": "the melt: what 230,000 particles taught me about letting go"
       },
       {
-        "slug": "2026-03-31-understanding-the-lake",
-        "title": "understanding the lake"
-      },
-      {
         "slug": "2026-04-01-the-melt",
         "title": "the melt"
       },
@@ -120,16 +112,8 @@
         "title": "repoptics recalibration"
       },
       {
-        "slug": "2026-04-10-the-crm-i-built-by-being-the-customer",
-        "title": "the crm i built by being the customer"
-      },
-      {
         "slug": "2026-04-10-the-polarity-problem",
         "title": "the polarity problem"
-      },
-      {
-        "slug": "2026-04-12-the-persistence-polarity",
-        "title": "the persistence polarity: a 3-day sprint from dead-letters to dual databases"
       },
       {
         "slug": "2026-04-14-fibonacci-magic",
@@ -142,16 +126,16 @@
     ],
     "agent828-build-arc": [
       {
+        "slug": "2026-03-19-the-context-lake",
+        "title": "the context lake"
+      },
+      {
+        "slug": "2026-03-31-understanding-the-lake",
+        "title": "understanding the lake"
+      },
+      {
         "slug": "2026-04-29-make-the-system-explain-itself",
         "title": "make the system explain itself"
-      },
-      {
-        "slug": "2026-04-30-the-crm-that-drafts-its-own-followups",
-        "title": "the crm that drafts its own follow-ups"
-      },
-      {
-        "slug": "2026-05-03-the-honest-column",
-        "title": "the honest column: making follow_up_date derive from facts"
       },
       {
         "slug": "2026-05-08-how-we-stopped-our-content-engine-from-repeating-itself",
@@ -160,6 +144,24 @@
       {
         "slug": "2026-05-09-the-backlog-is-a-feature",
         "title": "the backlog is a feature"
+      }
+    ],
+    "crm-agent828": [
+      {
+        "slug": "2026-04-10-the-crm-i-built-by-being-the-customer",
+        "title": "the crm i built by being the customer"
+      },
+      {
+        "slug": "2026-04-12-the-persistence-polarity",
+        "title": "the persistence polarity: a 3-day sprint from dead-letters to dual databases"
+      },
+      {
+        "slug": "2026-04-30-the-crm-that-drafts-its-own-followups",
+        "title": "the crm that drafts its own follow-ups"
+      },
+      {
+        "slug": "2026-05-03-the-honest-column",
+        "title": "the honest column: making follow_up_date derive from facts"
       }
     ]
   }

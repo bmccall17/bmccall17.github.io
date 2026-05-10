@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-30_the_crm_that_drafts_its_own_followups.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-30_the_crm_that_drafts_its_own_followups.png"
 tags: agent828, crm, meetings, ae-brief, context-puddle, draft-revisions, approval-gate, activity-log, sales-tooling
-seriesSlug: agent828-build-arc
+seriesSlug: crm-agent828
 ---
 
 # The crm that drafts its own follow-ups

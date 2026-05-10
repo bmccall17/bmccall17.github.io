@@ -3,7 +3,7 @@ title: "the crm that drafts its own follow-ups"
 date: 2026-04-30
 state: shipped
 tags: [agent828, crm, meetings, ae-brief, context-puddle, draft-revisions, approval-gate, activity-log, sales-tooling]
-series: "agent828-build-arc"
+series: "crm-agent828"
 og_image:
 next_experiment: "add stale-draft cron to surface buried approvals before the next morning"
 ---
