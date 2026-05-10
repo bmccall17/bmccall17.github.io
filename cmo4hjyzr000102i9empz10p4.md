@@ -1,10 +1,13 @@
 ---
 title: "The hashnode bridge: mirroring the mess"
+seoTitle: "The hashnode bridge: mirroring the mess"
+seoDescription: "darketype.com is the high-fidelity source of truth—it's got the glitches, the scanlines, and the raw lowercase aesthetic that i love. but reach matter"
 datePublished: Sat Apr 18 2026 15:22:16 GMT+0000 (Coordinated Universal Time)
 cuid: cmo4hjyzr000102i9empz10p4
 slug: 2026-04-18-the-hashnode-bridge
 canonical: https://bmccall17.github.io/darketype/weblog/2026-04-18_the_hashnode_bridge.html
 cover: https://bmccall17.github.io/assets/social/og/2026-04-18_the_hashnode_bridge.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-04-18_the_hashnode_bridge.png
 tags: automation, hashnode, meta, og-images, darketype
 
 ---
