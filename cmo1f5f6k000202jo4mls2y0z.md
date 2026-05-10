@@ -1,10 +1,13 @@
 ---
 title: "The persistence polarity: a 3-day sprint from dead-letters to dual databases"
+seoTitle: "The persistence polarity: a 3-day sprint from dead-letters t"
+seoDescription: "it started with a ghost. inbound emails were silently dead-lettering. when i checked the admin panel, the inboundemails queue was completely empty. ze"
 datePublished: Thu Apr 16 2026 11:51:39 GMT+0000 (Coordinated Universal Time)
 cuid: cmo1f5f6k000202jo4mls2y0z
 slug: 2026-04-12-the-persistence-polarity
 canonical: https://bmccall17.github.io/darketype/weblog/2026-04-12_the_persistence_polarity.html
 cover: https://bmccall17.github.io/assets/social/og/2026-04-12_the_persistence_polarity.png
+ogImage: https://bmccall17.github.io/assets/social/og/2026-04-12_the_persistence_polarity.png
 tags: database, architecture, infrastructure, sqlite, neon, agent
 
 ---
