@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-05-11",
+    "state": "shipped",
+    "title": "the repo is the bottleneck now",
+    "path": "2026-05-11_the_repo_is_the_bottleneck_now.html"
+  },
+  {
     "date": "2026-05-09",
     "state": "shipped",
     "title": "messy release v0.1.8: the system that publishes itself",

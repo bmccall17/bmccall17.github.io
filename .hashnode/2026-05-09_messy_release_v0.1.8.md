@@ -1,0 +1,51 @@
+---
+title: "Messy release v0.1.8: the system that publishes itself"
+slug: 2026-05-09-messy-release-v0-1-8
+domain: darketype.hashnode.dev
+canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-09_messy_release_v0.1.8.html"
+cover: "https://bmccall17.github.io/assets/social/og/2026-05-09_messy_release_v0.1.8.png"
+seo_title: "Messy release v0.1.8: the system that publishes itself"
+seo_description: "there's a kind of recursive satisfaction that only happens when the tool you built is the tool that explains the tool you built. this sprint was osten"
+og_image: "https://bmccall17.github.io/assets/social/og/2026-05-09_messy_release_v0.1.8.png"
+tags: darketype, agent828, hashnode, series, seo, weblog, ship-log
+seriesSlug: darketype-devlog
+---
+
+# Messy release v0.1.8: the system that publishes itself
+
+There's a kind of recursive satisfaction that only happens when the tool you built is the tool that explains the tool you built.
+
+This sprint was ostensibly about documenting the agent828 build arc. Five technical posts. Dates backfilled to match when the actual work happened. Screenshots fabricated where real ones couldn't be used. The usual.
+
+But somewhere in the middle of wiring up hashnode series, automating SEO metadata, and building a clickable series filter on the weblog index — i realized: the publishing system had become a product. Not a side project. Not glue code. A product with a clear interface, a deployment pipeline, and enough self-knowledge to push its own SEO descriptions without asking anyone what to write.
+
+## What shipped
+
+Five posts in the agent828 build arc:
+
+1. **Make the system explain itself** — the architecture knowledge graph that narrates its own health in real time
+2. **The CRM that drafts its own follow-ups** — three weeks, one AE, meeting transcripts as first-class artifacts
+3. **The honest column** — why `follow_up_date` should be derived from facts, not stored as a guess
+4. **How we stopped our content engine from repeating itself** — four guardrails, one entity cooldown log
+5. **The backlog is a feature** — BACKLOG.md as trigger-based methodology, not a priority queue
+
+Nine custom UI mockups to illustrate the posts. All fabricated, all technically accurate. No client data exposed.
+
+## The infrastructure that grew around it
+
+- **Hashnode series** — three of them. `Crm-agent828`, `agent828-build-arc`, `darketype-devlog`. Each post assigned. Each series has a description and a meta description ready to paste.
+- **Seo automation** — `seo_title`, `seo_description`, and `og_image` now write themselves from the entry content and push to hashnode on every `npm run hashnode:sync`. Zero dashboard work.
+- **Series filter on the index** — clicking `[crm]` or `[agent828]` filters the weblog list in place. `?Series=crm` in the URL bookmarks the view. `[× Clear]` resets it.
+- **Series tag on individual posts** — after the `hashnode ↗` link, a pill shows which series the post belongs to. Clicking it opens the hashnode series page.
+- **Expanded publishable states** — `mess`, `frustrated`, `optimistic`, `seed`, `debugging`, `broken` all publish to hashnode now. Eleven previously-missing posts went live.
+- **`/Entry` workflow rewrite** — full documentation of states, series slugs, image paths, and SEO automation. The workflow now tells you everything the system knows.
+
+## The thing i didn't expect
+
+The series filter was a five-minute idea. "Tag should be clickable." it turned into: URL params, re-render persistence, active state glow, a filter bar with dismiss. Not because anyone asked. Because once you start pulling the thread, the right answer is obvious.
+
+That's the real pattern from this sprint. Every feature revealed the next one. The system wanted to be coherent. I just followed it.
+
+---
+
+*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-05-09_messy_release_v0.1.8.html).*

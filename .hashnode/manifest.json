@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-05-10T01:33:36.839Z",
+  "_generated": "2026-05-11T23:48:19.951Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -41,7 +41,9 @@
     "2026-04-30_the_crm_that_drafts_its_own_followups": "https://darketype.hashnode.dev/2026-04-30-the-crm-that-drafts-its-own-followups",
     "2026-05-03_the_honest_column": "https://darketype.hashnode.dev/2026-05-03-the-honest-column",
     "2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself": "https://darketype.hashnode.dev/2026-05-08-how-we-stopped-our-content-engine-from-repeating-itself",
-    "2026-05-09_the_backlog_is_a_feature": "https://darketype.hashnode.dev/2026-05-09-the-backlog-is-a-feature"
+    "2026-05-09_messy_release_v0.1.8": "https://darketype.hashnode.dev/2026-05-09-messy-release-v0-1-8",
+    "2026-05-09_the_backlog_is_a_feature": "https://darketype.hashnode.dev/2026-05-09-the-backlog-is-a-feature",
+    "2026-05-11_the_repo_is_the_bottleneck_now": "https://darketype.hashnode.dev/2026-05-11-the-repo-is-the-bottleneck-now"
   },
   "series": {
     "darketype-devlog": [
@@ -172,6 +174,10 @@
       {
         "slug": "2026-04-18-the-hashnode-bridge",
         "title": "the hashnode bridge: mirroring the mess"
+      },
+      {
+        "slug": "2026-05-09-messy-release-v0-1-8",
+        "title": "messy release v0.1.8: the system that publishes itself"
       }
     ],
     "agent828-build-arc": [
@@ -194,6 +200,10 @@
       {
         "slug": "2026-05-09-the-backlog-is-a-feature",
         "title": "the backlog is a feature"
+      },
+      {
+        "slug": "2026-05-11-the-repo-is-the-bottleneck-now",
+        "title": "the repo is the bottleneck now"
       }
     ],
     "crm-agent828": [
