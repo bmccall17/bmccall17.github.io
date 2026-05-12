@@ -22,7 +22,7 @@ when a human team writes slowly, repo health problems can hide for a while. when
 
 ## AI made code faster. it did not make repos healthier.
 
-that is what this week's [repOptics](https://github.com/bmccall17/repOptics) research run made hard to ignore. 
+that is what this week's [repOptics](https://rep-optics.onrender.com/) research run made hard to ignore. 
 
 the current lake covers 5,771 scans across 2,907 repositories. across those scans:
 
@@ -38,7 +38,7 @@ repo drag is the residue of speed. we can create code faster than we create conf
 
 ## the next AI coding problem is repo drag
 
-this matters because AI coding is moving from autocomplete into agentic workflow. agents like [agent828](/agent828-build-arc) and others are starting to pick up issues, create branches, and operate inside the same systems humans use. GitHub is explicitly moving toward "Agent HQ", and Stack Overflow's 2025 survey notes that 46% of developers distrust AI tool accuracy.
+this matters because AI coding is moving from autocomplete into agentic workflow. agents like [agent828](https://agent828.com/) and others are starting to pick up issues, create branches, and operate inside the same systems humans use. GitHub is explicitly moving toward "Agent HQ", and Stack Overflow's 2025 survey notes that 46% of developers distrust AI tool accuracy.
 
 that means the repo is no longer just storage. it is the operating environment for humans and agents together. if the repo cannot explain itself, the agent has less to stand on, and the human has less reason to trust what changed.
 
