@@ -2,7 +2,7 @@
 title: "The repo is the bottleneck now"
 seoTitle: "The repo is the bottleneck now"
 seoDescription: "i keep coming back to the same pattern.  AI has made it much easier to produce code. that part is obvious now. the less obvious part is what gets expo"
-datePublished: Mon May 11 2026 23:48:41 GMT+0000 (Coordinated Universal Time)
+datePublished: 2026-05-11T23:48:41.140Z
 cuid: cmp1urtir000102ky1sx14sg8
 slug: 2026-05-11-the-repo-is-the-bottleneck-now
 canonical: https://bmccall17.github.io/darketype/weblog/2026-05-11_the_repo_is_the_bottleneck_now.html
