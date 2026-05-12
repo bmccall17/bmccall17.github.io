@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - SECTOR NOT FOUND</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicons/main.svg">
+  <!-- Analytics -->
+  <script>
+    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init rs ls yi ns us ts ss capture calculateEventProperties vs register register_once register_for_session unregister unregister_for_session gs getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags setGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty fs ds createPersonProfile setInternalOrTestUser ps Qr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing hs debug M cs getPageViewId captureTraceFeedback captureTraceMetric Kr".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+    posthog.init('phc_21ojMbvL2fR9lqHt84cFmuKCKLNWUqNHJTVJORXzmvn', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users
+    })
+  </script>
+
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    /* 404 Specific Styles */
+    :root {
+      --void: #060c06;
+      --tactical-green: #00ff41;
+      --steel: #8b949e;
+      --armor: rgba(10, 15, 10, 0.85);
+    }
+    
+    body {
+      background-color: var(--void);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Background Grid / Scanline */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(to right, rgba(128,128,128,0.07) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(128,128,128,0.07) 1px, transparent 1px);
+      background-size: 24px 24px;
+      z-index: 0;
+    }
+    
+    .scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to bottom, transparent, rgba(0, 255, 65, 0.1), transparent);
+      opacity: 0.5;
+      animation: scanline 6s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    @keyframes scanline {
+      0% { transform: translateY(-100vh); }
+      100% { transform: translateY(100vh); }
+    }
+    
+    .panel-404 {
+      position: relative;
+      z-index: 10;
+      max-width: 650px;
+      width: 100%;
+      margin: 20px;
+      padding: 48px;
+      background: var(--armor);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      animation: fade-in-scale 0.5s ease-out;
+    }
+    
+    @keyframes fade-in-scale {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    
+    .header-404 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--tactical-green);
+      font-family: var(--font-mono);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 14px;
+    }
+    
+    .header-icon {
+      font-weight: bold;
+    }
+    
+    .title-404 {
+      font-size: clamp(3rem, 8vw, 4.5rem);
+      font-weight: 800;
+      margin: 0 0 16px 0;
+      line-height: 1.1;
+      color: #fff;
+      text-transform: uppercase;
+      position: relative;
+    }
+    
+    .desc-404 {
+      color: var(--steel);
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+    
+    .path-highlight {
+      color: var(--tactical-green);
+      font-family: var(--font-mono);
+      background: rgba(0, 255, 65, 0.1);
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
+    
+    .form-group {
+      margin-bottom: 24px;
+    }
+    
+    .form-label {
+      display: block;
+      font-family: var(--font-mono);
+      color: var(--steel);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    
+    .emoji-picker {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .emoji-btn {
+      font-size: 2.5rem;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--void);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+      outline: none;
+    }
+    
+    .emoji-btn:hover {
+      border-color: rgba(0, 255, 65, 0.5);
+      background: rgba(0, 255, 65, 0.05);
+    }
+    
+    .emoji-btn.selected {
+      background: rgba(0, 255, 65, 0.2);
+      border: 2px solid var(--tactical-green);
+      transform: scale(1.1);
+    }
+    
+    .intel-textarea {
+      width: 100%;
+      background: var(--void);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      min-height: 120px;
+      resize: vertical;
+      transition: all 0.2s;
+      box-sizing: border-box;
+    }
+    
+    .intel-textarea:focus {
+      outline: none;
+      border-color: var(--tactical-green);
+      box-shadow: 0 0 0 1px var(--tactical-green);
+    }
+    
+    .intel-textarea::placeholder {
+      color: rgba(139, 148, 158, 0.5);
+    }
+    
+    .actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      flex: 1;
+      min-width: 150px;
+      padding: 16px 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: var(--font-main);
+    }
+    
+    .btn-primary {
+      background: #fff;
+      color: var(--void);
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      background: var(--tactical-green);
+    }
+    
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--tactical-green);
+      color: var(--tactical-green);
+    }
+    
+    .success-panel {
+      display: none;
+      background: rgba(0, 255, 65, 0.1);
+      border: 1px solid var(--tactical-green);
+      padding: 32px;
+      text-align: center;
+      animation: fade-in-scale 0.5s ease-out;
+    }
+    
+    .success-icon {
+      font-size: 4rem;
+      color: var(--tactical-green);
+      margin-bottom: 16px;
+    }
+    
+    .success-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--tactical-green);
+      margin-bottom: 8px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    @media (max-width: 768px) {
+      .panel-404 {
+        padding: 24px;
+      }
+      
+      .title-404 {
+        font-size: 2.5rem;
+      }
+      
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="scanline"></div>
+  
+  <div class="panel-404">
+    <div id="form-content">
+      <div class="header-404">
+        <span class="header-icon">>_</span>
+        <span>System Error 404</span>
+      </div>
+      
+      <h1 class="title-404">SECTOR NOT FOUND</h1>
+      
+      <p class="desc-404">
+        You've navigated into uncharted territory. The coordinates <span class="path-highlight" id="current-path">/unknown</span> don't exist in our current deployment.
+        <br><br>
+        Don't worry—there are humans (and bots) behind the scenes monitoring the perimeter. We will catch this anomaly.
+      </p>
+      
+      <div class="form-group">
+        <label class="form-label">1. Rate this navigational error:</label>
+        <div class="emoji-picker" id="emoji-picker">
+          <!-- Emojis populated by JS -->
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">2. Leave intel for the dev team (Optional):</label>
+        <textarea id="intel-message" class="intel-textarea" placeholder="Hey, I was looking for..."></textarea>
+      </div>
+      
+      <div class="actions">
+        <button id="send-btn" class="btn btn-primary" disabled>
+          <span>Send Intel</span>
+        </button>
+        <a href="/" class="btn btn-secondary">
+          <span>← Return to Base</span>
+        </a>
+      </div>
+    </div>
+    
+    <div id="success-content" class="success-panel">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Intel Received</div>
+      <p class="desc-404" style="margin-bottom: 32px;">Our operatives have logged your transmission. We'll patch this sector shortly.</p>
+      <a href="/" class="btn btn-primary" style="display: inline-flex; width: auto; padding: 16px 32px;">
+        <span>← Return to Base</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('current-path').textContent = window.location.pathname;
+    
+    const FUN_EMOJIS = [
+      '🤖', '👾', '👻', '👽', '💀', '💩', '🤡', '👺', '👹', '👿', 
+      '🤠', '😎', '🤓', '🥸', '🧐', '🤯', '🥶', '🥵', '😱', '🤪', 
+      '😵', '🤐', '🤫', '🤥', '😶', '🫥', '🫡', '🤔', '🫣', '🤨', 
+      '😑', '😬', '🙄', '😮‍💨', '🥴', '🤢', '🤮', '🤧', '😷', '🤒', 
+      '🤕', '🤑', '😈', '☠️', '🎃', '😺', '😸', '😹', '😻', '😼', 
+      '😽', '🙀', '😿', '😾'
+    ];
+    
+    // Pick 3 random
+    const shuffled = [...FUN_EMOJIS].sort(() => 0.5 - Math.random());
+    const selectedEmojis = shuffled.slice(0, 3);
+    
+    const emojiPicker = document.getElementById('emoji-picker');
+    let chosenEmoji = null;
+    const sendBtn = document.getElementById('send-btn');
+    const intelMessage = document.getElementById('intel-message');
+    
+    function updateSendButton() {
+      sendBtn.disabled = !chosenEmoji && !intelMessage.value.trim();
+    }
+    
+    selectedEmojis.forEach(emoji => {
+      const btn = document.createElement('button');
+      btn.className = 'emoji-btn';
+      btn.textContent = emoji;
+      btn.onclick = () => {
+        document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        chosenEmoji = emoji;
+        updateSendButton();
+      };
+      emojiPicker.appendChild(btn);
+    });
+    
+    intelMessage.addEventListener('input', updateSendButton);
+    
+    sendBtn.addEventListener('click', () => {
+      sendBtn.disabled = true;
+      sendBtn.innerHTML = '<span style="font-family: var(--font-mono); text-transform: uppercase; animation: pulse 1.5s infinite;">Transmitting...</span>';
+      
+      const path = window.location.pathname;
+      const msg = intelMessage.value.trim();
+      
+      setTimeout(() => {
+        const subject = encodeURIComponent(`404 Sector Breach: ${path}`);
+        const body = encodeURIComponent(`Emoji: ${chosenEmoji || 'None'}\nMessage: ${msg}`);
+        window.location.href = `mailto:brettmccall@gmail.com?subject=${subject}&body=${body}`;
+        
+        document.getElementById('form-content').style.display = 'none';
+        document.getElementById('success-content').style.display = 'block';
+      }, 800);
+    });
+  </script>
+</body>
+</html>
