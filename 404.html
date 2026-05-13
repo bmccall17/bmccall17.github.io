@@ -394,22 +394,18 @@
         });
       }
 
-      // 2. To send an email alert without a backend, you'll need a free service 
-      // like Formspree.io or Web3Forms.com. 
-      // Example with Web3Forms (uncomment and add your access key):
-      /*
+      // 2. Web3Forms Email Alert
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY', // Get this from web3forms.com
+          access_key: '58cfa132-b2d3-4ce1-b993-ebd84ea6dd1a',
           subject: '404 Sector Breach Alert',
           path: path,
           emoji: chosenEmoji || 'None',
           message: msg
         })
       });
-      */
 
       setTimeout(() => {
         document.getElementById('form-content').style.display = 'none';
