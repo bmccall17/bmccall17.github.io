@@ -385,11 +385,33 @@
       const path = window.location.pathname;
       const msg = intelMessage.value.trim();
       
+      // 1. Store the data in PostHog (since it's already installed on your site!)
+      if (window.posthog) {
+        posthog.capture('404_intel_submitted', {
+          path: path,
+          emoji: chosenEmoji || 'None',
+          message: msg
+        });
+      }
+
+      // 2. To send an email alert without a backend, you'll need a free service 
+      // like Formspree.io or Web3Forms.com. 
+      // Example with Web3Forms (uncomment and add your access key):
+      /*
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY', // Get this from web3forms.com
+          subject: '404 Sector Breach Alert',
+          path: path,
+          emoji: chosenEmoji || 'None',
+          message: msg
+        })
+      });
+      */
+
       setTimeout(() => {
-        const subject = encodeURIComponent(`404 Sector Breach: ${path}`);
-        const body = encodeURIComponent(`Emoji: ${chosenEmoji || 'None'}\nMessage: ${msg}`);
-        window.location.href = `mailto:brettmccall@gmail.com?subject=${subject}&body=${body}`;
-        
         document.getElementById('form-content').style.display = 'none';
         document.getElementById('success-content').style.display = 'block';
       }, 800);
