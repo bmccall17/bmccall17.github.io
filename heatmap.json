@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-05-17",
+    "state": "shipped",
+    "title": "the four-state contact",
+    "path": "2026-05-17_the_four_state_contact.html"
+  },
+  {
     "date": "2026-05-11",
     "state": "shipped",
     "title": "the repo is the bottleneck now",

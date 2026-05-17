@@ -27,7 +27,7 @@ When a human team writes slowly, repo health problems can hide for a while. When
 
 ## AI made code faster. It did not make repos healthier.
 
-That is what this week's [repOptics](https://github.com/bmccall17/repOptics) research run made hard to ignore. 
+That is what this week's [repOptics](https://rep-optics.onrender.com/) research run made hard to ignore. 
 
 The current lake covers 5,771 scans across 2,907 repositories. Across those scans:
 
@@ -43,7 +43,7 @@ Repo drag is the residue of speed. We can create code faster than we create conf
 
 ## The next AI coding problem is repo drag
 
-This matters because AI coding is moving from autocomplete into agentic workflow. Agents like [agent828](/agent828-build-arc) and others are starting to pick up issues, create branches, and operate inside the same systems humans use. GitHub is explicitly moving toward "Agent HQ", and Stack Overflow's 2025 survey notes that 46% of developers distrust AI tool accuracy.
+This matters because AI coding is moving from autocomplete into agentic workflow. Agents like [agent828](https://agent828.com/) and others are starting to pick up issues, create branches, and operate inside the same systems humans use. GitHub is explicitly moving toward "Agent HQ", and Stack Overflow's 2025 survey notes that 46% of developers distrust AI tool accuracy.
 
 That means the repo is no longer just storage. It is the operating environment for humans and agents together. If the repo cannot explain itself, the agent has less to stand on, and the human has less reason to trust what changed.
 
@@ -55,7 +55,7 @@ Trust requires distinguishing missing evidence from actual failure. Absence of e
 
 They need to know what is dangerous, what is drag, and what is merely unfinished. They need a way to turn a pile of files into a clearer decision about whether to ship, clean up, document, or slow down.
 
-If you are building with agents, shipping solo, maintaining open source, or trying to get a small team to launch with less guesswork, try running a scan with repOptics on a repo you care about. I would love for you to tell Brett A McCall where the scanner feels useful, unfair, too harsh, or not sharp enough yet.
+If you are building with agents, shipping solo, maintaining open source, or trying to get a small team to launch with less guesswork, try running a scan with [repOptics](https://rep-optics.onrender.com/) on a repo you care about. I would love for you to [tell me](https://bmccall17.github.io/contact) where the scanner feels useful, unfair, too harsh, or not sharp enough yet.
 
 ---
 

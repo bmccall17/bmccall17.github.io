@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-05-11T23:48:19.951Z",
+  "_generated": "2026-05-17T22:55:50.769Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -43,7 +43,8 @@
     "2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself": "https://darketype.hashnode.dev/2026-05-08-how-we-stopped-our-content-engine-from-repeating-itself",
     "2026-05-09_messy_release_v0.1.8": "https://darketype.hashnode.dev/2026-05-09-messy-release-v0-1-8",
     "2026-05-09_the_backlog_is_a_feature": "https://darketype.hashnode.dev/2026-05-09-the-backlog-is-a-feature",
-    "2026-05-11_the_repo_is_the_bottleneck_now": "https://darketype.hashnode.dev/2026-05-11-the-repo-is-the-bottleneck-now"
+    "2026-05-11_the_repo_is_the_bottleneck_now": "https://darketype.hashnode.dev/2026-05-11-the-repo-is-the-bottleneck-now",
+    "2026-05-17_the_four_state_contact": "https://darketype.hashnode.dev/2026-05-17-the-four-state-contact"
   },
   "series": {
     "darketype-devlog": [
@@ -222,6 +223,10 @@
       {
         "slug": "2026-05-03-the-honest-column",
         "title": "the honest column: making follow_up_date derive from facts"
+      },
+      {
+        "slug": "2026-05-17-the-four-state-contact",
+        "title": "the four-state contact"
       }
     ]
   }
