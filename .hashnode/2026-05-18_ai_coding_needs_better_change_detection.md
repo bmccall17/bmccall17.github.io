@@ -4,8 +4,8 @@ slug: 2026-05-18-ai-coding-needs-better-change-detection
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-18_ai_coding_needs_better_change_detection.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-05-18_ai_coding_needs_better_change_detection.png"
-seo_title: "Ai coding needs better change detection, not louder scorecar"
-seo_description: "one thing i keep learning from running repOptics every week: the loudest finding is not always the useful one. this week the research lake grew to 6,6"
+seo_title: "Ai coding needs better change detection not louder scorecard"
+seo_description: "one thing i keep learning from running repOptics every week: loudest finding is not always useful one. this week the research lake grew to 6,642 scans"
 og_image: "https://bmccall17.github.io/assets/social/og/2026-05-18_ai_coding_needs_better_change_detection.png"
 tags: repoptics, agent828, research, repo-health, ai-native
 seriesSlug: agent828-build-arc
@@ -74,7 +74,7 @@ Not just "your repo is a B." more like:
 
 That is the direction i am pushing repOptics.
 
-If you are using agents, shipping solo, maintaining open source, or trying to make launch decisions from a fast-moving repo — try running a scan on a repo you care about at [rep-optics.onrender.com](https://rep-optics.onrender.com/) and [tell me](https://bmccall17.github.io/contact) where the signal feels useful, unfair, too harsh, or still too vague.
+If you are using agents, shipping solo, maintaining open source, or trying to make launch decisions from a fast-moving repo — try running a scan on a repo you care about at [rep-optics.onrender.com](https://rep-optics.onrender.com/) and [tell me](https://bmccall17.github.io/) where the signal feels useful, unfair, too harsh, or still too vague.
 
 ---
 
