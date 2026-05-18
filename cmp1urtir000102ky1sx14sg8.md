@@ -8,11 +8,9 @@ slug: 2026-05-11-the-repo-is-the-bottleneck-now
 canonical: https://bmccall17.github.io/darketype/weblog/2026-05-11_the_repo_is_the_bottleneck_now.html
 cover: https://bmccall17.github.io/assets/social/og/2026-05-11_the_repo_is_the_bottleneck_now.png
 ogImage: https://bmccall17.github.io/assets/social/og/2026-05-11_the_repo_is_the_bottleneck_now.png
-tags: research, repoptics, agent828, repo-health
+tags: repository, research, repoptics, agent828, repo-health
 
 ---
-
-# The repo is the bottleneck now
 
 I keep coming back to the same pattern.
 
@@ -61,7 +59,7 @@ Trust requires distinguishing missing evidence from actual failure. Absence of e
 
 They need to know what is dangerous, what is drag, and what is merely unfinished. They need a way to turn a pile of files into a clearer decision about whether to ship, clean up, document, or slow down.
 
-If you are building with agents, shipping solo, maintaining open source, or trying to get a small team to launch with less guesswork, try running a scan with [repOptics](https://rep-optics.onrender.com/) on a repo you care about. I would love for you to tell Brett A McCall where the scanner feels useful, unfair, too harsh, or not sharp enough yet.
+If you are building with agents, shipping solo, maintaining open source, or trying to get a small team to launch with less guesswork, try running a scan with [repOptics](https://rep-optics.onrender.com/) on a repo you care about. I would love for you to [tell me](https://bmccall17.github.io/) where the scanner feels useful, unfair, too harsh, or not sharp enough yet.
 
 * * *
 
