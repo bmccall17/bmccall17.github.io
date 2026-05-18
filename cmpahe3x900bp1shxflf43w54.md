@@ -6,6 +6,7 @@ datePublished: 2026-05-18T00:44:02.015Z
 cuid: cmpahe3x900bp1shxflf43w54
 slug: 2026-05-17-the-four-state-contact
 canonical: https://bmccall17.github.io/darketype/weblog/2026-05-17_the_four_state_contact.html
+cover: https://cdn.hashnode.com/uploads/covers/69e0387df95c47e87f7727ca/cbecfa00-8be2-40fe-adde-73440124b878.png
 ogImage: https://cdn.hashnode.com/uploads/og-images/69e0387df95c47e87f7727ca/643f898e-712f-41a3-80f0-16179588e1a5.png
 
 ---
