@@ -49,7 +49,8 @@ function wrapText(ctx, text, maxWidth) {
 function pickPictogram(entry) {
     const title = (entry.title || '').toLowerCase();
     const tags = (entry.tags || []).map(t => (typeof t === 'string' ? t : '').toLowerCase());
-    const all = title + ' ' + tags.join(' ');
+    const series = (entry.series || '').toLowerCase();
+    const all = title + ' ' + tags.join(' ') + ' ' + series;
     const slug = (entry.slug || entry.file || '').toLowerCase();
 
     // specific matches first
