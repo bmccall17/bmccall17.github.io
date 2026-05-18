@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-05-17T22:55:50.769Z",
+  "_generated": "2026-05-18T15:32:28.761Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -44,7 +44,8 @@
     "2026-05-09_messy_release_v0.1.8": "https://darketype.hashnode.dev/2026-05-09-messy-release-v0-1-8",
     "2026-05-09_the_backlog_is_a_feature": "https://darketype.hashnode.dev/2026-05-09-the-backlog-is-a-feature",
     "2026-05-11_the_repo_is_the_bottleneck_now": "https://darketype.hashnode.dev/2026-05-11-the-repo-is-the-bottleneck-now",
-    "2026-05-17_the_four_state_contact": "https://darketype.hashnode.dev/2026-05-17-the-four-state-contact"
+    "2026-05-17_the_four_state_contact": "https://darketype.hashnode.dev/2026-05-17-the-four-state-contact",
+    "2026-05-18_ai_coding_needs_better_change_detection": "https://darketype.hashnode.dev/2026-05-18-ai-coding-needs-better-change-detection"
   },
   "series": {
     "darketype-devlog": [
@@ -205,6 +206,10 @@
       {
         "slug": "2026-05-11-the-repo-is-the-bottleneck-now",
         "title": "the repo is the bottleneck now"
+      },
+      {
+        "slug": "2026-05-18-ai-coding-needs-better-change-detection",
+        "title": "ai coding needs better change detection, not louder scorecards"
       }
     ],
     "crm-agent828": [
