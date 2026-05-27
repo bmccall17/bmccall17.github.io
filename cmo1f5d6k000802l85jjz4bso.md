@@ -2,7 +2,7 @@
 title: "Repoptics in the wild: building the tools to build the tools"
 seoTitle: "Repoptics in the wild: building the tools to build the tools"
 seoDescription: "i met with my friend julio last night and we talked about the current market of ai builders. everyone is building agents and wrappers, but how many of"
-datePublished: Thu Apr 16 2026 11:51:36 GMT+0000 (Coordinated Universal Time)
+datePublished: 2026-04-16T11:51:36.956Z
 cuid: cmo1f5d6k000802l85jjz4bso
 slug: 2026-03-26-repoptics-in-the-wild
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-26_repoptics_in_the_wild.html
