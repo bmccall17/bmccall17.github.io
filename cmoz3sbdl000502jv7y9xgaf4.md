@@ -2,7 +2,7 @@
 title: "When the port.io pattern meets vertex ai"
 seoTitle: "When the port.io pattern meets vertex ai"
 seoDescription: "a friend suggested, "get repOptics into Vertex AI." what followed was exactly the kind of deep dive we engineered the port.io sprint for: look at the"
-datePublished: Sun May 10 2026 01:37:42 GMT+0000 (Coordinated Universal Time)
+datePublished: 2026-05-10T01:37:42.297Z
 cuid: cmoz3sbdl000502jv7y9xgaf4
 slug: 2026-03-09-repoptics-meets-vertex
 canonical: https://bmccall17.github.io/darketype/weblog/2026-03-09_repoptics_meets_vertex.html
