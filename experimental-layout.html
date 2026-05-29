@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>brett a mccall (bmccall17)</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicons/main.svg">
+  <!-- Analytics -->
+  <script>
+    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init rs ls yi ns us ts ss capture calculateEventProperties vs register register_once register_for_session unregister unregister_for_session gs getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags setGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty fs ds createPersonProfile setInternalOrTestUser ps Qr opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing hs debug M cs getPageViewId captureTraceFeedback captureTraceMetric Kr".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+    posthog.init('phc_21ojMbvL2fR9lqHt84cFmuKCKLNWUqNHJTVJORXzmvn', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users
+    })
+  </script>
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/singularity.css">
+  <!-- Calendly -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <style>
+    /* === Calendly popup overrides: matrix / terminal theme === */
+    .calendly-overlay .calendly-popup {
+      border: 1px solid #00ff41 !important;
+      box-shadow: 0 0 40px rgba(0, 255, 65, 0.3), 0 0 80px rgba(0, 0, 0, 0.9) !important;
+      border-radius: 0 !important;
+      background: #060c06 !important;
+    }
+
+    .calendly-overlay .calendly-popup-close {
+      background: #000 !important;
+      border: 1px solid #00ff41 !important;
+      color: #00ff41 !important;
+      font-family: monospace !important;
+      border-radius: 0 !important;
+      box-shadow: 0 0 8px rgba(0, 255, 65, 0.4) !important;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .calendly-overlay .calendly-popup-close:hover {
+      background: #00ff41 !important;
+      color: #000 !important;
+    }
+
+    .calendly-overlay {
+      background: rgba(0, 6, 0, 0.92) !important;
+    }
+
+    /* "book a call" link styled like the rest of the sidebar socials */
+    a[data-calendly] {
+      position: relative;
+      cursor: pointer;
+    }
+
+    a[data-calendly]::after {
+      content: ' ↗';
+      font-size: 0.75em;
+      opacity: 0.6;
+    }
+
+    /* === TELEMETRY HUD === */
+    #telemetry-hud {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 210px;
+      background: rgba(5, 5, 5, 0.92);
+      border: 1px solid #1a3a1a;
+      border-left: none;
+      border-bottom: none;
+      border-radius: 0 4px 0 0;
+      padding: 8px 10px 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      line-height: 1.6;
+      color: #008f11;
+      z-index: 2;
+      pointer-events: none;
+      user-select: none;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(0, 143, 17, 0.06), inset 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    #telemetry-hud::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 255, 65, 0.012) 2px,
+          rgba(0, 255, 65, 0.012) 4px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #telemetry-hud .hud-header {
+      color: #00ff41;
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #1a3a1a;
+      padding-bottom: 3px;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #telemetry-hud .hud-dot {
+      width: 4px;
+      height: 4px;
+      background: #00ff41;
+      border-radius: 50%;
+      animation: hud-blink 1.5s ease-in-out infinite;
+      box-shadow: 0 0 3px #00ff41;
+    }
+
+    .hud-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.5px 0;
+    }
+
+    .hud-label {
+      color: #006d11;
+      font-size: 8.5px;
+      letter-spacing: 0.5px;
+    }
+
+    .hud-value {
+      color: #00ff41;
+      font-size: 9.5px;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(0, 255, 65, 0.35);
+      min-width: 55px;
+      text-align: right;
+    }
+
+    .hud-divider {
+      border: none;
+      border-top: 1px dashed #0a2a0a;
+      margin: 3px 0;
+    }
+
+    .hud-value.hud-alert {
+      color: #f85149;
+      text-shadow: 0 0 5px rgba(248, 81, 73, 0.4);
+    }
+
+    .hud-value.hud-warn {
+      color: #d29922;
+      text-shadow: 0 0 5px rgba(210, 153, 34, 0.4);
+    }
+
+    /* --- HUD Controls (slider + reset inside HUD) --- */
+    .hud-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+      pointer-events: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hud-controls .hud-label {
+      flex-shrink: 0;
+    }
+
+    #telemetry-hud input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      flex: 1;
+      height: 4px;
+      background: #0a2a0a;
+      border: 1px solid #1a3a1a;
+      border-radius: 0;
+      outline: none;
+      cursor: ew-resize;
+      margin: 0;
+      writing-mode: horizontal-tb;
+    }
+
+    #telemetry-hud input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 8px;
+      height: 12px;
+      background: #00ff41;
+      border: none;
+      border-radius: 0;
+      cursor: ew-resize;
+      box-shadow: 0 0 4px rgba(0, 255, 65, 0.5);
+    }
+
+    #telemetry-hud input[type=range]::-moz-range-thumb {
+      width: 8px;
+      height: 12px;
+      background: #00ff41;
+      border: none;
+      border-radius: 0;
+      cursor: ew-resize;
+      box-shadow: 0 0 4px rgba(0, 255, 65, 0.5);
+    }
+
+    #telemetry-hud .hud-reset-btn {
+      width: 10px;
+      height: 10px;
+      flex-shrink: 0;
+      background: #f85149;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      padding: 0;
+    }
+
+    #telemetry-hud .hud-reset-btn:hover {
+      transform: scale(1.4);
+      box-shadow: 0 0 6px rgba(248, 81, 73, 0.6);
+    }
+
+    @keyframes hud-blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.2;
+      }
+    }
+
+    @keyframes hud-scanflicker {
+      0% {
+        opacity: 0.92;
+      }
+
+      4% {
+        opacity: 0.88;
+      }
+
+      8% {
+        opacity: 0.92;
+      }
+
+      50% {
+        opacity: 0.90;
+      }
+
+      52% {
+        opacity: 0.78;
+      }
+
+      54% {
+        opacity: 0.90;
+      }
+
+      100% {
+        opacity: 0.92;
+      }
+    }
+
+    #telemetry-hud.hud-live {
+      animation: hud-scanflicker 5s ease-in-out infinite;
+    }
+
+    @media (max-width: 768px) {
+      #telemetry-hud {
+        display: none;
+      }
+    }
+  </style>
+  <meta name="description"
+    content="product leadership for the spatial web. creative technology, xr, and strategic innovation.">
+
+  <meta property="og:title" content="brett a mccall (bmccall17)">
+  <meta property="og:description"
+    content="product leadership for the spatial web. creative technology, xr, and strategic innovation.">
+  <meta property="og:image" content="https://bmccall17.github.io/assets/social/social-share-glitchy.png">
+  <meta property="og:url" content="https://bmccall17.github.io/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://bmccall17.github.io/assets/social/social-share-glitchy.png">
+</head>
+
+<body>
+
+  <!-- Inline SVG for Turbulence Surge -->
+  <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+    <defs>
+      <filter id="filament-distort" x="-30%" y="-30%" width="160%" height="160%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="3" seed="42" result="noise"
+          id="turb-noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"
+          id="turb-displace" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Singularity Background -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- TELEMETRY HUD -->
+  <div id="telemetry-hud">
+    <div class="hud-header">
+      <span>▮ telemetry</span>
+      <div class="hud-dot"></div>
+    </div>
+    <div class="hud-row"><span class="hud-label">PARTICLES</span><span class="hud-value" id="hud-particles">---</span>
+    </div>
+    <div class="hud-row"><span class="hud-label">ABSORBED</span><span class="hud-value" id="hud-absorbed">---</span>
+    </div>
+    <div class="hud-row"><span class="hud-label">ENTROPY</span><span class="hud-value" id="hud-entropy">0.0017</span>
+    </div>
+    <div class="hud-row"><span class="hud-label">TURBULENCE</span><span class="hud-value" id="hud-turbulence">0.0</span>
+    </div>
+    <div class="hud-row"><span class="hud-label">ABSORB_%</span><span class="hud-value" id="hud-absorb-pct">0.0%</span>
+    </div>
+    <hr class="hud-divider">
+    <div class="hud-row"><span class="hud-label">HORIZON_R</span><span class="hud-value" id="hud-horizon">100</span>
+    </div>
+    <div class="hud-row"><span class="hud-label">INPUT</span><span class="hud-value" id="hud-input">---</span></div>
+    <div class="hud-row"><span class="hud-label">CURSOR_XY</span><span class="hud-value" id="hud-cursor">---</span>
+    </div>
+    <hr class="hud-divider">
+    <div class="hud-row"><span class="hud-label">FPS</span><span class="hud-value" id="hud-fps">---</span></div>
+    <div class="hud-row"><span class="hud-label">UPTIME</span><span class="hud-value" id="hud-uptime">00:00</span></div>
+    <hr class="hud-divider">
+    <div class="hud-controls">
+      <span class="hud-label">E_CTRL</span>
+      <input type="range" id="jitterSlider" min="17" max="1700" value="17" step="1" title="Entropy">
+      <button class="hud-reset-btn" onclick="resetSingularity()" title="Reset Particles"></button>
+    </div>
+  </div>
+
+  <!-- Mobile-only fallback controls (HUD is hidden on mobile) -->
+  <div class="controls-panel">
+    <input type="range" id="jitterSliderMobile" min="17" max="1700" value="17" step="1" title="Entropy">
+    <button class="reset-btn" onclick="resetSingularity()" title="Reset Entropy"></button>
+  </div>
+
+  <div class="container">
+    <!-- left sidebar: profile -->
+    <aside class="profile-sidebar">
+      <div class="avatar glitch-avatar" data-text="bam">
+      </div>
+      <script>
+          (function () {
+            const avatar = document.querySelector('.glitch-avatar');
+            function scheduleNextWave() {
+              // Use the millisecond of the time stamp as a seed for randomness
+              const ms = new Date().getMilliseconds();
+              // Create a randomized interval between 2s and roughly 10s based on current ms
+              const nextInterval = 2000 + (ms * 8);
+
+              setTimeout(() => {
+                avatar.classList.add('wave-split-active');
+
+                // Remove the class after the animation completes (1.2s length)
+                setTimeout(() => {
+                  avatar.classList.remove('wave-split-active');
+                  scheduleNextWave(); // queue the next random wave
+                }, 1200);
+
+              }, nextInterval);
+            }
+            // Start the cycle
+            scheduleNextWave();
+          })();
+      </script>
+
+      <style>
+        .glitch-avatar {
+          position: relative;
+          overflow: visible;
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: #000;
+          color: #00ff41;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: monospace;
+          font-size: 2rem;
+          font-weight: bold;
+          border: 2px solid #00ff41;
+          box-shadow: 0 0 10px #00ff41;
+          /* Progressive glow driven by --absorption (0→1) from singularity.js */
+          --absorption: 0;
+          transition: box-shadow 0.5s ease, border-color 0.5s ease;
+        }
+
+        /* Progressive glow: scales with absorption ratio */
+        .glitch-avatar:not(.singularity-maxed) {
+          box-shadow:
+            0 0 calc(10px + 30px * var(--absorption)) rgba(0, 255, 65, calc(0.4 + 0.6 * var(--absorption))),
+            0 0 calc(5px + 60px * var(--absorption)) rgba(0, 255, 65, calc(0.1 + 0.4 * var(--absorption)));
+          border-color: hsl(calc(130 - 10 * var(--absorption)), 100%, calc(50% + 20% * var(--absorption)));
+        }
+
+        .glitch-avatar:after {
+          content: "bam";
+          /* Default: subtle pulse */
+          animation: pulse-text 3s infinite ease-in-out;
+        }
+
+        /* Reacts to absorption and occasionally splits in a chromatic wave */
+        .glitch-avatar::before {
+          content: "";
+          position: absolute;
+          inset: -2px;
+          /* Align with border */
+          border-radius: 50%;
+          border: 2px solid transparent;
+          /* Base chromatic aberration, scales with absorption */
+          box-shadow:
+            calc(-3px * var(--absorption)) 0 0 rgba(255, 0, 85, calc(0.7 * var(--absorption))),
+            calc(3px * var(--absorption)) 0 0 rgba(0, 255, 255, calc(0.7 * var(--absorption)));
+          pointer-events: none;
+          z-index: -1;
+        }
+
+        .glitch-avatar.wave-split-active::before {
+          animation: wave-jitter 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes wave-jitter {
+
+          0%,
+          100% {
+            border-radius: 50%;
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+            border-width: 2px;
+            box-shadow:
+              calc(-3px * var(--absorption)) 0 0 rgba(255, 0, 85, calc(0.7 * var(--absorption))),
+              calc(3px * var(--absorption)) 0 0 rgba(0, 255, 255, calc(0.7 * var(--absorption)));
+          }
+
+          20% {
+            /* Wavy separation / Energy Arcs */
+            border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%;
+            transform: scale(1.06) rotate(15deg);
+            border-width: 1px;
+            box-shadow:
+              -6px 0 10px rgba(255, 0, 85, 0.8),
+              6px 0 10px rgba(0, 255, 255, 0.8),
+              0 0 15px rgba(0, 255, 65, 0.6);
+            border-color: rgba(0, 255, 65, 0.8);
+          }
+
+          40% {
+            /* Jitter and distortion */
+            border-radius: 55% 45% 60% 40% / 45% 55% 40% 60%;
+            transform: scale(1.02) rotate(-10deg) translate(-2px, 2px);
+            border-width: 3px;
+            box-shadow:
+              -2px 4px 5px rgba(255, 0, 85, 0.9),
+              2px -4px 5px rgba(0, 255, 255, 0.9);
+            border-color: rgba(0, 255, 65, 0.4);
+            opacity: 0.8;
+          }
+
+          60% {
+            /* Waveform oscillation */
+            border-radius: 35% 65% 50% 50% / 60% 40% 60% 40%;
+            transform: scale(1.08) rotate(25deg);
+            border-width: 1.5px;
+            box-shadow:
+              -8px -4px 15px rgba(255, 0, 85, 0.7),
+              8px 4px 15px rgba(0, 255, 255, 0.7),
+              inset 0 0 10px rgba(0, 255, 65, 0.5);
+            border-color: rgba(0, 255, 65, 1);
+          }
+
+          80% {
+            /* High frequency corruption */
+            border-radius: 60% 40% 45% 55% / 40% 60% 55% 45%;
+            transform: scale(1.04) rotate(-20deg) translate(2px, -2px);
+            border-width: 2px;
+            box-shadow:
+              4px 2px 8px rgba(255, 0, 85, 0.8),
+              -4px -2px 8px rgba(0, 255, 255, 0.8);
+            border-color: rgba(0, 255, 65, 0.6);
+            opacity: 0.9;
+          }
+        }
+
+        /* Reactive Class triggered by JS */
+        .glitch-avatar.chaos-mode {
+          filter: url(#filament-distort);
+        }
+
+        .glitch-avatar.chaos-mode:after {
+          animation: glitch-text var(--glitch-duration, 0.5s) infinite steps(1);
+        }
+
+        /* === EASTER EGG: Singularity Maxed — Pulsation === */
+        .glitch-avatar.singularity-maxed {
+          animation: singularity-pulse 2s infinite ease-in-out;
+          cursor: pointer;
+          border-color: #aaffaa;
+        }
+
+        @keyframes singularity-pulse {
+
+          0%,
+          100% {
+            box-shadow:
+              0 0 40px rgba(0, 255, 65, 0.9),
+              0 0 80px rgba(0, 255, 65, 0.5),
+              0 0 120px rgba(0, 255, 65, 0.2);
+            transform: scale(1);
+          }
+
+          50% {
+            box-shadow:
+              0 0 60px rgba(0, 255, 65, 1),
+              0 0 100px rgba(0, 255, 65, 0.7),
+              0 0 160px rgba(0, 255, 65, 0.3);
+            transform: scale(1.06);
+          }
+        }
+
+        @keyframes pulse-text {
+
+          0%,
+          100% {
+            opacity: 1;
+            text-shadow: 0 0 10px #00ff41;
+          }
+
+          50% {
+            opacity: 0.7;
+            text-shadow: 0 0 2px #006d32;
+          }
+        }
+
+        @keyframes glitch-text {
+          0% {
+            content: "bam";
+            color: #00ff41;
+            transform: translate(0);
+          }
+
+          10% {
+            content: "neo";
+            color: #00ff41;
+            transform: translate(-2px, 1px);
+          }
+
+          20% {
+            content: "010";
+            color: #fff;
+            transform: translate(2px, -2px);
+          }
+
+          30% {
+            content: "110";
+            color: #00ff41;
+            transform: translate(-1px, 2px);
+          }
+
+          40% {
+            content: "001";
+            color: #fff;
+            transform: translate(1px, -1px);
+          }
+
+          50% {
+            content: "111";
+            color: #00ff41;
+            transform: translate(-2px, -1px);
+          }
+
+          60% {
+            content: "000";
+            color: #fff;
+            transform: translate(2px, 2px);
+          }
+
+          70% {
+            content: "011";
+            color: #00ff41;
+            transform: translate(-1px, 1px);
+          }
+
+          80% {
+            content: "lol";
+            color: red;
+            transform: translate(2px, -2px);
+          }
+
+          90% {
+            content: "bam";
+            color: #00ff41;
+            transform: translate(0);
+          }
+        }
+      </style>
+
+      <div class="names">
+        <h1>Brett A McCall</h1>
+        <p>bmccall17</p>
+      </div>
+
+      <div class="bio">
+        futurist, researcher, creative technologist, gamechanger, storyteller, #17, TEDster.
+        <br><br>
+        source creativity, engagement, play and technology + ancient wisdom.
+      </div>
+
+      <!-- <button class="btn-sm" style="width: 100%;">Follow</button> -->
+
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/brettmccall" target="_blank">linkedin.com/in/brettmccall /</a>
+        <a href="https://github.com/bmccall17" target="_blank">github.com/bmccall17/</a>
+        <a href="https://darketype.hashnode.dev/" target="_blank">darketype weblogs on hashnode/</a>
+        <a href="https://x.com/bmccall17" target="_blank">@bmccall17 twitter/</a>
+        <!-- <a href="https://betterthanunicorns.notion.site/gamedesign-resources-9ed90e9fa8be4b8c91b81e0442da3ea1"
+          target="_blank">#gamedesignresources/</a> -->
+        <a href="" data-calendly
+          onclick="Calendly.initPopupWidget({url: 'https://calendly.com/bambtu/29min'});return false;">book a call/</a>
+        <a href="https://buymeacoffee.com/bmccall17" target="_blank">buy me a coffee/</a>
+      </div>
+
+      <!-- manually blocked this out... just dont really like it and not using it
+      <hr style="border: 0; border-top: 1px solid var(--border); width: 100%; margin: 16px 0;">
+
+      <div class="achievements">
+        <h3>Achievements</h3>
+        <p style="font-size: 12px; color: var(--text-muted);">x2 Arctic Code Vault Contributor</p>
+      </div>
+-->
+    </aside>
+
+
+    <a href="https://brettamccall.com" class="back-to-surface">← Return to Surface</a>
+
+    <style>
+      /* Darketype Overhaul Styles */
+      .high-contrast-text {
+        text-shadow: 0 0 10px #000, 0 0 5px #000;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 4px 8px;
+        border-radius: 4px;
+        display: inline-block;
+        /* Wraps tightly */
+      }
+
+      .back-to-surface {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        color: #00ff41;
+        font-family: monospace;
+        text-decoration: none;
+        border: 1px solid #00ff41;
+        padding: 10px 20px;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .back-to-surface:hover {
+        background: #00ff41;
+        color: #000;
+        box-shadow: 0 0 15px #00ff41;
+      }
+
+      @media (max-width: 768px) {
+        .back-to-surface {
+          font-size: 10px;
+          padding: 6px 10px;
+          top: 10px;
+          right: 10px;
+          letter-spacing: 0;
+        }
+      }
+
+      /* Ghost Tile Layout */
+      .layout-columns {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(280px, 1fr));
+        gap: 40px;
+        margin-top: 16px;
+        padding-bottom: 80px;
+        align-items: start;
+        width: 100%;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .grid-column {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .column-header {
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+        padding-bottom: 15px;
+      }
+
+      .column-header h3 {
+        color: #00ff41;
+        font-size: 1.2rem;
+        margin: 0 0 5px 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+      }
+
+      .column-header p {
+        color: #c9d1d9;
+        font-family: monospace;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      .ghost-card {
+        position: relative;
+        width: 100%;
+        max-width: none;
+        height: 220px;
+        opacity: 0.91;
+        transition: opacity 0.3s, transform 0.3s;
+        border: 1px solid rgba(0, 255, 65, 0.2);
+        background: #000;
+        overflow: hidden;
+      }
+
+      .ghost-card.hero-card {
+        height: 320px;
+      }
+
+      .ghost-card.small-card {
+        height: 140px;
+      }
+
+      .ghost-card:hover {
+        opacity: 1.0;
+        transform: scale(1.02);
+        border-color: #00ff41;
+        z-index: 10;
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+      }
+
+      .ghost-card a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+      }
+
+      .ghost-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+        filter: grayscale(100%) contrast(1.2) sepia(20%) hue-rotate(90deg);
+        transition: all 0.5s;
+      }
+
+      .ghost-card:hover img {
+        filter: grayscale(0%) contrast(1.0) sepia(0%);
+        opacity: 1.0;
+      }
+
+      .ghost-content {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .ghost-card.hero-card .ghost-content {
+        bottom: 40px;
+        left: 40px;
+        right: 40px;
+      }
+
+      /* Mobile Ghost Card Enhancements */
+      @media (max-width: 768px) {
+
+        .leak-section {
+          display: none !important;
+        }
+
+        /* Fix the sidebar padding causing text to spill */
+        .profile-sidebar {
+          padding: 16px !important;
+          box-sizing: border-box;
+        }
+
+        /* Fix leak-header overflow (two long links side by side) */
+        .leak-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+
+        .leak-header>div {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        /* Ghost card: switch to compact list style */
+        .layout-columns {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          margin-top: 24px;
+          padding-bottom: 60px;
+        }
+
+        .grid-column {
+          gap: 16px;
+        }
+
+        .ghost-card,
+        .ghost-card.hero-card,
+        .ghost-card.small-card {
+          width: 100% !important;
+          max-width: 100% !important;
+          /* Critical — prevents 450px card overflowing 390px viewport */
+          opacity: 1.0;
+          border: 1px solid rgba(0, 255, 65, 0.3);
+          border-left: 4px solid #00ff41;
+          background: rgba(0, 10, 0, 0.8);
+          box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+          height: auto;
+          overflow: hidden;
+        }
+
+        .ghost-card a {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 12px;
+        }
+
+        .ghost-card img {
+          width: 80px;
+          height: 80px;
+          min-width: 80px;
+          object-fit: cover;
+          filter: grayscale(0%);
+          opacity: 0.9;
+          border-radius: 4px;
+          margin-right: 16px;
+        }
+
+        .ghost-content {
+          position: static;
+          pointer-events: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 0;
+        }
+
+        .ghost-content h3 {
+          font-size: 1.1rem;
+          margin: 0 0 4px 0;
+          padding: 0;
+          background: transparent;
+          border: none;
+        }
+
+        .ghost-content p {
+          font-size: 0.85rem;
+          padding: 0;
+          margin: 0;
+          background: transparent;
+          border-left: none;
+          color: #c9d1d9;
+        }
+      }
+
+      .ghost-content h3 {
+        font-size: 1.5rem;
+        /* Reduced from 3rem */
+        color: #fff;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        background: #000;
+        color: #00ff41;
+        display: inline-block;
+        padding: 0 10px;
+        margin-bottom: 5px;
+        border: 1px solid #00ff41;
+      }
+
+      .ghost-content p {
+        color: #fff;
+        font-family: monospace;
+        font-size: 0.8rem;
+        /* Reduced from 1.1rem */
+        background: rgba(0, 0, 0, 0.9);
+        padding: 8px;
+        /* Reduced from 15px */
+        max-width: 100%;
+        /* Fill container */
+        border-left: 2px solid #00ff41;
+      }
+
+      /* Global Text Contrast Enforcement */
+      .profile-sidebar,
+      .leak-section {
+        background: rgba(0, 0, 0, 0.85);
+        /* Stronger backdrop */
+        padding: 30px;
+        border: 1px solid #333;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      }
+
+      .profile-sidebar {
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      a {
+        text-shadow: 0 2px 4px #000;
+      }
+
+      /* Hide the original pinned section if we are replacing it, or keep it? 
+       User said "bring in the rest of the tiles... show me a different layout"
+       I will append the stream below the current content.
+    */
+    </style>
+
+    <!-- main content -->
+    <main class="main-content">
+
+      <!-- the leak / contribution graph -->
+      <section class="leak-section">
+        <div class="leak-header">
+          <span class="section-title">Contributions</span>
+          <div>
+            <a href="darketype/index.html" class="glitch-link">enter_darketype_mode();</a>
+            <a href="darketype/weblog/index.html" class="glitch-link"
+              style="margin-right: 16px;">view_system_logs();</a>
+          </div>
+        </div>
+
+        <!-- GitHub-style 52-week contribution calendar -->
+        <div id="calendar-graph"
+          style="display: flex; gap: 2px; align-items: flex-end; justify-content: flex-end; overflow: hidden;"></div>
+
+        <p id="contributions-footer" style="font-size: 11px; color: var(--text-muted); margin-top: 8px;">
+          loading...
+        </p>
+
+        <script>
+          async function loadContributions() {
+            const container = document.getElementById('calendar-graph');
+            const footer = document.getElementById('contributions-footer');
+
+            try {
+              const res = await fetch('contributions.json?t=' + Date.now());
+              if (!res.ok) throw new Error('no data');
+              const data = await res.json();
+
+              // Contribution count → color level
+              function levelColor(count) {
+                if (count === 0) return '#161b22';
+                if (count <= 2) return '#0e4429';
+                if (count <= 5) return '#006d32';
+                if (count <= 9) return '#26a641';
+                return '#39d353';
+              }
+
+              // Render last 52 weeks (GitHub style: columns of 7 days)
+              // Flatten all days from the data
+              const allDays = {};
+              data.weeks.forEach(week => {
+                week.days.forEach(d => { allDays[d.date] = d.count; });
+              });
+              // Build 156 week columns (3 years) to fill wide screens.
+              // Weeks prior to 52 will appear as "corrupted archive" data since they aren't in contributions.json
+              const now = new Date();
+              const totalWeeks = 156;
+              const start = new Date(now.getTime() - (totalWeeks * 7 * 24 * 60 * 60 * 1000));
+              start.setDate(start.getDate() - start.getDay()); // align to Sunday
+
+              let html = '';
+              for (let week = 0; week < totalWeeks; week++) {
+                html += '<div style="display:flex;flex-direction:column;gap:2px;">';
+                for (let day = 0; day < 7; day++) {
+                  const d = new Date(start.getTime() + ((week * 7 + day) * 24 * 60 * 60 * 1000));
+                  const dateStr = d.toISOString().split('T')[0];
+                  
+                  let count = allDays[dateStr];
+                  let color, title;
+
+                  if (count !== undefined) {
+                    color = levelColor(count);
+                    title = count > 0 ? `${dateStr}: ${count} contribution${count !== 1 ? 's' : ''}` : dateStr;
+                  } else {
+                    // Older than the 1 year provided by Github API -> archive glitch pattern
+                    const isGlitch = Math.random() > 0.94; // sparse archive noise
+                    color = isGlitch ? '#0e4429' : '#161b22';
+                    title = `${dateStr} [ARCHIVED]`;
+                  }
+                  
+                  html += `<div style="width:10px;height:10px;background:${color};border-radius:2px;" title="${title}"></div>`;
+                }
+                html += '</div>';
+              }
+              container.innerHTML = html;
+
+              // Update footer with real data
+              const since = new Date(data.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+              if (footer) footer.innerHTML = `${data.total.toLocaleString()} contributions in the last year. <span style="color:var(--glitch-color-1)">synced ${since}.</span>`;
+
+            } catch (e) {
+              console.log('contributions-offline', e);
+              // Graceful fallback: noise pattern while contributions.json is being built
+              let html = '';
+              for (let week = 0; week < 156; week++) {
+                html += '<div style="display:flex;flex-direction:column;gap:2px;">';
+                for (let day = 0; day < 7; day++) {
+                  const color = Math.random() > 0.82 ? '#0e4429' : '#161b22';
+                  html += `<div style="width:10px;height:10px;background:${color};border-radius:2px;"></div>`;
+                }
+                html += '</div>';
+              }
+              container.innerHTML = html;
+              if (footer) footer.innerHTML = `contributions syncing... <span style="color:var(--glitch-color-1)">run workflow to populate.</span>`;
+            }
+          }
+          loadContributions();
+        </script>
+
+      </section>
+
+
+      <!-- Ghost Grid Layout -->
+      <section class="layout-columns">
+
+        <!-- Left Column: Products + Experiments -->
+        <div class="grid-column">
+          <div class="column-header">
+            <h3>Products + Experiments</h3>
+            <p>game design & tool builds.</p>
+          </div>
+
+          <!-- repOptics (Hero) -->
+          <div class="ghost-card hero-card">
+            <a href="https://rep-optics.onrender.com/" target="_blank">
+              <img src="assets/repoptics.png" alt="repOptics">
+              <div class="ghost-content">
+                <h3>repOptics</h3>
+                <p>orchestrate security agents against your repositories. repo health research! automated pentesting +
+                  AI-powered vulnerability analysis.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- TarotTALKS (standard) -->
+          <div class="ghost-card">
+            <a href="https://tarottalks.app/" target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/projects/tarottalks.png" alt="TarotTALKS">
+              <div class="ghost-content">
+                <h3>TarotTALKS</h3>
+                <p>mapping ancient wisdom to modern ideas. find the easter eggs.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- thirtysix (standard) -->
+          <div class="ghost-card">
+            <a href="https://36.figma.site/" target="_blank">
+              <img src="assets/thirtysix.png" alt="thirtysix">
+              <div class="ghost-content">
+                <h3>thirtysix</h3>
+                <p>36 questions designed to accelerate closeness through reciprocal vulnerability.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- blackjack victory (standard) -->
+          <div class="ghost-card">
+            <a href="https://blackjack-victory-multiplayer.bmccall17.partykit.dev/" target="_blank">
+              <img src="https://blackjack-victory-multiplayer.bmccall17.partykit.dev/og_image.png"
+                alt="blackjack victory">
+              <div class="ghost-content">
+                <h3>blackjack victory</h3>
+                <p>roguelike blackjack game as an experiment in game design and agentic development.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- MoreThanOne (standard) -->
+          <div class="ghost-card">
+            <a href="https://morethanoneio.vercel.app/" target="_blank">
+              <img src="https://bmccall17.github.io/assets/morethanone.png" alt="MoreThanOne">
+              <div class="ghost-content">
+                <h3>MoreThanOne</h3>
+                <p>ranked-choice consensus for groups. because "majority rules" is a lie.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- ids (small) -->
+          <div class="ghost-card small-card">
+            <a href="https://ids.bmccall17.partykit.dev/" target="_blank">
+              <img src="https://bmccall17.github.io/assets/idsgame.png" alt="idsgame">
+              <div class="ghost-content">
+                <h3>ids</h3>
+                <p>multiplayer flock strategy game.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- YESYESNO Bot (Small) -->
+          <div class="ghost-card small-card">
+            <a href="https://chatgpt.com/g/g-68853015ce74819184da33338ebce8a3-yesyesno" target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/projects/yesyesno-bot/hero.png"
+                alt="YESYESNO Bot">
+              <div class="ghost-content">
+                <h3>YESYESNO Bot</h3>
+                <p>decode the internet.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- AVL1000 (Small) -->
+          <div class="ghost-card small-card">
+            <a href="https://avl1000demo.figma.site/" target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/projects/avl1000.png" alt="AVL1000">
+              <div class="ghost-content">
+                <h3>AVL1000</h3>
+                <p>finding the 10 most important people to meet next.</p>
+              </div>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Case Studies + Systems Work -->
+        <div class="grid-column">
+          <div class="column-header">
+            <h3>Case Studies + Systems Work</h3>
+            <p>shaping human operating systems.</p>
+          </div>
+
+          <!-- TEDx (standard) -->
+          <div class="ghost-card">
+            <a href="https://tedxasheville.com/about" target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/about/tedx-bio.png" alt="TEDxAsheville">
+              <div class="ghost-content">
+                <h3>TEDxAsheville</h3>
+                <p>co-founder & technical producer. building a resilient "production os" for high-stakes volunteer
+                  organizations.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- My AI Journey (Standard) -->
+          <div class="ghost-card">
+            <a href="https://betterthanunicorns.notion.site/Brett-s-AI-Journey-From-1993-to-Now-1e61b1c63fd6801294becd2db64201b5"
+              target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/ai-journey/hero.png" alt="AI Journey">
+              <div class="ghost-content">
+                <h3>My AI Journey</h3>
+                <p>from 1993 internships to modern llms. a lifetime of conversation with machines.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Listening Lab (standard) -->
+          <div class="ghost-card">
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7328479147847028738/" target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/leadership/listening-lab.png"
+                alt="Listening Lab">
+              <div class="ghost-content">
+                <h3>Listening Lab</h3>
+                <p>practicing presence and the art of listening.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Mural XR (Standard) -->
+          <div class="ghost-card">
+            <a href="https://ptom.net/xr/" target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/projects/mural-xr/hero.png" alt="Mural XR">
+              <div class="ghost-content">
+                <h3>Mural XR</h3>
+                <p>translating 2d collaboration into 3d spatial intuition. 40% increase in repeat engagement.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Media Production Portfolio (standard) -->
+          <div class="ghost-card">
+            <a href="https://www.notion.so/Film-Video-Podcast-Production-Portfolio-Brett-A-McCall-18d1b1c63fd680b886f8d9af851dd03b"
+              target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/media/hero.png"
+                alt="Media Production Portfolio">
+              <div class="ghost-content">
+                <h3>Media Production</h3>
+                <p>producer, talent, executive credits across film, esports casting, podcast host/producer.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Philanthrosphere (small) -->
+          <div class="ghost-card small-card">
+            <a href="https://www.philanthrosphere.com/" target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/projects/philanthrosphere/hero.png"
+                alt="Philanthrosphere">
+              <div class="ghost-content">
+                <h3>Philanthrosphere</h3>
+                <p>ruthless optimization for fundraising.</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Winter VR Summit (Small) -->
+          <div class="ghost-card small-card">
+            <a href="https://www.dropbox.com/scl/fi/rd3a3taugdpqqq7hgyd2f/BTU_GWG2022Summit-EventReport_PresentationFINAL.pdf?rlkey=ihjf9stbqjxmzs3plvi0vdchk&st=zhkrh2cc&dl=0"
+              target="_blank">
+              <img src="https://bmccall17.github.io/portfolio/static/images/projects/winter-vr-summit/hero.png"
+                alt="Winter VR Summit">
+              <div class="ghost-content">
+                <h3>Winter VR Summit</h3>
+                <p>exploring the future of immersive technologies.</p>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="scripts/singularity.js"></script>
+  <script src="scripts/leak_core.js"></script>
+</body>
+
+</html>
