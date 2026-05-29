@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Snyk__snyk_code_scan",
+      "Bash(find /home/bam/projects/bmccall17.github.io -name *ADR* -o -name *adr*)",
+      "Bash(grep -r \"next_experiment\" /home/bam/projects/bmccall17.github.io/darketype/entries/*.md)",
+      "Bash(ls -la /home/bam/projects/bmccall17.github.io/*.md)",
+      "Bash(find /home/bam/projects/bmccall17.github.io -name task* -o -name plan* -o -name work*)",
+      "Bash(wc:*)",
+      "Bash(node:*)",
+      "WebSearch",
+      "Bash(file:*)",
+      "Bash(grep -r \"canvas\\\\|webgl\\\\|shader\\\\|THREE\\\\|Babylon\" /home/bam/projects/bmccall17.github.io --include=*.html --include=*.js)",
+      "Bash(ls /home/bam/projects/bmccall17.github.io/darketype/entries/*.md)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(ls /home/bam/projects/bmccall17.github.io/darketype/weblog/*.html)",
+      "Bash(done)",
+      "Bash(find /home/bam/projects/bmccall17.github.io/darketype -name ADR* -o -name adr*)"
+    ]
+  }
+}

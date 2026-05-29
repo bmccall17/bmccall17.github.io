@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Snyk__snyk_code_scan",
+      "Bash(gh api:*)",
+      "Bash(dig:*)",
+      "Bash(nslookup brettamccall.com)",
+      "Bash(host brettamccall.com)",
+      "Bash(curl -s \"https://dns.google/resolve?name=brettamccall.com&type=A\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s \"https://dns.google/resolve?name=www.brettamccall.com&type=CNAME\")",
+      "Bash(curl -s \"https://dns.google/resolve?name=brettamccall.com&type=CNAME\")",
+      "Bash(curl -sI \"https://brettamccall.com\")",
+      "Bash(curl -sI \"https://brettamccall.com/book\")",
+      "Bash(curl -sI \"https://brettamccall.com/success\")",
+      "Bash(curl -sI \"https://bmccall17.github.io\")",
+      "Bash(curl -sI \"https://bmccall17.github.io/book\")"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:webflow.rp1.com)",
+      "WebFetch(domain:omb.metaverse-standards.org)",
+      "WebFetch(domain:digitalproducer.com)",
+      "WebFetch(domain:www.prweb.com)",
+      "WebFetch(domain:dev.rp1.com)",
+      "WebFetch(domain:rp1.com)",
+      "WebFetch(domain:cdn.rp1.com)",
+      "WebFetch(domain:skarredghost.com)",
+      "WebFetch(domain:luma.com)",
+      "WebFetch(domain:sensaihack.com)",
+      "Read(//home/bam/projects/daemon-mvp/**)",
+      "Bash(npm install three vite typescript @types/three)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite:*)",
+      "Bash(curl:*)",
+      "Bash(pkill:*)",
+      "Bash(npm install:*)",
+      "Bash(gh api:*)",
+      "Bash(npm:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
