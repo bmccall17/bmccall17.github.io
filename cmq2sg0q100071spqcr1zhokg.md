@@ -1,10 +1,12 @@
 ---
 title: "Telling the TarotTALKS story"
 seoTitle: "Telling the TarotTALKS story"
+seoDescription: "the origin story of tarottalks is entirely rooted in personal insight. i had been studying and working with tarot since 1993..."
 datePublished: 2026-06-06T20:10:59.883Z
 cuid: cmq2sg0q100071spqcr1zhokg
 slug: 2026-06-06-telling-the-tarottalks-story
 canonical: https://bmccall17.github.io/darketype/weblog/2026-06-06_telling_the_tarottalks_story.html
+ogImage: https://cdn.hashnode.com/uploads/og-images/69e0387df95c47e87f7727ca/b69061a3-3971-472a-b15f-eb85d84633a5.png
 tags: design, portfolio, shipping, tarot, ritual, tarottalks, tedtalks
 
 ---
