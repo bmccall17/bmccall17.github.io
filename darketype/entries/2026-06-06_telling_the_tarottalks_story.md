@@ -4,20 +4,18 @@ date: "2026-06-06"
 state: "shipped"
 tags: [portfolio, shipping, tarottalks, design]
 series: "darketype-devlog"
-next_experiment: "the fitxr interview"
+next_experiment: "more iterations on the ritual"
 ---
 
 # reflecting on the journey
 
-when applying for the senior product designer role at fitxr, the prompt was clear: *"tell us briefly about one thing you've shipped or tested in the last six months — how did you go from user insight to something testable and how quickly?"*
-
-it was the perfect prompt for [tarottalks](https://tarottalks.app/). the origin story of that app is entirely rooted in personal insight. i had been studying and working with tarot since 1993, and during a profoundly difficult season, i returned to a simple daily practice: draw one card, sit with the symbols, then find a ted or tedx talk that spoke to the archetype. day by day, the pattern grew clearer. constraint, liberation, vulnerability, reinvention. i mapped it intentionally until i had a complete framework: all 78 cards paired with curated talks.
+the origin story of [tarottalks](https://tarottalks.app/) is entirely rooted in personal insight. i had been studying and working with tarot since 1993, and during a profoundly difficult season, i returned to a simple daily practice: draw one card, sit with the symbols, then find a ted or tedx talk that spoke to the archetype. day by day, the pattern grew clearer. constraint, liberation, vulnerability, reinvention. i mapped it intentionally until i had a complete framework: all 78 cards paired with curated talks.
 
 ![tarottalks story](../entries/media/2026-06-06_telling_the_tarottalks_story/cover.png)
 
 # from insight to production
 
-the speed of the build was something i hadn't fully appreciated until i wrote it down for this application. 
+the speed of the build was something i hadn't fully appreciated until looking back at the timeline. 
 
 on december 5, 2025, i gave a [pecha kucha talk](https://tarottalks.app/cards/knight-of-cups) in asheville about the framework. that was the first live audience test of the concept. six days later, tarottalks was in production. 
 
@@ -33,4 +31,4 @@ looking back, we've shipped 47+ versioned releases since then. we iterated on ev
 
 the rationale for those ai readings comes back written in second person, in the voice of a trusted friend who happens to know tarot. 
 
-putting this application together was a reminder: the best products we build are often the ones we build to save ourselves, which then become things we can offer to others.
+looking back at this build is a reminder: the best products we build are often the ones we build to save ourselves, which then become things we can offer to others.

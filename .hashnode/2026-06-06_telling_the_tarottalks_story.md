@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-06-06_telling_the_tarottalks_story.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-06-06_telling_the_tarottalks_story.png"
 seo_title: "Telling the tarottalks story"
-seo_description: "when applying for the senior product designer role at fitxr, the prompt was clear: "tell us briefly about one thing you've shipped or tested in the la"
+seo_description: "the origin story of tarottalks is entirely rooted in personal insight. i had been studying and working with tarot since 1993, and during a profoundly"
 og_image: "https://bmccall17.github.io/assets/social/og/2026-06-06_telling_the_tarottalks_story.png"
 tags: portfolio, shipping, tarottalks, design
 seriesSlug: darketype-devlog
@@ -13,15 +13,13 @@ seriesSlug: darketype-devlog
 
 # Reflecting on the journey
 
-When applying for the senior product designer role at fitxr, the prompt was clear: *"tell us briefly about one thing you've shipped or tested in the last six months — how did you go from user insight to something testable and how quickly?"*
-
-It was the perfect prompt for [tarottalks](https://tarottalks.app/). The origin story of that app is entirely rooted in personal insight. I had been studying and working with tarot since 1993, and during a profoundly difficult season, i returned to a simple daily practice: draw one card, sit with the symbols, then find a ted or tedx talk that spoke to the archetype. Day by day, the pattern grew clearer. Constraint, liberation, vulnerability, reinvention. I mapped it intentionally until i had a complete framework: all 78 cards paired with curated talks.
+The origin story of [tarottalks](https://tarottalks.app/) is entirely rooted in personal insight. I had been studying and working with tarot since 1993, and during a profoundly difficult season, i returned to a simple daily practice: draw one card, sit with the symbols, then find a ted or tedx talk that spoke to the archetype. Day by day, the pattern grew clearer. Constraint, liberation, vulnerability, reinvention. I mapped it intentionally until i had a complete framework: all 78 cards paired with curated talks.
 
 ![Tarottalks story](https://bmccall17.github.io/darketype/entries/media/2026-06-06_telling_the_tarottalks_story/cover.png)
 
 # From insight to production
 
-The speed of the build was something i hadn't fully appreciated until i wrote it down for this application. 
+The speed of the build was something i hadn't fully appreciated until looking back at the timeline. 
 
 On december 5, 2025, i gave a [pecha kucha talk](https://tarottalks.app/cards/knight-of-cups) in asheville about the framework. That was the first live audience test of the concept. Six days later, tarottalks was in production. 
 
@@ -37,7 +35,7 @@ Looking back, we've shipped 47+ versioned releases since then. We iterated on ev
 
 The rationale for those ai readings comes back written in second person, in the voice of a trusted friend who happens to know tarot. 
 
-Putting this application together was a reminder: the best products we build are often the ones we build to save ourselves, which then become things we can offer to others.
+Looking back at this build is a reminder: the best products we build are often the ones we build to save ourselves, which then become things we can offer to others.
 
 ---
 
