@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-11_the_repo_is_the_bottleneck_now.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-05-11_the_repo_is_the_bottleneck_now.png"
 seo_title: "The repo is the bottleneck now"
-seo_description: "i keep coming back to the same pattern.  AI has made it much easier to produce code. that part is obvious now. the less obvious part is what gets expo"
+seo_description: "i keep coming back to the same pattern.   AI has made it much easier to produce code. that part is obvious now. the less obvious part is what gets e"
 og_image: "https://bmccall17.github.io/assets/social/og/2026-05-11_the_repo_is_the_bottleneck_now.png"
 tags: repoptics, agent828, research, repo-health
 seriesSlug: agent828-build-arc

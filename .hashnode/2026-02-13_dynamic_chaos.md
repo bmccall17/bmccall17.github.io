@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-13_dynamic_chaos.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-13_dynamic_chaos.png"
 seo_title: "Dynamic chaos: v0.1.4"
-seo_description: "the weblog was static. adding an entry required manual HTML rebuilds or waiting on potential CI. felt slow. felt rigid. refactored the engine to load"
+seo_description: "the weblog was static. adding an entry required manual HTML rebuilds or waiting on potential CI. felt slow. felt rigid.   refactored the engine to"
 og_image: "https://bmccall17.github.io/assets/social/og/2026-02-13_dynamic_chaos.png"
 tags: weblog, interaction, build-system
 seriesSlug: darketype-devlog

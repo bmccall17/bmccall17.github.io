@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-05-27T15:33:44.955Z",
+  "_generated": "2026-06-06T19:57:52.540Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -45,7 +45,8 @@
     "2026-05-09_the_backlog_is_a_feature": "https://darketype.hashnode.dev/2026-05-09-the-backlog-is-a-feature",
     "2026-05-11_the_repo_is_the_bottleneck_now": "https://darketype.hashnode.dev/2026-05-11-the-repo-is-the-bottleneck-now",
     "2026-05-17_the_four_state_contact": "https://darketype.hashnode.dev/2026-05-17-the-four-state-contact",
-    "2026-05-18_ai_coding_needs_better_change_detection": "https://darketype.hashnode.dev/2026-05-18-ai-coding-needs-better-change-detection"
+    "2026-05-18_ai_coding_needs_better_change_detection": "https://darketype.hashnode.dev/2026-05-18-ai-coding-needs-better-change-detection",
+    "2026-06-06_telling_the_tarottalks_story": "https://darketype.hashnode.dev/2026-06-06-telling-the-tarottalks-story"
   },
   "series": {
     "darketype-devlog": [
@@ -180,6 +181,10 @@
       {
         "slug": "2026-05-09-messy-release-v0-1-8",
         "title": "messy release v0.1.8: the system that publishes itself"
+      },
+      {
+        "slug": "2026-06-06-telling-the-tarottalks-story",
+        "title": "telling the tarottalks story"
       }
     ],
     "agent828-build-arc": [

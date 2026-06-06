@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-06-06",
+    "state": "shipped",
+    "title": "telling the tarottalks story",
+    "path": "2026-06-06_telling_the_tarottalks_story.html"
+  },
+  {
     "date": "2026-05-18",
     "state": "shipped",
     "title": "ai coding needs better change detection, not louder scorecards",

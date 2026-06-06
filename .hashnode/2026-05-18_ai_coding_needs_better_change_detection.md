@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-18_ai_coding_needs_better_change_detection.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-05-18_ai_coding_needs_better_change_detection.png"
 seo_title: "Ai coding needs better change detection, not louder scorecar"
-seo_description: "one thing i keep learning from running repOptics every week: the loudest finding is not always the useful one. this week the research lake grew to 6,6"
+seo_description: "one thing i keep learning from running repOptics every week: the loudest finding is not always the useful one.  this week the research lake grew to"
 og_image: "https://bmccall17.github.io/assets/social/og/2026-05-18_ai_coding_needs_better_change_detection.png"
 tags: repoptics, agent828, research, repo-health, ai-native
 seriesSlug: agent828-build-arc
