@@ -3,6 +3,7 @@ title: "telling the tarottalks story"
 date: "2026-06-06"
 state: "shipped"
 tags: [portfolio, shipping, tarottalks, design]
+seo_description: "a reflection on the origin story, design iterations, and shifting from lookup tool to living ritual while building tarottalks."
 series: "darketype-devlog"
 next_experiment: "more iterations on the ritual"
 ---
