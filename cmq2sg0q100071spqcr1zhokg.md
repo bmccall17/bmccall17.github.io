@@ -39,4 +39,8 @@ Putting this application together was a reminder: the best products we build are
 
 * * *
 
+I wrote about some of this publicly: on [runbooks and systems thinking](https://darketype.hashnode.dev/2026-04-14-fibonacci-magic), and on [how a bug became a design decision](https://darketype.hashnode.dev/2026-03-05-runbooks-tarottalks), using a TarotTALKS-referenced talk as the framing.
+
+* * *
+
 *View this post with the full interactive/glitchy experience on* [*darketype*](https://bmccall17.github.io/darketype/weblog/2026-06-06_telling_the_tarottalks_story.html)*.*
