@@ -16,7 +16,7 @@ tags: design, portfolio, shipping, tarot, ritual, tarottalks, tedtalks
 
 The origin story of [TarotTALKS](https://tarottalks.app/) is entirely rooted in personal insight. I had been studying and working with tarot since 1993, and during a recent profoundly difficult season, I returned to a simple daily practice: draw one card, sit with the symbols... but this time I decided to add a layer: find a TED talk that spoke to the archetype of each respective archetype represented by the card I drew. Day by day, the pattern grew clearer. Constraint, liberation, vulnerability, reinvention. I mapped it intentionally until I had a complete framework: all 78 cards paired with curated talks.
 
-![TarotTALKS story](https://bmccall17.github.io/darketype/entries/media/2026-06-06_telling_the_tarottalks_story/cover.png align="center")
+[![TarotTALKS story](https://bmccall17.github.io/darketype/entries/media/2026-06-06_telling_the_tarottalks_story/cover.png align="center")](https://tarottalks.app/)
 
 # From insight to production
 
