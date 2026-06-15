@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-09_messy_release_v0.1.8.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-05-09_messy_release_v0.1.8.png"
 seo_title: "Messy release v0.1.8: the system that publishes itself"
-seo_description: "there's a kind of recursive satisfaction that only happens when the tool you built is the tool that explains the tool you built.  this sprint was os"
+seo_description: "there's a kind of recursive satisfaction that only happens when the tool you built is the tool that explains the tool you built.  this sprint..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-05-09_messy_release_v0.1.8.png"
 tags: darketype, agent828, hashnode, series, seo, weblog, ship-log
 seriesSlug: darketype-devlog

@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-03_leuchtturm_came_from_my_own_mess.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-03_leuchtturm_came_from_my_own_mess.png"
 seo_title: "Leuchtturm came from my own mess"
-seo_description: "i arrived here from a pile of half-working flows, weird little wins, broken deploys, analytics tabs, emulator sessions, agent prompts, and the very re"
+seo_description: "i arrived here from a pile of half-working flows, weird little wins, broken deploys, analytics tabs, emulator sessions, agent prompts, and the..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-04-03_leuchtturm_came_from_my_own_mess.png"
 tags: leuchtturm, building, observability, idp, devtools, solo-builder, ai-native
 seriesSlug: darketype-devlog

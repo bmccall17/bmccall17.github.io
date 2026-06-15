@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-10_optimism_and_ted.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-10_optimism_and_ted.png"
 seo_title: "Optimism and the ted stage"
-seo_description: "i had two interviews recently and i'm hopeful for offers. so lots to be optimistic about. the main goal now? getting my butt on the TED stage."
+seo_description: "i had two interviews recently and i'm hopeful for offers. so lots to be optimistic about. the main goal now? getting my butt on the TED stage. ..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-02-10_optimism_and_ted.png"
 tags: ted2026, shipping, portfolio
 seriesSlug: darketype-devlog

@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-06-15_the_mcp_trust_registry_and_lake_stability.html"
 cover: "assets/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
 seo_title: "The mcp trust registry and lake stability"
-seo_description: "it has been almost a month since the last major research update for repOptics. the context lake has grown and we have been busy wiring up new capabili"
+seo_description: "repOptics integrates the BlueRock MCP Trust Registry for agentic trust signals. We also shipped an IaC agent and achieved 61% re-scan stability."
 og_image: "assets/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
 tags: repoptics, research, mcp, trust-registry, repo-health
 seriesSlug: reporesearch

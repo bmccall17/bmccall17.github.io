@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself.png"
 seo_title: "How we stopped our content engine from repeating itself"
-seo_description: "there is a specific failure mode in AI content pipelines that nobody talks about enough.  it is not hallucination. it is not tone. it is entity fixa"
+seo_description: "there is a specific failure mode in AI content pipelines that nobody talks about enough.  it is not hallucination. it is not tone. it is entity..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-05-08_how_we_stopped_our_content_engine_from_repeating_itself.png"
 tags: agent828, content-pipeline, anti-repetition, entity-cooldown, topic-momentum, vip-tier, domain-routing
 seriesSlug: agent828-build-arc

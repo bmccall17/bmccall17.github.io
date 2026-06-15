@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-05-17_the_four_state_contact.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-05-17_the_four_state_contact.png"
 seo_title: "The four-state contact"
-seo_description: "the crm had a hidden conflation: a "contact" was three different things at once — a person we'd nurtured for years, a stranger from an event, and some"
+seo_description: "the crm had a hidden conflation: a "contact" was three different things at once — a person we'd nurtured for years, a stranger from an event, and..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-05-17_the_four_state_contact.png"
 tags: crm, lifecycle, audit-trail, workflow
 seriesSlug: crm-agent828

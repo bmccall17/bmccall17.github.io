@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-06_the_loop_engaged.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-06_the_loop_engaged.png"
 seo_title: "The loop engaged: v0.1.1"
-seo_description: "the portfolio was static HTML soup. the darketype was a ghost town. we needed to connect them.   building a "universal reader" (entry.html) that fe"
+seo_description: "the portfolio was static HTML soup. the darketype was a ghost town. we needed to connect them.   building a "universal reader" (entry.html)..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-02-06_the_loop_engaged.png"
 tags: release, loop, github
 seriesSlug: darketype-devlog

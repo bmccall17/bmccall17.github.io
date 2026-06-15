@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-06-06_telling_the_tarottalks_story.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-06-06_telling_the_tarottalks_story.png"
 seo_title: "Telling the TarotTALKS story"
-seo_description: "the origin story of TarotTALKS is entirely rooted in personal insight. i had been studying and working with tarot since 1993, and during a recent prof"
+seo_description: "the origin story of TarotTALKS is entirely rooted in personal insight. i had been studying and working with tarot since 1993, and during a recent..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-06-06_telling_the_tarottalks_story.png"
 tags: portfolio, shipping, tarottalks, design
 seriesSlug: darketype-devlog

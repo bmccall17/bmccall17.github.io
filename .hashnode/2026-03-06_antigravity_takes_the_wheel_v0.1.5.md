@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-06_antigravity_takes_the_wheel_v0.1.5.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-06_antigravity_takes_the_wheel_v0.1.5.png"
 seo_title: "Antigravity takes the wheel"
-seo_description: "we ran into major git hang-ups today. Github Desktop was throwing sync fits, and running manual commits from the terminal got locked up because git co"
+seo_description: "we ran into major git hang-ups today. Github Desktop was throwing sync fits, and running manual commits from the terminal got locked up because..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-06_antigravity_takes_the_wheel_v0.1.5.png"
 tags: git, automation, antigravity, workflows
 seriesSlug: darketype-devlog

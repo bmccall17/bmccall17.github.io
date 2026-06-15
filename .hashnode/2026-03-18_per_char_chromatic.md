@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-18_per_char_chromatic.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-18_per_char_chromatic.png"
 seo_title: "Every letter has its own bruise"
-seo_description: "the LCD effect from ADR-0016 worked at the paragraph level. you'd move your cursor near a block of text and the entire thing would light up with chrom"
+seo_description: "the LCD effect from ADR-0016 worked at the paragraph level. you'd move your cursor near a block of text and the entire thing would light up with..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-18_per_char_chromatic.png"
 tags: darketype, animation, per-character, chromatic-aberration, performance, shipped
 seriesSlug: darketype-devlog

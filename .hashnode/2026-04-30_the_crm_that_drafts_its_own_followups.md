@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-30_the_crm_that_drafts_its_own_followups.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-30_the_crm_that_drafts_its_own_followups.png"
 seo_title: "The crm that drafts its own follow-ups"
-seo_description: "three weeks. one sales team of one person (me). and now the CRM writes first drafts, remembers every meeting, and will not send a single email without"
+seo_description: "three weeks. one sales team of one person (me). and now the CRM writes first drafts, remembers every meeting, and will not send a single email..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-04-30_the_crm_that_drafts_its_own_followups.png"
 tags: agent828, crm, meetings, ae-brief, context-puddle, draft-revisions, approval-gate, activity-log, sales-tooling
 seriesSlug: crm-agent828

@@ -56,7 +56,15 @@ function resolveMediaPaths(body) {
     return body.replace(/\.\.\/entries\/media\//g, 'https://bmccall17.github.io/darketype/entries/media/');
 }
 
-function extractSeoDescription(body) {
+function extractSeoDescription(body, meta) {
+    if (meta.seoDescription) {
+        let desc = meta.seoDescription.trim();
+        if (desc.length > 150) {
+            desc = desc.substring(0, 147).trim() + '...';
+        }
+        return desc;
+    }
+    
     // Strip frontmatter, code blocks, images, links, headings, bold/italic — get first clean paragraph
     let text = body.replace(/```[\s\S]*?```/g, '').trim();
     text = text.replace(/!\[[^\]]*\]\([^)]*\)/g, '');
@@ -64,7 +72,12 @@ function extractSeoDescription(body) {
     text = text.replace(/^#{1,6}\s+.*/gm, '');
     text = text.replace(/[*_`~]+/g, '');
     text = text.replace(/\n+/g, ' ').trim();
-    return text.slice(0, 150).trim();
+    
+    if (text.length > 150) {
+        text = text.substring(0, 147);
+        text = text.substring(0, Math.min(text.length, text.lastIndexOf(' '))) + '...';
+    }
+    return text.trim();
 }
 
 function build() {
@@ -130,7 +143,7 @@ function build() {
 
         const ogImageUrl = meta.hashnodeCover || `https://bmccall17.github.io/assets/social/og/${slug}.png`;
         const seoTitle = title.slice(0, 60);
-        const seoDesc = extractSeoDescription(body);
+        const seoDesc = extractSeoDescription(body, meta);
 
         const hashnodeFrontmatter = [
             '---',

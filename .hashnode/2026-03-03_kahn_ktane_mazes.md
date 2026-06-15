@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-03_kahn_ktane_mazes.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-03_kahn_ktane_mazes.png"
 seo_title: "Data points for what not to do (Kahn and KTANE)"
-seo_description: "exactly 25 years ago today, legendary Bayern Munich goalkeeper Oliver Kahn, trailing Hansa Rostock in the final minutes, sprinted up for a corner kick"
+seo_description: "exactly 25 years ago today, legendary Bayern Munich goalkeeper Oliver Kahn, trailing Hansa Rostock in the final minutes, sprinted up for a corner..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-03_kahn_ktane_mazes.png"
 tags: risk, learning, ktane, games, oliver-kahn, failure
 seriesSlug: darketype-devlog

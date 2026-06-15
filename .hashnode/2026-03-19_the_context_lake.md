@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-19_the_context_lake.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-19_the_context_lake.png"
 seo_title: "The context lake"
-seo_description: "i've been building the context lake for the team at agent828 — a tactical AI services team of devloper mercenaries who are building agents and tools f"
+seo_description: "i've been building the context lake for the team at agent828 — a tactical AI services team of devloper mercenaries who are building agents and..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-19_the_context_lake.png"
 tags: agent828, context-lake, ai-iteration, agentic, claude-code, shipped
 seriesSlug: agent828-build-arc

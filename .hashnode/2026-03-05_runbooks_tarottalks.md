@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-05_runbooks_tarottalks.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-05_runbooks_tarottalks.png"
 seo_title: "Runbooks and the power of diagnostic tools"
-seo_description: "yesterday, during a long sprint on the TarotTALKS project, my admin portal started lagging hard. 11 of 12 API routes were silently timing out (10s+ li"
+seo_description: "yesterday, during a long sprint on the TarotTALKS project, my admin portal started lagging hard. 11 of 12 API routes were silently timing out..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-05_runbooks_tarottalks.png"
 tags: runbooks, debugging, diagnostics, tarottalks, systems-thinking
 seriesSlug: darketype-devlog

@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-06_the_origin_story.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-06_the_origin_story.png"
 seo_title: "The origin story: portfolio + darketype"
-seo_description: "waking up with alot on my mind... mainly my portfolio and developing the accompanying site that is a bit of the darketype site where im practicing the"
+seo_description: "waking up with alot on my mind... mainly my portfolio and developing the accompanying site that is a bit of the darketype site where im practicing..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-02-06_the_origin_story.png"
 tags: meta, origin, manifesto
 seriesSlug: darketype-devlog

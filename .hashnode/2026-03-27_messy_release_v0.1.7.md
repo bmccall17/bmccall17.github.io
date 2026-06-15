@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-27_messy_release_v0.1.7.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-27_messy_release_v0.1.7.png"
 seo_title: "V0.1.7: shipping forms, particles, and reps"
-seo_description: "a lot of scattered work across different workflows: building forms to talk to humans, building particles to break the screen, and writing up past laun"
+seo_description: "a lot of scattered work across different workflows: building forms to talk to humans, building particles to break the screen, and writing up past..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-27_messy_release_v0.1.7.png"
 tags: meta, darketype, release
 seriesSlug: darketype-devlog

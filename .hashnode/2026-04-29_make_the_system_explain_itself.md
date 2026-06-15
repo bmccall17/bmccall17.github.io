@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-29_make_the_system_explain_itself.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-29_make_the_system_explain_itself.png"
 seo_title: "Make the system explain itself"
-seo_description: "at some point, every agentic stack becomes a black box.  you know it's working because posts are going out. you know it's broken when they stop. the"
+seo_description: "at some point, every agentic stack becomes a black box.  you know it's working because posts are going out. you know it's broken when they stop...."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-04-29_make_the_system_explain_itself.png"
 tags: agent828, architecture, observability, knowledge-graph, dashboards, status-rollup, admin-panel
 seriesSlug: agent828-build-arc

@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-05_port_ocean_pain.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-05_port_ocean_pain.png"
 seo_title: "The port.io ocean integration disaster"
-seo_description: "i'm building a comparison page inside repOptics that shows how my repo-level scoring tool stacks up against Port.io's org-scale software catalog. the"
+seo_description: "i'm building a comparison page inside repOptics that shows how my repo-level scoring tool stacks up against Port.io's org-scale software catalog...."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-05_port_ocean_pain.png"
 tags: port, devops, integration, developer-experience, frustration, github-actions
 seriesSlug: darketype-devlog

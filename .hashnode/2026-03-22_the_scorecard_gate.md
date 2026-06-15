@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-22_the_scorecard_gate.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-22_the_scorecard_gate.png"
 seo_title: "The scorecard gate: enforcing deployment readiness"
-seo_description: "i'm building a demo environment to illustrate how managed services can be governed within an Internal Developer Portal (IDP). the scenario: three Spor"
+seo_description: "i'm building a demo environment to illustrate how managed services can be governed within an Internal Developer Portal (IDP). the scenario: three..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-22_the_scorecard_gate.png"
 tags: devops, developer-experience, api, ai-tools, scorecards
 seriesSlug: darketype-devlog

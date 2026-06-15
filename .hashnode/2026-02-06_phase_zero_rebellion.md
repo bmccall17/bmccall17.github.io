@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-06_phase_zero_rebellion.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-06_phase_zero_rebellion.png"
 seo_title: "Phase zero: the gentle rebellion"
-seo_description: "we needed a place to break things without breaking the "professional" us.   binary code (0 and 1) is a perfect metaphor for "planning vs acting". p"
+seo_description: "we needed a place to break things without breaking the "professional" us.   binary code (0 and 1) is a perfect metaphor for "planning vs..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-02-06_phase_zero_rebellion.png"
 tags: meta, phase-zero, rebellion
 seriesSlug: darketype-devlog

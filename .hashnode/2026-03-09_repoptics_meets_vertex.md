@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-09_repoptics_meets_vertex.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-09_repoptics_meets_vertex.png"
 seo_title: "When the port.io pattern meets vertex ai"
-seo_description: "a friend suggested, "get repOptics into Vertex AI." what followed was exactly the kind of deep dive we engineered the port.io sprint for: look at the"
+seo_description: "a friend suggested, "get repOptics into Vertex AI." what followed was exactly the kind of deep dive we engineered the port.io sprint for: look at..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-09_repoptics_meets_vertex.png"
 tags: repoptics, vertex-ai, gemini, learning, integration
 seriesSlug: darketype-devlog

@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-10_the_crm_i_built_by_being_the_customer.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-10_the_crm_i_built_by_being_the_customer.png"
 seo_title: "The crm i built by being the customer"
-seo_description: "Emi asked agent828 to help her build sales and marketing tooling. she runs a thing, she has leads, the leads are slipping through cracks, the cracks a"
+seo_description: "Emi asked agent828 to help her build sales and marketing tooling. she runs a thing, she has leads, the leads are slipping through cracks, the..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-04-10_the_crm_i_built_by_being_the_customer.png"
 tags: agent828, crm, dogfooding, sales-tooling, lead-pipeline, ae-brief, context-puddle
 seriesSlug: crm-agent828

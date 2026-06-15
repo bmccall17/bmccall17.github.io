@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-03-06_daemon_summons.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-03-06_daemon_summons.png"
 seo_title: "Daemon summons"
-seo_description: "imagine you step into a world where the laws are different. not just the physics — the social physics. in this place, your curiosity has a shape. your"
+seo_description: "imagine you step into a world where the laws are different. not just the physics — the social physics. in this place, your curiosity has a shape...."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-06_daemon_summons.png"
 tags: daemon, metaverse, hackathon, ai, spatial, pullman, social-signaling
 seriesSlug: darketype-devlog

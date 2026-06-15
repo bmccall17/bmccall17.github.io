@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-02-25_logo_factory.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-02-25_logo_factory.png"
 seo_title: "The logo factory: when ai iteration fails, build your own to"
-seo_description: "TEDxAsheville asked for a logo. not just any logo — our logo. the one that represents the BAM identity on the team page. recently dissolved my old com"
+seo_description: "TEDxAsheville asked for a logo. not just any logo — our logo. the one that represents the BAM identity on the team page. recently dissolved my old..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-02-25_logo_factory.png"
 tags: logo, tedx, tools, ai-iteration, easter-egg
 seriesSlug: darketype-devlog

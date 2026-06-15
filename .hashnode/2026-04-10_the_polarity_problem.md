@@ -5,7 +5,7 @@ domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-04-10_the_polarity_problem.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-04-10_the_polarity_problem.png"
 seo_title: "The polarity problem"
-seo_description: "repOptics has seven scoring categories. six of them are named after a thing you want more of: decisions, architecture, governance, delivery, dependenc"
+seo_description: "repOptics has seven scoring categories. six of them are named after a thing you want more of: decisions, architecture, governance, delivery,..."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-04-10_the_polarity_problem.png"
 tags: repoptics, scoring, ux, naming, vocabulary, design-debt
 seriesSlug: darketype-devlog

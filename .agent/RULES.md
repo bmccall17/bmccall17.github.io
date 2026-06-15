@@ -71,6 +71,7 @@ for complex tasks, we follow a red-green-refactor loop:
 - [ ] do repOptics-related posts include a humble "buy me a coffee" invitation (`https://buymeacoffee.com/bmccall17`)?
 - [ ] do phrases like "how your repo scores" link directly to the scanner (`https://rep-optics.onrender.com/`)?
 - [ ] are hashnode cover images explicitly sized to 1600x840 and saved in `.hashnode/assets`?
+- [ ] does the frontmatter include a 150-character `seoDescription` summary?
 
 ### 4.3 technical integrity
 - [ ] no broken links between "Portfolio" and "Darketype".
