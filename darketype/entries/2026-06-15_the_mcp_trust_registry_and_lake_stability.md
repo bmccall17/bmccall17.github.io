@@ -3,7 +3,7 @@ title: "the mcp trust registry and lake stability"
 date: 2026-06-15
 state: "shipped"
 tags: [repoptics, research, mcp, trust-registry, repo-health]
-series: "agent828-build-arc"
+series: "reporesearch"
 ---
 
 it has been almost a month since the last major research update for [repOptics](https://rep-optics.onrender.com/). the context lake has grown and we have been busy wiring up new capabilities to measure repo trust and drag.

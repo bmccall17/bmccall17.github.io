@@ -3,7 +3,7 @@ title: "the repo is the bottleneck now"
 date: 2026-05-11
 state: "shipped"
 tags: [repoptics, agent828, research, repo-health]
-series: "agent828-build-arc"
+series: "reporesearch"
 ---
 
 # the repo is the bottleneck now

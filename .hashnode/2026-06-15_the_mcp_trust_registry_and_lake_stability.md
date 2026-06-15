@@ -8,7 +8,7 @@ seo_title: "The mcp trust registry and lake stability"
 seo_description: "it has been almost a month since the last major research update for repOptics. the context lake has grown and we have been busy wiring up new capabili"
 og_image: "https://bmccall17.github.io/assets/social/og/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
 tags: repoptics, research, mcp, trust-registry, repo-health
-seriesSlug: agent828-build-arc
+seriesSlug: reporesearch
 ---
 
 It has been almost a month since the last major research update for [repOptics](https://rep-optics.onrender.com/). The context lake has grown and we have been busy wiring up new capabilities to measure repo trust and drag.

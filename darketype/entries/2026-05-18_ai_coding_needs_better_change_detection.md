@@ -3,7 +3,7 @@ title: "ai coding needs better change detection, not louder scorecards"
 date: 2026-05-18
 state: "shipped"
 tags: [repoptics, agent828, research, repo-health, ai-native]
-series: "agent828-build-arc"
+series: "reporesearch"
 ---
 
 # the biggest number is not always the story

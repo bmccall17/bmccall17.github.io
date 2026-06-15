@@ -8,7 +8,7 @@
     "timestampIso": "2026-06-15T00:00:00.000Z",
     "epoch": 1781481600000,
     "state": "shipped",
-    "series": "agent828",
+    "series": "reporesearch",
     "path": "2026-06-15_the_mcp_trust_registry_and_lake_stability.html"
   },
   {
@@ -32,7 +32,7 @@
     "timestampIso": "2026-05-18T00:00:00.000Z",
     "epoch": 1779062400000,
     "state": "shipped",
-    "series": "agent828",
+    "series": "reporesearch",
     "path": "2026-05-18_ai_coding_needs_better_change_detection.html"
   },
   {
@@ -56,7 +56,7 @@
     "timestampIso": "2026-05-11T00:00:00.000Z",
     "epoch": 1778457600000,
     "state": "shipped",
-    "series": "agent828",
+    "series": "reporesearch",
     "path": "2026-05-11_the_repo_is_the_bottleneck_now.html"
   },
   {
