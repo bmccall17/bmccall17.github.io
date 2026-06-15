@@ -7,6 +7,7 @@ series: "reporesearch"
 seoDescription: "repOptics integrates the BlueRock MCP Trust Registry for agentic trust signals. We also shipped an IaC agent and achieved 61% re-scan stability."
 hashnodeSlug: the-mcp-trust-registry-and-lake-stability
 hashnodeCover: "assets/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
+ogImage: "assets/social/og/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
 ---
 
 it has been almost a month since the last major research update for [repOptics](https://rep-optics.onrender.com/). the context lake has grown and we have been busy wiring up new capabilities to measure repo trust and drag.

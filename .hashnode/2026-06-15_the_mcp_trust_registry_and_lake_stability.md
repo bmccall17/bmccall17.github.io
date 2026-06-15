@@ -6,7 +6,7 @@ canonical: "https://bmccall17.github.io/darketype/weblog/2026-06-15_the_mcp_trus
 cover: "assets/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
 seo_title: "The mcp trust registry and lake stability"
 seo_description: "repOptics integrates the BlueRock MCP Trust Registry for agentic trust signals. We also shipped an IaC agent and achieved 61% re-scan stability."
-og_image: "assets/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
+og_image: "assets/social/og/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
 tags: repoptics, research, mcp, trust-registry, repo-health
 seriesSlug: reporesearch
 ---
