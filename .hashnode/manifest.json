@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-06-06T22:34:40.407Z",
+  "_generated": "2026-06-15T14:54:12.133Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -46,7 +46,8 @@
     "2026-05-11_the_repo_is_the_bottleneck_now": "https://darketype.hashnode.dev/2026-05-11-the-repo-is-the-bottleneck-now",
     "2026-05-17_the_four_state_contact": "https://darketype.hashnode.dev/2026-05-17-the-four-state-contact",
     "2026-05-18_ai_coding_needs_better_change_detection": "https://darketype.hashnode.dev/2026-05-18-ai-coding-needs-better-change-detection",
-    "2026-06-06_telling_the_tarottalks_story": "https://darketype.hashnode.dev/2026-06-06-telling-the-tarottalks-story"
+    "2026-06-06_telling_the_tarottalks_story": "https://darketype.hashnode.dev/2026-06-06-telling-the-tarottalks-story",
+    "2026-06-15_the_mcp_trust_registry_and_lake_stability": "https://darketype.hashnode.dev/2026-06-15-the-mcp-trust-registry-and-lake-stability"
   },
   "series": {
     "darketype-devlog": [
@@ -215,6 +216,10 @@
       {
         "slug": "2026-05-18-ai-coding-needs-better-change-detection",
         "title": "ai coding needs better change detection, not louder scorecards"
+      },
+      {
+        "slug": "2026-06-15-the-mcp-trust-registry-and-lake-stability",
+        "title": "the mcp trust registry and lake stability"
       }
     ],
     "crm-agent828": [
