@@ -86,7 +86,7 @@ function build() {
         const { meta, body } = parseFrontmatter(content);
 
         const slug = file.replace(/\.md$/, '');
-        const safeSlug = slug.replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-');
+        const safeSlug = meta.hashnodeSlug || slug.replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-');
         
         // Determine if publishable
         // Can be forced via hashnode: true/false in frontmatter
@@ -128,7 +128,7 @@ function build() {
             tags = t;
         }
 
-        const ogImageUrl = `https://bmccall17.github.io/assets/social/og/${slug}.png`;
+        const ogImageUrl = meta.hashnodeCover || `https://bmccall17.github.io/assets/social/og/${slug}.png`;
         const seoTitle = title.slice(0, 60);
         const seoDesc = extractSeoDescription(body);
 

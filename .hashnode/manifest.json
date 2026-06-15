@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-06-15T15:29:41.790Z",
+  "_generated": "2026-06-15T15:40:26.112Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -47,7 +47,7 @@
     "2026-05-17_the_four_state_contact": "https://darketype.hashnode.dev/2026-05-17-the-four-state-contact",
     "2026-05-18_ai_coding_needs_better_change_detection": "https://darketype.hashnode.dev/2026-05-18-ai-coding-needs-better-change-detection",
     "2026-06-06_telling_the_tarottalks_story": "https://darketype.hashnode.dev/2026-06-06-telling-the-tarottalks-story",
-    "2026-06-15_the_mcp_trust_registry_and_lake_stability": "https://darketype.hashnode.dev/2026-06-15-the-mcp-trust-registry-and-lake-stability"
+    "2026-06-15_the_mcp_trust_registry_and_lake_stability": "https://darketype.hashnode.dev/the-mcp-trust-registry-and-lake-stability"
   },
   "series": {
     "darketype-devlog": [
@@ -220,7 +220,7 @@
         "title": "ai coding needs better change detection, not louder scorecards"
       },
       {
-        "slug": "2026-06-15-the-mcp-trust-registry-and-lake-stability",
+        "slug": "the-mcp-trust-registry-and-lake-stability",
         "title": "the mcp trust registry and lake stability"
       }
     ],

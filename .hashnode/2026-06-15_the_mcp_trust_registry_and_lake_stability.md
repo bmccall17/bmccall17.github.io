@@ -1,12 +1,12 @@
 ---
 title: "The mcp trust registry and lake stability"
-slug: 2026-06-15-the-mcp-trust-registry-and-lake-stability
+slug: the-mcp-trust-registry-and-lake-stability
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-06-15_the_mcp_trust_registry_and_lake_stability.html"
-cover: "https://bmccall17.github.io/assets/social/og/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
+cover: "assets/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
 seo_title: "The mcp trust registry and lake stability"
 seo_description: "it has been almost a month since the last major research update for repOptics. the context lake has grown and we have been busy wiring up new capabili"
-og_image: "https://bmccall17.github.io/assets/social/og/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
+og_image: "assets/2026-06-15_the_mcp_trust_registry_and_lake_stability.png"
 tags: repoptics, research, mcp, trust-registry, repo-health
 seriesSlug: reporesearch
 ---
