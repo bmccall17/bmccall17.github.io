@@ -6,7 +6,7 @@ datePublished: 2026-06-15T18:12:22.543Z
 cuid: cmqfj64xo00000chve7j3cnv6
 slug: the-mcp-trust-registry-and-lake-stability
 canonical: https://bmccall17.github.io/darketype/weblog/2026-06-15_the_mcp_trust_registry_and_lake_stability.html
-cover: https://cdn.hashnode.com/uploads/covers/69e0387df95c47e87f7727ca/f333db2e-7664-48d7-b483-13b0bd86f100.png
+cover: https://cdn.hashnode.com/uploads/covers/69e0387df95c47e87f7727ca/6658afa7-36df-4270-84dc-48afbd187624.png
 ogImage: https://cdn.hashnode.com/uploads/og-images/69e0387df95c47e87f7727ca/a186a014-307b-4129-aafc-3d323fc55f12.png
 tags: research, mcp, repoptics, repo-health, trust-registry, reporesearch
 
