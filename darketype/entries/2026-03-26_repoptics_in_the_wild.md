@@ -3,7 +3,7 @@ title: "repoptics in the wild: building the tools to build the tools"
 date: 2026-03-26
 state: "shipped"
 tags: [repoptics, security, idp, naval, building, agents]
-series: "darketype-devlog"
+series: "reporesearch"
 next_experiment: "gathering user feedback and iterating"
 ---
 

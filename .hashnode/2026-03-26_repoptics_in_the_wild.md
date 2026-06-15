@@ -8,7 +8,7 @@ seo_title: "Repoptics in the wild: building the tools to build the tools"
 seo_description: "i met with my friend julio last night and we talked about the current market of ai builders. everyone is building agents and wrappers, but how many of"
 og_image: "https://bmccall17.github.io/assets/social/og/2026-03-26_repoptics_in_the_wild.png"
 tags: repoptics, security, idp, naval, building, agents
-seriesSlug: darketype-devlog
+seriesSlug: reporesearch
 ---
 
 # The problem

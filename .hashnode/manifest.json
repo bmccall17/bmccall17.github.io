@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-06-15T15:00:19.615Z",
+  "_generated": "2026-06-15T15:07:18.022Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -144,10 +144,6 @@
         "title": "brett hud v1: stealing the cockpit from claude-hud"
       },
       {
-        "slug": "2026-03-26-repoptics-in-the-wild",
-        "title": "repoptics in the wild: building the tools to build the tools"
-      },
-      {
         "slug": "2026-03-27-messy-release-v0-1-7",
         "title": "v0.1.7: shipping forms, particles, and reps"
       },
@@ -162,10 +158,6 @@
       {
         "slug": "2026-04-03-leuchtturm-came-from-my-own-mess",
         "title": "leuchtturm came from my own mess"
-      },
-      {
-        "slug": "2026-04-06-repoptics-recalibration",
-        "title": "repoptics recalibration"
       },
       {
         "slug": "2026-04-10-the-polarity-problem",
@@ -210,6 +202,28 @@
         "title": "the backlog is a feature"
       }
     ],
+    "reporesearch": [
+      {
+        "slug": "2026-03-26-repoptics-in-the-wild",
+        "title": "repoptics in the wild: building the tools to build the tools"
+      },
+      {
+        "slug": "2026-04-06-repoptics-recalibration",
+        "title": "repoptics recalibration"
+      },
+      {
+        "slug": "2026-05-11-the-repo-is-the-bottleneck-now",
+        "title": "the repo is the bottleneck now"
+      },
+      {
+        "slug": "2026-05-18-ai-coding-needs-better-change-detection",
+        "title": "ai coding needs better change detection, not louder scorecards"
+      },
+      {
+        "slug": "2026-06-15-the-mcp-trust-registry-and-lake-stability",
+        "title": "the mcp trust registry and lake stability"
+      }
+    ],
     "crm-agent828": [
       {
         "slug": "2026-04-10-the-crm-i-built-by-being-the-customer",
@@ -230,20 +244,6 @@
       {
         "slug": "2026-05-17-the-four-state-contact",
         "title": "the four-state contact"
-      }
-    ],
-    "reporesearch": [
-      {
-        "slug": "2026-05-11-the-repo-is-the-bottleneck-now",
-        "title": "the repo is the bottleneck now"
-      },
-      {
-        "slug": "2026-05-18-ai-coding-needs-better-change-detection",
-        "title": "ai coding needs better change detection, not louder scorecards"
-      },
-      {
-        "slug": "2026-06-15-the-mcp-trust-registry-and-lake-stability",
-        "title": "the mcp trust registry and lake stability"
       }
     ]
   }
