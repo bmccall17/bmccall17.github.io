@@ -3,6 +3,7 @@ title: "testing The mcp trust registry and lake stability"
 datePublished: 2026-06-15T18:12:22.543Z
 cuid: cmqfj64xo00000chve7j3cnv6
 slug: testing-the-mcp-trust-registry-and-lake-stability
+cover: https://cdn.hashnode.com/uploads/covers/69e0387df95c47e87f7727ca/f333db2e-7664-48d7-b483-13b0bd86f100.png
 
 ---
 
