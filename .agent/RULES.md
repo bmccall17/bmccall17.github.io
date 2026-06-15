@@ -67,6 +67,9 @@ for complex tasks, we follow a red-green-refactor loop:
   - Title, Date, Status, Body.
 - [ ] is the "Manifesto" (`darketype/index.html`) intact and guiding the design?
 - [ ] is the writing style **rebellious enough**? (lowercase, no emdashes)
+- [ ] do contact/feedback CTAs link to `https://bmccall17.github.io/book` (not /contact)?
+- [ ] do repOptics-related posts include a humble "buy me a coffee" invitation (`https://buymeacoffee.com/bmccall17`)?
+- [ ] do phrases like "how your repo scores" link directly to the scanner (`https://rep-optics.onrender.com/`)?
 
 ### 4.3 technical integrity
 - [ ] no broken links between "Portfolio" and "Darketype".

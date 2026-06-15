@@ -30,7 +30,7 @@ A quick check on the pitfalls: duplicates failed in 68% of scans and governance 
 
 This matters because the repo is the bottleneck. If your agents cannot trust the context or cannot read the infrastructure definitions, they will hallucinate or fail. By pulling in the BlueRock trust signals and hardening our own scan capabilities, we are giving AI a clearer map of what to trust.
 
-If you want to see how your repo scores, run a scan and let me know what you think. You can reach out [here](https://bmccall17.github.io/contact).
+If you want to see [how your repo scores](https://rep-optics.onrender.com/), run a scan and let me know what you think. You can reach out [here](https://bmccall17.github.io/book). RepOptics is a free forever project, but if it brings value to your work and you'd like to support it, you can [buy me a coffee](https://buymeacoffee.com/bmccall17).
 
 ---
 

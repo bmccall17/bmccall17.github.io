@@ -55,7 +55,7 @@ Trust requires distinguishing missing evidence from actual failure. Absence of e
 
 They need to know what is dangerous, what is drag, and what is merely unfinished. They need a way to turn a pile of files into a clearer decision about whether to ship, clean up, document, or slow down.
 
-If you are building with agents, shipping solo, maintaining open source, or trying to get a small team to launch with less guesswork, try running a scan with [repOptics](https://rep-optics.onrender.com/) on a repo you care about. I would love for you to [tell me](https://bmccall17.github.io/contact) where the scanner feels useful, unfair, too harsh, or not sharp enough yet.
+If you are building with agents, shipping solo, maintaining open source, or trying to get a small team to launch with less guesswork, try running a scan to see [how your repo scores](https://rep-optics.onrender.com/) on a repo you care about. I would love for you to tell me where the scanner feels useful, unfair, too harsh, or not sharp enough yet. You can reach out [here](https://bmccall17.github.io/book). RepOptics is a free forever project, but if it brings value to your work and you'd like to support it, you can [buy me a coffee](https://buymeacoffee.com/bmccall17).
 
 ---
 

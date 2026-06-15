@@ -69,4 +69,4 @@ not just "your repo is a B." more like:
 
 that is the direction i am pushing repOptics.
 
-if you are using agents, shipping solo, maintaining open source, or trying to make launch decisions from a fast-moving repo — try running a scan on a repo you care about at [rep-optics.onrender.com](https://rep-optics.onrender.com/) and [tell me](https://bmccall17.github.io/contact) where the signal feels useful, unfair, too harsh, or still too vague.
+if you are using agents, shipping solo, maintaining open source, or trying to make launch decisions from a fast-moving repo — try running a scan to see [how your repo scores](https://rep-optics.onrender.com/) on a repo you care about. i would love for you to tell me where the signal feels useful, unfair, too harsh, or still too vague. you can reach out [here](https://bmccall17.github.io/book). repOptics is a free forever project, but if it brings value to your work and you'd like to support it, you can [buy me a coffee](https://buymeacoffee.com/bmccall17).
