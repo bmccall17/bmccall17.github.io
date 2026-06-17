@@ -52,9 +52,10 @@ all states except `void` are publishable to Hashnode automatically:
 - the build script auto-converts these to absolute GitHub Pages URLs for Hashnode.
 - **never use:** `weblog/media/` or absolute paths in the entry markdown itself.
 
-#### SEO / meta
+#### SEO / meta & Images
 - **SEO title** is auto-generated from `title` (trimmed to 60 chars) and pushed to Hashnode on sync.
 - **SEO description** is auto-extracted from the first 150 chars of the entry body (markdown stripped) and pushed to Hashnode on sync.
+- **Cover Image**: The Hashnode cover image must be explicitly cropped/resized to exactly **1600 × 840** dimensions. It lives at `assets/<slug>.png` and must be synced to `.hashnode/assets/<slug>.png`.
 - **OG image** is the per-entry generated image at `assets/social/og/<slug>.png` — pushed to Hashnode automatically.
 - no manual SEO fields needed unless you want to override. add `seo_title:` or `seo_description:` to the `.hashnode/` proxy file manually to override.
 
