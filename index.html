@@ -747,7 +747,7 @@
       .small-card h3 {
         font-size: 1.1rem;
       }
-      
+
       .small-card p {
         font-size: 0.75rem;
       }
@@ -1026,7 +1026,7 @@
               data.weeks.forEach(week => {
                 week.days.forEach(d => { allDays[d.date] = d.count; });
               });
-              
+
               // Build 156 week columns (3 years) to fill wide screens.
               // Weeks prior to 52 will appear as "corrupted archive" data since they aren't in contributions.json
               const now = new Date();
@@ -1040,7 +1040,7 @@
                 for (let day = 0; day < 7; day++) {
                   const d = new Date(start.getTime() + ((week * 7 + day) * 24 * 60 * 60 * 1000));
                   const dateStr = d.toISOString().split('T')[0];
-                  
+
                   let count = allDays[dateStr];
                   let color, title;
 
@@ -1053,7 +1053,7 @@
                     color = isGlitch ? '#0e4429' : '#161b22';
                     title = `${dateStr} [ARCHIVED]`;
                   }
-                  
+
                   html += `<div style="width:10px;height:10px;background:${color};border-radius:2px;" title="${title}"></div>`;
                 }
                 html += '</div>';
@@ -1141,13 +1141,12 @@
             </a>
           </div>
 
-          <!-- blackjack victory (standard) -->
+          <!-- kintsugi blackjack (standard) -->
           <div class="ghost-card">
-            <a href="https://blackjack-victory-multiplayer.bmccall17.partykit.dev/" target="_blank">
-              <img src="https://blackjack-victory-multiplayer.bmccall17.partykit.dev/og_image.png"
-                alt="blackjack victory">
+            <a href="https://kintsugiblackjack.bmccall17.partykit.dev/" target="_blank">
+              <img src="https://kintsugiblackjack.bmccall17.partykit.dev/og_image.png" alt="kintsugi blackjack">
               <div class="ghost-content">
-                <h3>blackjack victory</h3>
+                <h3>kintsugi blackjack</h3>
                 <p>roguelike blackjack game as an experiment in game design and agentic development.</p>
               </div>
             </a>
