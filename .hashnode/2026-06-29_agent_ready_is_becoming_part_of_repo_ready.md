@@ -8,7 +8,7 @@ seo_title: "Agent-ready is becoming part of repo-ready"
 seo_description: "this week's repOptics research covers 14,804 scans. visible AI-agent governance is growing, proving fast code needs shared operating instructions."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-06-29_agent_ready_is_becoming_part_of_repo_ready.png"
 tags: repoptics, agent828, research, repo-health, ai-native, repo-trust
-seriesSlug: agent828-build-arc
+seriesSlug: reporesearch
 ---
 
 The question i keep coming back to with [repOptics](https://rep-optics.onrender.com/) is not whether AI can write more code.

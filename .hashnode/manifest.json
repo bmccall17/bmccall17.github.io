@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-06-29T21:01:55.403Z",
+  "_generated": "2026-06-29T21:12:16.947Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -201,10 +201,6 @@
       {
         "slug": "2026-05-09-the-backlog-is-a-feature",
         "title": "the backlog is a feature"
-      },
-      {
-        "slug": "2026-06-29-agent-ready-is-becoming-part-of-repo-ready",
-        "title": "agent-ready is becoming part of repo-ready"
       }
     ],
     "reporesearch": [
@@ -227,6 +223,10 @@
       {
         "slug": "the-mcp-trust-registry-and-lake-stability",
         "title": "the mcp trust registry and lake stability"
+      },
+      {
+        "slug": "2026-06-29-agent-ready-is-becoming-part-of-repo-ready",
+        "title": "agent-ready is becoming part of repo-ready"
       }
     ],
     "crm-agent828": [

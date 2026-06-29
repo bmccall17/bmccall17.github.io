@@ -3,7 +3,7 @@ title: "agent-ready is becoming part of repo-ready"
 date: 2026-06-29
 state: "shipped"
 tags: [repoptics, agent828, research, repo-health, ai-native, repo-trust]
-series: "agent828-build-arc"
+series: "reporesearch"
 seoDescription: "this week's repOptics research covers 14,804 scans. visible AI-agent governance is growing, proving fast code needs shared operating instructions."
 ---
 
