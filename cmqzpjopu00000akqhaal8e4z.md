@@ -6,8 +6,8 @@ datePublished: 2026-06-29T21:06:15.907Z
 cuid: cmqzpjopu00000akqhaal8e4z
 slug: agent-ready-is-becoming-part-of-repo-ready
 canonical: https://bmccall17.github.io/darketype/weblog/2026-06-29_agent_ready_is_becoming_part_of_repo_ready.html
-cover: https://cdn.hashnode.com/uploads/covers/69e0387df95c47e87f7727ca/ebdead1c-7e73-4064-b391-604cc495f4ac.png
-ogImage: https://cdn.hashnode.com/uploads/og-images/69e0387df95c47e87f7727ca/1daf4465-c23c-4f76-95fa-6afd4d31520d.png
+cover: https://cdn.hashnode.com/uploads/covers/69e0387df95c47e87f7727ca/b81c00a0-d488-4d01-a5bc-c58a641f413b.png
+ogImage: https://cdn.hashnode.com/uploads/og-images/69e0387df95c47e87f7727ca/abaf8558-e3d6-4faf-a302-10be5f2d0002.png
 tags: research, ai-native, repoptics, repo-health, repo-research, repo-trust
 
 ---
@@ -22,7 +22,7 @@ Can someone review it? Maintain it? Understand the ownership model? Trust the se
 
 This week's research source covers 14,804 scans across 5,168 repositories. Coverage increased by 967 scans and 379 repositories since the prior successful report. The run has 9,636 raw re-scan deltas, but only 6,271 are eligible for trend and claim work. Another 3,365 were excluded because the scan interval was under 24 hours.
 
-One signal stood out from this cohort: visible AI-agent governance appeared in 28% of scans through `AGENTS`-style evidence.
+One signal stood out from this cohort: visible AI-agent governance appeared in 28% of scans through `AGENTS`\-style evidence.
 
 That number needs a caveat right away.
 
@@ -40,7 +40,7 @@ The newer bottleneck is deciding whether the resulting repository is understanda
 
 That is where visible operating instructions start to matter.
 
-An `AGENTS`-style file is not magic. It will not fix missing tests, unclear ownership, dependency risk, oversized files, weak governance, or thin README rationale.
+An `AGENTS`\-style file is not magic. It will not fix missing tests, unclear ownership, dependency risk, oversized files, weak governance, or thin README rationale.
 
 But it can become part of the repo's working contract.
 
@@ -60,7 +60,7 @@ That is not how i want repOptics to work.
 
 A visible instruction file is evidence, not proof.
 
-It belongs next to other signals: governance, code scanning, dependency posture, repo bloat, README rationale, and re-scan stability. It should help a builder ask better questions, not create a simplistic label. 
+It belongs next to other signals: governance, code scanning, dependency posture, repo bloat, README rationale, and re-scan stability. It should help a builder ask better questions, not create a simplistic label.
 
 Same-engine re-scan stability is a clean example of this: 79% of 1,036 same-engine deltas stayed within +/- 1 point on engine 2026.06.11. This stability doesn't prove repository quality, but it provides a reliable baseline for noticing real changes.
 
@@ -98,6 +98,6 @@ If you are building with agents, maintaining open source, or trying to decide wh
 
 RepOptics is a free forever project, if it brings value to your work and you'd like to support it, please [consider buying me a coffee](https://buymeacoffee.com/bmccall17) every little bit makes a difference.
 
----
+* * *
 
-*View this post with the full interactive/glitchy experience on [darketype](https://bmccall17.github.io/darketype/weblog/2026-06-29_agent_ready_is_becoming_part_of_repo_ready.html).*
+*View this post with the full interactive/glitchy experience on* [*darketype*](https://bmccall17.github.io/darketype/weblog/2026-06-29_agent_ready_is_becoming_part_of_repo_ready.html)*.*
