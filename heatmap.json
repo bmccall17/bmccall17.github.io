@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-06-29",
+    "state": "shipped",
+    "title": "agent-ready is becoming part of repo-ready",
+    "path": "2026-06-29_agent_ready_is_becoming_part_of_repo_ready.html"
+  },
+  {
     "date": "2026-06-15",
     "state": "shipped",
     "title": "the mcp trust registry and lake stability",
