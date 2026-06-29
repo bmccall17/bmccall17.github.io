@@ -4,6 +4,7 @@ date: 2026-06-29
 state: "shipped"
 tags: [repoptics, agent828, research, repo-health, ai-native, repo-trust]
 series: "reporesearch"
+hashnodeSlug: "agent-ready-is-becoming-part-of-repo-ready"
 seoDescription: "this week's repOptics research covers 14,804 scans. visible AI-agent governance is growing, proving fast code needs shared operating instructions."
 ---
 

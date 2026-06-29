@@ -1,6 +1,6 @@
 ---
 title: "Agent-ready is becoming part of repo-ready"
-slug: 2026-06-29-agent-ready-is-becoming-part-of-repo-ready
+slug: agent-ready-is-becoming-part-of-repo-ready
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-06-29_agent_ready_is_becoming_part_of_repo_ready.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-06-29_agent_ready_is_becoming_part_of_repo_ready.png"
