@@ -18,8 +18,8 @@ if a new mess entry is provided in the prompt, or you are executing this, ensure
 ### step 1: validate entry
 - ensure the markdown file exists in `darketype/entries/` and has valid frontmatter matching `darketype/entries/TEMPLATE.md`.
   - **required fields:** `title`, `date` (YYYY-MM-DD), `state` (see states below), `tags`.
-  - **optional fields:** `series`, `og_image`, `next_experiment`, `hashnode` (true/false override).
-  - if drafting a new entry, create the filename as `YYYY-MM-DD_title_slug.md`.
+  - **optional fields:** `series`, `og_image`, `next_experiment`, `hashnode` (true/false override), `hashnodeSlug` (always define this for new posts to drop the date prefix, e.g. `hashnodeSlug: "my-post-title"`).
+  - if drafting a new entry, create the filename as `YYYY-MM-DD_title_slug.md` but always use the `hashnodeSlug` property to explicitly set the slug WITHOUT the date prefix.
 - **grammar-police-dodging:** verify the entire entry strictly follows the "darketype" styling — all lowercase titles, headings, and body text. absolutely no capital letters unless deeply intentional for code, or proper names of people, brands, projects. the name is always `Brett A McCall` — middle initial A, no period, never abbreviated.
 - ensure `tags` are relevant and exist as an active array in the frontmatter (e.g. `tags: [agent828, crm, meetings]`).
 
