@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-30T17:28:04.050Z",
+  "_generated": "2026-07-30T18:10:33.815Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -202,10 +202,6 @@
       {
         "slug": "2026-05-09-the-backlog-is-a-feature",
         "title": "the backlog is a feature"
-      },
-      {
-        "slug": "only-2-2-percent-of-repositories-earn-an-a",
-        "title": "only 2.2% of repositories earn an a"
       }
     ],
     "reporesearch": [
@@ -232,6 +228,10 @@
       {
         "slug": "agent-ready-is-becoming-part-of-repo-ready",
         "title": "agent-ready is becoming part of repo-ready"
+      },
+      {
+        "slug": "only-2-2-percent-of-repositories-earn-an-a",
+        "title": "only 2.2% of repositories earn an a"
       }
     ],
     "crm-agent828": [

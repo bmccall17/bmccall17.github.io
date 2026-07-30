@@ -1,14 +1,14 @@
 ---
-title: "Only 2.2% of repositories earn an A"
+title: "Only 2.2% of repositories earn an a"
 slug: only-2-2-percent-of-repositories-earn-an-a
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-07-30_only_2_2_percent_of_repositories_earn_an_a.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-07-30_only_2_2_percent_of_repositories_earn_an_a.png"
-seo_title: "Only 2.2% of repositories earn an A"
+seo_title: "Only 2.2% of repositories earn an a"
 seo_description: "i scored 5,364 public repositories across 15,336 scans. only 2.2% earned an a, and security was the single worst dimension."
 og_image: "https://bmccall17.github.io/assets/social/og/2026-07-30_only_2_2_percent_of_repositories_earn_an_a.png"
 tags: repoptics, agent828, research, repo-health, ai-native
-seriesSlug: agent828-build-arc
+seriesSlug: reporesearch
 ---
 
 For the last several months, [repOptics](https://rep-optics.onrender.com/) has been quietly doing one thing: scanning public repositories and grading them on how ready they actually are — measuring decisions, architecture, governance, delivery, dependencies, security, and file tidiness.
