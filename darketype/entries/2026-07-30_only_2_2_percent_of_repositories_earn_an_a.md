@@ -4,7 +4,7 @@ date: 2026-07-30
 state: "shipped"
 tags: [repoptics, agent828, research, repo-health, ai-native]
 series: "reporesearch"
-hashnodeSlug: "only-2-2-percent-of-repositories-earn-an-a"
+hashnodeSlug: "only-2-2-of-repositories-earn-an-a"
 seoDescription: "i scored 5,364 public repositories across 15,336 scans. only 2.2% earned an a, and security was the single worst dimension."
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Only 2.2% of repositories earn an a"
-slug: only-2-2-percent-of-repositories-earn-an-a
+slug: only-2-2-of-repositories-earn-an-a
 domain: darketype.hashnode.dev
 canonical: "https://bmccall17.github.io/darketype/weblog/2026-07-30_only_2_2_percent_of_repositories_earn_an_a.html"
 cover: "https://bmccall17.github.io/assets/social/og/2026-07-30_only_2_2_percent_of_repositories_earn_an_a.png"

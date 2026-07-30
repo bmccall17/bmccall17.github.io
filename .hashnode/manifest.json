@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-30T18:10:33.815Z",
+  "_generated": "2026-07-30T18:39:15.081Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -49,7 +49,7 @@
     "2026-06-06_telling_the_tarottalks_story": "https://darketype.hashnode.dev/2026-06-06-telling-the-tarottalks-story",
     "2026-06-15_the_mcp_trust_registry_and_lake_stability": "https://darketype.hashnode.dev/the-mcp-trust-registry-and-lake-stability",
     "2026-06-29_agent_ready_is_becoming_part_of_repo_ready": "https://darketype.hashnode.dev/agent-ready-is-becoming-part-of-repo-ready",
-    "2026-07-30_only_2_2_percent_of_repositories_earn_an_a": "https://darketype.hashnode.dev/only-2-2-percent-of-repositories-earn-an-a"
+    "2026-07-30_only_2_2_percent_of_repositories_earn_an_a": "https://darketype.hashnode.dev/only-2-2-of-repositories-earn-an-a"
   },
   "series": {
     "darketype-devlog": [
@@ -230,7 +230,7 @@
         "title": "agent-ready is becoming part of repo-ready"
       },
       {
-        "slug": "only-2-2-percent-of-repositories-earn-an-a",
+        "slug": "only-2-2-of-repositories-earn-an-a",
         "title": "only 2.2% of repositories earn an a"
       }
     ],
