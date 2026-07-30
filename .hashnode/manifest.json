@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-06-29T21:21:28.034Z",
+  "_generated": "2026-07-30T17:28:04.050Z",
   "posts": {
     "2026-02-06_cslp_infection": "https://darketype.hashnode.dev/2026-02-06-cslp-infection",
     "2026-02-06_phase_zero_rebellion": "https://darketype.hashnode.dev/2026-02-06-phase-zero-rebellion",
@@ -48,7 +48,8 @@
     "2026-05-18_ai_coding_needs_better_change_detection": "https://darketype.hashnode.dev/2026-05-18-ai-coding-needs-better-change-detection",
     "2026-06-06_telling_the_tarottalks_story": "https://darketype.hashnode.dev/2026-06-06-telling-the-tarottalks-story",
     "2026-06-15_the_mcp_trust_registry_and_lake_stability": "https://darketype.hashnode.dev/the-mcp-trust-registry-and-lake-stability",
-    "2026-06-29_agent_ready_is_becoming_part_of_repo_ready": "https://darketype.hashnode.dev/agent-ready-is-becoming-part-of-repo-ready"
+    "2026-06-29_agent_ready_is_becoming_part_of_repo_ready": "https://darketype.hashnode.dev/agent-ready-is-becoming-part-of-repo-ready",
+    "2026-07-30_only_2_2_percent_of_repositories_earn_an_a": "https://darketype.hashnode.dev/only-2-2-percent-of-repositories-earn-an-a"
   },
   "series": {
     "darketype-devlog": [
@@ -201,6 +202,10 @@
       {
         "slug": "2026-05-09-the-backlog-is-a-feature",
         "title": "the backlog is a feature"
+      },
+      {
+        "slug": "only-2-2-percent-of-repositories-earn-an-a",
+        "title": "only 2.2% of repositories earn an a"
       }
     ],
     "reporesearch": [
