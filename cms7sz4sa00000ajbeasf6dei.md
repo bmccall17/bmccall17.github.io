@@ -3,6 +3,8 @@ title: "Only 2.2% of repositories earn an A"
 datePublished: 2026-07-30T17:44:07.177Z
 cuid: cms7sz4sa00000ajbeasf6dei
 slug: only-2-2-of-repositories-earn-an-a
+ogImage: https://cdn.hashnode.com/uploads/og-images/69e0387df95c47e87f7727ca/7d4116cb-bbc7-4ac7-9e0c-cd4a0d556a36.png
+tags: research, ai-native, repoptics, agent828, repo-health
 
 ---
 
