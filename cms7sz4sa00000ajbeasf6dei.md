@@ -1,8 +1,11 @@
 ---
 title: "Only 2.2% of repositories earn an A"
+seoTitle: "Only 2.2% of repositories earn an A"
+seoDescription: "i scored 5,364 public repositories across 15,336 scans. only 2.2% earned an a, and security was the single worst dimension."
 datePublished: 2026-07-30T17:44:07.177Z
 cuid: cms7sz4sa00000ajbeasf6dei
 slug: only-2-2-of-repositories-earn-an-a
+canonical: https://bmccall17.github.io/darketype/weblog/2026-07-30_only_2_2_percent_of_repositories_earn_an_a.html
 ogImage: https://cdn.hashnode.com/uploads/og-images/69e0387df95c47e87f7727ca/7d4116cb-bbc7-4ac7-9e0c-cd4a0d556a36.png
 tags: research, ai-native, repoptics, agent828, repo-health
 
